@@ -1,0 +1,12 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:GasStationModeling.styles"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <FontFamily x:Key="BaseFont">Roboto</FontFamily>
+    <system:Double x:Key="Small">14</system:Double>
+    <system:Double x:Key="Medium">18</system:Double>
+    <system:Double x:Key="Big">24</system:Double>
+    <system:Double x:Key="H1">28</system:Double>
+    
+</ResourceDictionary>
