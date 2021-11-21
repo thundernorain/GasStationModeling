@@ -8,4 +8,6 @@
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="Padding" Value="56, 16"/>
     </Style>
+    
+    
 </ResourceDictionary>
