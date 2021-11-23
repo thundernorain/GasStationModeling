@@ -5,8 +5,53 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GasStationModeling.add_forms"
         mc:Ignorable="d"
-        Title="AddFuelTypeWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="Добавление вида топлива" Height="480" Width="640">
+    <StackPanel>
+        <TextBlock
+            Style="{StaticResource BaseText}"
+            Text="Добавление модели ТРК в БД"
+            FontSize="{StaticResource H1}"
+            HorizontalAlignment="Center"
+            Margin="0,30,0,0"
+            ></TextBlock>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,50,0,0">
+            <TextBlock
+                Style="{StaticResource BaseText}"
+                Text="Название модели"
+                FontSize="{StaticResource Big}"
+                VerticalAlignment="Center"
+                Margin="50,30,0,20">
+
+            </TextBlock>
+            <TextBox 
+                Width="200"
+                Height="30"
+                Margin="150,10,0,0">
+            </TextBox>
+
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" >
+            <TextBlock
+                Style="{StaticResource BaseText}"
+                Text="Скорость заправки (л/мин)"
+                FontSize="{StaticResource Big}"
+                VerticalAlignment="Center"
+                Margin="50,30,0,20">
+
+            </TextBlock>
+            <TextBox 
+                Width="200"
+                Height="30"
+                Margin="50,10,0,0"
+                HorizontalAlignment="Right">
+            </TextBox>
+        </StackPanel>
+        <Button 
+            Style="{StaticResource AquaButton}"
+            Content="Добавить"
+            HorizontalAlignment="Right"
+            Margin="0,100,25,0"
+            Padding="40,15"
+            ></Button>
+    </StackPanel>
 </Window>

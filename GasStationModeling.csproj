@@ -56,10 +56,31 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="add_forms\AddFuelTankWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="add_forms\AddFuelTypeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="add_forms\AddModelTrkWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="welcome_window\view\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="add_forms\AddFuelTankWindow.xaml.cs">
+      <DependentUpon>AddFuelTankWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="add_forms\AddFuelTypeWindow.xaml.cs">
+      <DependentUpon>AddFuelTypeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="add_forms\AddModelTrkWindow.xaml.cs">
+      <DependentUpon>AddModelTrkWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
