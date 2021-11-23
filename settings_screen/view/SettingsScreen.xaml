@@ -10,50 +10,8 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition  Height="200"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="0">
-            <StackPanel>
-                <TextBlock Style="{StaticResource BaseText}"
-                   FontSize="{StaticResource Medium}" 
-                   HorizontalAlignment="Left"  
-                   Margin="38,10,0,0"
-                   >
-            Топология
-                </TextBlock>
-                <Rectangle Fill="{StaticResource LightGrayBrush}"  
-                       Width="150" Height="3"
-                       HorizontalAlignment="Left"
-                           Margin="15,10,0,0"/>
-            </StackPanel>
-            <StackPanel>
-                <TextBlock Style="{StaticResource BaseText}"
-                   FontSize="{StaticResource Medium}" 
-                   HorizontalAlignment="Left"  
-                   Margin="38,10,0,0"
-                   >
-                    Настройки АЗС
-                </TextBlock>
-                <Rectangle Fill="{StaticResource LightGrayBrush}"  
-                       Width="200" 
-                       Height="3"
-                           Margin="0,10,0,0"
-                       HorizontalAlignment="Left" />
-            </StackPanel>
-            <StackPanel>
-                <TextBlock Style="{StaticResource BaseText}"
-                   FontSize="{StaticResource Medium}" 
-                   HorizontalAlignment="Left"  
-                   Margin="38,10,0,0">
-                Моделирование
-                </TextBlock>
-                <Rectangle Fill= "{StaticResource LightGrayBrush}" 
-                       Width="200" Height="3"
-                       HorizontalAlignment="Left"
-                           Margin="0,10,0,0"/>
-            </StackPanel>
-        </StackPanel>
         <TextBlock HorizontalAlignment="Left" Margin="148,32,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Время появления автомобиля (с)" VerticalAlignment="Top" Style="{StaticResource BaseText}" FontSize="{StaticResource Medium}"/>
         <Slider HorizontalAlignment="Left" Margin="680,32,0,0" Grid.Row="1" VerticalAlignment="Top" Width="234" Height="22" Value="0" Minimum="5" Maximum="60" SelectionStart="0"/>
         <TextBlock HorizontalAlignment="Left" Margin="680,59,0,0" Grid.Row="1" TextWrapping="Wrap" Text="5" VerticalAlignment="Top" Style="{StaticResource BaseText}" FontSize="{StaticResource Medium}"/>

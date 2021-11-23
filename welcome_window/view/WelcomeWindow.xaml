@@ -4,11 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GasStationModeling"
-        xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" x:Class="GasStationModeling.MainWindow"
+        xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2"
+        x:Class="GasStationModeling.welcome_window.view.WelcomeWindow"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
-        Title="Система моделирования АЗС" Height="480" Width="640">
+        Title="Система моделирования АЗС" Height="480" Width="640"
+        DataContext="{Binding Welcome, Source={StaticResource Locator}}">
     <Window.Resources>
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
@@ -324,7 +326,10 @@
                    Text="Вы можете создать новую топологию АЗС или загрузить уже готовую."/>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,48,0,0">
-            <Button Style="{StaticResource AquaButton}" Content="Создать" Margin="0,0,10,0"/>
+            <Button
+                Style="{StaticResource AquaButton}"
+                Content="Создать"
+                Margin="0,0,10,0" Click="Button_Click"/>
 
             <ComboBox Margin="10,0,0,0"
                       Text="Загрузить"
