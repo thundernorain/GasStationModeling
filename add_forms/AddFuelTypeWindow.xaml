@@ -9,7 +9,7 @@
     <StackPanel>
         <TextBlock
             Style="{StaticResource BaseText}"
-            Text="Добавление модели ТРК в БД"
+            Text="Добавление вида топлива в БД"
             FontSize="{StaticResource H1}"
             HorizontalAlignment="Center"
             Margin="0,30,0,0"
@@ -17,7 +17,7 @@
         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,50,0,0">
             <TextBlock
                 Style="{StaticResource BaseText}"
-                Text="Название модели"
+                Text="Название топлива"
                 FontSize="{StaticResource Big}"
                 VerticalAlignment="Center"
                 Margin="50,30,0,20">
@@ -33,7 +33,7 @@
         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" >
             <TextBlock
                 Style="{StaticResource BaseText}"
-                Text="Скорость заправки (л/мин)"
+                Text="Цена (руб.)"
                 FontSize="{StaticResource Big}"
                 VerticalAlignment="Center"
                 Margin="50,30,0,20">
