@@ -50,6 +50,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationFramework.Aero2" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -70,13 +71,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="settings_screen\view\SettingsScreen.xaml.cs">
-      <DependentUpon>SettingsScreen.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="settings_screen\view\Test.xaml.cs">
-      <DependentUpon>Test.xaml</DependentUpon>
-    </Compile>
-    <Page Include="main_screen\view\MainWindow.xaml">
+    <Page Include="welcome_window\view\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -84,7 +79,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="main_screen\view\MainWindow.xaml.cs">
+    <Compile Include="welcome_window\view\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -93,6 +88,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="settings_screen\view\Test.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="styles\Bitmaps.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -141,14 +140,20 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="core\" />
-    <Folder Include="main_screen\model\" />
-    <Folder Include="main_screen\presenter\" />
     <Folder Include="modeling\model\" />
     <Folder Include="modeling\presenter\" />
     <Folder Include="modeling\view\" />
     <Folder Include="topology\model\" />
     <Folder Include="topology\presenter\" />
     <Folder Include="topology\view\" />
+    <Folder Include="welcome_window\model\" />
+    <Folder Include="welcome_window\presenter\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="styles\assets\InfoButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="styles\assets\QuestionButton.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">

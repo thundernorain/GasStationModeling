@@ -2,13 +2,14 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:GasStationModeling"
-             StartupUri="main_screen/view/MainWindow.xaml">
+             StartupUri="welcome_window/view/MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="styles/Fonts.xaml"/>
                 <ResourceDictionary Source="styles/Color.xaml"/>
                 <ResourceDictionary Source="styles/Texts.xaml"/>
+                <ResourceDictionary Source="styles/Bitmaps.xaml"/>
                 <ResourceDictionary Source="styles/Buttons.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
