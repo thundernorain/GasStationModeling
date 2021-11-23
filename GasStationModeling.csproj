@@ -55,6 +55,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="topology\view\TopologyScreen.xaml.cs">
+      <DependentUpon>TopologyScreen.xaml</DependentUpon>
+    </Compile>
     <Page Include="main_screen\view\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
