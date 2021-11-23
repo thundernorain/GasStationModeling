@@ -20,13 +20,13 @@
                 Text="Название топлива"
                 FontSize="{StaticResource Big}"
                 VerticalAlignment="Center"
-                Margin="50,30,0,20">
+                Margin="100,30,0,20">
 
             </TextBlock>
             <TextBox 
                 Width="200"
                 Height="30"
-                Margin="150,10,0,0">
+                Margin="70,10,0,0">
             </TextBox>
 
         </StackPanel>
@@ -36,13 +36,13 @@
                 Text="Цена (руб.)"
                 FontSize="{StaticResource Big}"
                 VerticalAlignment="Center"
-                Margin="50,30,0,20">
+                Margin="100,30,0,20">
 
             </TextBlock>
             <TextBox 
                 Width="200"
                 Height="30"
-                Margin="50,10,0,0"
+                Margin="150,10,0,0"
                 HorizontalAlignment="Right">
             </TextBox>
         </StackPanel>
