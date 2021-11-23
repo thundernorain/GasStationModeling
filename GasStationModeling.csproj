@@ -55,6 +55,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="topology\view\TopologyScreen.xaml.cs">
+      <DependentUpon>TopologyScreen.xaml</DependentUpon>
+    </Compile>
     <Page Include="main_screen\view\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -80,6 +83,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="styles\Texts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="topology\view\TopologyScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -114,15 +121,6 @@
     <Folder Include="core\" />
     <Folder Include="main_screen\model\" />
     <Folder Include="main_screen\presenter\" />
-    <Folder Include="modeling\model\" />
-    <Folder Include="modeling\presenter\" />
-    <Folder Include="modeling\view\" />
-    <Folder Include="settings_screen\model\" />
-    <Folder Include="settings_screen\presenter\" />
-    <Folder Include="settings_screen\view\" />
-    <Folder Include="topology\model\" />
-    <Folder Include="topology\presenter\" />
-    <Folder Include="topology\view\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
