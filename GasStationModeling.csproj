@@ -104,6 +104,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="add_forms\AddModelTrkWindow.xaml">
+    <Page Include="modelling\view\ModellingPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -124,7 +125,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="main_window\view\MainWindow.xaml.cs">
+    <Compile Include="modelling\view\ModellingPage.xaml.cs">
+      <DependentUpon>ModellingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="welcome_window\view\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -193,6 +197,10 @@
     <Folder Include="modeling\model\" />
     <Folder Include="modeling\presenter\" />
     <Folder Include="modeling\view\" />
+    <Folder Include="core\" />
+    <Folder Include="settings_screen\model\" />
+    <Folder Include="settings_screen\presenter\" />
+    <Folder Include="settings_screen\view\" />
     <Folder Include="topology\model\" />
     <Folder Include="topology\presenter\" />
     <Folder Include="topology\view\" />
@@ -214,6 +222,10 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+    <Resource Include="styles\assets\Rectangle_20.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="styles\assets\Stop20.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
