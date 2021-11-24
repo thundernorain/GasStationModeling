@@ -104,13 +104,12 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="add_forms\AddModelTrkWindow.xaml">
+    <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="modelling\view\ModellingPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="welcome_window\view\MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Compile Include="add_forms\AddFuelTankWindow.xaml.cs">
       <DependentUpon>AddFuelTankWindow.xaml</DependentUpon>
@@ -128,13 +127,14 @@
     <Compile Include="modelling\view\ModellingPage.xaml.cs">
       <DependentUpon>ModellingPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="welcome_window\view\MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="welcome_window\view\WelcomeWindow.xaml.cs">
       <DependentUpon>WelcomeWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+      <Compile Include="main_window\view\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="settings_screen\view\SettingsScreen.xaml">
