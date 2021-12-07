@@ -10,19 +10,47 @@
     <StackPanel VerticalAlignment="Center">
         <TextBlock
             Style="{StaticResource BaseText}"
-            Text="Моделирование системы АЗС"
-            FontSize="{StaticResource H1}"
-            HorizontalAlignment="Center"
-            Margin="0,30,0,0"/>
-
-        <TextBlock
-            Width="600"
-            Style="{StaticResource BaseText}"
-            Text="Работу выполнили студенты группы 6414 Сабельников Артём, Фаттахов Артур, Баскаков Михаил, Журавлев Даниил."
             FontSize="{StaticResource Medium}"
             HorizontalAlignment="Center"
             TextAlignment="Center"
-            Margin="0,30,0,0" TextWrapping="Wrap"/>
+            Margin="0,20,0,0"
+            TextWrapping="Wrap">
+                Самарский университет<LineBreak/>
+                Кафедра программных систем
+        </TextBlock>
+
+        <TextBlock
+            Style="{StaticResource BaseText}"
+            Text="Курсовой проект по дисциплине Программная инженерия"
+            FontSize="{StaticResource Medium}"
+            HorizontalAlignment="Center"
+            TextAlignment="Center"
+            Margin="0,20,0,0" TextWrapping="Wrap"/>
+
+
+
+        <TextBlock
+            Style="{StaticResource BaseText}"
+            Text="Тема проекта: «Автоматизированная система моделирования работы автозаправочной станции»"
+            FontSize="{StaticResource Big}"
+            HorizontalAlignment="Center"
+                TextAlignment="Center"
+                TextWrapping="Wrap"
+                Margin="0,20,0,0"/>
+
+        <TextBlock
+            Style="{StaticResource BaseText}"
+            FontSize="{StaticResource Medium}"
+            HorizontalAlignment="Center"
+            TextAlignment="Center"
+            Margin="0,20,0,0" TextWrapping="Wrap">
+            Разработчики (студенты группы 6414-020302D):<LineBreak/>
+            <LineBreak/>
+            Сабельников Артём<LineBreak/>
+            Фаттахов Артур<LineBreak/>
+            Баскаков Михаил<LineBreak/>
+            Журавлев Даниил
+        </TextBlock>
 
         <TextBlock
             Width="600"
@@ -31,6 +59,6 @@
             FontSize="{StaticResource Medium}"
             HorizontalAlignment="Center"
             TextAlignment="Center"
-            Margin="0,30,0,0" TextWrapping="Wrap"/>
+            Margin="0,20,0,0" TextWrapping="Wrap"/>
     </StackPanel>
 </Window>
