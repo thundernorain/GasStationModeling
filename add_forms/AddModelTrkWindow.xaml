@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GasStationModeling.add_forms"
         mc:Ignorable="d"
-        Title="Добавление модели ТРК" Height="480" Width="640">
+        Title="Добавление модели ТРК" Height="480" Width="640" 
+        WindowStartupLocation="CenterScreen">
     <StackPanel>
         <TextBlock
             Style="{StaticResource BaseText}"

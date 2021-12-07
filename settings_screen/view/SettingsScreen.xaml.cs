@@ -1,4 +1,5 @@
 ﻿using CommonServiceLocator;
+using GasStationModeling.add_forms;
 using GasStationModeling.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -31,6 +32,24 @@ namespace GasStationModeling.settings_screen.view
         {
             var mainViewModel = ServiceLocator.Current.GetInstance<MainViewModel>();
             mainViewModel.CurrentPageUri = new Uri(MainViewModel.TOPOLOGY_SCREEN_URI, UriKind.Relative);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new AddModelTrkWindow();
+            window.Show();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            var window = new AddFuelTankWindow();
+            window.Show();
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            var window = new AddFuelTypeWindow();
+            window.Show();
         }
     }
 }

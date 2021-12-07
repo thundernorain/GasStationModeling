@@ -21,7 +21,7 @@
                    HorizontalAlignment="Left"  
                    Margin="38,10,0,0"
                    >
-            Топология
+            Настройки АЗС
                 </TextBlock>
                 <Rectangle Fill="{Binding PageIndicatorBrushes[0]}"
                        Width="150" Height="3"
@@ -34,7 +34,7 @@
                    HorizontalAlignment="Left"  
                    Margin="38,10,0,0"
                    >
-                    Настройки АЗС
+                    Топология
                 </TextBlock>
                 <Rectangle Fill="{Binding PageIndicatorBrushes[1]}"  
                        Width="200" 
