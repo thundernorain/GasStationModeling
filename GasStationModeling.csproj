@@ -141,6 +141,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Compile Include="settings_screen\view\SettingsScreen.xaml.cs">
+      <DependentUpon>SettingsScreen.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
     <Page Include="settings_screen\view\Test.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

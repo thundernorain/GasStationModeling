@@ -1,6 +1,9 @@
 using GalaSoft.MvvmLight;
 using GasStationModeling.settings_screen.view;
+using System;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace GasStationModeling.ViewModel
 {
@@ -18,30 +21,56 @@ namespace GasStationModeling.ViewModel
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
-        private Page settingsScreen;
+        public const string SETTINGS_SCREEN_URI = "/../settings_screen/view/SettingsScreen.xaml";
 
-        private Page currentPage;
+        private Uri currentPageUri;
 
-        public Page CurrentPage {
+        public Uri CurrentPageUri
+        {
             get
             {
-                return currentPage;
+                return currentPageUri;
             }
+
             set
             {
-                if (currentPage == value)
+                if (currentPageUri == value)
                     return;
 
-                currentPage = value;
-                RaisePropertyChanged(() => CurrentPage);
+                currentPageUri = value;
+                RaisePropertyChanged(() => CurrentPageUri);
             }
+        }
+
+        private Brush[] pageIndicatorBrushes;
+
+        public Brush[] PageIndicatorBrushes
+        {
+            get { return pageIndicatorBrushes; }
         }
 
         public MainViewModel()
         {
-            settingsScreen = new SettingsScreen();
+            CurrentPageUri = new Uri(SETTINGS_SCREEN_URI, UriKind.Relative);
 
-            CurrentPage = settingsScreen;
+            pageIndicatorBrushes = InitBrushes();
+            SetIndicatorBrushesActive(CurrentPageUri);
+        }
+
+        public void SetIndicatorBrushesActive(Uri pageUri)
+        {
+            pageIndicatorBrushes[0] = Application.Current.TryFindResource("AquaBrush") as Brush;
+            RaisePropertyChanged(() => PageIndicatorBrushes);
+        }
+
+        private Brush[] InitBrushes()
+        {
+            return new Brush[]
+            {
+                Application.Current.TryFindResource("LightGrayBrush") as Brush,
+                Application.Current.TryFindResource("LightGrayBrush") as Brush,
+                Application.Current.TryFindResource("LightGrayBrush") as Brush
+            };
         }
     }
 }
