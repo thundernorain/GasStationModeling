@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CommonServiceLocator;
+using GasStationModeling.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,7 +34,8 @@ namespace GasStationModeling.modelling.view
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
+            var mainViewModel = ServiceLocator.Current.GetInstance<MainViewModel>();
+            mainViewModel.CurrentPageUri = new Uri(MainViewModel.TOPOLOGY_SCREEN_URI, UriKind.Relative);
         }
     }
 }

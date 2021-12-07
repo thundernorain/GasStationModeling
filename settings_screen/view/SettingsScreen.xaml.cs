@@ -29,6 +29,8 @@ namespace GasStationModeling.settings_screen.view
 
         private void NextButton_Click(object sender, RoutedEventArgs e)
         {
+            var mainViewModel = ServiceLocator.Current.GetInstance<MainViewModel>();
+            mainViewModel.CurrentPageUri = new Uri(MainViewModel.TOPOLOGY_SCREEN_URI, UriKind.Relative);
         }
     }
 }

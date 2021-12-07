@@ -22,6 +22,8 @@ namespace GasStationModeling.ViewModel
     public class MainViewModel : ViewModelBase
     {
         public const string SETTINGS_SCREEN_URI = "/../settings_screen/view/SettingsScreen.xaml";
+        public const string TOPOLOGY_SCREEN_URI = "/../topology/view/TopologyScreen.xaml";
+        public const string MODELLING_SCREEN_URI = "/../modelling/view/ModellingPage.xaml";
 
         private Uri currentPageUri;
 
@@ -38,6 +40,9 @@ namespace GasStationModeling.ViewModel
                     return;
 
                 currentPageUri = value;
+
+                SetIndicatorBrushesActive(value);
+
                 RaisePropertyChanged(() => CurrentPageUri);
             }
         }
@@ -51,16 +56,38 @@ namespace GasStationModeling.ViewModel
 
         public MainViewModel()
         {
-            CurrentPageUri = new Uri(SETTINGS_SCREEN_URI, UriKind.Relative);
-
             pageIndicatorBrushes = InitBrushes();
-            SetIndicatorBrushesActive(CurrentPageUri);
+            CurrentPageUri = new Uri(SETTINGS_SCREEN_URI, UriKind.Relative);
         }
 
         public void SetIndicatorBrushesActive(Uri pageUri)
         {
-            pageIndicatorBrushes[0] = Application.Current.TryFindResource("AquaBrush") as Brush;
+            SetGrayIndicator();
+
+            if (pageUri.ToString().Contains("SettingsScreen.xaml"))
+            {
+                pageIndicatorBrushes[0] = Application.Current.TryFindResource("AquaBrush") as Brush;
+            }
+
+            if (pageUri.ToString().Contains("TopologyScreen.xaml"))
+            {
+                pageIndicatorBrushes[1] = Application.Current.TryFindResource("AquaBrush") as Brush;
+            }
+
+            if (pageUri.ToString().Contains("ModellingPage.xaml"))
+            {
+                pageIndicatorBrushes[2] = Application.Current.TryFindResource("AquaBrush") as Brush;
+            }
+
+
             RaisePropertyChanged(() => PageIndicatorBrushes);
+        }
+
+        private void SetGrayIndicator()
+        {
+            pageIndicatorBrushes[0] = Application.Current.TryFindResource("LightGrayBrush") as Brush;
+            pageIndicatorBrushes[1] = Application.Current.TryFindResource("LightGrayBrush") as Brush;
+            pageIndicatorBrushes[2] = Application.Current.TryFindResource("LightGrayBrush") as Brush;
         }
 
         private Brush[] InitBrushes()
