@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CommonServiceLocator;
+using GasStationModeling.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,5 +27,8 @@ namespace GasStationModeling.settings_screen.view
             InitializeComponent();
         }
 
+        private void NextButton_Click(object sender, RoutedEventArgs e)
+        {
+        }
     }
 }
