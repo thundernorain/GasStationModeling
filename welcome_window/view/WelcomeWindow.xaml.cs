@@ -1,6 +1,8 @@
-﻿using GasStationModeling.main_window.view;
+﻿using GasStationModeling.developers_info_window.view;
+using GasStationModeling.main_window.view;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +29,19 @@ namespace GasStationModeling.welcome_window.view
         {
             var mainWindow = new MainWindow();
             mainWindow.Show();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            var systemInfoFile = "..\\..\\system_info.html";
+
+            System.Diagnostics.Process.Start(systemInfoFile);
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            var developersInfoWindow = new DevelopersInfoWindow();
+            developersInfoWindow.Show();
         }
     }
 }

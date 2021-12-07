@@ -86,10 +86,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="developers_info_window\view\DevelopersInfoWindow.xaml.cs">
+      <DependentUpon>DevelopersInfoWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="topology\view\TopologyScreen.xaml.cs">
       <DependentUpon>TopologyScreen.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\WelcomeViewModel.cs" />
+    <Page Include="developers_info_window\view\DevelopersInfoWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="main_window\view\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

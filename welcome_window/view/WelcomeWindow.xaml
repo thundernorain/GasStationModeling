@@ -292,7 +292,7 @@
     </Window.Resources>
     <StackPanel>
         <Grid>
-            <Button HorizontalAlignment="Left" Background="White" BorderBrush="White" Margin="16,16,0,0">
+            <Button HorizontalAlignment="Left" Background="White" BorderBrush="White" Margin="16,16,0,0" Click="Button_Click_1">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="50"/>
@@ -301,7 +301,7 @@
                 <Image Source="{StaticResource QuestionButtonImage}" Height="40"/>
             </Button>
 
-            <Button HorizontalAlignment="Right" Background="White" BorderBrush="White" Margin="0, 16, 16, 0">
+            <Button HorizontalAlignment="Right" Background="White" BorderBrush="White" Margin="0, 16, 16, 0" Click="Button_Click_2">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="50"/>

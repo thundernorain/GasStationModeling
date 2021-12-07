@@ -95,11 +95,11 @@
                 </TextBlock>
             </ComboBoxItem>
             <ComboBoxItem >
-                <TextBlock 
-                    Style="{StaticResource BaseText}"
-                    FontSize="{StaticResource Medium}"
-                    TextAlignment="center">
-                    92
+                <TextBlock
+                  Style="{StaticResource BaseText}"
+                  FontSize="{StaticResource Medium}"
+                  TextAlignment="center">
+                  92
                 </TextBlock>
             </ComboBoxItem>
             <ComboBoxItem>
