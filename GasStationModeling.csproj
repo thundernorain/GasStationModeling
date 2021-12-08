@@ -88,6 +88,7 @@
       <HintPath>packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.IO, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.IO.4.3.0\lib\net462\System.IO.dll</HintPath>
@@ -168,6 +169,9 @@
     <Compile Include="topology\view\TopologyScreen.xaml.cs">
       <DependentUpon>TopologyScreen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="core\DB\DbInitializer.cs" />
+    <Compile Include="core\DB\DbWorker.cs" />
+    <Compile Include="core\DB\Interfaces\IDbWorker.cs" />
     <Compile Include="ViewModel\WelcomeViewModel.cs" />
     <Page Include="developers_info_window\view\DevelopersInfoWindow.xaml">
       <SubType>Designer</SubType>
@@ -278,7 +282,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="appsettings.json" />
     <None Include="core\Compression\Snappy\lib\linux\libsnappy64.so" />
     <None Include="core\Compression\Snappy\lib\osx\libsnappy64.dylib" />
     <None Include="core\Compression\Zstandard\lib\linux\libzstd.so" />
