@@ -23,7 +23,7 @@ namespace GasStationModeling.DB
 
         public List<T> deleteEntry(int id)
         {
-            var filter = Builders<T>.Filter.Eq("_Id", id);
+            var filter = Builders<T>.Filter.Eq("_id", id);
             collection.DeleteOne(filter);
             return getCollection();
         }
@@ -36,7 +36,7 @@ namespace GasStationModeling.DB
 
         public T getEntry(int id)
         {
-            var filter = Builders<T>.Filter.Eq("_Id", id);
+            var filter = Builders<T>.Filter.Eq("_id", id);
             return collection.Find(filter).First();
         }
 

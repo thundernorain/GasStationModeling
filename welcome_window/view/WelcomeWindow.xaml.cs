@@ -2,6 +2,7 @@
 using GasStationModeling.main_window.view;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,7 @@ namespace GasStationModeling.welcome_window.view
         public WelcomeWindow()
         {
             InitializeComponent();
+            CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-EN");
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

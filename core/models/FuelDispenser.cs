@@ -1,9 +1,5 @@
 ﻿using MongoDB.Bson;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace GasStationModeling.core.models
 {
@@ -11,11 +7,11 @@ namespace GasStationModeling.core.models
     {
         public ObjectId Id { get; set; }
 
-        private static readonly string image = "";
-        public string Image
-        {
-            get { return image; }
-        }
-        public int SpeedRefueling { get; set; }
+        [BsonIgnore]
+        public string Image { get; }
+
+        public string Name { get; set; }
+
+        public double SpeedRefueling { get; set; }
     }
 }
