@@ -14,7 +14,7 @@ namespace GasStationModeling.add_forms
     public partial class AddFuelTankWindow : Window
     {
         private static IMongoDatabase DB = DbInitializer.getInstance();
-        private static DbWorker<Tank> dbWorker = new DbWorker<Tank>(DB, "fuelTanks");
+        private static DbWorker<Tank> dbWorker = new DbWorker<Tank>(DB, DBWorkerKeys.FUEL_TANKS_KEY);
 
         public AddFuelTankWindow()
         {

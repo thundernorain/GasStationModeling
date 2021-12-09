@@ -15,7 +15,7 @@ namespace GasStationModeling.add_forms
     public partial class AddFuelTypeWindow : Window
     {
         private static IMongoDatabase DB = DbInitializer.getInstance();
-        private static DbWorker<Fuel> dbWorker = new DbWorker<Fuel>(DB, "fuelTypes");
+        private static DbWorker<Fuel> dbWorker = new DbWorker<Fuel>(DB, DBWorkerKeys.FUEL_TYPES_KEY);
 
         public AddFuelTypeWindow()
         {

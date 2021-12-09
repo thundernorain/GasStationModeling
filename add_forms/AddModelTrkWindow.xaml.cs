@@ -14,7 +14,7 @@ namespace GasStationModeling.add_forms
     public partial class AddModelTrkWindow : Window
     {
         private static IMongoDatabase DB = DbInitializer.getInstance();
-        private static DbWorker<FuelDispenser> dbWorker = new DbWorker<FuelDispenser>(DB, "fuelDispensers");
+        private static DbWorker<FuelDispenser> dbWorker = new DbWorker<FuelDispenser>(DB, DBWorkerKeys.FUEL_DISPENSERS_KEY);
         public AddModelTrkWindow()
         {
             InitializeComponent();

@@ -1,4 +1,5 @@
-﻿using GasStationModeling.developers_info_window.view;
+﻿using GasStationModeling.core.DB;
+using GasStationModeling.developers_info_window.view;
 using GasStationModeling.main_window.view;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,7 @@ namespace GasStationModeling.welcome_window.view
         {
             InitializeComponent();
             CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-EN");
+            DbInitializer.getInstance();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

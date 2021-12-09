@@ -46,4 +46,13 @@ namespace GasStationModeling.DB
             return getCollection();
         }
     }
+
+    class DBWorkerKeys
+    {
+        public const string FUEL_TYPES_KEY = "fuelTypes";
+        public const string FUEL_TANKS_KEY = "fuelTanks";
+        public const string FUEL_DISPENSERS_KEY = "fuelDispensers";
+        public const string CARS_KEY = "cars";
+        public const string TOPOLOGIES_KEY = "topologies";
+    }
 }
