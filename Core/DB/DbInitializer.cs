@@ -3,22 +3,26 @@ using System.Configuration;
 
 namespace GasStationModeling.core.DB
 {
-    class DbInitializer
+    static class DbInitializer
     {
         static IMongoDatabase DB { get; set; }
 
-        private static IMongoDatabase InitializeClient(string name)
+        private const string DB_NAME = "GasStation";
+
+        private static IMongoDatabase InitializeClient()
         {
             string con = ConfigurationManager.ConnectionStrings["MongoDb"].ConnectionString;
             var client =  new MongoClient(con);
-            DB = client.GetDatabase(name);
+            var dbName = client.ListDatabaseNames().ToList()[0];
+            DB = client.GetDatabase(dbName);
+            //DB = client.GetDatabase(DB_NAME);
             return DB;
         }
 
-        public static IMongoDatabase getInstance(string name)
+        public static IMongoDatabase getInstance()
         {
             if (DB == null)
-                DB = InitializeClient(name);
+                DB = InitializeClient();
             return DB;
         }
     }

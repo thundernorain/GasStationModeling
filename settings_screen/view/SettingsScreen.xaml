@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:GasStationModeling.settings_screen.view"
       mc:Ignorable="d" d:DesignWidth="1140"
+      DataContext="{Binding SettingsScreen, Source={StaticResource Locator}}" 
       Title="SettingsScreen">
 
     <Grid>
@@ -22,31 +23,25 @@
         <TextBlock HorizontalAlignment="Left" Margin="889,144,0,0" Grid.Row="1" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Style="{StaticResource BaseText}" FontSize="{StaticResource Medium}"/>
 
         <TextBlock HorizontalAlignment="Left" Margin="148,220,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Модель ТРК" VerticalAlignment="Top" Style="{StaticResource BaseText}" FontSize="{StaticResource Medium}"/>
-        <ComboBox HorizontalAlignment="Left" Margin="679,214,0,0" Grid.Row="1" VerticalAlignment="Top" Width="229" Background="White">
-            <ComboBoxItem  IsSelected="True">
-                <TextBlock 
-                    Style="{StaticResource BaseText}"
-                    FontSize="{StaticResource Medium}"
-                    TextAlignment="center">
-                    ТРК 1
-                </TextBlock>
-            </ComboBoxItem>
-            <ComboBoxItem >
-                <TextBlock 
-                    Style="{StaticResource BaseText}"
-                    FontSize="{StaticResource Medium}"
-                    TextAlignment="center">
-                    ТРК 2
-                </TextBlock>
-            </ComboBoxItem>
-            <ComboBoxItem>
-                <TextBlock 
-                    Style="{StaticResource BaseText}"
-                    FontSize="{StaticResource Medium}"
-                    TextAlignment="center">
-                    ТРК 3
-                </TextBlock>
-            </ComboBoxItem>
+        <ComboBox 
+            HorizontalAlignment="Left" 
+            Margin="679,214,0,0" Grid.Row="1" 
+            VerticalAlignment="Top" Width="229" 
+            Background="White"
+            ItemsSource="{Binding FuelDispensers}"
+            SelectedValuePath="Name"
+            SelectedValue="{Binding SelectedFuelDispenser, Mode=TwoWay}">
+
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock
+                        Text="{Binding Path=Name}" 
+                        Style="{StaticResource BaseText}"
+                        FontSize="{StaticResource Medium}"
+                        TextAlignment="center"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+
         </ComboBox>
         <Button Content="+" HorizontalAlignment="Left" Margin="937,201,0,0" Grid.Row="1" VerticalAlignment="Top" Style="{StaticResource AquaButton}" Padding="20,15,20,15" Click="Button_Click"/>
 
@@ -56,61 +51,55 @@
         <TextBlock HorizontalAlignment="Left" Margin="865,320,0,0" Grid.Row="1" TextWrapping="Wrap" Text="500000" VerticalAlignment="Top" Style="{StaticResource BaseText}" FontSize="{StaticResource Medium}"/>
 
         <TextBlock HorizontalAlignment="Left" Margin="148,400,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Модель топливного бака" VerticalAlignment="Top" Style="{StaticResource BaseText}" FontSize="{StaticResource Medium}"/>
-        <ComboBox HorizontalAlignment="Left" Margin="679,400,0,0" Grid.Row="1" VerticalAlignment="Top" Width="229" Background="White">
-            <ComboBoxItem  IsSelected="True">
-                <TextBlock 
-                    Style="{StaticResource BaseText}"
-                    FontSize="{StaticResource Medium}"
-                    TextAlignment="center">
-                    Модель 1
-                </TextBlock>
-            </ComboBoxItem>
-            <ComboBoxItem >
-                <TextBlock 
-                    Style="{StaticResource BaseText}"
-                    FontSize="{StaticResource Medium}"
-                    TextAlignment="center">
-                    Модель 1
-                </TextBlock>
-            </ComboBoxItem>
-            <ComboBoxItem>
-                <TextBlock 
-                    Style="{StaticResource BaseText}"
-                    FontSize="{StaticResource Medium}"
-                    TextAlignment="center">
-                    Модель 3
-                </TextBlock>
-            </ComboBoxItem>
+        <ComboBox 
+            HorizontalAlignment="Left" 
+            Margin="679,400,0,0" 
+            Grid.Row="1" 
+            VerticalAlignment="Top" 
+            Width="229" 
+            Background="White"
+            ItemsSource="{Binding FuelTanks}"
+            SelectedValuePath="Name"
+            SelectedValue="{Binding SelectedFuelTank, Mode=TwoWay}">
+
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock
+                        Text="{Binding Path=Name}" 
+                        Style="{StaticResource BaseText}"
+                        FontSize="{StaticResource Medium}"
+                        TextAlignment="center"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+
         </ComboBox>
+        
         <Button Content="+" HorizontalAlignment="Left" Margin="937,387,0,0" Grid.Row="1" VerticalAlignment="Top" Style="{StaticResource AquaButton}" Padding="20,15,20,15" Click="Button_Click_1"/>
 
         <TextBlock HorizontalAlignment="Left" Margin="148,500,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Вид топлива" VerticalAlignment="Top" Style="{StaticResource BaseText}" FontSize="{StaticResource Medium}"/>
-        <ComboBox HorizontalAlignment="Left" Margin="679,500,0,0" Grid.Row="1" VerticalAlignment="Top" Width="229" Background="White">
-            <ComboBoxItem  IsSelected="True">
-                <TextBlock 
-                    Style="{StaticResource BaseText}"
-                    FontSize="{StaticResource Medium}"
-                    TextAlignment="center">
-                    95
-                </TextBlock>
-            </ComboBoxItem>
-            <ComboBoxItem >
-                <TextBlock
-                  Style="{StaticResource BaseText}"
-                  FontSize="{StaticResource Medium}"
-                  TextAlignment="center">
-                  92
-                </TextBlock>
-            </ComboBoxItem>
-            <ComboBoxItem>
-                <TextBlock 
-                    Style="{StaticResource BaseText}"
-                    FontSize="{StaticResource Medium}"
-                    TextAlignment="center">
-                    ДТ
-                </TextBlock>
-            </ComboBoxItem>
+        <ComboBox 
+            HorizontalAlignment="Left" 
+            Margin="679,500,0,0" 
+            Grid.Row="1" 
+            VerticalAlignment="Top" 
+            Width="229" 
+            Background="White"
+            ItemsSource="{Binding Fuels}"
+            SelectedValuePath="Name"
+            SelectedValue="{Binding SelectedFuel, Mode=TwoWay}">
+
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock
+                        Text="{Binding Path=Name}" 
+                        Style="{StaticResource BaseText}"
+                        FontSize="{StaticResource Medium}"
+                        TextAlignment="center"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+
         </ComboBox>
+
         <Button Content="+" HorizontalAlignment="Left" Margin="937,485,0,0" Grid.Row="1" VerticalAlignment="Top" Style="{StaticResource AquaButton}" Padding="20,15,20,15" Click="Button_Click_2"/>
         <Button Content="Назад" HorizontalAlignment="Left" Margin="55,666,0,0" Grid.Row="1" VerticalAlignment="Top" Style="{StaticResource AquaButton}"/>
         <Button x:Name="NextButton" Content="Далее" HorizontalAlignment="Left" Margin="937,666,0,0" Grid.Row="1" VerticalAlignment="Top" Style="{StaticResource AquaButton}" Click="NextButton_Click"/>

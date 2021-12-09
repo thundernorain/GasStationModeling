@@ -23,7 +23,7 @@ namespace GasStationModeling.DB
 
         public List<T> deleteEntry(int id)
         {
-            var filter = Builders<T>.Filter.Eq("_Id", id);
+            var filter = Builders<T>.Filter.Eq("_id", id);
             collection.DeleteOne(filter);
             return getCollection();
         }
@@ -36,7 +36,7 @@ namespace GasStationModeling.DB
 
         public T getEntry(int id)
         {
-            var filter = Builders<T>.Filter.Eq("_Id", id);
+            var filter = Builders<T>.Filter.Eq("_id", id);
             return collection.Find(filter).First();
         }
 
@@ -45,5 +45,14 @@ namespace GasStationModeling.DB
             collection.InsertOne(entry);
             return getCollection();
         }
+    }
+
+    class DBWorkerKeys
+    {
+        public const string FUEL_TYPES_KEY = "fuelTypes";
+        public const string FUEL_TANKS_KEY = "fuelTanks";
+        public const string FUEL_DISPENSERS_KEY = "fuelDispensers";
+        public const string CARS_KEY = "cars";
+        public const string TOPOLOGIES_KEY = "topologies";
     }
 }

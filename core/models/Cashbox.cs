@@ -1,21 +1,10 @@
-﻿using MongoDB.Bson;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace GasStationModeling.core.models
 {
     public class Cashbox
     {
-        public ObjectId Id { get; set; }
+        public string Image { get; }
 
-        private static readonly string image = "";
-        public string Image
-        {
-            get { return image; }
-        }
         public int LimitCash { get; set; }
 
         public int CurrentCash { get; set; }

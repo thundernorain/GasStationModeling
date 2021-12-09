@@ -24,7 +24,7 @@
                 Margin="100,30,0,20">
 
             </TextBlock>
-            <TextBox 
+            <TextBox x:Name="FuelTankNameTB" 
                 Width="200"
                 Height="30"
                 Margin="55,10,0,0">
@@ -40,19 +40,19 @@
                 Margin="100,30,0,20">
 
             </TextBlock>
-            <TextBox 
+            <TextBox x:Name="FuelSizeTB" 
                 Width="200"
                 Height="30"
                 Margin="50,10,0,0"
                 HorizontalAlignment="Right">
             </TextBox>
         </StackPanel>
-        <Button 
+        <Button x:Name="AddTankButton" 
             Style="{StaticResource AquaButton}"
             Content="Добавить"
             HorizontalAlignment="Right"
             Margin="0,100,25,0"
-            Padding="40,15"
+            Padding="40,15" Click="Button_Click"
             ></Button>
     </StackPanel>
 </Window>
