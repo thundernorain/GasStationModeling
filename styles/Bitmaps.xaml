@@ -4,5 +4,6 @@
 
     <BitmapImage x:Key="InfoButtonImage" UriSource="./assets/InfoButton.png" />
     <BitmapImage x:Key="QuestionButtonImage" UriSource="./assets/QuestionButton.png" />
+    <BitmapImage x:Key="DeleteIcon" UriSource="./assets/deleteIcon.png" />
 
 </ResourceDictionary>

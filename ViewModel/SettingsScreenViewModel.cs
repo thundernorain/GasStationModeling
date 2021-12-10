@@ -1,7 +1,11 @@
-﻿using GalaSoft.MvvmLight;
+﻿using CommonServiceLocator;
+using GalaSoft.MvvmLight;
+using GasStationModeling.core;
 using GasStationModeling.core.DB;
 using GasStationModeling.core.models;
 using GasStationModeling.DB;
+using GasStationModeling.settings_screen.mapper;
+using GasStationModeling.settings_screen.model;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
@@ -10,12 +14,14 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using System.Xml.Serialization;
 
 namespace GasStationModeling.ViewModel
 {
     public class SettingsScreenViewModel : ViewModelBase
     {
+        #region Fields
         private string _selectedFuel;
         private List<FuelComboBoxItem> _fuels = new List<FuelComboBoxItem>();
 
@@ -24,7 +30,9 @@ namespace GasStationModeling.ViewModel
 
         private string _selectedFuelDispenser;
         private List<FuelDispenserComboBoxItem> _fuelDispensers = new List<FuelDispenserComboBoxItem>();
+        #endregion
 
+        #region Properties
         public string SelectedFuel
         {
             get => _selectedFuel;
@@ -84,6 +92,7 @@ namespace GasStationModeling.ViewModel
                 RaisePropertyChanged(() => FuelDispensers);
             }
         }
+        #endregion
 
         public SettingsScreenViewModel()
         {
@@ -94,20 +103,13 @@ namespace GasStationModeling.ViewModel
             getFuelDispensersFromDB(db);
         }
 
+        #region GetFromDBMethods
         private void getFuelsFromDB(IMongoDatabase db)
         {
             var dbWorker = new DbWorker<Fuel>(db, DBWorkerKeys.FUEL_TYPES_KEY);
             var collectionFromDb = dbWorker.getCollection();
-            var collectionToComboBox = new List<FuelComboBoxItem>();
 
-            foreach (var fuel in collectionFromDb)
-            {
-                collectionToComboBox.Add(
-                    new FuelComboBoxItem(fuel.Id, fuel.Name)
-                    );
-            }
-
-            Fuels = collectionToComboBox;
+            Fuels = new FuelToFuelComboBoxMapper().MapList(collectionFromDb);
             SelectedFuel = Fuels[0].Name;
         }
 
@@ -115,16 +117,8 @@ namespace GasStationModeling.ViewModel
         {
             var dbWorker = new DbWorker<Tank>(db, DBWorkerKeys.FUEL_TANKS_KEY);
             var collectionFromDb = dbWorker.getCollection();
-            var collectionToComboBox = new List<FuelTankComboBoxItem>();
 
-            foreach (var fuel in collectionFromDb)
-            {
-                collectionToComboBox.Add(
-                    new FuelTankComboBoxItem(fuel.Id, fuel.Name)
-                    );
-            }
-
-            FuelTanks = collectionToComboBox;
+            FuelTanks = new TankToFuelTankComboBoxItemMapper().MapList(collectionFromDb);
             SelectedFuelTank = FuelTanks[0].Name;
         }
 
@@ -132,64 +126,11 @@ namespace GasStationModeling.ViewModel
         {
             var dbWorker = new DbWorker<FuelDispenser>(db, DBWorkerKeys.FUEL_DISPENSERS_KEY);
             var collectionFromDb = dbWorker.getCollection();
-            var collectionToComboBox = new List<FuelDispenserComboBoxItem>();
 
-            foreach (var fuel in collectionFromDb)
-            {
-                collectionToComboBox.Add(
-                    new FuelDispenserComboBoxItem(fuel.Id, fuel.Name)
-                    );
-            }
-
-            FuelDispensers = collectionToComboBox;
+            FuelDispensers = new FuelDispenserToFuelDispenserComboBoxItemMapper().MapList(collectionFromDb);
             SelectedFuelDispenser = FuelDispensers[0].Name;
         }
+        #endregion
 
-    }
-
-
-    [Serializable]
-    public class FuelComboBoxItem
-    {
-        [XmlAttribute("Name")]
-        public string Name { get; }
-
-        public ObjectId Id { get; }
-
-        public FuelComboBoxItem(ObjectId id, string name)
-        {
-            this.Id = id;
-            this.Name = name;
-        }
-    }
-
-    [Serializable]
-    public class FuelTankComboBoxItem
-    {
-        [XmlAttribute("Name")]
-        public string Name { get; }
-
-        public ObjectId Id { get; }
-
-        public FuelTankComboBoxItem(ObjectId id, string name)
-        {
-            this.Id = id;
-            this.Name = name;
-        }
-    }
-
-    [Serializable]
-    public class FuelDispenserComboBoxItem
-    {
-        [XmlAttribute("Name")]
-        public string Name { get; }
-
-        public ObjectId Id { get; }
-
-        public FuelDispenserComboBoxItem(ObjectId id, string name)
-        {
-            this.Id = id;
-            this.Name = name;
-        }
     }
 }

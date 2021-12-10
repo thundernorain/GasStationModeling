@@ -28,6 +28,13 @@ namespace GasStationModeling.DB
             return getCollection();
         }
 
+        public List<T> deleteEntry(ObjectId id)
+        {
+            var filter = Builders<T>.Filter.Eq("_id", id);
+            collection.DeleteOne(filter);
+            return getCollection();
+        }
+
         public List<T> getCollection()
         {
             var filter = new BsonDocument();

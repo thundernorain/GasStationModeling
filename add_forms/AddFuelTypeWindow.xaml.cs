@@ -1,7 +1,10 @@
-﻿using GasStationModeling.core;
+﻿using CommonServiceLocator;
+using GasStationModeling.core;
 using GasStationModeling.core.DB;
 using GasStationModeling.core.models;
 using GasStationModeling.DB;
+using GasStationModeling.settings_screen.mapper;
+using GasStationModeling.ViewModel;
 using MongoDB.Driver;
 using System;
 using System.Windows;
@@ -44,7 +47,11 @@ namespace GasStationModeling.add_forms
                 Name = name,
                 Price = price
             };
-            dbWorker.insertEntry(fuel);
+
+            var newCollection = dbWorker.insertEntry(fuel);
+            var viewModel = ServiceLocator.Current.GetInstance<SettingsScreenViewModel>();
+            viewModel.Fuels = new FuelToFuelComboBoxMapper().MapList(newCollection);
+
             Close();
         }
     }
