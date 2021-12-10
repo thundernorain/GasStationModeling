@@ -1,7 +1,10 @@
-﻿using GasStationModeling.core;
+﻿using CommonServiceLocator;
+using GasStationModeling.core;
 using GasStationModeling.core.DB;
 using GasStationModeling.core.models;
 using GasStationModeling.DB;
+using GasStationModeling.settings_screen.mapper;
+using GasStationModeling.ViewModel;
 using MongoDB.Driver;
 using System;
 using System.Windows;
@@ -43,7 +46,11 @@ namespace GasStationModeling.add_forms
                 Name = name,
                 MaxVolume = volume
             };
-            dbWorker.insertEntry(tank);
+
+            var newCollection = dbWorker.insertEntry(tank);
+            var viewModel = ServiceLocator.Current.GetInstance<SettingsScreenViewModel>();
+            viewModel.FuelTanks = new TankToFuelTankComboBoxItemMapper().MapList(newCollection);
+
             Close();
         }
     }

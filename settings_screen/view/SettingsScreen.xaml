@@ -34,11 +34,21 @@
 
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock
+                    <DockPanel Width="224">
+                        <TextBlock
                         Text="{Binding Path=Name}" 
                         Style="{StaticResource BaseText}"
                         FontSize="{StaticResource Medium}"
                         TextAlignment="center"/>
+
+                        <Button 
+                            HorizontalAlignment="Right"
+                            Command="{Binding Path=DeleteCommand}">
+                            <Image
+                                Height="18"
+                                Source="{StaticResource DeleteIcon}"/>
+                        </Button>
+                    </DockPanel>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
 
@@ -64,11 +74,21 @@
 
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock
+                    <DockPanel Width="224">
+                        <TextBlock
                         Text="{Binding Path=Name}" 
                         Style="{StaticResource BaseText}"
                         FontSize="{StaticResource Medium}"
                         TextAlignment="center"/>
+
+                        <Button 
+                            HorizontalAlignment="Right"
+                            Command="{Binding Path=DeleteCommand}">
+                            <Image
+                                Height="18"
+                                Source="{StaticResource DeleteIcon}"/>
+                        </Button>
+                    </DockPanel>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
 
@@ -90,11 +110,21 @@
 
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock
+                    <DockPanel Width="224">
+                        <TextBlock
                         Text="{Binding Path=Name}" 
                         Style="{StaticResource BaseText}"
                         FontSize="{StaticResource Medium}"
                         TextAlignment="center"/>
+
+                        <Button 
+                            HorizontalAlignment="Right"
+                            Command="{Binding Path=DeleteCommand}">
+                            <Image
+                                Height="18"
+                                Source="{StaticResource DeleteIcon}"/>
+                        </Button>
+                    </DockPanel>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
 

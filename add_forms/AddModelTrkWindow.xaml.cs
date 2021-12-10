@@ -1,7 +1,10 @@
-﻿using GasStationModeling.core;
+﻿using CommonServiceLocator;
+using GasStationModeling.core;
 using GasStationModeling.core.DB;
 using GasStationModeling.core.models;
 using GasStationModeling.DB;
+using GasStationModeling.settings_screen.mapper;
+using GasStationModeling.ViewModel;
 using MongoDB.Driver;
 using System;
 using System.Windows;
@@ -42,7 +45,11 @@ namespace GasStationModeling.add_forms
                 Name = name,
                 SpeedRefueling = speed
             };
-            dbWorker.insertEntry(fuelDispenser);
+
+            var newCollection = dbWorker.insertEntry(fuelDispenser);
+            var viewModel = ServiceLocator.Current.GetInstance<SettingsScreenViewModel>();
+            viewModel.FuelDispensers = new FuelDispenserToFuelDispenserComboBoxItemMapper().MapList(newCollection);
+
             Close();
         }
     }
