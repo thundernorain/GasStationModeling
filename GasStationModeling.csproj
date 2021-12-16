@@ -93,6 +93,10 @@
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Common, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Drawing.Common.6.0.0\lib\net461\System.Drawing.Common.dll</HintPath>
+    </Reference>
     <Reference Include="System.IO, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.IO.4.3.0\lib\net462\System.IO.dll</HintPath>
       <Private>True</Private>
@@ -172,12 +176,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+<<<<<<< HEAD
     <Compile Include="messageBoxes\ErrorMessageBoxShower.cs" />
+=======
+    <Compile Include="add_forms\ErrorMessageBoxShower.cs" />
+    <Compile Include="core\DataGridWorker.cs" />
+>>>>>>> начал создавать топологию
     <Compile Include="core\DB\dto\FuelDispenserDTO.cs" />
     <Compile Include="core\DB\dto\FuelTankDTO.cs" />
     <Compile Include="core\DB\dto\FuelTypeDTO.cs" />
     <Compile Include="core\DB\dto\TopolgyDTO.cs" />
+    <Compile Include="core\models\IGasStationElement.cs" />
     <Compile Include="core\RelayCommand.cs" />
+    <Compile Include="core\topology\Topology.cs" />
+    <Compile Include="core\topology\TopologyBuilder.cs" />
+    <Compile Include="core\topology\TopologyConstant.cs" />
     <Compile Include="core\Validator.cs" />
     <Compile Include="developers_info_window\view\DevelopersInfoWindow.xaml.cs">
       <DependentUpon>DevelopersInfoWindow.xaml</DependentUpon>
@@ -212,6 +225,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="main_window\view\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="styles\TemplateColumn.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -3,7 +3,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace GasStationModeling.core.models
 {
-    public class FuelDispenser
+    public class FuelDispenser : IGasStationElement
     {
         public ObjectId Id { get; set; }
 
