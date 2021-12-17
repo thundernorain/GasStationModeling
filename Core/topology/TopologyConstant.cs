@@ -16,5 +16,6 @@ namespace GasStationModeling.core.topology
 
         public static readonly double ServiceAreaInShares = 0.25;
 
+        public const int TOPOLOGY_CELL_SIZE = 48;
     }
 }

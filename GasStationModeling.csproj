@@ -67,6 +67,9 @@
     <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.4.1.0, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
       <HintPath>packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
     </Reference>
+    <Reference Include="Gu.Wpf.DataGrid2D, Version=0.2.4.0, Culture=neutral, PublicKeyToken=34988ea4e73235be, processorArchitecture=MSIL">
+      <HintPath>packages\Gu.Wpf.DataGrid2D.0.2.4\lib\net45\Gu.Wpf.DataGrid2D.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Win32.Registry, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Win32.Registry.5.0.0\lib\net461\Microsoft.Win32.Registry.dll</HintPath>
     </Reference>
@@ -176,12 +179,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-<<<<<<< HEAD
     <Compile Include="messageBoxes\ErrorMessageBoxShower.cs" />
-=======
     <Compile Include="add_forms\ErrorMessageBoxShower.cs" />
     <Compile Include="core\DataGridWorker.cs" />
->>>>>>> начал создавать топологию
     <Compile Include="core\DB\dto\FuelDispenserDTO.cs" />
     <Compile Include="core\DB\dto\FuelTankDTO.cs" />
     <Compile Include="core\DB\dto\FuelTypeDTO.cs" />
@@ -189,7 +189,6 @@
     <Compile Include="core\models\IGasStationElement.cs" />
     <Compile Include="core\RelayCommand.cs" />
     <Compile Include="core\topology\Topology.cs" />
-    <Compile Include="core\topology\TopologyBuilder.cs" />
     <Compile Include="core\topology\TopologyConstant.cs" />
     <Compile Include="core\Validator.cs" />
     <Compile Include="developers_info_window\view\DevelopersInfoWindow.xaml.cs">
@@ -379,6 +378,8 @@
     <Content Include="core\Compression\Snappy\lib\win\snappy64.dll" />
     <Content Include="core\Compression\Zstandard\lib\win\libzstd.dll" />
     <Content Include="mongocrypt.dll" />
+    <Resource Include="styles\assets\Cell2.png" />
+    <Resource Include="styles\assets\Cell.png" />
     <Resource Include="styles\assets\deleteIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

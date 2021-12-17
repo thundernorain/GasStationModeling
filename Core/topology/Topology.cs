@@ -6,102 +6,128 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using CommonServiceLocator;
+using GasStationModeling.ViewModel;
 
 namespace GasStationModeling.core.topology
 {
     public partial class Topology
     {
-        private readonly IGasStationElement[,] field;
-        private readonly int serviceAreaBorderColIndex;
+        private Grid grid;
+        private IGasStationElement[,] topologyElements;
 
-        public Topology(IGasStationElement[,] field, int serviceAreaBorderColIndex)
+        private int topologyRowCountMain = 5;
+        private int topologyRowCountWorker = 3;
+        private int topologyColumnCount = 10;
+
+        public IGasStationElement[,] TopologyElements
         {
-            this.field = field ?? throw new NullReferenceException();
-            this.serviceAreaBorderColIndex = serviceAreaBorderColIndex;
+            get { return topologyElements; }
         }
-
-        public IGasStationElement this[int x, int y]
+        public Grid TopologyGrid
         {
             get
             {
-                if (x < 0)
+                if (grid == null)
+                    return GetEmptyTopologyGrid(TopologyRowCountMain + TopologyRowCountWorker, TopologyColumnCount);
+
+                return grid;
+            }
+            private set
+            {
+                grid = value;
+
+                var viewModel = ServiceLocator.Current.GetInstance<MainViewModel>();
+                if (viewModel != null)
                 {
-                    throw new IndexOutOfRangeException();
+                    viewModel.RaisePropertyChanged("GetTopology");
                 }
+            }
+        }
 
-                if (x > LastX)
+        public int TopologyRowCountMain
+        {
+            get { return topologyRowCountMain; }
+            set
+            {
+                topologyRowCountMain = value;
+                TopologyGrid = GetEmptyTopologyGrid(value + TopologyRowCountWorker, TopologyColumnCount);
+            }
+        }
+
+        public int TopologyRowCountWorker
+        {
+            get { return topologyRowCountWorker; }
+            set
+            {
+                topologyRowCountWorker = value;
+                TopologyGrid = GetEmptyTopologyGrid(TopologyRowCountMain + value, TopologyColumnCount);
+            }
+        }
+
+        public int TopologyColumnCount
+        {
+            get { return topologyColumnCount; }
+            set
+            {
+                topologyColumnCount = value;
+                TopologyGrid = GetEmptyTopologyGrid(TopologyRowCountMain + TopologyRowCountWorker, value);
+            }
+        }
+
+        private Grid GetEmptyTopologyGrid(int rowCount, int columnCount)
+        {
+            var topology = new Grid();
+            topology.Height = TOPOLOGY_CELL_SIZE * rowCount;
+            topology.Width = TOPOLOGY_CELL_SIZE * columnCount;
+
+            for (int i = 0; i < rowCount; i++)
+            {
+                topology.RowDefinitions.Add(new RowDefinition()
                 {
-                    throw new IndexOutOfRangeException();
-                }
-
-                if (y < 0)
+                    Height = new GridLength(TOPOLOGY_CELL_SIZE)
+                });
+            }
+            for (int i = 0; i < columnCount; i++)
+            {
+                topology.ColumnDefinitions.Add(new ColumnDefinition()
                 {
-                    throw new IndexOutOfRangeException();
-                }
+                    Width = new GridLength(TOPOLOGY_CELL_SIZE)
+                });
+            }
 
-                if (y > LastY)
+            FillEmptyTopology(topology);
+
+            return topology;
+        }
+
+        private void FillEmptyTopology(Grid grid)
+        {
+            for (int i = 0; i < grid.RowDefinitions.Count; i++)
+            {
+                for (int j = 0; j < grid.ColumnDefinitions.Count; j++)
                 {
-                    throw new IndexOutOfRangeException();
+                    var item = new Label()
+                    {
+                        Background = new ImageBrush(Application.Current.TryFindResource("Cell") as BitmapImage)
+                    };
+
+                    Grid.SetRow(item, i);
+                    Grid.SetColumn(item, j);
+                    grid.Children.Add(item);
                 }
-
-                return field[y, x];
-            }
-        }
-        public int ServiceAreaBorderColIndex { get; }
-
-        public int ColsCount
-        {
-            get
-            {
-                return field.GetLength(1);
             }
         }
 
-        public int RowsCount
+        enum ChangedGridSize
         {
-            get
-            {
-                return field.GetLength(0);
-            }
+            ColumnCount,
+            RowCountMain,
+            RowCountWorker
         }
-
-        public int LastX
-        {
-            get
-            {
-                return ColsCount - 1;
-            }
-        }
-
-        public int LastY
-        {
-            get
-            {
-                return RowsCount - 1;
-            }
-        }
-
-        public IGasStationElement GetElement(int x, int y)
-        {
-            return field[y, x];
-        }
-
-        public bool IsCashbox(int x, int y)
-        {
-            return this[x, y] is Cashbox;
-        }
-
-
-        public bool IsFuelDispenser(int x, int y)
-        {
-            return this[x, y] is FuelDispenser;
-        }
-
-
-        public bool IsTank(int x, int y)
-        {
-            return this[x, y] is Tank;
-        }
-
     }
 }
