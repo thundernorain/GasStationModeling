@@ -43,14 +43,14 @@
                 <TextBlock Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="x1 Выезд" VerticalAlignment="Center" FontSize="24" Height="32" Width="98" Margin="0,36,0,35"/>
                 <TextBlock Grid.Row="5" Grid.Column="3" TextWrapping="Wrap" Text="Ширина служебной части:" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Height="24" Margin="0,40,0,39" Width="219"/>
                 <TextBlock Grid.Row="6" Grid.Column="3" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Text="Ширина основной части:" FontSize="18" Height="24" Width="241" Margin="0,35"/>
-                <Slider Value="{Binding GetTopology.TopologyRowCountWorker, Mode=TwoWay}" Grid.Row="5" Grid.Column="4" HorizontalAlignment="Left" VerticalAlignment="Top" Height="52" Width="142" Maximum="20" Minimum="2" Margin="10,35,0,0"/>
-                <Slider Value="{Binding GetTopology.TopologyRowCountMain, Mode=TwoWay}" Grid.Row="6" Grid.Column="4" HorizontalAlignment="Left" VerticalAlignment="Top" Height="52" Width="141" RenderTransformOrigin="0.412,3.47" Maximum="5" Minimum="1" Margin="10,40,0,0"/>
+                <Slider Value="{Binding GetTopology.TopologyRowCountWorker, Mode=TwoWay}" Grid.Row="5" Grid.Column="4" HorizontalAlignment="Left" VerticalAlignment="Top" Height="52" Width="142" Maximum="20" Minimum="7" Margin="10,35,0,0"/>
+                <Slider Value="{Binding GetTopology.TopologyRowCountMain, Mode=TwoWay}" Grid.Row="6" Grid.Column="4" HorizontalAlignment="Left" VerticalAlignment="Top" Height="52" Width="141" RenderTransformOrigin="0.412,3.47" Maximum="5" Minimum="3" Margin="10,40,0,0"/>
                 <TextBlock Grid.Row="5" Grid.Column="4" HorizontalAlignment="Left" TextWrapping="Wrap" Text="7" VerticalAlignment="Top" Margin="10,56,0,0" Height="16" Width="6"/>
                 <TextBlock Grid.Row="5" Grid.Column="4" HorizontalAlignment="Left" TextWrapping="Wrap" Text="20" VerticalAlignment="Top" Margin="134,56,0,0" Height="16" Width="14"/>
                 <TextBlock Grid.Row="6" Grid.Column="4" TextWrapping="Wrap" Text="3" VerticalAlignment="Top" Margin="10,62,177,0" Height="16"/>
                 <TextBlock Grid.Row="6" Grid.Column="4" HorizontalAlignment="Left" TextWrapping="Wrap" Text="5" VerticalAlignment="Top" Margin="135,62,0,0" Height="16" Width="6"/>
                 <TextBlock Grid.Row="1" Grid.Column="6" HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Text="Длина АЗС:" FontSize="18" Height="48" Margin="35,10,36,0" Width="92"/>
-                <Slider Value="{Binding GetTopology.TopologyColumnCount, Mode=TwoWay}"  Grid.Row="1" Grid.Column="6" HorizontalAlignment="Left"  VerticalAlignment="Top" Height="54" Width="143" Maximum="20" Minimum="2" Margin="10,54,0,0" Grid.RowSpan="2"/>
+                <Slider Value="{Binding GetTopology.TopologyColumnCount, Mode=TwoWay}"  Grid.Row="1" Grid.Column="6" HorizontalAlignment="Left"  VerticalAlignment="Top" Height="54" Width="143" Maximum="20" Minimum="5" Margin="10,54,0,0" Grid.RowSpan="2"/>
                 <TextBlock Grid.Row="1" Grid.Column="6" HorizontalAlignment="Left" TextWrapping="Wrap" Text="5" VerticalAlignment="Top" Margin="10,82,0,0" Height="16" Width="6"/>
                 <TextBlock Grid.Row="1" Grid.Column="6" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="20" VerticalAlignment="Top" Margin="135,82,0,0" Height="16" Width="13"/>
                 <Border Grid.Column="3" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Bottom"  Background="Black" Height="528" Width="528"  Grid.ColumnSpan="3" Grid.RowSpan="5">
@@ -66,7 +66,7 @@
                 <Label Grid.Row="3" Grid.Column="2" x:Name="ТБ" Content="ТБ" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="24" Height="42" Width="36" Margin="6,30,0,30"/>
                 <Polygon Grid.Row="4" Grid.Column="2" Fill="#FFC4C4C4" Points="0,40 20,0 40,40" HorizontalAlignment="Left" VerticalAlignment="Center" Height="40" Width="40" Margin="0,31,0,32" />
                 <Polygon Grid.Row="5" Grid.Column="2" Fill="#FFC4C4C4" Points="0,0 20,40 40,0" HorizontalAlignment="Left" VerticalAlignment="Center" RenderTransformOrigin="1,3.275" Height="40" Width="40" Margin="0,32,0,31" />
-                <Button Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Content="Назад" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="185" Height="50" Foreground="White" Click="Button_Click_1">
+                <Button Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Content="Назад" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="185" Height="50" Foreground="White">
                     <Button.Background>
                         <SolidColorBrush Color="{DynamicResource AquaColor}"/>
                     </Button.Background>

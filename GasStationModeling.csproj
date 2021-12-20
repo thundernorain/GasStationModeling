@@ -180,7 +180,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="messageBoxes\ErrorMessageBoxShower.cs" />
-    <Compile Include="add_forms\ErrorMessageBoxShower.cs" />
     <Compile Include="core\DataGridWorker.cs" />
     <Compile Include="core\DB\dto\FuelDispenserDTO.cs" />
     <Compile Include="core\DB\dto\FuelTankDTO.cs" />

@@ -33,8 +33,6 @@ namespace GasStationModeling.ViewModel
         private Uri currentPageUri;
         private Brush[] pageIndicatorBrushes;
         private Topology topology;
-
-        private Uri currentPageUri;
        
         public Uri CurrentPageUri
         {
