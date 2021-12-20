@@ -88,7 +88,7 @@
             <Label Grid.Row="3" Grid.Column="2" x:Name="ТБ" Content="ТБ" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="24" Height="42" Width="36" Margin="6,30,0,30"/>
             <Polygon Grid.Row="4" Grid.Column="2" Fill="#FFC4C4C4" Points="0,40 20,0 40,40" HorizontalAlignment="Left" VerticalAlignment="Center" Height="40" Width="40" Margin="0,31,0,32" />
             <Polygon Grid.Row="5" Grid.Column="2" Fill="#FFC4C4C4" Points="0,0 20,40 40,0" HorizontalAlignment="Left" VerticalAlignment="Center" RenderTransformOrigin="1,3.275" Height="40" Width="40" Margin="0,32,0,31" />
-            <Button Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Content="Назад" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="185" Height="50" Foreground="White" Click="Button_Click_1">
+            <Button Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Content="Назад" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="185" Height="50" Foreground="White">
                 <Button.Background>
                     <SolidColorBrush Color="{DynamicResource AquaColor}"/>
                 </Button.Background>

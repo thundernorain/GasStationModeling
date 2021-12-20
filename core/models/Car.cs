@@ -11,9 +11,11 @@ namespace GasStationModeling.core.models
         public string Image { get; }
 
         public string Model { get; set; }
-        public string TypeFuel { get; set; }
-        public int CurrentFuelSupply { get; set; }
-        public int MaxVolumeTank { get; set; }
 
+        public string TypeFuel { get; set; }
+
+        public int CurrentFuelSupply { get; set; }
+
+        public int MaxVolumeTank { get; set; }
     }
 }
