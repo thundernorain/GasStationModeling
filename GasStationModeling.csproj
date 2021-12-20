@@ -378,6 +378,15 @@
     <Content Include="core\Compression\Snappy\lib\win\snappy64.dll" />
     <Content Include="core\Compression\Zstandard\lib\win\libzstd.dll" />
     <Content Include="mongocrypt.dll" />
+    <Resource Include="styles\assets\imgElementStation\tank.png" />
+    <Resource Include="styles\assets\imgElementStation\refueller.png" />
+    <Resource Include="styles\assets\imgElementStation\ikonka-yandex-kassa-848x424.png" />
+    <Resource Include="styles\assets\imgElementStation\fuelDispenser.png" />
+    <Resource Include="styles\assets\imgElementStation\exit.png" />
+    <Resource Include="styles\assets\imgElementStation\entrance.png" />
+    <Resource Include="styles\assets\imgElementStation\collector.png" />
+    <Resource Include="styles\assets\imgElementStation\cashbox.png" />
+    <Resource Include="styles\assets\imgElementStation\car.png" />
     <Resource Include="styles\assets\Cell2.png" />
     <Resource Include="styles\assets\Cell.png" />
     <Resource Include="styles\assets\deleteIcon.png" />
