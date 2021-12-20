@@ -5,5 +5,7 @@
     <BitmapImage x:Key="InfoButtonImage" UriSource="./assets/InfoButton.png" />
     <BitmapImage x:Key="QuestionButtonImage" UriSource="./assets/QuestionButton.png" />
     <BitmapImage x:Key="DeleteIcon" UriSource="./assets/deleteIcon.png" />
+    <BitmapImage x:Key="Cell" UriSource="./assets/Cell.png" />
+    <BitmapImage x:Key="CellBrown" UriSource="./assets/Cell2.png" />
 
 </ResourceDictionary>

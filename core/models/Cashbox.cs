@@ -1,7 +1,7 @@
 ﻿
 namespace GasStationModeling.core.models
 {
-    public class Cashbox
+    public class Cashbox : IGasStationElement
     {
         public string Image { get; }
 

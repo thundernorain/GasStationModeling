@@ -2,7 +2,7 @@
 
 namespace GasStationModeling.core.models
 {
-    public class Fuel
+    public class Fuel : IGasStationElement
     {
         public ObjectId Id { get; set; }
 

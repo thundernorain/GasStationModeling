@@ -1,11 +1,13 @@
 using GalaSoft.MvvmLight;
 using GasStationModeling.Properties;
 using GasStationModeling.settings_screen.model;
+using GasStationModeling.core.topology;
 using GasStationModeling.settings_screen.view;
 using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace GasStationModeling.ViewModel
 {
@@ -28,8 +30,9 @@ namespace GasStationModeling.ViewModel
         public const string MODELLING_SCREEN_URI = "/../modelling/view/ModellingPage.xaml";
 
         public ModellingSettings ModellingSettings { get; set; }
-
         private Uri currentPageUri;
+        private Brush[] pageIndicatorBrushes;
+        private Topology topology;
        
         public Uri CurrentPageUri
         {
@@ -51,12 +54,22 @@ namespace GasStationModeling.ViewModel
             }
         }
 
-        private Brush[] pageIndicatorBrushes;
-
         public Brush[] PageIndicatorBrushes
         {
             get { return pageIndicatorBrushes; }
         }
+
+        public Topology GetTopology
+        {
+            get
+            {
+                if (topology == null)
+                    topology = new Topology();
+
+                return topology;
+            }
+        }
+
 
         public MainViewModel()
         {
