@@ -14,8 +14,6 @@ namespace GasStationModeling.DB
     {
         private static IMongoCollection<T> collection;
 
-        private static string CollectionName;
-
         public DbWorker(IMongoDatabase db,string collectionName)
         {
             collection = db.GetCollection<T>(collectionName);

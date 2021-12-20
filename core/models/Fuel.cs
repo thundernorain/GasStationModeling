@@ -8,6 +8,6 @@ namespace GasStationModeling.core.models
 
         public double Price { get; set; }
 
-        public string Name  { get; set; }
+        public string Name { get; set; }
     }
 }

@@ -1,21 +1,13 @@
-﻿using CommonServiceLocator;
-using GalaSoft.MvvmLight;
-using GasStationModeling.core;
+﻿using GalaSoft.MvvmLight;
 using GasStationModeling.core.DB;
 using GasStationModeling.core.models;
 using GasStationModeling.DB;
+using GasStationModeling.exceptions;
 using GasStationModeling.settings_screen.mapper;
 using GasStationModeling.settings_screen.model;
-using MongoDB.Bson;
 using MongoDB.Driver;
-using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using System.Xml.Serialization;
 
 namespace GasStationModeling.ViewModel
 {
@@ -30,6 +22,14 @@ namespace GasStationModeling.ViewModel
 
         private string _selectedFuelDispenser;
         private List<FuelDispenserComboBoxItem> _fuelDispensers = new List<FuelDispenserComboBoxItem>();
+        #endregion
+
+        #region DbData
+        public List<Fuel> FuelsDB { get; set; }
+
+        public List<Tank> TanksDB { get; set; }
+
+        public List<FuelDispenser> FuelDispensersDB { get; set; }
         #endregion
 
         #region Properties
@@ -103,31 +103,61 @@ namespace GasStationModeling.ViewModel
             getFuelDispensersFromDB(db);
         }
 
+        public List<Fuel> getChosenFuels()
+        {
+            var ids = _fuels
+                .Where(fuelItem => fuelItem.IsChecked)
+                .Select(fuelItem => fuelItem.Id)
+                .ToList();
+
+            if (ids.Count == 0) throw new ParameterNotSelectedException(ParameterErrorMessage.FUELS_NOT_SELECTED);
+
+            var elems = FuelsDB
+                .Where(fuel => ids.Any(id => id == fuel.Id))
+                .ToList();
+
+            return elems;
+        }
+
+        public FuelDispenser getChosenFuelDispenser()
+        {
+            FuelDispenser dispenser = FuelDispensersDB.Where(disp => disp.Name.Equals(SelectedFuelDispenser)).First();
+            if (dispenser == null) throw new ParameterNotSelectedException(ParameterErrorMessage.DISPENSER_NOT_SELECTED);
+            return dispenser;
+        }
+
+        public Tank getChosenTank()
+        {
+            Tank tank = TanksDB.Where(fuel => fuel.Name.Equals(SelectedFuelTank)).First();
+            if(tank == null) throw new ParameterNotSelectedException(ParameterErrorMessage.TANK_NOT_SELECTED);
+            return tank;
+        }
+
         #region GetFromDBMethods
         private void getFuelsFromDB(IMongoDatabase db)
         {
             var dbWorker = new DbWorker<Fuel>(db, DBWorkerKeys.FUEL_TYPES_KEY);
-            var collectionFromDb = dbWorker.getCollection();
+            FuelsDB = dbWorker.getCollection();
 
-            Fuels = new FuelToFuelComboBoxMapper().MapList(collectionFromDb);
+            Fuels = new FuelToFuelComboBoxMapper().MapList(FuelsDB);
             SelectedFuel = Fuels[0].Name;
         }
 
         private void getFuelTanksFromDB(IMongoDatabase db)
         {
             var dbWorker = new DbWorker<Tank>(db, DBWorkerKeys.FUEL_TANKS_KEY);
-            var collectionFromDb = dbWorker.getCollection();
+            TanksDB = dbWorker.getCollection();
 
-            FuelTanks = new TankToFuelTankComboBoxItemMapper().MapList(collectionFromDb);
+            FuelTanks = new TankToFuelTankComboBoxItemMapper().MapList(TanksDB);
             SelectedFuelTank = FuelTanks[0].Name;
         }
 
         private void getFuelDispensersFromDB(IMongoDatabase db)
         {
             var dbWorker = new DbWorker<FuelDispenser>(db, DBWorkerKeys.FUEL_DISPENSERS_KEY);
-            var collectionFromDb = dbWorker.getCollection();
+            FuelDispensersDB = dbWorker.getCollection();
 
-            FuelDispensers = new FuelDispenserToFuelDispenserComboBoxItemMapper().MapList(collectionFromDb);
+            FuelDispensers = new FuelDispenserToFuelDispenserComboBoxItemMapper().MapList(FuelDispensersDB);
             SelectedFuelDispenser = FuelDispensers[0].Name;
         }
         #endregion

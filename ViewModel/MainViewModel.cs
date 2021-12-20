@@ -1,4 +1,6 @@
 using GalaSoft.MvvmLight;
+using GasStationModeling.Properties;
+using GasStationModeling.settings_screen.model;
 using GasStationModeling.settings_screen.view;
 using System;
 using System.Windows;
@@ -25,8 +27,10 @@ namespace GasStationModeling.ViewModel
         public const string TOPOLOGY_SCREEN_URI = "/../topology/view/TopologyScreen.xaml";
         public const string MODELLING_SCREEN_URI = "/../modelling/view/ModellingPage.xaml";
 
-        private Uri currentPageUri;
+        public ModellingSettings ModellingSettings { get; set; }
 
+        private Uri currentPageUri;
+       
         public Uri CurrentPageUri
         {
             get
@@ -57,7 +61,7 @@ namespace GasStationModeling.ViewModel
         public MainViewModel()
         {
             pageIndicatorBrushes = InitBrushes();
-            CurrentPageUri = new Uri(SETTINGS_SCREEN_URI, UriKind.Relative);
+            CurrentPageUri = new Uri(TOPOLOGY_SCREEN_URI, UriKind.Relative);
         }
 
         public void SetIndicatorBrushesActive(Uri pageUri)

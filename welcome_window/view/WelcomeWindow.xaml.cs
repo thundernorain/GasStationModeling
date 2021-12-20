@@ -1,8 +1,10 @@
-﻿using GasStationModeling.core.DB;
+﻿using GasStationModeling.add_forms;
+using GasStationModeling.core.DB;
 using GasStationModeling.developers_info_window.view;
 using GasStationModeling.main_window.view;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -37,9 +39,15 @@ namespace GasStationModeling.welcome_window.view
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            var systemInfoFile = "..\\..\\system_info.html";
-
-            System.Diagnostics.Process.Start(systemInfoFile);
+            var systemInfoFilePath = ConfigurationManager.AppSettings.Get("InfoFilePath"); ;
+            try
+            {
+                System.Diagnostics.Process.Start(systemInfoFilePath);
+            }
+            catch (System.ComponentModel.Win32Exception)
+            {
+                ErrorMessageBoxShower.show("Ошибка системы. Файл справочной информации не найден.");
+            }
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)

@@ -172,7 +172,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="add_forms\ErrorMessageBoxShower.cs" />
+    <Compile Include="messageBoxes\ErrorMessageBoxShower.cs" />
     <Compile Include="core\DB\dto\FuelDispenserDTO.cs" />
     <Compile Include="core\DB\dto\FuelTankDTO.cs" />
     <Compile Include="core\DB\dto\FuelTypeDTO.cs" />
@@ -187,12 +187,18 @@
     <Compile Include="core\models\Fuel.cs" />
     <Compile Include="core\models\FuelDispenser.cs" />
     <Compile Include="core\models\Tank.cs" />
+    <Compile Include="exceptions\ParameterNotSelectedException.cs" />
+    <Compile Include="modelling\model\CarTableItem.cs" />
+    <Compile Include="messageBoxes\DeleteConfirmationMessageBoxShower.cs" />
+    <Compile Include="modelling\model\FuelTableItem.cs" />
     <Compile Include="settings_screen\mapper\FuelDispenserToFuelDispenserComboBoxItemMapper.cs" />
     <Compile Include="settings_screen\mapper\FuelToFuelComboBoxMapper.cs" />
     <Compile Include="settings_screen\mapper\TankToFuelTankComboBoxItemMapper.cs" />
     <Compile Include="settings_screen\model\FuelComboBoxItem.cs" />
     <Compile Include="settings_screen\model\FuelDispenserComboBoxItem.cs" />
     <Compile Include="settings_screen\model\FuelTankComboBoxItem.cs" />
+    <Compile Include="ViewModel\ModellingScreenViewModel.cs" />
+    <Compile Include="settings_screen\model\ModellingSettings.cs" />
     <Compile Include="topology\view\TopologyScreen.xaml.cs">
       <DependentUpon>TopologyScreen.xaml</DependentUpon>
     </Compile>
@@ -326,10 +332,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DB\" />
-    <Folder Include="modeling\model\" />
-    <Folder Include="modeling\presenter\" />
-    <Folder Include="modeling\view\" />
     <Folder Include="topology\model\" />
     <Folder Include="topology\presenter\" />
   </ItemGroup>

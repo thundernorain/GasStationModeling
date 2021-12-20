@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:GasStationModeling.modelling.view"
       mc:Ignorable="d" 
       d:DesignHeight="800"
-      Title="ModellingPage" Width="1137">
+      Title="ModellingPage" Width="1137"
+      DataContext="{Binding ModellingScreen, Source={StaticResource Locator}}" >
 
     <StackPanel Orientation="Horizontal" Height="776" Margin="10,24,-10,0" VerticalAlignment="Top" Width="1140" Background="White">
         <Grid Width="419">
@@ -24,7 +25,22 @@
                    Margin="19,0,336,704"
                    Text="Бензин:" Width="64" Height="25" VerticalAlignment="Bottom"/>
             <Border BorderBrush="Black" BorderThickness="10" HorizontalAlignment="Left" Height="157" Margin="19,73,0,0" VerticalAlignment="Top" Width="305"/>
-            <DataGrid x:Name="FuelGrid" HorizontalAlignment="Left" Height="149" Margin="23,76,0,0" VerticalAlignment="Top" Width="297"/>
+            <DataGrid 
+                x:Name="FuelGrid" 
+                HorizontalAlignment="Left" 
+                Height="149" 
+                Margin="23,76,0,0" 
+                VerticalAlignment="Top"
+                IsReadOnly="true"
+                ItemsSource="{Binding Fuels}"
+                Width="297">
+
+                <DataGrid.Columns>
+
+                </DataGrid.Columns>
+
+            </DataGrid>
+
 
 
             <TextBlock Style="{StaticResource BaseText}" 
@@ -34,7 +50,15 @@
                    Margin="21,0,302,496"
                    Text="Транспорт:" Width="96" Height="24" VerticalAlignment="Bottom"/>
             <Border BorderBrush="Black" BorderThickness="10" HorizontalAlignment="Left" Height="179" Margin="21,285,0,0" VerticalAlignment="Top" Width="385">
-                <DataGrid x:Name="TransportGrid" HorizontalAlignment="Left" Height="172" Margin="-8,-5,-5,-8" VerticalAlignment="Top" Width="378" SelectionChanged="TransportGrid_SelectionChanged"/>
+                <DataGrid x:Name="TransportGrid" 
+                          HorizontalAlignment="Left" 
+                          Height="172" Margin="-8,-5,-5,-8" 
+                          VerticalAlignment="Top"
+                          Width="378" 
+                          IsReadOnly="true"
+                          AutoGenerateColumns="false"
+                          ItemsSource="{Binding ModellingScreen.CarTableItems}"
+                          SelectionChanged="TransportGrid_SelectionChanged"/>
             </Border>
 
             <TextBlock x:Name="CashCountInfo" Style="{StaticResource BaseText}" 
@@ -51,7 +75,7 @@
                    Margin="24,0,17,238"
                    Text="Количество топлива в ТБ:" Width="378" Height="26" VerticalAlignment="Bottom"/>
 
-            <Button x:Name="GoBackButton" Style="{StaticResource AquaButton}" Content="Назад" Margin="26,696,213,24" Click="Button_Click"/>
+            <Button x:Name="GoBackButton" Style="{StaticResource AquaButton}" Content="Назад" Margin="26,675,213,45" Click="Button_Click"/>
 
         </Grid>
         <StackPanel/>
@@ -59,25 +83,20 @@
         <Grid Width="712">
             <StackPanel Name="StationImage" Orientation="Horizontal" Margin="0,0,0,119"/>
 
-            <Grid Height="72" Margin="252,686,252,18">
-                <Button x:Name="StartButton" Style="{StaticResource AquaButton}" Margin="124,12,36,11" Click="Button_Click" RenderTransformOrigin="0.5,0.5">
-                    <Image Source="{StaticResource InfoButtonImage}" Height="63" RenderTransformOrigin="0.5,0.5" Width="67">
-                        <Image.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform ScaleX="-1"/>
-                                <SkewTransform/>
-                                <RotateTransform/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </Image.RenderTransform>
-                    </Image>
+            <Grid Height="72" Margin="252,662,252,42">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="65*"/>
+                    <RowDefinition Height="7*"/>
+                </Grid.RowDefinitions>
+                <Button x:Name="StartButton" Style="{StaticResource AquaButton}" Margin="124,12,36,4.127" Click="Button_Click" RenderTransformOrigin="0.5,0.5">
+                    
                 </Button>
-                <Button x:Name="StopButton" Style="{StaticResource AquaButton}" Margin="36,12,125,11" Click="Button_Click" RenderTransformOrigin="0.5,0.5">
-                    <Image Source="{StaticResource InfoButtonImage}" Height="40" Width="44"/>
+                <Button x:Name="StopButton" Style="{StaticResource AquaButton}" Margin="36,12,125,4.127" Click="Button_Click" RenderTransformOrigin="0.5,0.5">
                 </Button>
             </Grid>
 
         </Grid>
+        <Image Width="100"/>
 
     </StackPanel>
 </Page>

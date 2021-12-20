@@ -45,6 +45,7 @@ namespace GasStationModeling.ViewModel
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<WelcomeViewModel>();
             SimpleIoc.Default.Register<SettingsScreenViewModel>();
+            SimpleIoc.Default.Register<ModellingScreenViewModel>();
         }
 
         public MainViewModel Main
@@ -70,6 +71,15 @@ namespace GasStationModeling.ViewModel
                 return ServiceLocator.Current.GetInstance<SettingsScreenViewModel>();
             }
         }
+
+        public ModellingScreenViewModel ModellingScreen
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ModellingScreenViewModel>();
+            }
+        }
+
 
         public static void Cleanup()
         {

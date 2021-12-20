@@ -11,6 +11,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Xml.Serialization;
 
@@ -25,6 +27,8 @@ namespace GasStationModeling.settings_screen.model
         public string Name { get; }
 
         public ObjectId Id { get; }
+
+        public Boolean IsChecked { get; set; }
 
         public ICommand DeleteCommand
         {
@@ -46,12 +50,15 @@ namespace GasStationModeling.settings_screen.model
 
         private void DeleteItem()
         {
-            var db = DbInitializer.getInstance();
-            var dbWorker = new DbWorker<Fuel>(db, DBWorkerKeys.FUEL_TYPES_KEY);
-            var newCollection = dbWorker.deleteEntry(Id);
+            if (DeleteConfirmationMessageBoxShower.show(Name).Equals(MessageBoxResult.Yes))
+            {
+                var db = DbInitializer.getInstance();
+                var dbWorker = new DbWorker<Fuel>(db, DBWorkerKeys.FUEL_TYPES_KEY);
+                var newCollection = dbWorker.deleteEntry(Id);
 
-            var viewModel = ServiceLocator.Current.GetInstance<SettingsScreenViewModel>();
-            viewModel.Fuels = new FuelToFuelComboBoxMapper().MapList(newCollection);
+                var viewModel = ServiceLocator.Current.GetInstance<SettingsScreenViewModel>();
+                viewModel.Fuels = new FuelToFuelComboBoxMapper().MapList(newCollection);
+            }
         }
     }
 }

@@ -1,7 +1,10 @@
 ﻿using CommonServiceLocator;
+using GasStationModeling.core.models;
+using GasStationModeling.modelling.model;
 using GasStationModeling.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,8 +23,9 @@ namespace GasStationModeling.modelling.view
     /// <summary>
     /// Interaction logic for ModellingPage.xaml
     /// </summary>
-    public partial class ModellingPage : Page
+    public partial class ModellingPage : Page    
     {
+ 
         public ModellingPage()
         {
             InitializeComponent();
@@ -35,7 +39,7 @@ namespace GasStationModeling.modelling.view
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             var mainViewModel = ServiceLocator.Current.GetInstance<MainViewModel>();
-            mainViewModel.CurrentPageUri = new Uri(MainViewModel.TOPOLOGY_SCREEN_URI, UriKind.Relative);
+            mainViewModel.CurrentPageUri = new Uri(MainViewModel.SETTINGS_SCREEN_URI, UriKind.Relative);
         }
     }
 }
