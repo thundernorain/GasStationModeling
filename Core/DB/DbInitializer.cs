@@ -21,7 +21,7 @@ namespace GasStationModeling.core.DB
                 DB = client.GetDatabase(dbName);
                 return DB;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw new DbErrorException(DbErrorMessage.CONNECTION_ERROR);
             }

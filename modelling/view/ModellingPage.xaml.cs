@@ -1,5 +1,6 @@
 ﻿using CommonServiceLocator;
 using GasStationModeling.core.models;
+using GasStationModeling.core.topology;
 using GasStationModeling.modelling.model;
 using GasStationModeling.ViewModel;
 using System;
@@ -17,6 +18,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace GasStationModeling.modelling.view
 {
@@ -25,6 +27,7 @@ namespace GasStationModeling.modelling.view
     /// </summary>
     public partial class ModellingPage : Page    
     {
+        DispatcherTimer timer = new DispatcherTimer();
  
         public ModellingPage()
         {
@@ -40,6 +43,16 @@ namespace GasStationModeling.modelling.view
         {
             var mainViewModel = ServiceLocator.Current.GetInstance<MainViewModel>();
             mainViewModel.CurrentPageUri = new Uri(MainViewModel.SETTINGS_SCREEN_URI, UriKind.Relative);
+        }
+
+        private void StartButton_Click(object sender, RoutedEventArgs e)
+        {
+            timer.Start();
+        }
+
+        private void StopButton_Click(object sender, RoutedEventArgs e)
+        {
+            timer.Stop();
         }
     }
 }
