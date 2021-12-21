@@ -26,14 +26,20 @@ namespace GasStationModeling.core.topology
 
         public IGasStationElement[,] TopologyElements
         {
-            get { return topologyElements; }
+            get
+            {
+                if (topologyElements == null)
+                    topologyElements = GetEmptyGasStationElementsArray();
+
+                return topologyElements;
+            }
         }
         public Grid TopologyGrid
         {
             get
             {
                 if (grid == null)
-                    return GetEmptyTopologyGrid(topologyRowCount, topologyColumnCountMain  + topologyColumnCountWorker);
+                    grid = GetTopologyGrid(TopologyRowCount, TopologyColumnCountMain  + TopologyColumnCountWorker);
 
                 return grid;
             }
@@ -55,7 +61,7 @@ namespace GasStationModeling.core.topology
             set
             {
                 topologyColumnCountMain = value;
-                TopologyGrid = GetEmptyTopologyGrid(TopologyRowCount, value + TopologyColumnCountWorker);
+                TopologyGrid = GetTopologyGrid(TopologyRowCount, value + TopologyColumnCountWorker);
             }
         }
 
@@ -65,7 +71,7 @@ namespace GasStationModeling.core.topology
             set
             {
                 topologyColumnCountWorker = value;
-                TopologyGrid = GetEmptyTopologyGrid(TopologyRowCount, value + TopologyColumnCountMain);
+                TopologyGrid = GetTopologyGrid(TopologyRowCount, value + TopologyColumnCountMain);
             }
         }
 
@@ -75,11 +81,11 @@ namespace GasStationModeling.core.topology
             set
             {
                 topologyRowCount = value;
-                TopologyGrid = GetEmptyTopologyGrid(value, TopologyColumnCountWorker + TopologyColumnCountMain);
+                TopologyGrid = GetTopologyGrid(value, TopologyColumnCountWorker + TopologyColumnCountMain);
             }
         }
 
-        private Grid GetEmptyTopologyGrid(int rowCount, int columnCount)
+        private Grid GetTopologyGrid(int rowCount, int columnCount)
         {
             var topology = new Grid();
             topology.Height = TOPOLOGY_CELL_SIZE * rowCount;
@@ -100,12 +106,12 @@ namespace GasStationModeling.core.topology
                 });
             }
 
-            FillEmptyTopology(topology);
+            FillTopologyGridWithImages(topology);
 
             return topology;
         }
 
-        private void FillEmptyTopology(Grid grid)
+        private void FillTopologyGridWithImages(Grid grid)
         {
             for (int i = 0; i < grid.RowDefinitions.Count; i++)
             {
@@ -113,7 +119,11 @@ namespace GasStationModeling.core.topology
                 {
                     var item = new Label()
                     {
-                        Background = new ImageBrush(Application.Current.TryFindResource("Cell") as BitmapImage)
+                        Background = new ImageBrush(
+                            (j < TopologyColumnCountMain)
+                            ? Application.Current.TryFindResource("Cell") as BitmapImage
+                            : Application.Current.TryFindResource("CellBrown") as BitmapImage
+                            )
                     };
 
                     Grid.SetRow(item, i);
@@ -121,6 +131,26 @@ namespace GasStationModeling.core.topology
                     grid.Children.Add(item);
                 }
             }
+        }
+
+        private BitmapImage GetCellImage(int i, int j)
+        {
+            object image = null;
+            var element = TopologyElements[i, j];
+
+            if(element == null)
+            {
+                image = (j < TopologyColumnCountMain)
+                            ? Application.Current.TryFindResource("Cell") as BitmapImage
+                            : Application.Current.TryFindResource("CellBrown") as BitmapImage;
+            }
+
+            return image as BitmapImage;
+        }
+
+        private IGasStationElement[,] GetEmptyGasStationElementsArray()
+        {
+            return new IGasStationElement[topologyRowCount, topologyColumnCountMain + topologyColumnCountWorker];
         }
 
         enum ChangedGridSize
