@@ -41,19 +41,19 @@
                 <TextBlock Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="x7 Топливный бак" TextAlignment="Center" VerticalAlignment="Center" FontSize="24" Height="76" Width="164" Margin="0,12,0,14"/>
                 <TextBlock Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="x1 Въезд" VerticalAlignment="Center" FontSize="24" Height="32" Width="95" Margin="0,35,0,36"/>
                 <TextBlock Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="x1 Выезд" VerticalAlignment="Center" FontSize="24" Height="32" Width="98" Margin="0,36,0,35"/>
-                <TextBlock Grid.Row="5" Grid.Column="3" TextWrapping="Wrap" Text="Ширина служебной части:" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Height="24" Margin="0,40,0,39" Width="219"/>
-                <TextBlock Grid.Row="6" Grid.Column="3" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Text="Ширина основной части:" FontSize="18" Height="24" Width="241" Margin="0,35"/>
-                <Slider Value="{Binding GetTopology.TopologyRowCountWorker, Mode=TwoWay}" Grid.Row="5" Grid.Column="4" HorizontalAlignment="Left" VerticalAlignment="Top" Height="52" Width="142" Maximum="20" Minimum="7" Margin="10,35,0,0"/>
-                <Slider Value="{Binding GetTopology.TopologyRowCountMain, Mode=TwoWay}" Grid.Row="6" Grid.Column="4" HorizontalAlignment="Left" VerticalAlignment="Top" Height="52" Width="141" RenderTransformOrigin="0.412,3.47" Maximum="5" Minimum="3" Margin="10,40,0,0"/>
+                <TextBlock Grid.Row="5" Grid.Column="3" TextWrapping="Wrap" Text="Ширина основной части части:" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Height="24" Margin="0,40,0,39" Width="219"/>
+                <TextBlock Grid.Row="6" Grid.Column="3" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Text="Ширина служебной части:" FontSize="18" Height="24" Width="241" Margin="0,35"/>
+                <Slider Value="{Binding GetTopology.TopologyColumnCountMain, Mode=TwoWay}" Grid.Row="5" Grid.Column="4" HorizontalAlignment="Left" VerticalAlignment="Top" Height="52" Width="142" Maximum="11" Minimum="5" Margin="10,35,0,0" ValueChanged="Slider_ValueChanged"/>
+                <Slider Value="{Binding GetTopology.TopologyColumnCountWorker, Mode=TwoWay}" Grid.Row="6" Grid.Column="4" HorizontalAlignment="Left" VerticalAlignment="Top" Height="52" Width="141" RenderTransformOrigin="0.412,3.47" Maximum="5" Minimum="3" Margin="10,40,0,0"/>
                 <TextBlock Grid.Row="5" Grid.Column="4" HorizontalAlignment="Left" TextWrapping="Wrap" Text="7" VerticalAlignment="Top" Margin="10,56,0,0" Height="16" Width="6"/>
                 <TextBlock Grid.Row="5" Grid.Column="4" HorizontalAlignment="Left" TextWrapping="Wrap" Text="20" VerticalAlignment="Top" Margin="134,56,0,0" Height="16" Width="14"/>
                 <TextBlock Grid.Row="6" Grid.Column="4" TextWrapping="Wrap" Text="3" VerticalAlignment="Top" Margin="10,62,177,0" Height="16"/>
                 <TextBlock Grid.Row="6" Grid.Column="4" HorizontalAlignment="Left" TextWrapping="Wrap" Text="5" VerticalAlignment="Top" Margin="135,62,0,0" Height="16" Width="6"/>
                 <TextBlock Grid.Row="1" Grid.Column="6" HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Text="Длина АЗС:" FontSize="18" Height="48" Margin="35,10,36,0" Width="92"/>
-                <Slider Value="{Binding GetTopology.TopologyColumnCount, Mode=TwoWay}"  Grid.Row="1" Grid.Column="6" HorizontalAlignment="Left"  VerticalAlignment="Top" Height="54" Width="143" Maximum="20" Minimum="5" Margin="10,54,0,0" Grid.RowSpan="2"/>
+                <Slider Value="{Binding GetTopology.TopologyRowCount, Mode=TwoWay}"  Grid.Row="1" Grid.Column="6" HorizontalAlignment="Left"  VerticalAlignment="Top" Height="54" Width="143" Maximum="11" Minimum="5" Margin="10,54,0,0" Grid.RowSpan="2"/>
                 <TextBlock Grid.Row="1" Grid.Column="6" HorizontalAlignment="Left" TextWrapping="Wrap" Text="5" VerticalAlignment="Top" Margin="10,82,0,0" Height="16" Width="6"/>
-                <TextBlock Grid.Row="1" Grid.Column="6" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="20" VerticalAlignment="Top" Margin="135,82,0,0" Height="16" Width="13"/>
-                <Border Grid.Column="3" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Bottom"  Background="Black" Height="528" Width="528"  Grid.ColumnSpan="3" Grid.RowSpan="5">
+                <TextBlock Grid.Row="1" Grid.Column="6" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="11" VerticalAlignment="Top" Margin="135,82,0,0" Height="16" Width="13"/>
+                <Border Grid.Column="3" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Bottom"  Background="Gray" Height="528" Width="528"  Grid.ColumnSpan="4" Grid.RowSpan="5">
 
                     <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Bottom" Content="{Binding GetTopology.TopologyGrid}" />
 

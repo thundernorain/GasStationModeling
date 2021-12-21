@@ -20,9 +20,9 @@ namespace GasStationModeling.core.topology
         private Grid grid;
         private IGasStationElement[,] topologyElements;
 
-        private int topologyRowCountMain = 5;
-        private int topologyRowCountWorker = 3;
-        private int topologyColumnCount = 10;
+        private int topologyColumnCountMain = 5;
+        private int topologyColumnCountWorker = 3;
+        private int topologyRowCount = 6;
 
         public IGasStationElement[,] TopologyElements
         {
@@ -33,7 +33,7 @@ namespace GasStationModeling.core.topology
             get
             {
                 if (grid == null)
-                    return GetEmptyTopologyGrid(TopologyRowCountMain + TopologyRowCountWorker, TopologyColumnCount);
+                    return GetEmptyTopologyGrid(topologyRowCount, topologyColumnCountMain  + topologyColumnCountWorker);
 
                 return grid;
             }
@@ -49,33 +49,33 @@ namespace GasStationModeling.core.topology
             }
         }
 
-        public int TopologyRowCountMain
+        public int  TopologyColumnCountMain
         {
-            get { return topologyRowCountMain; }
+            get { return topologyColumnCountMain; } 
             set
             {
-                topologyRowCountMain = value;
-                TopologyGrid = GetEmptyTopologyGrid(value + TopologyRowCountWorker, TopologyColumnCount);
+                topologyColumnCountMain = value;
+                TopologyGrid = GetEmptyTopologyGrid(TopologyRowCount, value + TopologyColumnCountWorker);
             }
         }
 
-        public int TopologyRowCountWorker
+        public int TopologyColumnCountWorker
         {
-            get { return topologyRowCountWorker; }
+            get { return topologyColumnCountWorker; }
             set
             {
-                topologyRowCountWorker = value;
-                TopologyGrid = GetEmptyTopologyGrid(TopologyRowCountMain + value, TopologyColumnCount);
+                topologyColumnCountWorker = value;
+                TopologyGrid = GetEmptyTopologyGrid(TopologyRowCount, value + TopologyColumnCountMain);
             }
         }
 
-        public int TopologyColumnCount
+        public int TopologyRowCount
         {
-            get { return topologyColumnCount; }
+            get { return topologyRowCount; }
             set
             {
-                topologyColumnCount = value;
-                TopologyGrid = GetEmptyTopologyGrid(TopologyRowCountMain + TopologyRowCountWorker, value);
+                topologyRowCount = value;
+                TopologyGrid = GetEmptyTopologyGrid(value, TopologyColumnCountWorker + TopologyColumnCountMain);
             }
         }
 
