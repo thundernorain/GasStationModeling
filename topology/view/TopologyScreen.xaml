@@ -36,11 +36,16 @@
                 </Grid.RowDefinitions>
 
                 <TextBlock Grid.Row="0" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" RenderTransformOrigin="-3.461,-1.151" Height="48" Width="292" FontSize="18" TextAlignment="Center" HorizontalAlignment="Left" Grid.ColumnSpan="2" Text="Расположите объекты на сетке топологии" Margin="5,38,61,37"/>
-                <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="x1 Касса" VerticalAlignment="Center" FontSize="24" Height="32" Width="95" Margin="0,35,0,36"/>
-                <TextBlock Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="x4 ТРК" VerticalAlignment="Center" FontSize="24" Height="32" Width="95" Margin="0,36,0,34"/>
-                <TextBlock Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="x7 Топливный бак" TextAlignment="Center" VerticalAlignment="Center" FontSize="24" Height="76" Width="164" Margin="0,12,0,14"/>
-                <TextBlock Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="x1 Въезд" VerticalAlignment="Center" FontSize="24" Height="32" Width="95" Margin="0,35,0,36"/>
-                <TextBlock Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="x1 Выезд" VerticalAlignment="Center" FontSize="24" Height="32" Width="98" Margin="0,36,0,35"/>
+                <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Касса x" VerticalAlignment="Center" FontSize="24" Height="32" Width="95" Margin="0,35,0,36"/>
+                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding GetTopology.AvailableCashBoxCount}" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-30, 0, 0, 0"/>
+                <TextBlock Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="ТРК x" VerticalAlignment="Center" FontSize="24" Height="32" Width="95" Margin="0,36,0,34"/>
+                <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding GetTopology.AvailableFuelDispenserCount}" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-70, 2, 0, 0"/>
+                <TextBlock Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Топливный бак x" TextAlignment="Center" VerticalAlignment="Center" FontSize="24" Height="76" Width="164" Margin="0,12,0,14"/>
+                <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding GetTopology.AvailableTankCount}" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="30, 18, 0, 0"/>
+                <TextBlock Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Въезд x" VerticalAlignment="Center" FontSize="24" Height="32" Width="95" Margin="0,35,0,36"/>
+                <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding GetTopology.AvailableEntranceCount}" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-26, -1, 0, 0"/>
+                <TextBlock Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Выезд x" VerticalAlignment="Center" FontSize="24" Height="32" Width="98" Margin="0,36,0,35"/>
+                <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding GetTopology.AvailableExitCount}" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-24, -1, 0, 0"/>
                 <TextBlock Grid.Row="5" Grid.Column="3" TextWrapping="Wrap" Text="Ширина основной части части:" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Height="24" Margin="0,40,0,39" Width="219"/>
                 <TextBlock Grid.Row="6" Grid.Column="3" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Text="Ширина служебной части:" FontSize="18" Height="24" Width="241" Margin="0,35"/>
                 <Slider Value="{Binding GetTopology.TopologyColumnCountMain, Mode=TwoWay}" Grid.Row="5" Grid.Column="4" HorizontalAlignment="Left" VerticalAlignment="Top" Height="52" Width="142" Maximum="11" Minimum="5" Margin="10,35,0,0" ValueChanged="Slider_ValueChanged"/>

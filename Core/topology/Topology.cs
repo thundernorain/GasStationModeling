@@ -18,6 +18,7 @@ namespace GasStationModeling.core.topology
 {
     public partial class Topology
     {
+        #region Variables
         private Grid grid;
         private TopologyElement[,] topologyElements;
 
@@ -25,8 +26,16 @@ namespace GasStationModeling.core.topology
         private int topologyColumnCountWorker = 3;
         private int topologyRowCount = 6;
 
-        private TopologyElement selectedTopologyElement;
+        private int availableCashBoxCount = CASHBOX_MAX_COUNT;
+        private int availableTankCount = TANK_MAX_COUNT;
+        private int availableFuelDispenserCount = FUEL_DISPENSER_MAX_COUNT;
+        private int availableEntranceCount = ENTRANCE_MAX_COUNT;
+        private int availableExitCount = EXIT_MAX_COUNT;
 
+        private TopologyElement selectedTopologyElement;
+        #endregion
+
+        #region Fields
         public TopologyElement[,] TopologyElements
         {
             get
@@ -90,9 +99,36 @@ namespace GasStationModeling.core.topology
         public TopologyElement SelectedTopologyElement
         {
             get { return selectedTopologyElement; }
-            set { selectedTopologyElement = value; }
+            set { selectedTopologyElement = (value >= 0)? value : 0; }
         }
+        public int AvailableCashBoxCount
+        {
+            get { return availableCashBoxCount; }
+            set { availableCashBoxCount = (value >= 0) ? value : 0; }
+        }
+        public int AvailableTankCount
+        {
+            get { return availableTankCount; }
+            set { availableTankCount = (value >= 0) ? value : 0; }
+        }
+        public int AvailableFuelDispenserCount
+        {
+            get { return availableFuelDispenserCount; }
+            set { availableFuelDispenserCount = (value >= 0) ? value : 0; }
+        }
+        public int AvailableEntranceCount
+        {
+            get { return availableEntranceCount; }
+            set { availableEntranceCount = (value >= 0) ? value : 0; }
+        }
+        public int AvailableExitCount
+        {
+            get { return availableExitCount; }
+            set { availableExitCount = (value >= 0) ? value : 0; }
+        }
+        #endregion
 
+        #region TopologyGridMethods
         private Grid GetTopologyGrid(int rowCount, int columnCount)
         {
             var topology = new Grid();
@@ -183,6 +219,57 @@ namespace GasStationModeling.core.topology
             return image as BitmapImage;
         }
 
+        private void GridElementMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (SelectedTopologyElement != TopologyElement.Nothing)
+            {
+                var canAdd = true;
+
+                switch (SelectedTopologyElement)
+                {
+                    case TopologyElement.Tank:
+                        if (AvailableTankCount == 0) canAdd = false;
+                        else AvailableTankCount--;
+                        break;
+
+                    case TopologyElement.CashBox:
+                        if (AvailableCashBoxCount == 0) canAdd = false;
+                        else AvailableCashBoxCount--;
+                        break;
+
+                    case TopologyElement.FuelDispenser:
+                        if (AvailableFuelDispenserCount == 0) canAdd = false;
+                        else AvailableFuelDispenserCount--;
+                        break;
+
+                    case TopologyElement.Entrance:
+                        if (AvailableEntranceCount == 0) canAdd = false;
+                        else AvailableEntranceCount--;
+                        break;
+
+                    case TopologyElement.Exit:
+                        if (AvailableExitCount == 0) canAdd = false;
+                        AvailableExitCount--;
+                        break;
+                }
+
+                if (canAdd)
+                {
+                    Label label = sender as Label;
+
+                    int row = (int)label.GetValue(Grid.RowProperty);
+                    int column = (int)label.GetValue(Grid.ColumnProperty);
+
+                    TopologyElements[row, column] = SelectedTopologyElement;
+                    TopologyGrid = GetTopologyGrid(TopologyRowCount, TopologyColumnCountMain + TopologyColumnCountWorker);
+                    SelectedTopologyElement = TopologyElement.Nothing;
+                }
+            }
+        }
+
+        #endregion
+
+        #region TopologyElementMethods
         private TopologyElement[,] GetEmptyGasStationElementsArray()
         {
             return new TopologyElement[topologyRowCount, topologyColumnCountMain + topologyColumnCountWorker];
@@ -205,21 +292,7 @@ namespace GasStationModeling.core.topology
 
             return newGasStationElements;
         }
-
-        private void GridElementMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (SelectedTopologyElement != TopologyElement.Nothing)
-            {
-                Label label = sender as Label;
-
-                int row = (int)label.GetValue(Grid.RowProperty);
-                int column = (int)label.GetValue(Grid.ColumnProperty);
-
-                TopologyElements[row, column] = SelectedTopologyElement;
-                TopologyGrid = GetTopologyGrid(TopologyRowCount, TopologyColumnCountMain + TopologyColumnCountWorker);
-                SelectedTopologyElement = TopologyElement.Nothing;
-            }
-        }
+        #endregion
 
         enum ChangedGridSize
         {

@@ -17,5 +17,11 @@ namespace GasStationModeling.core.topology
         public static readonly double ServiceAreaInShares = 0.25;
 
         public const int TOPOLOGY_CELL_SIZE = 48;
+
+        public const int CASHBOX_MAX_COUNT = 1;
+        public const int FUEL_DISPENSER_MAX_COUNT = 4;
+        public const int TANK_MAX_COUNT = 7;
+        public const int ENTRANCE_MAX_COUNT = 1;
+        public const int EXIT_MAX_COUNT = 1;
     }
 }
