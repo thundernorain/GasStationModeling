@@ -206,6 +206,10 @@
     <Compile Include="modelling\model\CarTableItem.cs" />
     <Compile Include="messageBoxes\DeleteConfirmationMessageBoxShower.cs" />
     <Compile Include="modelling\model\FuelTableItem.cs" />
+    <Compile Include="modelling\moveableElems\CarElem.cs" />
+    <Compile Include="modelling\moveableElems\CollectorElem.cs" />
+    <Compile Include="modelling\moveableElems\MoveableElem.cs" />
+    <Compile Include="modelling\moveableElems\RefuellerElem.cs" />
     <Compile Include="settings_screen\mapper\FuelDispenserToFuelDispenserComboBoxItemMapper.cs" />
     <Compile Include="settings_screen\mapper\FuelToFuelComboBoxMapper.cs" />
     <Compile Include="settings_screen\mapper\TankToFuelTankComboBoxItemMapper.cs" />
