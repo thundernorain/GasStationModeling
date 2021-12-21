@@ -1,4 +1,5 @@
 ﻿using CommonServiceLocator;
+using GasStationModeling.add_forms;
 using GasStationModeling.ViewModel;
 using System;
 using System.Windows;
@@ -27,5 +28,11 @@ namespace GasStationModeling.topology.view
             mainViewModel.CurrentPageUri = new Uri(MainViewModel.SETTINGS_SCREEN_URI, UriKind.Relative);
         }
 
+        private void Save_Click(object sender, RoutedEventArgs e)
+        {
+            var mainViewModel = ServiceLocator.Current.GetInstance<MainViewModel>();
+            AddTopologyWindow addTopologyWindow = new AddTopologyWindow(mainViewModel.GetTopology);
+            addTopologyWindow.Show();
+        }
     }
 }

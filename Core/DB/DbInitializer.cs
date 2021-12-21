@@ -1,4 +1,6 @@
-﻿using MongoDB.Driver;
+﻿using GasStationModeling.exceptions;
+using MongoDB.Driver;
+using System;
 using System.Configuration;
 
 namespace GasStationModeling.core.DB
@@ -11,12 +13,18 @@ namespace GasStationModeling.core.DB
 
         private static IMongoDatabase InitializeClient()
         {
-            string con = ConfigurationManager.ConnectionStrings["MongoDb"].ConnectionString;
-            var client =  new MongoClient(con);
-            var dbName = client.ListDatabaseNames().ToList()[0];
-            DB = client.GetDatabase(dbName);
-            //DB = client.GetDatabase(DB_NAME);
-            return DB;
+            try
+            {
+                string con = ConfigurationManager.ConnectionStrings["MongoDb"].ConnectionString;
+                var client = new MongoClient(con);
+                var dbName = client.ListDatabaseNames().ToList()[0];
+                DB = client.GetDatabase(dbName);
+                return DB;
+            }
+            catch (Exception ex)
+            {
+                throw new DbErrorException(DbErrorMessage.CONNECTION_ERROR);
+            }
         }
 
         public static IMongoDatabase getInstance()

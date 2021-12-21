@@ -1,6 +1,7 @@
 ﻿using GasStationModeling.add_forms;
 using GasStationModeling.core.DB;
 using GasStationModeling.developers_info_window.view;
+using GasStationModeling.exceptions;
 using GasStationModeling.main_window.view;
 using System;
 using System.Collections.Generic;
@@ -26,9 +27,16 @@ namespace GasStationModeling.welcome_window.view
     {
         public WelcomeWindow()
         {
-            InitializeComponent();
-            CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-EN");
-            DbInitializer.getInstance();
+            try
+            {
+                InitializeComponent();
+                CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-EN");
+                DbInitializer.getInstance();
+            }
+            catch (Exception ex)
+            {
+                ErrorMessageBoxShower.show(ex.Message);
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

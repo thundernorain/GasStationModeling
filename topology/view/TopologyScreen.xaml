@@ -71,7 +71,7 @@
                         <SolidColorBrush Color="{DynamicResource AquaColor}"/>
                     </Button.Background>
                 </Button>
-                <Button Grid.Row="6" Grid.Column="5" Grid.ColumnSpan="2" Content="Сохранить" VerticalAlignment="Bottom" Width="185" Height="50" Foreground="White" HorizontalAlignment="Right">
+                <Button x:Name="SaveBtn" Grid.Row="6" Grid.Column="5" Grid.ColumnSpan="2" Content="Сохранить" VerticalAlignment="Bottom" Width="185" Height="50" Foreground="White" HorizontalAlignment="Right" Click="Save_Click">
                     <Button.Background>
                         <SolidColorBrush Color="{DynamicResource AquaColor}"/>
                     </Button.Background>
