@@ -337,19 +337,22 @@
                       IsEditable="True"
                       Style="{DynamicResource ComboBoxStyle1}"
                       Padding="56,16"
+                      ItemsSource="{Binding Topologies}"
+                      SelectedValuePath="Name"
+                      SelectedValue="{Binding SelectedTopology,Mode=TwoWay}"
                       FontSize="{StaticResource Medium}"
-                      Foreground="White">
-                <ComboBoxItem Style="{StaticResource AquaComboBoxItem}">
-                    <TextBlock><Run Text="topology1"/></TextBlock>
-                </ComboBoxItem>
-
-                <ComboBoxItem Style="{StaticResource AquaComboBoxItem}">
-                    <TextBlock><Run Text="topology2"/></TextBlock>
-                </ComboBoxItem>
-
-                <ComboBoxItem Style="{StaticResource AquaComboBoxItem}">
-                    <TextBlock><Run Text="topology3"/></TextBlock>
-                </ComboBoxItem>
+                      Foreground="{StaticResource ComboBox.Static.Background}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <DockPanel Width="224">
+                            <TextBlock
+                            Text="{Binding Path=Name}" 
+                            Style="{StaticResource BaseText}"
+                            FontSize="{StaticResource Medium}"
+                            TextAlignment="center"/>
+                        </DockPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
             </ComboBox>
         </StackPanel>
     </StackPanel>

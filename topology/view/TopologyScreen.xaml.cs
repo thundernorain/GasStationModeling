@@ -1,5 +1,6 @@
-﻿using CommonServiceLocator;
+using CommonServiceLocator;
 using GasStationModeling.core.topology;
+using GasStationModeling.add_forms;
 using GasStationModeling.ViewModel;
 using System;
 using System.Windows;
@@ -61,6 +62,13 @@ namespace GasStationModeling.topology.view
         {
             var mainViewModel = ServiceLocator.Current.GetInstance<MainViewModel>();
             mainViewModel.GetTopology.SelectedTopologyElement = TopologyElement.Exit;
+        }
+        
+        private void Save_Click(object sender, RoutedEventArgs e)
+        {
+            var mainViewModel = ServiceLocator.Current.GetInstance<MainViewModel>();
+            AddTopologyWindow addTopologyWindow = new AddTopologyWindow(mainViewModel.GetTopology);
+            addTopologyWindow.Show();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using GasStationModeling.core.DB.Interfaces;
+using GasStationModeling.exceptions;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
@@ -36,13 +37,19 @@ namespace GasStationModeling.DB
         public List<T> getCollection()
         {
             var filter = new BsonDocument();
-            return collection.Find(filter).ToList<T>();
+            var entries = collection.Find(filter);
+            if (entries.CountDocuments() == 0)
+                throw new EntryNotFoundException(EntryNotFoundErrorMessage.NOT_FOUND);
+            else return entries.ToList<T>();
         }
 
         public T getEntry(int id)
         {
             var filter = Builders<T>.Filter.Eq("_id", id);
-            return collection.Find(filter).First();
+            var entries = collection.Find(filter);
+            if (entries.CountDocuments() == 0)
+                throw new EntryNotFoundException(EntryNotFoundErrorMessage.NOT_FOUND);
+            else return entries.First();
         }
 
         public List<T> insertEntry(T entry)
