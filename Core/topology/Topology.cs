@@ -123,6 +123,9 @@ namespace GasStationModeling.core.topology
             }
         }
 
+
+
+
         enum ChangedGridSize
         {
             ColumnCount,
