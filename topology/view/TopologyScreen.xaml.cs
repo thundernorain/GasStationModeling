@@ -1,4 +1,5 @@
 ﻿using CommonServiceLocator;
+using GasStationModeling.core.topology;
 using GasStationModeling.ViewModel;
 using System;
 using System.Windows;
@@ -30,6 +31,36 @@ namespace GasStationModeling.topology.view
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
 
+        }
+
+        private void CashBoxRectangle_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var mainViewModel = ServiceLocator.Current.GetInstance<MainViewModel>();
+            mainViewModel.GetTopology.SelectedTopologyElement = TopologyElement.CashBox;
+        }
+
+        private void FuelDispenserRectangle_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var mainViewModel = ServiceLocator.Current.GetInstance<MainViewModel>();
+            mainViewModel.GetTopology.SelectedTopologyElement = TopologyElement.FuelDispenser;
+        }
+
+        private void TankRectangle_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var mainViewModel = ServiceLocator.Current.GetInstance<MainViewModel>();
+            mainViewModel.GetTopology.SelectedTopologyElement = TopologyElement.Tank;
+        }
+
+        private void EntrancePolygon_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var mainViewModel = ServiceLocator.Current.GetInstance<MainViewModel>();
+            mainViewModel.GetTopology.SelectedTopologyElement = TopologyElement.Entrance;
+        }
+
+        private void ExitPolygon_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var mainViewModel = ServiceLocator.Current.GetInstance<MainViewModel>();
+            mainViewModel.GetTopology.SelectedTopologyElement = TopologyElement.Exit;
         }
     }
 }
