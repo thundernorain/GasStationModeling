@@ -28,10 +28,12 @@ namespace GasStationModeling.modelling.view
     public partial class ModellingPage : Page    
     {
         DispatcherTimer timer = new DispatcherTimer();
- 
+        ModellingScreenViewModel mscViewModel;
+
         public ModellingPage()
         {
             InitializeComponent();
+            mscViewModel = ServiceLocator.Current.GetInstance<ModellingScreenViewModel>();        
         }
 
         private void TransportGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -48,6 +50,7 @@ namespace GasStationModeling.modelling.view
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
             timer.Start();
+            StationCanvas = mscViewModel.initializeStationCanvas(StationCanvas);
         }
 
         private void StopButton_Click(object sender, RoutedEventArgs e)

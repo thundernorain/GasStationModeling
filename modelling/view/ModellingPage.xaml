@@ -49,16 +49,20 @@
                    TextAlignment="Center" 
                    Margin="21,0,302,496"
                    Text="Транспорт:" Width="96" Height="24" VerticalAlignment="Bottom"/>
-            <Border BorderBrush="Black" BorderThickness="10" HorizontalAlignment="Left" Height="179" Margin="21,285,0,0" VerticalAlignment="Top" Width="196">
+            <Border BorderBrush="Black" BorderThickness="10" HorizontalAlignment="Left" Height="179" Margin="21,285,0,0" VerticalAlignment="Top" Width="310">
                 <DataGrid x:Name="TransportGrid" 
                           HorizontalAlignment="Left" 
-                          Height="172" Margin="-8,-5,-10,-8" 
+                          Height="172" Margin="-8,-5,-120,-8" 
                           VerticalAlignment="Top"
-                          Width="188" 
+                          Width="304" 
                           IsReadOnly="true"
-                          AutoGenerateColumns="false"
+                          FontSize="{StaticResource Medium}"       
                           ItemsSource="{Binding CarTableItems}"
-                          SelectionChanged="TransportGrid_SelectionChanged"/>
+                          SelectionChanged="TransportGrid_SelectionChanged">
+                    <DataGrid.Columns>
+
+                    </DataGrid.Columns>
+                </DataGrid>
             </Border>
 
             <TextBlock x:Name="CashCountInfo" Style="{StaticResource BaseText}" 
