@@ -179,12 +179,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="add_forms\AddTopologyWindow.xaml.cs">
+      <DependentUpon>AddTopologyWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="exceptions\DbErrorException.cs" />
+    <Compile Include="exceptions\EntryNotFoundException.cs" />
     <Compile Include="messageBoxes\ErrorMessageBoxShower.cs" />
     <Compile Include="core\DataGridWorker.cs" />
-    <Compile Include="core\DB\dto\FuelDispenserDTO.cs" />
-    <Compile Include="core\DB\dto\FuelTankDTO.cs" />
-    <Compile Include="core\DB\dto\FuelTypeDTO.cs" />
-    <Compile Include="core\DB\dto\TopolgyDTO.cs" />
+    <Compile Include="core\DB\dto\TopologyDTO.cs" />
     <Compile Include="core\models\IGasStationElement.cs" />
     <Compile Include="core\RelayCommand.cs" />
     <Compile Include="core\topology\Topology.cs" />
@@ -199,6 +201,7 @@
     <Compile Include="core\models\FuelDispenser.cs" />
     <Compile Include="core\models\Tank.cs" />
     <Compile Include="exceptions\ParameterNotSelectedException.cs" />
+    <Compile Include="modelling\mapper\ModellingScreenMapper.cs" />
     <Compile Include="modelling\model\CarTableItem.cs" />
     <Compile Include="messageBoxes\DeleteConfirmationMessageBoxShower.cs" />
     <Compile Include="modelling\model\FuelTableItem.cs" />
@@ -218,6 +221,10 @@
     <Compile Include="core\DB\Interfaces\IDbWorker.cs" />
     <Compile Include="ViewModel\SettingsScreenViewModel.cs" />
     <Compile Include="ViewModel\WelcomeViewModel.cs" />
+    <Page Include="add_forms\AddTopologyWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="developers_info_window\view\DevelopersInfoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
