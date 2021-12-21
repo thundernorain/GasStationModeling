@@ -2,6 +2,7 @@
 using GasStationModeling.core;
 using GasStationModeling.core.DB;
 using GasStationModeling.core.DB.dto;
+using GasStationModeling.core.mapper;
 using GasStationModeling.core.topology;
 using GasStationModeling.DB;
 using GasStationModeling.ViewModel;
@@ -50,8 +51,8 @@ namespace GasStationModeling.add_forms
             TopologyDTO topologyDTO = new TopologyDTO
             {
                 Name = name,
-                Topology = topology.TopologyElements,
-                ServiceAreaWidth = topology.TopologyRowCountWorker
+                Topology = new TopologyElementToGasStationElementMapper().MapArray(topology.TopologyElements),
+                ServiceAreaWidth = topology.TopologyColumnCountWorker
             };
 
             var newCollection = dbWorker.insertEntry(topologyDTO);
