@@ -13,6 +13,9 @@ using System.Windows.Media.Imaging;
 using CommonServiceLocator;
 using GasStationModeling.ViewModel;
 using System.Windows.Input;
+using System.Windows.Media.Effects;
+using System.Media;
+using GasStationModeling.add_forms;
 
 namespace GasStationModeling.core.topology
 {
@@ -125,7 +128,51 @@ namespace GasStationModeling.core.topology
         public TopologyElement SelectedTopologyElement
         {
             get { return selectedTopologyElement; }
-            set { selectedTopologyElement = (value >= 0)? value : 0; }
+            set {
+                selectedTopologyElement = (value >= 0)? value : 0;
+
+                var viewModel = ServiceLocator.Current.GetInstance<MainViewModel>();
+                if (viewModel != null)
+                {
+                    viewModel.RaisePropertyChanged("GetTopology");
+                }
+            }
+        }
+        public Effect[] SelectedElementEffects
+        {
+            get
+            {
+                var effects = new Effect[5];
+                int changeEffectIndex = -1;
+
+                switch (SelectedTopologyElement)
+                {
+                    case TopologyElement.CashBox:
+                        changeEffectIndex = 0;
+                        break;
+
+                    case TopologyElement.FuelDispenser:
+                        changeEffectIndex = 1;
+                        break;
+
+                    case TopologyElement.Tank:
+                        changeEffectIndex = 2;
+                        break;
+
+                    case TopologyElement.Entrance:
+                        changeEffectIndex = 3;
+                        break;
+
+                    case TopologyElement.Exit:
+                        changeEffectIndex = 4;
+                        break;
+                }
+
+                if(changeEffectIndex > -1)
+                    effects[changeEffectIndex] = new DropShadowEffect();
+
+                return effects;
+            }
         }
         public int AvailableCashBoxCount
         {
@@ -182,6 +229,7 @@ namespace GasStationModeling.core.topology
                 TopologyRowCount,
                 TopologyColumnCountMain + TopologyColumnCountWorker
                 );
+            UpdateTopologyElementsCountProperties();
             FillTopologyGridWithImages(topology);
 
             return topology;
@@ -202,6 +250,7 @@ namespace GasStationModeling.core.topology
                     Grid.SetColumn(item, j);
 
                     item.MouseLeftButtonDown += GridElementMouseLeftButtonDown;
+                    item.MouseRightButtonDown += GridElementMouseRightButtonDown;
 
                     grid.Children.Add(item);
                 }
@@ -242,57 +291,156 @@ namespace GasStationModeling.core.topology
                     break;
             }
 
-            return image as BitmapImage;
+            return (image as BitmapImage);
         }
 
         private void GridElementMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (SelectedTopologyElement != TopologyElement.Nothing)
             {
-                var canAdd = true;
+                Label label = sender as Label;
 
-                switch (SelectedTopologyElement)
-                {
-                    case TopologyElement.Tank:
-                        if (AvailableTankCount == 0) canAdd = false;
-                        else AvailableTankCount--;
-                        break;
+                int row = (int)label.GetValue(Grid.RowProperty);
+                int column = (int)label.GetValue(Grid.ColumnProperty);
 
-                    case TopologyElement.CashBox:
-                        if (AvailableCashBoxCount == 0) canAdd = false;
-                        else AvailableCashBoxCount--;
-                        break;
-
-                    case TopologyElement.FuelDispenser:
-                        if (AvailableFuelDispenserCount == 0) canAdd = false;
-                        else AvailableFuelDispenserCount--;
-                        break;
-
-                    case TopologyElement.Entrance:
-                        if (AvailableEntranceCount == 0) canAdd = false;
-                        else AvailableEntranceCount--;
-                        break;
-
-                    case TopologyElement.Exit:
-                        if (AvailableExitCount == 0) canAdd = false;
-                        AvailableExitCount--;
-                        break;
-                }
+                bool canAdd = isCanAddElementToGrid(row, column);
 
                 if (canAdd)
                 {
-                    Label label = sender as Label;
-
-                    int row = (int)label.GetValue(Grid.RowProperty);
-                    int column = (int)label.GetValue(Grid.ColumnProperty);
-
                     TopologyElements[row, column] = SelectedTopologyElement;
                     TopologyGrid = GetTopologyGrid(TopologyRowCount, TopologyColumnCountMain + TopologyColumnCountWorker);
                     SelectedTopologyElement = TopologyElement.Nothing;
                 }
+                /*else
+                {
+                    PlaySound();
+                }*/
             }
         }
 
+        #region CheckAddingToTopologyMethods
+        private bool isCanAddElementToGrid(int row, int column)
+        {
+            switch (SelectedTopologyElement)
+            {
+                case TopologyElement.Tank:
+                    if (AvailableTankCount == 0)
+                    {
+                        ErrorMessageBoxShower.ShowTopology("Количество элементов выбранного шаблона на топологии максимально");
+                        return false;
+                    }
+                    if (column < TopologyColumnCountMain)
+                    {
+                        ErrorMessageBoxShower.ShowTopology("Выбранный шаблон не может распологаться на общей части территории");
+                        return false;
+                    }
+                    break;
+
+                case TopologyElement.CashBox:
+                    if (AvailableCashBoxCount == 0)
+                    {
+                        ErrorMessageBoxShower.ShowTopology("Количество элементов выбранного шаблона на топологии максимально");
+                        return false;
+                    }
+                    if (column >= TopologyColumnCountMain)
+                    {
+                        ErrorMessageBoxShower.ShowTopology("Выбранный шаблон не может распологаться на служебной части территории");
+                        return false;
+                    }
+                    break;
+
+                case TopologyElement.FuelDispenser:
+                    if (AvailableFuelDispenserCount == 0)
+                    {
+                        ErrorMessageBoxShower.ShowTopology("Количество элементов выбранного шаблона на топологии максимально");
+                        return false;
+                    }
+                    if (column >= TopologyColumnCountMain)
+                    {
+                        ErrorMessageBoxShower.ShowTopology("Выбранный шаблон не может распологаться на служебной части территории");
+                        return false;
+                    }
+                    break;
+
+                case TopologyElement.Entrance:
+                    if (AvailableEntranceCount == 0)
+                    {
+                        ErrorMessageBoxShower.ShowTopology("Количество элементов выбранного шаблона на топологии максимально");
+                        return false;
+                    }
+                    if (column >= TopologyColumnCountMain)
+                    {
+                        ErrorMessageBoxShower.ShowTopology("Выбранный шаблон не может распологаться на служебной части территории");
+                        return false;
+                    }
+                    if(row != TopologyRowCount - 1)
+                    {
+                        ErrorMessageBoxShower.ShowTopology("Выбранный шаблон может распологаться только в нижней части сетки");
+                        return false;
+                    }
+                    break;
+
+                case TopologyElement.Exit:
+                    if (AvailableExitCount == 0)
+                    {
+                        ErrorMessageBoxShower.ShowTopology("Количество элементов выбранного шаблона на топологии максимально");
+                        return false;
+                    }
+                    if (column >= TopologyColumnCountMain)
+                    {
+                        ErrorMessageBoxShower.ShowTopology("Выбранный шаблон не может распологаться на служебной части территории");
+                        return false;
+                    }
+                    if (row != TopologyRowCount - 1)
+                    {
+                        ErrorMessageBoxShower.ShowTopology("Выбранный шаблон может распологаться только в нижней части сетки");
+                        return false;
+                    }
+                    break;
+            }
+
+            return CheckTopologyCellRangeIsFree(row, column);
+        }
+
+        private bool CheckTopologyCellRangeIsFree(int row, int column)
+        {
+            for(int i = -1; i <= 1; i++)
+            {
+                for(int j = -1; j <= 1; j++)
+                {
+                    var checkingRow = row + i;
+                    var checkingColumn = column + j;
+
+                    if(checkingRow < 0 
+                        || checkingRow >= TopologyRowCount 
+                        || checkingColumn < 0 
+                        || checkingColumn >= (TopologyColumnCountMain + TopologyColumnCountWorker))
+                    {
+                        continue;
+                    }
+
+                    if (TopologyElements[checkingRow, checkingColumn] != TopologyElement.Nothing)
+                    {
+                        ErrorMessageBoxShower.ShowTopology("Вокруг выбранной клетки в диапазоне 1 клетки уже существует объект топологии");
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+        #endregion
+
+        private void GridElementMouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Label label = sender as Label;
+
+            int row = (int)label.GetValue(Grid.RowProperty);
+            int column = (int)label.GetValue(Grid.ColumnProperty);
+
+            TopologyElements[row, column] = TopologyElement.Nothing;
+            TopologyGrid = GetTopologyGrid(TopologyRowCount, TopologyColumnCountMain + TopologyColumnCountWorker);
+        }
         #endregion
 
         #region TopologyElementMethods
@@ -318,7 +466,56 @@ namespace GasStationModeling.core.topology
 
             return newGasStationElements;
         }
+
+        private void UpdateTopologyElementsCountProperties()
+        {
+            int cashBoxCount = 0;
+            int tankCount = 0;
+            int fuelDispenserCount = 0;
+            int entranceCount = 0;
+            int exitCount = 0;
+
+            for(int i = 0; i < TopologyElements.GetLength(0); i++)
+            {
+                for(int j = 0; j < TopologyElements.GetLength(1); j++)
+                {
+                    switch (TopologyElements[i, j])
+                    {
+                        case TopologyElement.CashBox:
+                            cashBoxCount++;
+                            break;
+
+                        case TopologyElement.Tank:
+                            tankCount++;
+                            break;
+
+                        case TopologyElement.FuelDispenser:
+                            fuelDispenserCount++;
+                            break;
+
+                        case TopologyElement.Entrance:
+                            entranceCount++;
+                            break;
+
+                        case TopologyElement.Exit:
+                            exitCount++;
+                            break;
+                    }
+                }
+            }
+
+            AvailableCashBoxCount = CASHBOX_MAX_COUNT - cashBoxCount;
+            AvailableTankCount = TANK_MAX_COUNT - tankCount;
+            AvailableFuelDispenserCount = FUEL_DISPENSER_MAX_COUNT - fuelDispenserCount;
+            AvailableEntranceCount = ENTRANCE_MAX_COUNT - entranceCount;
+            AvailableExitCount = EXIT_MAX_COUNT - exitCount;
+        }
         #endregion
+
+        private void PlaySound()
+        {
+            SystemSounds.Beep.Play();
+        }
 
         enum ChangedGridSize
         {
@@ -331,6 +528,7 @@ namespace GasStationModeling.core.topology
     public enum TopologyElement
     {
         Nothing,
+        NothingWorker,
         Tank,
         CashBox,
         FuelDispenser,

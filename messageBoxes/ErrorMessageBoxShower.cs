@@ -13,5 +13,15 @@ namespace GasStationModeling.add_forms
                     MessageBoxImage.Error
                     );
         }
+
+        public static void ShowTopology(string errorMessage)
+        {
+            MessageBox.Show(
+                errorMessage,
+                "Ошибка при добавлении элемента",
+                MessageBoxButton.OK,
+                MessageBoxImage.Error
+            );
+        }
     }
 }

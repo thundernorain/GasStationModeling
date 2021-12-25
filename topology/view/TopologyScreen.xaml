@@ -44,8 +44,8 @@
                 <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding GetTopology.AvailableCashBoxCount}" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-30, 0, 0, 0"/>
                 <TextBlock Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="ТРК x" VerticalAlignment="Center" FontSize="24" Height="32" Width="95" Margin="0,36,0,34"/>
                 <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding GetTopology.AvailableFuelDispenserCount}" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-70, 2, 0, 0"/>
-                <TextBlock Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Топливный бак x" TextAlignment="Center" VerticalAlignment="Center" FontSize="24" Height="76" Width="164" Margin="0,12,0,14"/>
-                <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding GetTopology.AvailableTankCount}" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="30, 18, 0, 0"/>
+                <TextBlock Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Топливный бак x" TextAlignment="Center" VerticalAlignment="Center" FontSize="24" Height="76" Width="132" Margin="0,13,0,15"/>
+                <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding GetTopology.AvailableTankCount}" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5, 18, 0, 0"/>
                 <TextBlock Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Въезд x" VerticalAlignment="Center" FontSize="24" Height="32" Width="95" Margin="0,35,0,36"/>
                 <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding GetTopology.AvailableEntranceCount}" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-26, -1, 0, 0"/>
                 <TextBlock Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Выезд x" VerticalAlignment="Center" FontSize="24" Height="32" Width="98" Margin="0,36,0,35"/>
@@ -64,15 +64,15 @@
                 <TextBlock Grid.Row="5" Grid.Column="6" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="11" VerticalAlignment="Top" Margin="129,84,0,0" Height="16" Width="13" RenderTransformOrigin="-0.127,27.031"/>
                 <Border Grid.Column="3" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Bottom"  Background="Gray" Height="528" Width="720"  Grid.ColumnSpan="4" Grid.RowSpan="5">
 
-                    <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Bottom" Content="{Binding GetTopology.TopologyGrid}" />
+                    <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Top" Content="{Binding GetTopology.TopologyGrid}" />
 
                 </Border>
 
-                <Image x:Name="CashBoxImage" Grid.Row="1" Grid.Column="1" Height="50" Width="50" HorizontalAlignment="Left" Grid.ColumnSpan="2" Margin="202.2,34.4,0,20.4" MouseLeftButtonUp="CashBoxRectangle_MouseLeftButtonUp" OpacityMask="Black" MinHeight="50" MinWidth="50" Source="{DynamicResource Cashbox}"/>
-                <Image x:Name="FuelDispenserImage" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Height="50" Width="50" Margin="0,26" MouseLeftButtonUp="FuelDispenserRectangle_MouseLeftButtonUp" MinWidth="50" MinHeight="50" OpacityMask="Black" Source="/GasStationModeling;component/styles/assets/imgElementStation/fuelDispenser.png" />
-                <Image x:Name="TankImage" Grid.Row="3" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Height="50" Width="50" Margin="0,26" MouseLeftButtonUp="TankRectangle_MouseLeftButtonUp" OpacityMask="Black" MinWidth="50" MinHeight="50" Source="{DynamicResource Tank}"/>
-                <Polygon x:Name="EntrancePolygon" Grid.Row="4" Grid.Column="2" Fill="#FFC4C4C4" Points="0,40 20,0 40,40" HorizontalAlignment="Left" VerticalAlignment="Center" Height="40" Width="40" Margin="0,31,0,32" MouseLeftButtonUp="EntrancePolygon_MouseLeftButtonUp" />
-                <Polygon x:Name="ExitPolygon" Grid.Row="5" Grid.Column="2" Fill="#FFC4C4C4" Points="0,0 20,40 40,0" HorizontalAlignment="Left" VerticalAlignment="Center" RenderTransformOrigin="1,3.275" Height="40" Width="40" Margin="0,32,0,31" MouseLeftButtonUp="ExitPolygon_MouseLeftButtonUp" />
+                <Image x:Name="CashBoxImage" Grid.Row="1" Grid.Column="1" Height="50" Width="50" Effect="{Binding GetTopology.SelectedElementEffects[0]}" HorizontalAlignment="Left" Grid.ColumnSpan="2" Margin="202.2,34.4,0,20.4" MouseLeftButtonUp="CashBoxRectangle_MouseLeftButtonUp" OpacityMask="Black" MinHeight="50" MinWidth="50" Source="{DynamicResource Cashbox}"/>
+                <Image x:Name="FuelDispenserImage" Grid.Row="2" Grid.Column="2" Effect="{Binding GetTopology.SelectedElementEffects[1]}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="50" Width="50" Margin="0,26" MouseLeftButtonUp="FuelDispenserRectangle_MouseLeftButtonUp" MinWidth="50" MinHeight="50" OpacityMask="Black" Source="/GasStationModeling;component/styles/assets/imgElementStation/fuelDispenser.png" />
+                <Image x:Name="TankImage" Grid.Row="3" Grid.Column="2" Effect="{Binding GetTopology.SelectedElementEffects[2]}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="50" Width="50" Margin="0,26" MouseLeftButtonUp="TankRectangle_MouseLeftButtonUp" OpacityMask="Black" MinWidth="50" MinHeight="50" Source="{DynamicResource Tank}"/>
+                <Polygon x:Name="EntrancePolygon" Grid.Row="4" Grid.Column="2" Effect="{Binding GetTopology.SelectedElementEffects[3]}" Fill="#FFC4C4C4" Points="0,40 20,0 40,40" HorizontalAlignment="Left" VerticalAlignment="Center" Height="40" Width="40" Margin="0,31,0,32" MouseLeftButtonUp="EntrancePolygon_MouseLeftButtonUp" />
+                <Polygon x:Name="ExitPolygon" Grid.Row="5" Grid.Column="2" Effect="{Binding GetTopology.SelectedElementEffects[4]}" Fill="#FFC4C4C4" Points="0,0 20,40 40,0" HorizontalAlignment="Left" VerticalAlignment="Center" RenderTransformOrigin="1,3.275" Height="40" Width="40" Margin="0,32,0,31" MouseLeftButtonUp="ExitPolygon_MouseLeftButtonUp" />
                 <Button Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Content="Назад" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="185" Height="50" Foreground="White">
                     <Button.Background>
                         <SolidColorBrush Color="{DynamicResource AquaColor}"/>
