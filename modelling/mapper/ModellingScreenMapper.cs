@@ -45,7 +45,7 @@ namespace GasStationModeling.modelling.mapper
             return fuelTableItems;
         }
 
-        public static List<TankView> initializeTankViews(List<Fuel> fuels, double maxVolume)
+        public static List<TankView> initializeTankViews(List<Fuel> fuels, FuelTank tank)
         {
             List<TankView> tankViews = new List<TankView>();
             foreach (var fuel in fuels)
