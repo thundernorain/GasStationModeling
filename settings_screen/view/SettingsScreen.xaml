@@ -12,11 +12,12 @@
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
+        <TextBlock x:Name="IntervalValue" HorizontalAlignment="Left" Margin="937,32,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Style="{StaticResource BaseText}" FontSize="{StaticResource Medium}"/>
         <TextBlock HorizontalAlignment="Left" Margin="148,32,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Время появления автомобиля (с)" VerticalAlignment="Top" Style="{StaticResource BaseText}" FontSize="{StaticResource Medium}"/>
         <Slider x:Name="IntervalSlider" HorizontalAlignment="Left" Margin="680,32,0,0" Grid.Row="1" VerticalAlignment="Top" Width="234" Height="22" Value="5" Minimum="5" Maximum="60" SelectionStart="5" ValueChanged="IntervalSlider_ValueChanged"/>
         <TextBlock HorizontalAlignment="Left" Margin="680,59,0,0" Grid.Row="1" TextWrapping="Wrap" Text="5" VerticalAlignment="Top" Style="{StaticResource BaseText}" FontSize="{StaticResource Medium}"/>
         <TextBlock HorizontalAlignment="Left" Margin="889,59,0,0" Grid.Row="1" TextWrapping="Wrap" Text="60" VerticalAlignment="Top" Style="{StaticResource BaseText}" FontSize="{StaticResource Medium}"/>
-        <TextBlock x:Name="IntervalValueTB" HorizontalAlignment="Left" Margin="937,32,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Style="{StaticResource BaseText}" FontSize="{StaticResource Medium}"/>
+      
 
         <TextBlock HorizontalAlignment="Left" Margin="148,120,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Вероятность заезда автотранспорта" VerticalAlignment="Top" Style="{StaticResource BaseText}" FontSize="{StaticResource Medium}"/>
         <Slider x:Name="ProbabilitySlider" HorizontalAlignment="Left" Margin="680,120,0,0" VerticalAlignment="Top" Width="234" Height="22" Value="0" Minimum="0" Maximum="1" SelectionStart="0" ValueChanged="ProbabilitySlider_ValueChanged"/>
@@ -56,12 +57,12 @@
 
         </ComboBox>
         <Button Content="+" HorizontalAlignment="Left" Margin="937,201,0,0" Grid.Row="1" VerticalAlignment="Top" Style="{StaticResource AquaButton}" Padding="20,15,20,15" Click="Button_Click"/>
-
+        <TextBlock x:Name="CashLimitValue" HorizontalAlignment="Left" Margin="937,300,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Style="{StaticResource BaseText}" FontSize="{StaticResource Medium}"/>
         <TextBlock HorizontalAlignment="Left" Margin="148,300,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Лимит денег в кассе (руб)" VerticalAlignment="Top" Style="{StaticResource BaseText}" FontSize="{StaticResource Medium}"/>
         <Slider x:Name="CashLimitSlider" HorizontalAlignment="Left" Margin="680,300,0,0" Grid.Row="1" VerticalAlignment="Top" Width="234" Height="22" Value="100000" Minimum="100000" Maximum="500000" SelectionStart="100000" ValueChanged="CashLimitSlider_ValueChanged"/>
         <TextBlock HorizontalAlignment="Left" Margin="679,325,0,0" Grid.Row="1" TextWrapping="Wrap" Text="100000" VerticalAlignment="Top" Style="{StaticResource BaseText}" FontSize="{StaticResource Medium}"/>
         <TextBlock HorizontalAlignment="Left" Margin="865,320,0,0" Grid.Row="1" TextWrapping="Wrap" Text="500000" VerticalAlignment="Top" Style="{StaticResource BaseText}" FontSize="{StaticResource Medium}"/>
-        <TextBlock x:Name="CashLimitValueTB" HorizontalAlignment="Left" Margin="937,300,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Style="{StaticResource BaseText}" FontSize="{StaticResource Medium}"/>
+
         
         <TextBlock HorizontalAlignment="Left" Margin="148,400,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Модель топливного бака" VerticalAlignment="Top" Style="{StaticResource BaseText}" FontSize="{StaticResource Medium}"/>
         <ComboBox x:Name="TankBox" 

@@ -69,17 +69,17 @@ namespace GasStationModeling.settings_screen.view
 
         private void IntervalSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            IntervalValueTB.Text = e.NewValue.ToString();
-        }
-
-        private void ProbabilitySlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            ProbabilityValueTB.Text = String.Format("{0:0.##}", e.NewValue);
+            IntervalValue.Text = ((int)IntervalSlider.Value).ToString();
         }
 
         private void CashLimitSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            CashLimitValueTB.Text = String.Format("{0:0.##}", e.NewValue);
+            CashLimitValue.Text = ((int)CashLimitSlider.Value).ToString();
+        }
+
+        private void ProbabilitySlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            ProbabilityValueTB.Text = String.Format("{0:0.##}", ProbabilitySlider.Value);
         }
     }
 }
