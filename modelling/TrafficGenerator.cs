@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GasStationModeling.modelling
 {
-    class TrafficGenerator
+    public class TrafficGenerator
     {
     }
 }
