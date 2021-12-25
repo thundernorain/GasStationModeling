@@ -41,6 +41,10 @@ namespace GasStationModeling.ViewModel
         {
             var db = DbInitializer.getInstance();
             //Topologies = getTopologiesFromDB(db);
+            Topologies = new List<TopologyDTO>();
+            TopologyDTO tdto = new TopologyDTO();
+            tdto.Name = "Загрузить";
+            Topologies.Add(tdto);
         }
 
         public TopologyDTO getChosenTopology()

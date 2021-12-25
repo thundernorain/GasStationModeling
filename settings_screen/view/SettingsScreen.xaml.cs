@@ -66,5 +66,20 @@ namespace GasStationModeling.settings_screen.view
             var window = new AddFuelTypeWindow();
             window.Show();
         }
+
+        private void IntervalSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            IntervalValueTB.Text = e.NewValue.ToString();
+        }
+
+        private void ProbabilitySlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            ProbabilityValueTB.Text = String.Format("{0:0.##}", e.NewValue);
+        }
+
+        private void CashLimitSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            CashLimitValueTB.Text = String.Format("{0:0.##}", e.NewValue);
+        }
     }
 }
