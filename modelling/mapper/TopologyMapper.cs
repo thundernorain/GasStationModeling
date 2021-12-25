@@ -54,15 +54,17 @@ namespace GasStationModeling.modelling.mapper
                 + Topology.TopologyColumnCountWorker;
 
             int height = Topology.TopologyRowCount;
+
+            int heightWithRoad = height + 3;
             stationCanvas.Width = width  * ElementSizeHelper.CELL_WIDTH;
-            stationCanvas.Height = (height + 3) * ElementSizeHelper.CELL_HEIGHT;
+            stationCanvas.Height = heightWithRoad * ElementSizeHelper.CELL_HEIGHT;
     
             for (int i = 0; i < height; i++)
             {
                 for (int j = 0; j < width; j++)
                 {
                     ImageBrush brush = new ImageBrush();
-                    var elemImage = Topology.GetCellImage(i, j);
+                    var elemImage = Topology.GetCellImageModelling(i, j);
                     brush.ImageSource = elemImage;
                     Rectangle topologyElem = createTopologyElem(Topology.TopologyElements[i, j], brush);
                     Canvas.SetLeft(topologyElem, ElementSizeHelper.CELL_WIDTH * j);
@@ -70,7 +72,8 @@ namespace GasStationModeling.modelling.mapper
                     stationCanvas.Children.Add(topologyElem);
                 }
             }
-            for (int i = height; i < height + 3; i++)
+            //Road
+            for (int i = height; i < heightWithRoad; i++)
             {
                 for (int j = 0; j < width; j++)
                 {

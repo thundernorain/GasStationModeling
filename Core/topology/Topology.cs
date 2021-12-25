@@ -257,6 +257,18 @@ namespace GasStationModeling.core.topology
             }
         }
 
+        public BitmapImage GetCellImageModelling(int i, int j)
+        {
+            var element = TopologyElements[i, j];
+            if (element == TopologyElement.Nothing)
+            {
+                return (j < TopologyColumnCountMain)
+                        ? Application.Current.TryFindResource("Cell_Model") as BitmapImage
+                        : Application.Current.TryFindResource("Cell_Service_Model") as BitmapImage;
+            }
+            else return GetCellImage(i, j);
+        }
+
         public BitmapImage GetCellImage(int i, int j)
         {
             object image = null;

@@ -5,6 +5,8 @@
     <BitmapImage x:Key="QuestionButtonImage" UriSource="./assets/QuestionButton.png" />
     <BitmapImage x:Key="DeleteIcon" UriSource="./assets/deleteIcon.png" />
     <BitmapImage x:Key="Cell" UriSource="./assets/Cell.png" />
+    <BitmapImage x:Key="Cell_Model" UriSource="./assets/Cell_Model.png" />
+    <BitmapImage x:Key="Cell_Service_Model" UriSource="./assets/Cell_Service_Model.png" />
     <BitmapImage x:Key="CellBrown" UriSource="./assets/Cell2.png" />
     <BitmapImage x:Key="Road" UriSource="./assets/imgElementStation/road.png" />
     <BitmapImage x:Key="CellIncorrect" UriSource="./assets/imgElementStation/Incorrect.png" />

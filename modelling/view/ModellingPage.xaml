@@ -84,7 +84,7 @@
         </Grid>
         <StackPanel/>
 
-        <Grid Width="712">
+        <Grid Width="729" Background="#F5F5F5" >
             <Canvas Name="StationCanvas" Background="LightGray" Margin="0,0,-17,108" />
 
             <Grid Height="72" Margin="105,673,42,31">
