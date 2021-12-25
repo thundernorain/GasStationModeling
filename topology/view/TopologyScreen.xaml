@@ -62,7 +62,7 @@
                 <Slider Value="{Binding GetTopology.TopologyRowCount, Mode=TwoWay}"  Grid.Row="5" Grid.Column="5" HorizontalAlignment="Left"  VerticalAlignment="Top" Height="54" Width="143" Maximum="11" Minimum="5" Margin="60,65,0,0" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
                 <TextBlock Grid.Row="5" Grid.Column="6" HorizontalAlignment="Left" TextWrapping="Wrap" Text="5" VerticalAlignment="Top" Margin="10,84,0,0" Height="16" Width="6"/>
                 <TextBlock Grid.Row="5" Grid.Column="6" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="11" VerticalAlignment="Top" Margin="129,84,0,0" Height="16" Width="13" RenderTransformOrigin="-0.127,27.031"/>
-                <Border Grid.Column="3" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Bottom"  Background="Gray" Height="528" Width="720"  Grid.ColumnSpan="4" Grid.RowSpan="5">
+                <Border Grid.Column="3" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Bottom"  Background="White" Height="528" Width="720"  Grid.ColumnSpan="4" Grid.RowSpan="5">
 
                     <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Top" Content="{Binding GetTopology.TopologyGrid}" />
 

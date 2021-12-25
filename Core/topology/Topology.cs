@@ -308,13 +308,12 @@ namespace GasStationModeling.core.topology
 
         private void GridElementMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            Label label = sender as Label;
+            int row = (int)label.GetValue(Grid.RowProperty);
+            int column = (int)label.GetValue(Grid.ColumnProperty);
+
             if (SelectedTopologyElement != TopologyElement.Nothing)
             {
-                Label label = sender as Label;
-
-                int row = (int)label.GetValue(Grid.RowProperty);
-                int column = (int)label.GetValue(Grid.ColumnProperty);
-
                 bool canAdd = isCanAddElementToGrid(row, column);
 
                 if (canAdd)
@@ -323,10 +322,12 @@ namespace GasStationModeling.core.topology
                     TopologyGrid = GetTopologyGrid(TopologyRowCount, TopologyColumnCountMain + TopologyColumnCountWorker);
                     SelectedTopologyElement = TopologyElement.Nothing;
                 }
-                /*else
-                {
-                    PlaySound();
-                }*/
+            }
+            else
+            {
+                SelectedTopologyElement = TopologyElements[row, column];
+                TopologyElements[row, column] = TopologyElement.Nothing;
+                UpdateTopologyElementsCountProperties();
             }
         }
 
@@ -346,6 +347,11 @@ namespace GasStationModeling.core.topology
                         ErrorMessageBoxShower.ShowTopology("Выбранный шаблон не может распологаться на общей части территории");
                         return false;
                     }
+                    if (row == TopologyRowCount - 1)
+                    {
+                        ErrorMessageBoxShower.ShowTopology("Выбранный шаблон не может распологаться в нижней части сетки");
+                        return false;
+                    }
                     break;
 
                 case TopologyElement.CashBox:
@@ -359,6 +365,11 @@ namespace GasStationModeling.core.topology
                         ErrorMessageBoxShower.ShowTopology("Выбранный шаблон не может распологаться на служебной части территории");
                         return false;
                     }
+                    if (row == TopologyRowCount - 1)
+                    {
+                        ErrorMessageBoxShower.ShowTopology("Выбранный шаблон не может распологаться в нижней части сетки");
+                        return false;
+                    }
                     break;
 
                 case TopologyElement.FuelDispenser:
@@ -370,6 +381,11 @@ namespace GasStationModeling.core.topology
                     if (column >= TopologyColumnCountMain)
                     {
                         ErrorMessageBoxShower.ShowTopology("Выбранный шаблон не может распологаться на служебной части территории");
+                        return false;
+                    }
+                    if (row == TopologyRowCount - 1)
+                    {
+                        ErrorMessageBoxShower.ShowTopology("Выбранный шаблон не может распологаться в нижней части сетки");
                         return false;
                     }
                     break;
