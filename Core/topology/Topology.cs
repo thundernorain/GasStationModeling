@@ -335,6 +335,7 @@ namespace GasStationModeling.core.topology
         CashBox,
         FuelDispenser,
         Entrance,
+        Road,
         Exit
     }
 }

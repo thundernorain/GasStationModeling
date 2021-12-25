@@ -41,8 +41,6 @@ namespace GasStationModeling.ViewModel
             List<Car> cars = getCarsFromDB(db);
             CarTableItems = ModellingScreenMapper.CreateCarTableItems(cars,Settings.Fuels);
             Fuels = ModellingScreenMapper.CreateFuelTableitems(Settings.Fuels);
-
-            TankViews = ModellingScreenMapper.initializeTankViews(Settings.Fuels, Settings.FuelTank);
         }
 
         public List<Car> getCarsFromDB(IMongoDatabase db)

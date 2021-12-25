@@ -11,7 +11,7 @@ namespace GasStationModeling.core.models
         public string Image { get; }
 
         [BsonIgnore]
-        public string TypeFuel { get; set; }
+        public Fuel TypeFuel { get; set; }
 
         [BsonIgnore]
         public double CurrentVolume { get; set; }

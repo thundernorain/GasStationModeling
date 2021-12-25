@@ -10,7 +10,7 @@
       DataContext="{Binding ModellingScreen, Source={StaticResource Locator}}" >
 
     <StackPanel Orientation="Horizontal" Height="776" Margin="10,24,-10,0" VerticalAlignment="Top" Width="1140" Background="White">
-        <Grid Width="425">
+        <Grid Width="408">
             <TextBlock Style="{StaticResource BaseText}" 
                    FontSize="{StaticResource H1}" 
                    HorizontalAlignment="Center" 
@@ -85,7 +85,7 @@
         <StackPanel/>
 
         <Grid Width="712">
-            <Canvas Name="StationCanvas" Background="LightGray" Margin="0,0,0,108" />
+            <Canvas Name="StationCanvas" Background="LightGray" Margin="0,0,-17,108" />
 
             <Grid Height="72" Margin="105,673,42,31">
                 <Grid.RowDefinitions>
@@ -95,12 +95,11 @@
                 <Button x:Name="StartButton" Style="{StaticResource AquaButton}" Content="Старт" Margin="301,6,101,6" Click="StartButton_Click" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2">
 
                 </Button>
-                <Button x:Name="StopButton" Style="{StaticResource AquaButton}"  Content="Стоп" Margin="94,8,309,4" Click="StopButton_Click" RenderTransformOrigin="0.5,0.5">
+                <Button x:Name="StopButton" Style="{StaticResource AquaButton}"  Content="Стоп" Margin="94,6,309,6" Click="StopButton_Click" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2">
                 </Button>
             </Grid>
 
         </Grid>
-        <Image Width="100"/>
 
     </StackPanel>
 </Page>
