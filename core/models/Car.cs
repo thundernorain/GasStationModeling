@@ -1,5 +1,4 @@
 ﻿using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
 
 namespace GasStationModeling.core.models
 {
@@ -13,8 +12,8 @@ namespace GasStationModeling.core.models
 
         public string TypeFuel { get; set; }
 
-        public int CurrentFuelSupply { get; set; }
+        public double CurrentFuelSupply { get; set; }
 
-        public int MaxVolumeTank { get; set; }
+        public double MaxVolumeTank { get; set; }
     }
 }

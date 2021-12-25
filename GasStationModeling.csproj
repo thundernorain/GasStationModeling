@@ -229,7 +229,7 @@
     <Compile Include="settings_screen\model\FuelDispenserComboBoxItem.cs" />
     <Compile Include="settings_screen\model\FuelTankComboBoxItem.cs" />
     <Compile Include="ViewModel\ModellingScreenViewModel.cs" />
-    <Compile Include="settings_screen\model\ModellingSettings.cs" />
+    <Compile Include="core\models\ModellingSettings.cs" />
     <Compile Include="topology\view\TopologyScreen.xaml.cs">
       <DependentUpon>TopologyScreen.xaml</DependentUpon>
     </Compile>
