@@ -4,14 +4,13 @@ namespace GasStationModeling.modelling.managers
 {
     public class ModellingTimeHelper
     {
-        const int TIMER_TICK_MILLISECONDS = 20;
+        public const int TIMER_TICK_MILLISECONDS = 20;
 
-        static int TimerTicksCount { get; set; }
-        static bool IsPaused { get; set; }
-
-        static int TicksAfterLastCarSpawning { get; set; }
-        static double TimeAfterLastCarSpawningInSeconds => TicksAfterLastCarSpawning * (double)TIMER_TICK_MILLISECONDS / 1000;
-        static double TimeBetweenCars { get; set; }
+        public static int TimerTicksCount { get; set; }
+        public static bool IsPaused { get; set; }
+        public static int TicksAfterLastCarSpawning { get; set; }
+        public static double TimeAfterLastCarSpawningInSeconds => TicksAfterLastCarSpawning * (double)TIMER_TICK_MILLISECONDS / 1000;
+        public static double TimeBetweenCars { get; set; }
 
         public ModellingTimeHelper() { }
 
