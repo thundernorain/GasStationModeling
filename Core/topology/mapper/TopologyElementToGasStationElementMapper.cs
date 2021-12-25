@@ -34,7 +34,7 @@ namespace GasStationModeling.core.mapper
                     break;
 
                 case TopologyElement.CashBox:
-                    return new Cashbox();
+                    return new CashBox();
                     break;
 
                 case TopologyElement.FuelDispenser:

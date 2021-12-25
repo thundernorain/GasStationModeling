@@ -16,11 +16,12 @@ namespace GasStationModeling.core.models
         [BsonIgnore]
         public double CurrentVolume { get; set; }
 
+        [BsonIgnore]
+        public double LimitVolume { get; set; }
+
         public double MaxVolume { get; set; }
 
         public string Name { get; set; }
 
-        [BsonIgnore]
-        public double LimitVolume { get; set; }
     }
 }

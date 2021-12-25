@@ -3,9 +3,6 @@ using GasStationModeling.modelling.model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GasStationModeling.modelling.mapper
 {
@@ -19,14 +16,17 @@ namespace GasStationModeling.modelling.mapper
             Random r = new Random();
             cars.ForEach(car =>
             {
-                double price = fuels.Find(fuel => fuel.Name == car.TypeFuel).Price;
-                carTableItems.Add(new CarTableItem()
+                if(fuels.Exists(fuel => fuel.Name == car.TypeFuel))
                 {
-                    Id = cars.IndexOf(car),
-                    Name = car.Model,
-                    Volume = r.Next(1, car.MaxVolumeTank),
-                    Price = price
-                });
+                    double price = fuels.Find(fuel => fuel.Name == car.TypeFuel).Price;
+                    carTableItems.Add(new CarTableItem()
+                    {
+                        Id = cars.IndexOf(car),
+                        Name = car.Model,
+                        Volume = car.CurrentFuelSupply,
+                        Price = price
+                    });
+                }         
             });
 
             return carTableItems;
@@ -44,5 +44,17 @@ namespace GasStationModeling.modelling.mapper
             });
             return fuelTableItems;
         }
+
+        public static List<TankView> initializeTankViews(List<Fuel> fuels, Tank tank)
+        {
+            List<TankView> tankViews = new List<TankView>();
+            foreach (var fuel in fuels)
+            {
+                tank.TypeFuel = fuel.Name;
+                tankViews.Add(new TankView(tank));
+            }
+            return tankViews;
+        }
+
     }
 }

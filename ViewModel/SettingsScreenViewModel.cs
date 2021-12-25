@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight;
+﻿using CommonServiceLocator;
+using GalaSoft.MvvmLight;
 using GasStationModeling.core.DB;
 using GasStationModeling.core.models;
 using GasStationModeling.DB;
@@ -111,6 +112,12 @@ namespace GasStationModeling.ViewModel
                 .ToList();
 
             if (ids.Count == 0) throw new ParameterNotSelectedException(ParameterErrorMessage.FUELS_NOT_SELECTED);
+
+            var mainViewModel = ServiceLocator.Current.GetInstance<MainViewModel>();
+
+            var fuelTanksOnTopologyCount = mainViewModel.GetTopology.FuelTankCountChosen;
+
+            if(ids.Count != fuelTanksOnTopologyCount) throw new ParameterNotSelectedException(ParameterErrorMessage.FUELS_COUNT_NOT_EQUALS_TANKS_COUNT);
 
             var elems = FuelsDB
                 .Where(fuel => ids.Any(id => id == fuel.Id))

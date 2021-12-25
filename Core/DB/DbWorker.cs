@@ -38,8 +38,7 @@ namespace GasStationModeling.DB
         {
             var filter = new BsonDocument();
             var entries = collection.Find(filter);
-            if (entries.CountDocuments() == 0)
-                throw new EntryNotFoundException(EntryNotFoundErrorMessage.NOT_FOUND);
+            if (entries.CountDocuments() == 0) return new List<T>();
             else return entries.ToList<T>();
         }
 

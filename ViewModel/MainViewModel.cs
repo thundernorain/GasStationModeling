@@ -30,6 +30,7 @@ namespace GasStationModeling.ViewModel
         public const string MODELLING_SCREEN_URI = "/../modelling/view/ModellingPage.xaml";
 
         public ModellingSettings ModellingSettings { get; set; }
+        public int FuelTanksCount { get; set; }
         private Uri currentPageUri;
         private Brush[] pageIndicatorBrushes;
         private Topology topology;

@@ -10,30 +10,30 @@
       DataContext="{Binding ModellingScreen, Source={StaticResource Locator}}" >
 
     <StackPanel Orientation="Horizontal" Height="776" Margin="10,24,-10,0" VerticalAlignment="Top" Width="1140" Background="White">
-        <Grid Width="419">
+        <Grid Width="425">
             <TextBlock Style="{StaticResource BaseText}" 
                    FontSize="{StaticResource H1}" 
                    HorizontalAlignment="Center" 
-                   TextAlignment="Center" 
-                   Margin="18,10,79,734"
-                   Text="Информационное табло" Width="322"/>
+                   TextAlignment="Center"              
+                   Text="Информационное табло" Width="322" Margin="48,0,47,740"/>
 
             <TextBlock Style="{StaticResource BaseText}" 
                    FontSize="{StaticResource Medium}" 
                    HorizontalAlignment="Center" 
                    TextAlignment="Center" 
-                   Margin="19,0,336,704"
-                   Text="Бензин:" Width="64" Height="25" VerticalAlignment="Bottom"/>
-            <Border BorderBrush="Black" BorderThickness="10" HorizontalAlignment="Left" Height="157" Margin="19,73,0,0" VerticalAlignment="Top" Width="305"/>
+  
+                   Text="Бензин:" Width="64" Height="25" VerticalAlignment="Bottom" Margin="24,0,327,705"/>
+            <Border BorderBrush="Black" BorderThickness="10" HorizontalAlignment="Left" Height="157" Margin="19,73,0,0" VerticalAlignment="Top" Width="192"/>
             <DataGrid 
                 x:Name="FuelGrid" 
                 HorizontalAlignment="Left" 
                 Height="149" 
                 Margin="23,76,0,0" 
                 VerticalAlignment="Top"
-                IsReadOnly="true"
+                IsReadOnly="true"               
+                FontSize="{StaticResource Medium}"                  
                 ItemsSource="{Binding Fuels}"
-                Width="297">
+                Width="183">
 
                 <DataGrid.Columns>
 
@@ -49,16 +49,20 @@
                    TextAlignment="Center" 
                    Margin="21,0,302,496"
                    Text="Транспорт:" Width="96" Height="24" VerticalAlignment="Bottom"/>
-            <Border BorderBrush="Black" BorderThickness="10" HorizontalAlignment="Left" Height="179" Margin="21,285,0,0" VerticalAlignment="Top" Width="385">
+            <Border BorderBrush="Black" BorderThickness="10" HorizontalAlignment="Left" Height="179" Margin="21,285,0,0" VerticalAlignment="Top" Width="310">
                 <DataGrid x:Name="TransportGrid" 
                           HorizontalAlignment="Left" 
-                          Height="172" Margin="-8,-5,-5,-8" 
+                          Height="172" Margin="-8,-5,-120,-8" 
                           VerticalAlignment="Top"
-                          Width="378" 
+                          Width="304" 
                           IsReadOnly="true"
-                          AutoGenerateColumns="false"
-                          ItemsSource="{Binding ModellingScreen.CarTableItems}"
-                          SelectionChanged="TransportGrid_SelectionChanged"/>
+                          FontSize="{StaticResource Medium}"       
+                          ItemsSource="{Binding CarTableItems}"
+                          SelectionChanged="TransportGrid_SelectionChanged">
+                    <DataGrid.Columns>
+
+                    </DataGrid.Columns>
+                </DataGrid>
             </Border>
 
             <TextBlock x:Name="CashCountInfo" Style="{StaticResource BaseText}" 
@@ -66,14 +70,14 @@
                    HorizontalAlignment="Center" 
                    TextAlignment="Left" 
                    Margin="24,0,17,269"
-                   Text="Количество денег в кассе:" Width="378" Height="24" VerticalAlignment="Bottom"/>
+                   Text="{Binding CurrentCashView}" Width="378" Height="24" VerticalAlignment="Bottom"/>
 
             <TextBlock x:Name="FuelCountInfo" Style="{StaticResource BaseText}" 
                    FontSize="{StaticResource Medium}" 
                    HorizontalAlignment="Center" 
                    TextAlignment="Left" 
                    Margin="24,0,17,238"
-                   Text="Количество топлива в ТБ:" Width="378" Height="26" VerticalAlignment="Bottom"/>
+                   Text="{Binding CurrentFuelVolumeView}" Width="378" Height="26" VerticalAlignment="Bottom"/>
 
             <Button x:Name="GoBackButton" Style="{StaticResource AquaButton}" Content="Назад" Margin="26,675,213,45" Click="Button_Click"/>
 
@@ -81,17 +85,17 @@
         <StackPanel/>
 
         <Grid Width="712">
-            <StackPanel Name="StationImage" Orientation="Horizontal" Margin="0,0,0,119"/>
+            <Canvas Name="StationCanvas" Background="LightGray" Margin="0,0,0,108" />
 
-            <Grid Height="72" Margin="252,662,252,42">
+            <Grid Height="72" Margin="105,673,42,31">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="65*"/>
                     <RowDefinition Height="7*"/>
                 </Grid.RowDefinitions>
-                <Button x:Name="StartButton" Style="{StaticResource AquaButton}" Margin="124,12,36,4.127" Click="Button_Click" RenderTransformOrigin="0.5,0.5">
-                    
+                <Button x:Name="StartButton" Style="{StaticResource AquaButton}" Content="Старт" Margin="301,6,101,6" Click="StartButton_Click" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2">
+
                 </Button>
-                <Button x:Name="StopButton" Style="{StaticResource AquaButton}" Margin="36,12,125,4.127" Click="Button_Click" RenderTransformOrigin="0.5,0.5">
+                <Button x:Name="StopButton" Style="{StaticResource AquaButton}"  Content="Стоп" Margin="94,8,309,4" Click="StopButton_Click" RenderTransformOrigin="0.5,0.5">
                 </Button>
             </Grid>
 
