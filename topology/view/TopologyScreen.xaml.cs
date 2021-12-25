@@ -26,7 +26,32 @@ namespace GasStationModeling.topology.view
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             var mainViewModel = ServiceLocator.Current.GetInstance<MainViewModel>();
-            mainViewModel.CurrentPageUri = new Uri(MainViewModel.SETTINGS_SCREEN_URI, UriKind.Relative);
+            var topology = mainViewModel.GetTopology;
+
+            if (topology.AvailableFuelDispenserCount == Topology.FUEL_DISPENSER_MAX_COUNT)
+            {
+                ErrorMessageBoxShower.ShowTopology("Должен быть как минимум 1 экземпляр ТРК на топологии");
+            }
+            else if (topology.AvailableCashBoxCount == Topology.CASHBOX_MAX_COUNT)
+            {
+                ErrorMessageBoxShower.ShowTopology("Должен быть как минимум 1 экземпляр кассы на топологии");
+            }
+            else if (topology.AvailableEntranceCount == Topology.ENTRANCE_MAX_COUNT)
+            {
+                ErrorMessageBoxShower.ShowTopology("Должен быть как минимум 1 экземпляр въезда на топологии");
+            }
+            else if (topology.AvailableExitCount == Topology.ENTRANCE_MAX_COUNT)
+            {
+                ErrorMessageBoxShower.ShowTopology("Должен быть как минимум 1 экземпляр выезда на топологии");
+            }
+            else if (topology.AvailableTankCount == Topology.TANK_MAX_COUNT)
+            {
+                ErrorMessageBoxShower.ShowTopology("Должен быть как минимум 1 экземпляр топливного бака на топологии");
+            }
+            else
+            {
+                mainViewModel.CurrentPageUri = new Uri(MainViewModel.SETTINGS_SCREEN_URI, UriKind.Relative);
+            }
         }
 
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -67,8 +92,34 @@ namespace GasStationModeling.topology.view
         private void Save_Click(object sender, RoutedEventArgs e)
         {
             var mainViewModel = ServiceLocator.Current.GetInstance<MainViewModel>();
-            AddTopologyWindow addTopologyWindow = new AddTopologyWindow(mainViewModel.GetTopology);
-            addTopologyWindow.Show();
+
+            var topology = mainViewModel.GetTopology;
+
+            if (topology.AvailableFuelDispenserCount == Topology.FUEL_DISPENSER_MAX_COUNT)
+            {
+                ErrorMessageBoxShower.ShowTopology("Должен быть как минимум 1 экземпляр ТРК на топологии");
+            }
+            else if (topology.AvailableCashBoxCount == Topology.CASHBOX_MAX_COUNT)
+            {
+                ErrorMessageBoxShower.ShowTopology("Должен быть как минимум 1 экземпляр кассы на топологии");
+            }
+            else if (topology.AvailableEntranceCount == Topology.ENTRANCE_MAX_COUNT)
+            {
+                ErrorMessageBoxShower.ShowTopology("Должен быть как минимум 1 экземпляр въезда на топологии");
+            }
+            else if (topology.AvailableExitCount == Topology.ENTRANCE_MAX_COUNT)
+            {
+                ErrorMessageBoxShower.ShowTopology("Должен быть как минимум 1 экземпляр выезда на топологии");
+            }
+            else if (topology.AvailableTankCount == Topology.TANK_MAX_COUNT)
+            {
+                ErrorMessageBoxShower.ShowTopology("Должен быть как минимум 1 экземпляр топливного бака на топологии");
+            }
+            else
+            {
+                AddTopologyWindow addTopologyWindow = new AddTopologyWindow(mainViewModel.GetTopology);
+                addTopologyWindow.Show();
+            }
         }
     }
 }

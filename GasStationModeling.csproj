@@ -405,6 +405,7 @@
     <Content Include="mongocrypt.dll" />
     <Resource Include="styles\assets\Cell_Model.png" />
     <Resource Include="styles\assets\Cell_Service_Model.png" />
+    <Resource Include="styles\assets\imgElementStation\Incorrect.png" />
     <Resource Include="styles\assets\imgElementStation\tankWhite.png" />
     <Resource Include="styles\assets\imgElementStation\road.png" />
     <Resource Include="styles\assets\imgElementStation\tank.png" />

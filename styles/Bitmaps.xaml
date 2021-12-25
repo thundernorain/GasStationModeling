@@ -9,6 +9,7 @@
     <BitmapImage x:Key="Cell_Service_Model" UriSource="./assets/Cell_Service_Model.png" />
     <BitmapImage x:Key="CellBrown" UriSource="./assets/Cell2.png" />
     <BitmapImage x:Key="Road" UriSource="./assets/imgElementStation/road.png" />
+    <BitmapImage x:Key="CellIncorrect" UriSource="./assets/imgElementStation/Incorrect.png" />
     <BitmapImage x:Key="Tank" UriSource="./assets/imgElementStation/tank.png"/>
     <BitmapImage x:Key="Car" UriSource="./assets/imgElementStation/car.png"/>
     <BitmapImage x:Key="Cashbox" UriSource="./assets/imgElementStation/cashbox.png"/>
