@@ -80,14 +80,14 @@ namespace GasStationModeling.ViewModel
 
         public void SetIndicatorBrushesActive(Uri pageUri)
         {
-            SetGrayIndicator();
+            SetGrayIndicator(); 
 
-            if (pageUri.ToString().Contains("SettingsScreen.xaml"))
+            if (pageUri.ToString().Contains("TopologyScreen.xaml"))
             {
                 pageIndicatorBrushes[0] = Application.Current.TryFindResource("AquaBrush") as Brush;
             }
 
-            if (pageUri.ToString().Contains("TopologyScreen.xaml"))
+            if (pageUri.ToString().Contains("SettingsScreen.xaml"))
             {
                 pageIndicatorBrushes[1] = Application.Current.TryFindResource("AquaBrush") as Brush;
             }
