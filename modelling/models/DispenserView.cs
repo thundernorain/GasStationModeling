@@ -1,9 +1,6 @@
 ﻿using GasStationModeling.core.models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GasStationModeling.modelling.model
 {
@@ -34,13 +31,14 @@ namespace GasStationModeling.modelling.model
             CarsInQueue = 0;
         }
 
-        public void getFuelFromTank(List<TankView> tanks, string selectedFuel)
+        public void refuelCar(List<TankView> tanks, CarView car)
         {
             var tankWithTypeOfFuel = tanks
-                .Where(tank => tank.TypeFuel.Equals(selectedFuel))
+                .Where(tank => tank.TypeFuel.Equals(car.TypeFuel))
                 .First();
 
             tankWithTypeOfFuel.CurrentFuelVolume -= SpeedRefuelingPerTick;
+            car.CurrentFuelVolume += SpeedRefuelingPerTick;
         }
     }
 }
