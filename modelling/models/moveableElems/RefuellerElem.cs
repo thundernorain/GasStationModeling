@@ -1,4 +1,6 @@
-﻿using GasStationModeling.modelling.pictureView;
+﻿using GasStationModeling.modelling.helpers;
+using GasStationModeling.modelling.model;
+using GasStationModeling.modelling.pictureView;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,11 +16,15 @@ namespace GasStationModeling.modelling.moveableElems
     {
         Rect CollectorRect { get; set; }
 
-        public RefuellerElem(Canvas canvas, ImageBrush brush, Point location)
+        public RefuellerElem(
+            Canvas canvas,
+            ImageBrush brush,
+            Point location,
+            RefuellerView refuellerView)
         {
-            Tag = "Collector";
-            Height = 48;
-            Width = 48;
+            Tag = refuellerView;
+            Height = ElementSizeHelper.CELL_WIDTH;
+            Width = ElementSizeHelper.CELL_HEIGHT;
             Fill = brush;
             CurrentLocation = location;
             canvas.Children.Add(this);

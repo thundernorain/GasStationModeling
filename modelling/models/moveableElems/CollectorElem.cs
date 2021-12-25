@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GasStationModeling.modelling.helpers;
+using GasStationModeling.modelling.model;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -13,11 +10,14 @@ namespace GasStationModeling.modelling.pictureView
     {
         Rect CollectorRect { get; set; }
 
-        public CollectorElem(Canvas canvas, ImageBrush brush, Point location)
+        public CollectorElem(Canvas canvas,
+            ImageBrush brush,
+            Point location, 
+            CollectorView collectorView)
         {
-            Tag = "Collector";
-            Height = 48;
-            Width = 48;
+            Tag = collectorView;
+            Height = ElementSizeHelper.CELL_WIDTH;
+            Width = ElementSizeHelper.CELL_HEIGHT;
             Fill = brush;
             CurrentLocation = location;
             IsGoingToFill = false;

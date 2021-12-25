@@ -49,16 +49,20 @@
                    TextAlignment="Center" 
                    Margin="21,0,302,496"
                    Text="Транспорт:" Width="96" Height="24" VerticalAlignment="Bottom"/>
-            <Border BorderBrush="Black" BorderThickness="10" HorizontalAlignment="Left" Height="179" Margin="21,285,0,0" VerticalAlignment="Top" Width="196">
+            <Border BorderBrush="Black" BorderThickness="10" HorizontalAlignment="Left" Height="179" Margin="21,285,0,0" VerticalAlignment="Top" Width="310">
                 <DataGrid x:Name="TransportGrid" 
                           HorizontalAlignment="Left" 
-                          Height="172" Margin="-8,-5,-10,-8" 
+                          Height="172" Margin="-8,-5,-120,-8" 
                           VerticalAlignment="Top"
-                          Width="188" 
+                          Width="304" 
                           IsReadOnly="true"
-                          AutoGenerateColumns="false"
+                          FontSize="{StaticResource Medium}"       
                           ItemsSource="{Binding CarTableItems}"
-                          SelectionChanged="TransportGrid_SelectionChanged"/>
+                          SelectionChanged="TransportGrid_SelectionChanged">
+                    <DataGrid.Columns>
+
+                    </DataGrid.Columns>
+                </DataGrid>
             </Border>
 
             <TextBlock x:Name="CashCountInfo" Style="{StaticResource BaseText}" 
@@ -83,15 +87,15 @@
         <Grid Width="712">
             <Canvas Name="StationCanvas" Background="LightGray" Margin="0,0,0,108" />
 
-            <Grid Height="72" Margin="258,673,246,31">
+            <Grid Height="72" Margin="105,673,42,31">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="65*"/>
                     <RowDefinition Height="7*"/>
                 </Grid.RowDefinitions>
-                <Button x:Name="StartButton" Style="{StaticResource AquaButton}" Margin="124,12,36,4.127" Click="StopButton_Click" RenderTransformOrigin="0.5,0.5">
+                <Button x:Name="StartButton" Style="{StaticResource AquaButton}" Content="Старт" Margin="301,6,101,6" Click="StartButton_Click" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2">
 
                 </Button>
-                <Button x:Name="StopButton" Style="{StaticResource AquaButton}" Margin="36,12,125,4.127" Click="StartButton_Click" RenderTransformOrigin="0.5,0.5">
+                <Button x:Name="StopButton" Style="{StaticResource AquaButton}"  Content="Стоп" Margin="94,8,309,4" Click="StopButton_Click" RenderTransformOrigin="0.5,0.5">
                 </Button>
             </Grid>
 

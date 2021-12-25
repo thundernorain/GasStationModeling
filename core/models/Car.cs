@@ -7,7 +7,7 @@ namespace GasStationModeling.core.models
     {
         public ObjectId Id { get; set; }
 
-        public string Image { get; }
+        public string Image { get; set; }
 
         public string Model { get; set; }
 

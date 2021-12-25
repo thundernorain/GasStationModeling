@@ -40,7 +40,7 @@ namespace GasStationModeling.ViewModel
         public WelcomeViewModel()
         {
             var db = DbInitializer.getInstance();
-            Topologies = getTopologiesFromDB(db);
+            //Topologies = getTopologiesFromDB(db);
         }
 
         public TopologyDTO getChosenTopology()

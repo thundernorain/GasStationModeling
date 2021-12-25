@@ -20,6 +20,7 @@ namespace GasStationModeling.ViewModel
 {
     public class ModellingScreenViewModel : ViewModelBase
     {
+         #region Fields
         public ModellingSettings Settings { get; set; }
 
         public Topology CurrentTopology { get; set; }
@@ -28,33 +29,12 @@ namespace GasStationModeling.ViewModel
 
         public List<FuelTableItem> Fuels { get; set; }
 
-        private double _currentCash;
+        public CashBoxView CashBoxView { get; set; }
 
-        private double _currentFuelVolume;
+        public List<TankView> TankViews { get; set; }
 
-        public string CurrentCashView { get; set; }
-
-        public string CurrentFuelVolumeView { get; set; }
-
-        public double CurrentCashCount
-        {
-            get => _currentCash;
-            set
-            {
-                _currentCash = value;
-                CurrentCashView = "Объём денег в кассе (руб) : " + _currentCash + " \\ " + Settings.CashLimit + " руб";
-            }
-        }
-
-        public double CurrentFuelVolume
-        {
-            get => _currentFuelVolume;
-            set
-            {
-                _currentFuelVolume = value;
-                CurrentFuelVolumeView = "Объём топлива в ТБ (м3) : " + _currentFuelVolume + " \\ " + Settings.FuelTank.MaxVolume + " м3";
-            }
-        }
+            
+        #endregion 
 
         public ModellingScreenViewModel()
         {
@@ -67,8 +47,7 @@ namespace GasStationModeling.ViewModel
             CarTableItems = ModellingScreenMapper.CreateCarTableItems(cars,Settings.Fuels);
             Fuels = ModellingScreenMapper.CreateFuelTableitems(Settings.Fuels);
 
-            CurrentCashCount = 0;
-            CurrentFuelVolume = Settings.FuelTank.MaxVolume;
+            TankViews = ModellingScreenMapper.initializeTankViews(Settings.Fuels, Settings.FuelTank.MaxVolume);
         }
 
         public List<Car> getCarsFromDB(IMongoDatabase db)
@@ -76,22 +55,6 @@ namespace GasStationModeling.ViewModel
             var dbWorker = new DbWorker<Car>(db, DBWorkerKeys.CARS_KEY);
             return dbWorker.getCollection();
         }
-
-
-        public Canvas initializeStationCanvas(Canvas modelCanvas)
-        {
-            modelCanvas.Width = CurrentTopology.TopologyColumnCount * 48;
-            modelCanvas.Height = (CurrentTopology.TopologyRowCountMain + CurrentTopology.TopologyRowCountWorker + 1) * 48;
-
-            for (int i = 0; i < CurrentTopology.TopologyRowCountMain; i++)
-            {
-                for (int j = 0; j < CurrentTopology.TopologyColumnCount; j++)
-                {
-                   // modelCanvas.
-                }
-            }
-            return modelCanvas;
-        }
-
+        
     }
 }
