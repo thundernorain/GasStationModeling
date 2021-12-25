@@ -20,7 +20,7 @@ namespace GasStationModeling.modelling.view
         {
             InitializeComponent();
             mscViewModel = ServiceLocator.Current.GetInstance<ModellingScreenViewModel>();
-            StationCanvas = TopologyMapper.mapTopology(StationCanvas, mscViewModel.CurrentTopology);
+            StationCanvas = TopologyMapper.mapTopology(StationCanvas, mscViewModel.CurrentTopology,mscViewModel.Settings);
         }
 
         private void TransportGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)

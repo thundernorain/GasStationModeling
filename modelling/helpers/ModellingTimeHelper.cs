@@ -13,6 +13,8 @@ namespace GasStationModeling.modelling.managers
         static double TimeAfterLastCarSpawningInSeconds => TicksAfterLastCarSpawning * (double)TIMER_TICK_MILLISECONDS / 1000;
         static double TimeBetweenCars { get; set; }
 
+        public ModellingTimeHelper() { }
+
         static void SetUpTimer(DispatcherTimer timer)
         {
             TimerTicksCount = 0;

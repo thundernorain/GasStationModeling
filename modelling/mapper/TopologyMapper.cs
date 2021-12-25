@@ -1,5 +1,6 @@
 ﻿using GasStationModeling.core.topology;
 using GasStationModeling.modelling.helpers;
+using GasStationModeling.settings_screen.model;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Controls;
@@ -10,15 +11,15 @@ namespace GasStationModeling.modelling.mapper
 {
     class TopologyMapper
     {      
-        public static Canvas mapTopology(Canvas stationCanvas, Topology currentTopology)
+        public static Canvas mapTopology(Canvas stationCanvas, Topology currentTopology, ModellingSettings settings)
         {
             int width = currentTopology.TopologyColumnCountMain
-                + currentTopology.TopologyColumnCountWorker
-                + 3 ;
+                + currentTopology.TopologyColumnCountWorker;
 
             int height = currentTopology.TopologyRowCount;
             stationCanvas.Width = width * ElementSizeHelper.CELL_WIDTH;
-            stationCanvas.Height = height * ElementSizeHelper.CELL_HEIGHT;
+            stationCanvas.Height = (height + 3) * ElementSizeHelper.CELL_HEIGHT;
+
             ImageBrush brush = new ImageBrush();
          
             for (int i = 0; i < width; i++)
@@ -39,6 +40,15 @@ namespace GasStationModeling.modelling.mapper
                     stationCanvas.Children.Add(topologyElem);
                 }
             }
+
+            for (int i = 0; i < width; i++)
+            {
+                for (int j = height; j < stationCanvas.Height; j++)
+                {
+                    //var roadImage = 
+                }
+            }
+
             return stationCanvas;
         }
 

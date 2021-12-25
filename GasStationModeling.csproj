@@ -205,6 +205,7 @@
     <Compile Include="modelling\helpers\DestinationPointHelper.cs" />
     <Compile Include="modelling\helpers\ElementSizeHelper.cs" />
     <Compile Include="modelling\helpers\ModellingTimeHelper.cs" />
+    <Compile Include="modelling\mapper\FuelTank.cs" />
     <Compile Include="modelling\mapper\ModellingImageBrushes.cs" />
     <Compile Include="modelling\mapper\ModellingScreenMapper.cs" />
     <Compile Include="modelling\mapper\TopologyMapper.cs" />
@@ -222,6 +223,7 @@
     <Compile Include="modelling\models\moveableElems\CollectorElem.cs" />
     <Compile Include="modelling\models\moveableElems\MoveableElem.cs" />
     <Compile Include="modelling\models\moveableElems\RefuellerElem.cs" />
+    <Compile Include="modelling\TrafficGenerator.cs" />
     <Compile Include="settings_screen\mapper\FuelDispenserToFuelDispenserComboBoxItemMapper.cs" />
     <Compile Include="settings_screen\mapper\FuelToFuelComboBoxMapper.cs" />
     <Compile Include="settings_screen\mapper\TankToFuelTankComboBoxItemMapper.cs" />
