@@ -14,5 +14,6 @@
     <BitmapImage x:Key="Exit" UriSource="./assets/imgElementStation/exit.png"/>
     <BitmapImage x:Key="FuelDispenser" UriSource="./assets/imgElementStation/fuelDispenser.png"/>
     <BitmapImage x:Key="Refueller" UriSource="./assets/imgElementStation/refueller.png"/>
-
+    <BitmapImage x:Key="TankWhite" UriSource="./assets/imgElementStation/tankWhite.png"/>
+    
 </ResourceDictionary>
