@@ -1,4 +1,4 @@
-﻿using GasStationModeling.core.models;
+﻿ using GasStationModeling.core.models;
 using System;
 using System.Drawing;
 
@@ -33,6 +33,32 @@ namespace GasStationModeling.core.topology
         private int availableExitCount = EXIT_MAX_COUNT;
 
         private TopologyElement selectedTopologyElement;
+
+
+        public int TopologyHeight
+        {
+            get
+            {
+                return topologyElements.Length;
+            }
+        }
+
+        public int TopologyWidth
+        {
+            get
+            {
+                return topologyElements.GetLength(1);
+            }
+        }
+
+
+        public int FuelTankCountChosen
+        {
+            get
+            {
+                return TANK_MAX_COUNT - AvailableTankCount;
+            }
+        }
         #endregion
 
         #region Fields
@@ -182,7 +208,7 @@ namespace GasStationModeling.core.topology
             }
         }
 
-        private BitmapImage GetCellImage(int i, int j)
+        public BitmapImage GetCellImage(int i, int j)
         {
             object image = null;
             var element = TopologyElements[i, j];

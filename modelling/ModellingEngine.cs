@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GasStationModeling.core.models
+namespace GasStationModeling.modelling
 {
-    class CashBox : IGasStationElement
+    class ModellingEngine
     {
     }
 }

@@ -87,15 +87,15 @@
         <Grid Width="712">
             <Canvas Name="StationCanvas" Background="LightGray" Margin="0,0,0,108" />
 
-            <Grid Height="72" Margin="258,673,246,31">
+            <Grid Height="72" Margin="105,673,42,31">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="65*"/>
                     <RowDefinition Height="7*"/>
                 </Grid.RowDefinitions>
-                <Button x:Name="StartButton" Style="{StaticResource AquaButton}" Margin="124,12,36,4.127" Click="StopButton_Click" RenderTransformOrigin="0.5,0.5">
+                <Button x:Name="StartButton" Style="{StaticResource AquaButton}" Content="Старт" Margin="301,6,101,6" Click="StartButton_Click" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2">
 
                 </Button>
-                <Button x:Name="StopButton" Style="{StaticResource AquaButton}" Margin="36,12,125,4.127" Click="StartButton_Click" RenderTransformOrigin="0.5,0.5">
+                <Button x:Name="StopButton" Style="{StaticResource AquaButton}"  Content="Стоп" Margin="94,8,309,4" Click="StopButton_Click" RenderTransformOrigin="0.5,0.5">
                 </Button>
             </Grid>
 

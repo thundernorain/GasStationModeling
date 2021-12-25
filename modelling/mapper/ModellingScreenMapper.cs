@@ -47,5 +47,20 @@ namespace GasStationModeling.modelling.mapper
             });
             return fuelTableItems;
         }
+
+        public static List<TankView> initializeTankViews(List<Fuel> fuels, double maxVolume)
+        {
+            List<TankView> tankViews = new List<TankView>();
+            foreach (var fuel in fuels)
+            {
+                tankViews.Add(new TankView()
+                {
+                    MaxVolume = maxVolume,
+                    CurrentFuelVolume = maxVolume,
+                    FuelName = fuel.Name
+                });
+            }
+            return tankViews;
+        }
     }
 }

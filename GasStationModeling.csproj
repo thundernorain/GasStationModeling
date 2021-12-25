@@ -182,12 +182,13 @@
     <Compile Include="add_forms\AddTopologyWindow.xaml.cs">
       <DependentUpon>AddTopologyWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="core\mapper\TopologyElementToGasStationElementMapper.cs" />
+    <Compile Include="core\topology\mapper\TopologyElementToGasStationElementMapper.cs" />
+    <Compile Include="core\models\CashBox.cs" />
     <Compile Include="exceptions\DbErrorException.cs" />
     <Compile Include="exceptions\EntryNotFoundException.cs" />
     <Compile Include="messageBoxes\ErrorMessageBoxShower.cs" />
     <Compile Include="core\DataGridWorker.cs" />
-    <Compile Include="core\DB\dto\TopologyDTO.cs" />
+    <Compile Include="core\topology\TopologyDTO.cs" />
     <Compile Include="core\models\IGasStationElement.cs" />
     <Compile Include="core\RelayCommand.cs" />
     <Compile Include="core\topology\Topology.cs" />
@@ -197,19 +198,30 @@
       <DependentUpon>DevelopersInfoWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="core\models\Car.cs" />
-    <Compile Include="core\models\Cashbox.cs" />
     <Compile Include="core\models\Fuel.cs" />
     <Compile Include="core\models\FuelDispenser.cs" />
     <Compile Include="core\models\Tank.cs" />
     <Compile Include="exceptions\ParameterNotSelectedException.cs" />
+    <Compile Include="modelling\helpers\DestinationPointHelper.cs" />
+    <Compile Include="modelling\helpers\ElementSizeHelper.cs" />
+    <Compile Include="modelling\helpers\ModellingTimeHelper.cs" />
+    <Compile Include="modelling\mapper\ModellingImageBrushes.cs" />
     <Compile Include="modelling\mapper\ModellingScreenMapper.cs" />
-    <Compile Include="modelling\model\CarTableItem.cs" />
+    <Compile Include="modelling\mapper\TopologyMapper.cs" />
+    <Compile Include="modelling\ModellingEngine.cs" />
+    <Compile Include="modelling\models\CarView.cs" />
+    <Compile Include="modelling\models\CollectorView.cs" />
+    <Compile Include="modelling\models\DispenserView.cs" />
+    <Compile Include="modelling\models\RefuellerView.cs" />
+    <Compile Include="modelling\models\tableItem\CarTableItem.cs" />
     <Compile Include="messageBoxes\DeleteConfirmationMessageBoxShower.cs" />
-    <Compile Include="modelling\model\FuelTableItem.cs" />
-    <Compile Include="modelling\moveableElems\CarElem.cs" />
-    <Compile Include="modelling\moveableElems\CollectorElem.cs" />
-    <Compile Include="modelling\moveableElems\MoveableElem.cs" />
-    <Compile Include="modelling\moveableElems\RefuellerElem.cs" />
+    <Compile Include="modelling\models\CashBoxView.cs" />
+    <Compile Include="modelling\models\tableItem\FuelTableItem.cs" />
+    <Compile Include="modelling\models\TankView.cs" />
+    <Compile Include="modelling\models\moveableElems\CarElem.cs" />
+    <Compile Include="modelling\models\moveableElems\CollectorElem.cs" />
+    <Compile Include="modelling\models\moveableElems\MoveableElem.cs" />
+    <Compile Include="modelling\models\moveableElems\RefuellerElem.cs" />
     <Compile Include="settings_screen\mapper\FuelDispenserToFuelDispenserComboBoxItemMapper.cs" />
     <Compile Include="settings_screen\mapper\FuelToFuelComboBoxMapper.cs" />
     <Compile Include="settings_screen\mapper\TankToFuelTankComboBoxItemMapper.cs" />

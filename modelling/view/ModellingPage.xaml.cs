@@ -1,6 +1,7 @@
 ﻿using CommonServiceLocator;
 using GasStationModeling.core.models;
 using GasStationModeling.core.topology;
+using GasStationModeling.modelling.mapper;
 using GasStationModeling.modelling.model;
 using GasStationModeling.ViewModel;
 using System;
@@ -33,7 +34,8 @@ namespace GasStationModeling.modelling.view
         public ModellingPage()
         {
             InitializeComponent();
-            mscViewModel = ServiceLocator.Current.GetInstance<ModellingScreenViewModel>();        
+            mscViewModel = ServiceLocator.Current.GetInstance<ModellingScreenViewModel>();
+            StationCanvas = TopologyMapper.mapTopology(StationCanvas, mscViewModel.CurrentTopology);
         }
 
         private void TransportGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -49,8 +51,7 @@ namespace GasStationModeling.modelling.view
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
-            timer.Start();
-            StationCanvas = mscViewModel.initializeStationCanvas(StationCanvas);
+            timer.Start();    
         }
 
         private void StopButton_Click(object sender, RoutedEventArgs e)

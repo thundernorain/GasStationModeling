@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GasStationModeling.modelling.helpers;
+using GasStationModeling.modelling.model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,11 +15,11 @@ namespace GasStationModeling.modelling.pictureView
     {
         Rect CarRect { get; set; }
 
-        public CarElem(Canvas canvas,ImageBrush brush, Point location)
+        public CarElem(Canvas canvas,ImageBrush brush, Point location, CarView carView)
         {
-            Tag = "car";
-            Height = 48;
-            Width = 48;
+            Tag = carView;
+            Height = ElementSizeHelper.CELL_WIDTH;
+            Width = ElementSizeHelper.CELL_HEIGHT;
             Fill = brush;
             CurrentLocation = location;
             IsGoingToFill = false;
