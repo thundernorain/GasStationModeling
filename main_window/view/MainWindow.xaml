@@ -20,9 +20,7 @@
                    FontSize="{StaticResource Medium}" 
                    HorizontalAlignment="Left"  
                    Margin="38,10,0,0"
-                   >
-            Настройки АЗС
-                </TextBlock>
+                   ><Run Language="ru-ru" Text="Топология"/></TextBlock>
                 <Rectangle Fill="{Binding PageIndicatorBrushes[0]}"
                        Width="150" Height="3"
                        HorizontalAlignment="Left"
@@ -33,9 +31,8 @@
                    FontSize="{StaticResource Medium}" 
                    HorizontalAlignment="Left"  
                    Margin="38,10,0,0"
-                   >
-                    Топология
-                </TextBlock>
+                   Text="Настройки АЗС"
+                   />
                 <Rectangle Fill="{Binding PageIndicatorBrushes[1]}"  
                        Width="200" 
                        Height="3"

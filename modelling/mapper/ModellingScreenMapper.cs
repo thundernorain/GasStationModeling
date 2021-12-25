@@ -44,17 +44,5 @@ namespace GasStationModeling.modelling.mapper
             });
             return fuelTableItems;
         }
-
-        public static List<TankView> initializeTankViews(List<Fuel> fuels, Tank tank)
-        {
-            List<TankView> tankViews = new List<TankView>();
-            foreach (var fuel in fuels)
-            {
-                tank.TypeFuel = fuel.Name;
-                tankViews.Add(new TankView(tank));
-            }
-            return tankViews;
-        }
-
     }
 }

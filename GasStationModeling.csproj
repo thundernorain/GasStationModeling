@@ -404,6 +404,8 @@
     <Content Include="core\Compression\Zstandard\lib\win\libzstd.dll" />
     <Content Include="mongocrypt.dll" />
     <Resource Include="styles\assets\imgElementStation\Incorrect.png" />
+    <Resource Include="styles\assets\imgElementStation\tankWhite.png" />
+    <Resource Include="styles\assets\imgElementStation\road.png" />
     <Resource Include="styles\assets\imgElementStation\tank.png" />
     <Resource Include="styles\assets\imgElementStation\refueller.png" />
     <Resource Include="styles\assets\imgElementStation\ikonka-yandex-kassa-848x424.png" />

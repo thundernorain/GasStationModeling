@@ -10,7 +10,7 @@ namespace GasStationModeling.modelling.model
 
         public double MaxVolume { get; set; }
 
-        public string TypeFuel { get; set; }
+        public Fuel TypeFuel { get; set; }
 
         private double LimitVolume { get; set; }
 
