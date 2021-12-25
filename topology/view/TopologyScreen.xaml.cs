@@ -62,31 +62,46 @@ namespace GasStationModeling.topology.view
         private void CashBoxRectangle_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             var mainViewModel = ServiceLocator.Current.GetInstance<MainViewModel>();
-            mainViewModel.GetTopology.SelectedTopologyElement = TopologyElement.CashBox;
+            var topology = mainViewModel.GetTopology;
+
+            if(topology.SelectedTopologyElement != TopologyElement.CashBox)
+                topology.SelectedTopologyElement = TopologyElement.CashBox;
         }
 
         private void FuelDispenserRectangle_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             var mainViewModel = ServiceLocator.Current.GetInstance<MainViewModel>();
-            mainViewModel.GetTopology.SelectedTopologyElement = TopologyElement.FuelDispenser;
+            var topology = mainViewModel.GetTopology;
+
+            if (topology.SelectedTopologyElement != TopologyElement.FuelDispenser)
+                mainViewModel.GetTopology.SelectedTopologyElement = TopologyElement.FuelDispenser;
         }
 
         private void TankRectangle_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             var mainViewModel = ServiceLocator.Current.GetInstance<MainViewModel>();
-            mainViewModel.GetTopology.SelectedTopologyElement = TopologyElement.Tank;
+            var topology = mainViewModel.GetTopology;
+
+            if (topology.SelectedTopologyElement != TopologyElement.Tank)
+                mainViewModel.GetTopology.SelectedTopologyElement = TopologyElement.Tank;
         }
 
         private void EntrancePolygon_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             var mainViewModel = ServiceLocator.Current.GetInstance<MainViewModel>();
-            mainViewModel.GetTopology.SelectedTopologyElement = TopologyElement.Entrance;
+            var topology = mainViewModel.GetTopology;
+
+            if (topology.SelectedTopologyElement != TopologyElement.Entrance)
+                mainViewModel.GetTopology.SelectedTopologyElement = TopologyElement.Entrance;
         }
 
         private void ExitPolygon_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             var mainViewModel = ServiceLocator.Current.GetInstance<MainViewModel>();
-            mainViewModel.GetTopology.SelectedTopologyElement = TopologyElement.Exit;
+            var topology = mainViewModel.GetTopology;
+
+            if (topology.SelectedTopologyElement != TopologyElement.Exit)
+                mainViewModel.GetTopology.SelectedTopologyElement = TopologyElement.Exit;
         }
         
         private void Save_Click(object sender, RoutedEventArgs e)
