@@ -403,6 +403,8 @@
     <Content Include="core\Compression\Snappy\lib\win\snappy64.dll" />
     <Content Include="core\Compression\Zstandard\lib\win\libzstd.dll" />
     <Content Include="mongocrypt.dll" />
+    <Resource Include="styles\assets\Cell_Model.png" />
+    <Resource Include="styles\assets\Cell_Service_Model.png" />
     <Resource Include="styles\assets\imgElementStation\tankWhite.png" />
     <Resource Include="styles\assets\imgElementStation\road.png" />
     <Resource Include="styles\assets\imgElementStation\tank.png" />
