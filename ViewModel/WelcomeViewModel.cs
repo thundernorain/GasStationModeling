@@ -1,7 +1,11 @@
-﻿using GalaSoft.MvvmLight;
+﻿using CommonServiceLocator;
+using GalaSoft.MvvmLight;
 using GasStationModeling.core.DB;
 using GasStationModeling.core.DB.dto;
+using GasStationModeling.core.models;
 using GasStationModeling.DB;
+using GasStationModeling.main_window.view;
+using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +26,7 @@ namespace GasStationModeling.ViewModel
             set
             {
                 _selectedTopology = value;
+                LoadTopology();
                 RaisePropertyChanged(() => SelectedTopology);
             }
         }
@@ -40,7 +45,7 @@ namespace GasStationModeling.ViewModel
         public WelcomeViewModel()
         {
             var db = DbInitializer.getInstance();
-            //Topologies = getTopologiesFromDB(db);
+            Topologies = getTopologiesFromDB(db);
         }
 
         public TopologyDTO getChosenTopology()
@@ -57,5 +62,16 @@ namespace GasStationModeling.ViewModel
             return dbWorker.getCollection();
         }
         #endregion
+
+        public void LoadTopology()
+        {
+            var mainWindow = new MainWindow();
+
+            var viewModel = ServiceLocator.Current.GetInstance<MainViewModel>();
+            var topology = getChosenTopology();
+            viewModel.GetTopology.LoadTopology(topology.Topology, topology.ServiceAreaWidth);
+
+            mainWindow.Show();
+        }
     }
 }

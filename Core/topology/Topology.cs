@@ -16,6 +16,7 @@ using System.Windows.Input;
 using System.Windows.Media.Effects;
 using System.Media;
 using GasStationModeling.add_forms;
+using GasStationModeling.core.topology.mapper;
 
 namespace GasStationModeling.core.topology
 {
@@ -73,6 +74,10 @@ namespace GasStationModeling.core.topology
                     topologyElements = GetEmptyGasStationElementsArray();
 
                 return topologyElements;
+            }
+            private set
+            {
+                topologyElements = value;
             }
         }
         public Grid TopologyGrid
@@ -539,6 +544,17 @@ namespace GasStationModeling.core.topology
             AvailableExitCount = EXIT_MAX_COUNT - exitCount;
         }
         #endregion
+
+        public void LoadTopology(IGasStationElement[,] topology, int serviceAreaWidth)
+        {
+            TopologyElements = new GasStationElementToTopologyElement().MapArray(topology);
+
+            topologyColumnCountWorker = serviceAreaWidth;
+            topologyColumnCountMain = TopologyElements.GetLength(1) - serviceAreaWidth;
+            topologyRowCount = TopologyElements.GetLength(0);
+
+            TopologyGrid = GetTopologyGrid(TopologyRowCount, TopologyColumnCountMain + TopologyColumnCountWorker);
+        }
 
         private void PlaySound()
         {

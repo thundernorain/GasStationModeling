@@ -182,6 +182,9 @@
     <Compile Include="add_forms\AddTopologyWindow.xaml.cs">
       <DependentUpon>AddTopologyWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="core\models\Entrance.cs" />
+    <Compile Include="core\models\Exit.cs" />
+    <Compile Include="core\topology\mapper\GasStationElementToTopologyElement.cs" />
     <Compile Include="core\topology\mapper\TopologyElementToGasStationElementMapper.cs" />
     <Compile Include="core\models\CashBox.cs" />
     <Compile Include="exceptions\DbErrorException.cs" />
