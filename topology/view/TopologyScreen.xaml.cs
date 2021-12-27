@@ -5,6 +5,8 @@ using GasStationModeling.ViewModel;
 using System;
 using System.Windows;
 using System.Windows.Controls;
+using GasStationModeling.main_window.view;
+using GalaSoft.MvvmLight.Ioc;
 
 namespace GasStationModeling.topology.view
 {
@@ -135,6 +137,13 @@ namespace GasStationModeling.topology.view
                 AddTopologyWindow addTopologyWindow = new AddTopologyWindow(mainViewModel.GetTopology);
                 addTopologyWindow.Show();
             }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            SimpleIoc.Default.Unregister<MainViewModel>();
+            SimpleIoc.Default.Register<MainViewModel>();
+            MainWindow.GetWindow(this).Close();
         }
     }
 }

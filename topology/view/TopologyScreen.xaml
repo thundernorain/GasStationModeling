@@ -73,7 +73,7 @@
                 <Image x:Name="TankImage" Grid.Row="3" Grid.Column="2" Effect="{Binding GetTopology.SelectedElementEffects[2]}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="50" Width="50" Margin="0,26" MouseLeftButtonUp="TankRectangle_MouseLeftButtonUp" OpacityMask="Black" MinWidth="50" MinHeight="50" Source="{DynamicResource TankWhite}"/>
                 <Polygon x:Name="EntrancePolygon" Grid.Row="4" Grid.Column="2" Effect="{Binding GetTopology.SelectedElementEffects[3]}" Fill="#FFC4C4C4" Points="0,40 20,0 40,40" HorizontalAlignment="Left" VerticalAlignment="Center" Height="40" Width="40" Margin="0,31,0,32" MouseLeftButtonUp="EntrancePolygon_MouseLeftButtonUp" />
                 <Polygon x:Name="ExitPolygon" Grid.Row="5" Grid.Column="2" Effect="{Binding GetTopology.SelectedElementEffects[4]}" Fill="#FFC4C4C4" Points="0,0 20,40 40,0" HorizontalAlignment="Left" VerticalAlignment="Center" RenderTransformOrigin="1,3.275" Height="40" Width="40" Margin="0,32,0,31" MouseLeftButtonUp="ExitPolygon_MouseLeftButtonUp" />
-                <Button Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Content="Назад" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="185" Height="50" Foreground="White">
+                <Button Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Content="Назад" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="185" Height="50" Foreground="White" Click="Button_Click_1" >
                     <Button.Background>
                         <SolidColorBrush Color="{DynamicResource AquaColor}"/>
                     </Button.Background>

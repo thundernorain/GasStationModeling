@@ -325,36 +325,54 @@
                    Margin="38,0"
                    Text="Вы можете создать новую топологию АЗС или загрузить уже готовую."/>
 
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,48,0,0">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="125,48,0,0">
             <Button
                 Style="{StaticResource AquaButton}"
                 Content="Создать"
                 Margin="0,0,10,0" Click="Button_Click"/>
 
-            <ComboBox Margin="10,0,0,0"
+            <Canvas>
+                <ComboBox x:Name="cmbxLoad" Margin="10,0,0,0"
                       IsReadOnly="True"
                       IsEditable="True"
                       Style="{DynamicResource ComboBoxStyle1}"
                       Padding="36,16"
                       ItemsSource="{Binding Topologies}"
-                      SelectedValue="{Binding SelectedTopology,Mode=TwoWay}"
+                      SelectedValuePath="Name"
+                      SelectedValue="{Binding SelectedTopology, Mode=TwoWay}"
                       FontSize="{StaticResource Medium}"
                       Text="Загрузить"  
                       Foreground="White"
                       MaxWidth="200"
-                      Background="{StaticResource ComboBox.Static.Background}">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <DockPanel Width="224">
-                            <TextBlock
+                      Background="{StaticResource ComboBox.Static.Background}" >
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <DockPanel Width="224">
+                                <TextBlock
                             Text="{Binding Path=Name}" 
                             Style="{StaticResource BaseText}"
                             FontSize="{StaticResource Medium}"
+                            Foreground="Black"
                             TextAlignment="center"/>
-                        </DockPanel>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
+                            </DockPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+
+                <Rectangle 
+                    Fill="{StaticResource AquaBrush}"
+                    Height="50"
+                    Width="120" Canvas.Left="36"
+                    />
+
+                <TextBlock 
+                    Text="Загрузить"
+                    Style="{StaticResource BaseText}"
+                    FontSize="{StaticResource Medium}"
+                    Foreground="White" Canvas.Left="57" Canvas.Top="20"
+                    />
+            </Canvas>
+            
         </StackPanel>
     </StackPanel>
 </Window>

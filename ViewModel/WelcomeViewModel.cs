@@ -1,7 +1,11 @@
-﻿using GalaSoft.MvvmLight;
+﻿using CommonServiceLocator;
+using GalaSoft.MvvmLight;
 using GasStationModeling.core.DB;
 using GasStationModeling.core.DB.dto;
+using GasStationModeling.core.models;
 using GasStationModeling.DB;
+using GasStationModeling.main_window.view;
+using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +15,7 @@ namespace GasStationModeling.ViewModel
     public class WelcomeViewModel : ViewModelBase
     {
         #region Fields
-        private string _selectedTopology;
+        private string _selectedTopology = "Загрузить";
         private List<TopologyDTO> _topologies;
         #endregion
 
@@ -21,7 +25,8 @@ namespace GasStationModeling.ViewModel
             get => _selectedTopology;
             set
             {
-                _selectedTopology = value;
+                LoadTopology(value);
+                _selectedTopology = "Загрузить";
                 RaisePropertyChanged(() => SelectedTopology);
             }
         }
@@ -40,17 +45,13 @@ namespace GasStationModeling.ViewModel
         public WelcomeViewModel()
         {
             var db = DbInitializer.getInstance();
-            //Topologies = getTopologiesFromDB(db);
-            Topologies = new List<TopologyDTO>();
-            TopologyDTO tdto = new TopologyDTO();
-            tdto.Name = "Загрузить";
-            Topologies.Add(tdto);
+            Topologies = getTopologiesFromDB(db);
         }
 
-        public TopologyDTO getChosenTopology()
+        public TopologyDTO getChosenTopology(string value)
         {
             return Topologies
-               .Where(topology => topology.Name.Equals(_selectedTopology))
+               .Where(topology => topology.Name.Equals(value))
                .First();
         }
 
@@ -61,5 +62,16 @@ namespace GasStationModeling.ViewModel
             return dbWorker.getCollection();
         }
         #endregion
+
+        public void LoadTopology(string value)
+        {
+            var mainWindow = new MainWindow();
+
+            var viewModel = ServiceLocator.Current.GetInstance<MainViewModel>();
+            var topology = getChosenTopology(value);
+            viewModel.GetTopology.LoadTopology(topology.Topology, topology.ServiceAreaWidth);
+
+            mainWindow.Show();
+        }
     }
 }
