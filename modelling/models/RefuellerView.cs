@@ -1,19 +1,31 @@
 ﻿
+using GasStationModeling.modelling.models;
+using System.Windows.Shapes;
+
 namespace GasStationModeling.modelling.model
 {
-    class RefuellerView
+    public class RefuellerView : TopologyView
     {
         public double SpeedRefueling { get; set; }
 
-        public RefuellerView(double speedOfRefuellingPerSecond, double tick)
+        public Rectangle ChosenTank { get; set; }
+
+        public TankView TankData
+        {
+            get
+            {
+                return ChosenTank.Tag as TankView;
+            }
+        }
+
+        public RefuellerView(double tick, double speedOfRefuellingPerSecond)
         {
             SpeedRefueling = speedOfRefuellingPerSecond * tick / 1000;
         }
 
-        public TankView refillFuelTank(TankView tank)
+        public void refillFuelTank()
         {
-            tank.CurrentFuelVolume += SpeedRefueling;
-            return tank;
+            TankData.CurrentFuelVolume += SpeedRefueling;
         }
     }
 }

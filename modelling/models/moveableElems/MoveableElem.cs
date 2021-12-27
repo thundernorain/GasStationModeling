@@ -1,12 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
 namespace GasStationModeling.modelling.pictureView
 {
-    class MoveableElem : Shape
+    public class MoveableElem : Shape
     {
+
+        public Rect intersectRect { get; set; }
 
         protected override Geometry DefiningGeometry { get; }
         public override Geometry RenderedGeometry { get; }
@@ -22,9 +26,6 @@ namespace GasStationModeling.modelling.pictureView
         private readonly List<System.Windows.Point> destinationPoints;
 
         public System.Windows.Point DestinationSpot { get; set; }
-
-        public System.Windows.Point CurrentLocation { get; set; }
-
 
         public MoveableElem()
         {
@@ -44,6 +45,26 @@ namespace GasStationModeling.modelling.pictureView
         public bool HasDestPoints()
         {
             return destinationPoints.Count > 0;
+        }
+
+        public void removeDestinationPoints()
+        {
+            destinationPoints.Clear();
+        }
+
+        public void removeDestinationPoint(Point destpoint)
+        {
+            destinationPoints.Remove(destpoint);
+        }
+
+        public Rect createIntersectRect()
+        {
+            intersectRect = new Rect(
+                Canvas.GetLeft(this),
+                Canvas.GetTop(this),
+                this.Width, 
+                this.Height);
+            return intersectRect;
         }
     }
 }

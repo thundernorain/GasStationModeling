@@ -1,8 +1,10 @@
 ﻿using GasStationModeling.core.models;
+using GasStationModeling.modelling.models;
+using System.Windows.Shapes;
 
 namespace GasStationModeling.modelling.model
 {
-    class CarView
+    public class CarView : TopologyView
     {
         public int Id { get; set; }
 
@@ -20,6 +22,8 @@ namespace GasStationModeling.modelling.model
 
         public bool IsGoingToFill { get; set; }
 
+        public Rectangle ChosenDispenser { get; set; }
+
         public CarView(int id,Car car)
         {
             Id = id;
@@ -29,6 +33,11 @@ namespace GasStationModeling.modelling.model
             MaxVolumeTank = car.MaxVolumeTank;
             FuelDispenserChosen = false;
             IsGoingToFill = false;
+        }
+
+        public void PayForFuel(ref CashBoxView cashBoxView, double price)
+        {
+            cashBoxView.CurrentCashCount += CurrentFuelSupply * price;
         }
     }
 }

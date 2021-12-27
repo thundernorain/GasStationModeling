@@ -7,12 +7,9 @@ using System.Windows.Media;
 
 namespace GasStationModeling.modelling.moveableElems
 {
-    class RefuellerElem : MoveableElem
+    public class RefuellerElem : MoveableElem
     {
-        Rect CollectorRect { get; set; }
-
         public RefuellerElem(
-            Canvas canvas,
             ImageBrush brush,
             Point location,
             RefuellerView refuellerView)
@@ -21,8 +18,6 @@ namespace GasStationModeling.modelling.moveableElems
             Height = ElementSizeHelper.CELL_WIDTH;
             Width = ElementSizeHelper.CELL_HEIGHT;
             Fill = brush;
-            CurrentLocation = location;
-            canvas.Children.Add(this);
         }
     }
 }

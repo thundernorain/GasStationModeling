@@ -1,7 +1,9 @@
 ﻿
+using GasStationModeling.modelling.models;
+
 namespace GasStationModeling.modelling.model
 {
-    public class CashBoxView
+    public class CashBoxView : TopologyView
     {
         public string CurrentCashView { get; set; }
 

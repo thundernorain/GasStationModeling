@@ -3,7 +3,9 @@ using GasStationModeling.core.topology;
 using GasStationModeling.modelling.helpers;
 using GasStationModeling.modelling.managers;
 using GasStationModeling.modelling.model;
+using GasStationModeling.modelling.models;
 using GasStationModeling.settings_screen.model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -15,7 +17,7 @@ using System.Windows.Shapes;
 namespace GasStationModeling.modelling.mapper
 {
     class TopologyMapper
-    {     
+    {
         public ModellingSettings Settings { get; set; }
 
         public Topology Topology { get; set; }
@@ -48,8 +50,9 @@ namespace GasStationModeling.modelling.mapper
             ChosenFuelId = 0;
         }
 
-        public Canvas mapTopology(Canvas stationCanvas)
+        public CanvasParser mapTopology(Canvas stationCanvas)
         {
+            CanvasParser parsedCanvas = new CanvasParser();
             int width = Topology.TopologyColumnCountMain
                 + Topology.TopologyColumnCountWorker;
 
@@ -66,7 +69,7 @@ namespace GasStationModeling.modelling.mapper
                     ImageBrush brush = new ImageBrush();
                     var elemImage = Topology.GetCellImageModelling(i, j);
                     brush.ImageSource = elemImage;
-                    Rectangle topologyElem = createTopologyElem(Topology.TopologyElements[i, j], brush);
+                    Rectangle topologyElem = createTopologyElem(Topology.TopologyElements[i, j], brush,ref parsedCanvas);
                     Canvas.SetLeft(topologyElem, ElementSizeHelper.CELL_WIDTH * j);
                     Canvas.SetTop(topologyElem, ElementSizeHelper.CELL_HEIGHT * i);
                     stationCanvas.Children.Add(topologyElem);
@@ -86,9 +89,24 @@ namespace GasStationModeling.modelling.mapper
                     stationCanvas.Children.Add(topologyElem);
                 }
             }
-            return stationCanvas;
+            parsedCanvas.StationCanvas = stationCanvas;
+            return parsedCanvas;
         }
 
+        public Rectangle createTopologyElem(TopologyElement elemType, ImageBrush brush,ref  CanvasParser parsedCanvas)
+        {
+            var topologyElem = createTopologyElem(elemType, brush);
+            switch (elemType)
+            {
+                case TopologyElement.Entrance: parsedCanvas.Entrance = topologyElem; break;
+                case TopologyElement.Exit: parsedCanvas.Exit = topologyElem; break;
+                case TopologyElement.CashBox: parsedCanvas.CashBox = topologyElem; break;
+                case TopologyElement.FuelDispenser: parsedCanvas.Dispensers.Add(topologyElem); break;
+                case TopologyElement.Tank: parsedCanvas.Tanks.Add(topologyElem); break;
+                default: break;
+            }
+            return topologyElem;
+        }
 
         public Rectangle createTopologyElem(TopologyElement elemType, ImageBrush brush)
         {
@@ -124,14 +142,6 @@ namespace GasStationModeling.modelling.mapper
                 Fill = brush
             };
             return topologyElem;
-        }
-
-        public static List<Rectangle> getTopologyElemsWithTypeOf(TopologyElement topologyElementType, Canvas stationCanvas)
-        {
-            return stationCanvas.Children
-                .OfType<Rectangle>()
-                .Where(elem => (TopologyElement)elem.Tag  == topologyElementType)
-                .ToList();
         }
     }
 }

@@ -1,8 +1,9 @@
 ﻿using GasStationModeling.core.models;
+using GasStationModeling.modelling.models;
 
 namespace GasStationModeling.modelling.model
 {
-    public class TankView
+    public class TankView : TopologyView
     {
         private double _currentFuelVolume;
 

@@ -1,10 +1,11 @@
 ﻿using GasStationModeling.core.models;
+using GasStationModeling.modelling.models;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace GasStationModeling.modelling.model
 {
-    class DispenserView
+    public class DispenserView : TopologyView
     {
         public int Id { get; set; }
 
@@ -31,13 +32,9 @@ namespace GasStationModeling.modelling.model
             CarsInQueue = 0;
         }
 
-        public void refuelCar(List<TankView> tanks, CarView car)
+        public void refuelCar(ref TankView tankView,ref CarView car)
         {
-            var tankWithTypeOfFuel = tanks
-                .Where(tank => tank.TypeFuel.Equals(car.TypeFuel))
-                .First();
-
-            tankWithTypeOfFuel.CurrentFuelVolume -= SpeedRefuelingPerTick;
+            tankView.CurrentFuelVolume -= SpeedRefuelingPerTick;
             car.CurrentFuelVolume += SpeedRefuelingPerTick;
         }
     }

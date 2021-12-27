@@ -12,7 +12,6 @@ namespace GasStationModeling.modelling.mapper
         public static ObservableCollection<CarTableItem> CreateCarTableItems(List<Car> cars, List<Fuel> fuels)
         {
             ObservableCollection<CarTableItem> carTableItems = new ObservableCollection<CarTableItem>();
-
             Random r = new Random();
             cars.ForEach(car =>
             {
@@ -28,7 +27,6 @@ namespace GasStationModeling.modelling.mapper
                     });
                 }         
             });
-
             return carTableItems;
         }
 
@@ -43,6 +41,6 @@ namespace GasStationModeling.modelling.mapper
                 });
             });
             return fuelTableItems;
-        }
+        } 
     }
 }

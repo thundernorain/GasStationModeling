@@ -11,65 +11,79 @@ namespace GasStationModeling.modelling
     public class DestinationPointHelper
     {
         #region IntPos
-        public static int FuelingPointDeltaX { get; } = 5;
-        public static int FuelingPointDeltaY { get; } = 5;
-        public static int CarRoadPositionY { get; private set; }
-        public static int ReSpawnPointX { get; } = -50;
+        public int FuelingPointDeltaX { get; } = 5;
+        public int FuelingPointDeltaY { get; } = 5;
+        public int CarRoadPositionY { get; private set; }
+        public int ReSpawnPointX { get; } = -50;
         #endregion
 
         #region CommonPoints
-        public static Point SpawnPoint { get; private set; }      
-        public static Point LeavePointNoFilling { get; private set; }
-        public static Point LeavePointFilled { get; private set; }
+        public Point SpawnPoint { get; private set; }      
+        public Point LeavePointNoFilling { get; private set; }
+        public Point LeavePointFilled { get; private set; }
         #endregion
 
         #region TopologyElemsPoints
-        public static Point EntrancePoint { get; private set; }
-        public static Point ExitPoint { get; private set; }
+        public Point EntrancePoint { get; private set; }
+        public Point ExitPoint { get; private set; }
 
-        public static Point CashCounterPoint { get; private set; }
-        public static Dictionary<Rectangle, Point> FuelDispensersDestPoints { get; private set; }
-        public static Dictionary<Rectangle, Point> RefuellerDestPoints { get; private set; }
+        public Point ServiceEntrancePoint { get; set; }
 
-        public static Point ServiceAreaEntrancePoint { get; private set; }
-        public static Point ServiceAreaExitPoint { get; private set; }
+        public Point CashBoxPoint { get; private set; }
+        public Dictionary<Rectangle, Point> FuelDispensersDestPoints { get; private set; }
+        public Dictionary<Rectangle, Point> RefuellerDestPoints { get; private set; }
+
+        public Point ServiceAreaEntrancePoint { get; private set; }
+        public Point ServiceAreaExitPoint { get; private set; }
         #endregion
 
-        public DestinationPointHelper(Canvas stationCanvas)
+        public DestinationPointHelper(CanvasParser parsedCanvas)
         {
-            defineCommonPoints(stationCanvas);
-            defineElementsPoints(stationCanvas);
+            defineCommonPoints(parsedCanvas);
+            defineElementsPoints(parsedCanvas);
         }
 
-        public static void defineCommonPoints(Canvas stationCanvas)
+        public void defineCommonPoints(CanvasParser parsedCanvas)
         {
-            CarRoadPositionY = (int)stationCanvas.Height - ElementSizeHelper.CELL_HEIGHT; 
-            SpawnPoint = new Point((int)stationCanvas.Width + 50, CarRoadPositionY);
+            CarRoadPositionY = (int)parsedCanvas.StationCanvas.Height - ElementSizeHelper.CELL_HEIGHT; 
+            SpawnPoint = new Point((int)parsedCanvas.StationCanvas.Width + 50, CarRoadPositionY);
             LeavePointNoFilling = new Point(ReSpawnPointX, CarRoadPositionY);
             LeavePointFilled = new Point(ReSpawnPointX, CarRoadPositionY - (ElementSizeHelper.CELL_HEIGHT + 1));
         }
 
-        public static void defineElementsPoints(Canvas stationCanvas)
+        public void defineElementsPoints(CanvasParser parsedCanvas)
         {
-            FuelDispensersDestPoints = defineDestPointsToDispensers(stationCanvas);
-            CashCounterPoint = defineDestPointFor(TopologyElement.CashBox,stationCanvas);
-            RefuellerDestPoints = defineDestPointsToFuelTanks(stationCanvas);
+            FuelDispensersDestPoints = defineDestPointsToDispensers(parsedCanvas);
+            CashBoxPoint = defineDestPointFor(TopologyElement.CashBox, parsedCanvas);
+            RefuellerDestPoints = defineDestPointsToFuelTanks(parsedCanvas);
 
-            EntrancePoint = defineDestPointFor(TopologyElement.Entrance, stationCanvas);
-            ExitPoint = defineDestPointFor(TopologyElement.Exit, stationCanvas);
+            EntrancePoint = defineDestPointFor(TopologyElement.Entrance, parsedCanvas);
+            ExitPoint = defineDestPointFor(TopologyElement.Exit, parsedCanvas);
         }
 
-        public static Point defineDestPointFor(TopologyElement elementType, Canvas stationCanvas)
+        public Point defineDestPointFor(TopologyElement elementType, CanvasParser parsedCanvas)
         {
-            var rect = TopologyMapper.getTopologyElemsWithTypeOf(elementType, stationCanvas)[0];
+            Rectangle rect = null;
+            switch (elementType)
+            {
+                case TopologyElement.CashBox: rect = parsedCanvas.CashBox; break;
+                case TopologyElement.Entrance: rect = parsedCanvas.Entrance; break;
+                case TopologyElement.Exit: rect = parsedCanvas.Exit; break;
+                default: break;
+            }
             Point destPoint = new Point((int)Canvas.GetLeft(rect), (int)Canvas.GetTop(rect) + ElementSizeHelper.CELL_HEIGHT);
             return destPoint;
         }
 
-        public static Dictionary<Rectangle, Point> defineDestPointsToDispensers(Canvas stationCanvas)
+        public void defineServiceAreaEntrancePoint(Rectangle elem)
+        {
+            ServiceAreaEntrancePoint = new Point((int)Canvas.GetLeft(elem) + ElementSizeHelper.CELL_WIDTH, SpawnPoint.Y);
+        }
+
+        public Dictionary<Rectangle, Point> defineDestPointsToDispensers(CanvasParser parsedCanvas)
         {
             Dictionary<Rectangle, Point> destPointsDict = new Dictionary<Rectangle, Point>();
-            var elems = TopologyMapper.getTopologyElemsWithTypeOf(TopologyElement.FuelDispenser, stationCanvas);
+            var elems = parsedCanvas.Dispensers;
             foreach (var rect in elems)
             {
                 Point destPoint = new Point((int)Canvas.GetLeft(rect), (int)Canvas.GetTop(rect) + ElementSizeHelper.CELL_HEIGHT);
@@ -78,16 +92,26 @@ namespace GasStationModeling.modelling
             return destPointsDict;
         }
 
-        public static Dictionary<Rectangle, Point> defineDestPointsToFuelTanks(Canvas stationCanvas)
+        public Dictionary<Rectangle, Point> defineDestPointsToFuelTanks(CanvasParser parsedCanvas)
         {
             Dictionary<Rectangle, Point> destPointsDict = new Dictionary<Rectangle, Point>();
-            var elems = TopologyMapper.getTopologyElemsWithTypeOf(TopologyElement.Tank, stationCanvas);
+            var elems = parsedCanvas.Tanks;
+            defineServiceAreaEntrancePoint(elems[0]);
             foreach (var rect in elems)
             {
                 Point destPoint = new Point((int)Canvas.GetLeft(rect) + ElementSizeHelper.CELL_WIDTH, (int)Canvas.GetTop(rect));
                 destPointsDict.Add(rect, destPoint);
             }
             return destPointsDict;
+        }
+
+        public Rect createDestinationSpot(Point destpoint)
+        {
+            return new Rect(
+                destpoint.X,
+                destpoint.Y,
+                ElementSizeHelper.CELL_WIDTH / 2,
+                ElementSizeHelper.CELL_HEIGHT / 2);
         }
     }
 }

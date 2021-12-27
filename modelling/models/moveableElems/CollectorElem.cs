@@ -6,11 +6,9 @@ using System.Windows.Media;
 
 namespace GasStationModeling.modelling.pictureView
 {
-    class CollectorElem : MoveableElem
+    public class CollectorElem : MoveableElem
     {
-        Rect CollectorRect { get; set; }
-
-        public CollectorElem(Canvas canvas,
+        public CollectorElem(
             ImageBrush brush,
             Point location, 
             CollectorView collectorView)
@@ -19,9 +17,7 @@ namespace GasStationModeling.modelling.pictureView
             Height = ElementSizeHelper.CELL_WIDTH;
             Width = ElementSizeHelper.CELL_HEIGHT;
             Fill = brush;
-            CurrentLocation = location;
             IsGoingToFill = false;
-            canvas.Children.Add(this);
         }
     }
 }

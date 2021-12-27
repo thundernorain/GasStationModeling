@@ -1,11 +1,16 @@
 ﻿
+
+using GasStationModeling.modelling.models;
+using System.Windows.Shapes;
+
 namespace GasStationModeling.modelling.model
 {
-    class CollectorView
+    public class CollectorView : TopologyView
     {
-
         public double TakenCashCount { get; set; }
         public bool IsMovingToCashBox { get; set; }
+
+        public Rectangle CashBox { get; set; }
 
         public double CollectingCashSpeed { get; set; }
 
@@ -16,7 +21,7 @@ namespace GasStationModeling.modelling.model
             CollectingCashSpeed = cashCollectingSpeedSecond * tick / 1000;
         }
 
-        public CashBoxView GetCashFromCashBox(CashBoxView cashBox)
+        public CashBoxView GetCashFromCashBox(ref CashBoxView cashBox)
         {
             cashBox.CurrentCashCount -= CollectingCashSpeed;
             TakenCashCount += CollectingCashSpeed;

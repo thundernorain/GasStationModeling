@@ -28,6 +28,12 @@ namespace GasStationModeling.ViewModel
 
         public List<TankView> TankViews { get; set; }
 
+        public List<Car> Cars { get; set; }
+
+        public string CurrentFuelVolumeView = "22";
+
+        public string CurrentCashView = "11";
+
             
         #endregion 
 
@@ -38,8 +44,8 @@ namespace GasStationModeling.ViewModel
             CurrentTopology = mainViewModel.GetTopology;
             var db = DbInitializer.getInstance();
 
-            List<Car> cars = getCarsFromDB(db);
-            CarTableItems = ModellingScreenMapper.CreateCarTableItems(cars,Settings.Fuels);
+            Cars = getCarsFromDB(db);
+            CarTableItems = ModellingScreenMapper.CreateCarTableItems(Cars,Settings.Fuels);
             Fuels = ModellingScreenMapper.CreateFuelTableitems(Settings.Fuels);
         }
 
