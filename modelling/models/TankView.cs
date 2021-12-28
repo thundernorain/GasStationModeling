@@ -32,10 +32,12 @@ namespace GasStationModeling.modelling.model
         public TankView(int id,Tank tank)
         {
             Id = id;
-            MaxVolume = tank.MaxVolume;
+            MaxVolume = tank.LimitVolume;
+            //LimitVolume = tank.CriticalVolume;
             LimitVolume = tank.LimitVolume;
             TypeFuel = tank.TypeFuel;
-            CurrentFuelVolume = MaxVolume;
+            //CurrentFuelVolume = MaxVolume;
+            CurrentFuelVolume = 0;
         }
     }
 }

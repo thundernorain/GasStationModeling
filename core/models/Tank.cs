@@ -27,6 +27,14 @@ namespace GasStationModeling.core.models
 
         public double MaxVolume { get; set; }
 
+        public double CriticalVolume {
+            get
+            {
+                return MaxVolume * 0.1;
+            }
+
+        }
+
         public string Name { get; set; }
 
     }

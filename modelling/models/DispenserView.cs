@@ -35,8 +35,11 @@ namespace GasStationModeling.modelling.model
 
         public void refuelCar(ref TankView tankView,ref CarView car)
         {
-            tankView.CurrentFuelVolume -= car.CurrentFuelSupply / 2;
-            car.CurrentFuelVolume += car.CurrentFuelSupply/2;
+            if(tankView.CurrentFuelVolume > SpeedRefuelingPerTick)
+            {
+                tankView.CurrentFuelVolume -= car.CurrentFuelSupply / 2;
+                car.CurrentFuelVolume += car.CurrentFuelSupply / 2;
+            }         
         }
     }
 }

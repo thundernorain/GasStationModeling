@@ -25,7 +25,7 @@ namespace GasStationModeling.modelling.helpers
                 activeVehicle.Width,
                 activeVehicle.Height);
 
-            foreach (var elem in stationCanvas.Children.OfType<MoveableElem>())
+            /*foreach (var elem in stationCanvas.Children.OfType<MoveableElem>())
             {
                 if (elem == activeVehicle)
                 {
@@ -45,7 +45,7 @@ namespace GasStationModeling.modelling.helpers
                     continue;
                 }
 
-                /*var anotherVehicle = moveableElem;
+                var anotherVehicle = moveableElem;
 
                 switch (direction)
                 {
@@ -198,8 +198,8 @@ namespace GasStationModeling.modelling.helpers
                                 break;
                             }
                     }
-                }*/
-            }
+                }
+            }*/
 
             return activeVehicle.GetDestinationPoint();
         }

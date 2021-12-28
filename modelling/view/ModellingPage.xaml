@@ -47,12 +47,12 @@
                    TextAlignment="Center" 
                    Margin="21,0,298,496"
                    Text="Транспорт:" Width="96" Height="24" VerticalAlignment="Bottom"/>
-            <Border BorderBrush="Black" BorderThickness="10" HorizontalAlignment="Left" Height="179" Margin="21,285,0,0" VerticalAlignment="Top" Width="367">
+            <Border BorderBrush="Black" BorderThickness="10" HorizontalAlignment="Left" Height="179" Margin="21,285,0,0" VerticalAlignment="Top" Width="369">
                 <DataGrid x:Name="TransportGrid" 
                           HorizontalAlignment="Left" 
-                          Height="172" Margin="-7.6,-4.6,-66,-8.2" 
+                          Height="172" Margin="-8,-5,-68,-8" 
                           VerticalAlignment="Top"
-                          Width="364" 
+                          Width="366" 
                           IsReadOnly="true"
                           FontSize="{StaticResource Medium}"       
                           ItemsSource="{Binding CarTableItems}">

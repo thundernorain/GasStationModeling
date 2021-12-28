@@ -73,6 +73,7 @@ namespace GasStationModeling.modelling
                 default: break;
             }
             Point destPoint = new Point((int)Canvas.GetLeft(rect), (int)Canvas.GetTop(rect) + ElementSizeHelper.CELL_HEIGHT);
+            if(elementType.Equals(TopologyElement.Exit)) destPoint = new Point((int)Canvas.GetLeft(rect), (int)Canvas.GetTop(rect) + 2 * ElementSizeHelper.CELL_HEIGHT);
             return destPoint;
         }
 

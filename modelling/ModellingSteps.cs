@@ -122,12 +122,12 @@ namespace GasStationModeling.modelling
             toAdd.Add(refueller);
         }
 
-        public void StartRefilling(ref RefuellerElem refueller)
+        public void StartRefilling(RefuellerElem refueller)
         {
             refueller.IsFilling = true;
         }
 
-        public void RefillFuelTank(ref RefuellerElem refueller)
+        public void RefillFuelTank( RefuellerElem refueller)
         {
             var refuellerView = refueller.Tag as RefuellerView;
 
@@ -137,11 +137,11 @@ namespace GasStationModeling.modelling
 
             if (fillingFuelTank.CurrentFuelVolume >= fillingFuelTank.MaxVolume)
             {
-                StopRefilling(ref refueller);
+                StopRefilling( refueller);
             }
         }
 
-        private static void StopRefilling(ref RefuellerElem refueller)
+        private static void StopRefilling(RefuellerElem refueller)
         {
             var refuellerView = refueller.Tag as RefuellerView;
             refueller.IsFilling = false;
