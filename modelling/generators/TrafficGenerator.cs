@@ -48,16 +48,20 @@ namespace GasStationModeling.modelling
             return carElem;
         }
 
-        public CollectorElem SpawnCollector(ref Canvas stCanvas)
+        public CollectorElem SpawnCollector()
         {
             var elem =  MoveableElemGenerator.createCollectorElem(
                 ModellingTimeHelper.TIMER_TICK_MILLISECONDS,
                 settings.CashLimit / settings.CollectingTimeSec,
                 destPointHelper.SpawnPoint);
+            elem.AddDestinationPoint(destPointHelper.LeavePointFilled);
+            elem.AddDestinationPoint(destPointHelper.ExitPoint);
+            elem.AddDestinationPoint(destPointHelper.CashBoxPoint);
+            elem.AddDestinationPoint(destPointHelper.EntrancePoint);
             return elem;
         }
 
-        public RefuellerElem SpawnRefueller(Rectangle fuelTank, ref Canvas stCanvas)
+        public RefuellerElem SpawnRefueller(Rectangle fuelTank)
         {
             var elem = MoveableElemGenerator.createRefuellerElem(
                 fuelTank,

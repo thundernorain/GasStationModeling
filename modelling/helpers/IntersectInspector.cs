@@ -25,7 +25,7 @@ namespace GasStationModeling.modelling.helpers
                 activeVehicle.Width,
                 activeVehicle.Height);
 
-            /*foreach (var elem in stationCanvas.Children.OfType<MoveableElem>())
+            foreach (var elem in stationCanvas.Children.OfType<MoveableElem>())
             {
                 if (elem == activeVehicle)
                 {
@@ -199,7 +199,7 @@ namespace GasStationModeling.modelling.helpers
                             }
                     }
                 }
-            }*/
+            }
 
             return activeVehicle.GetDestinationPoint();
         }
@@ -211,7 +211,7 @@ namespace GasStationModeling.modelling.helpers
 
         public double right(UIElement element)
         {
-            return stationCanvas.Width - (Canvas.GetLeft(element) + ElementSizeHelper.CELL_WIDTH);
+            return Canvas.GetLeft(element) + ElementSizeHelper.CELL_WIDTH;
         }
 
         public double top(UIElement element)
@@ -221,7 +221,7 @@ namespace GasStationModeling.modelling.helpers
 
         public double bottom(UIElement element)
         {
-            return stationCanvas.Height - (Canvas.GetTop(element) + ElementSizeHelper.CELL_WIDTH);
+            return Canvas.GetTop(element) + ElementSizeHelper.CELL_WIDTH;
         }
     }
 

@@ -57,8 +57,9 @@ namespace GasStationModeling.modelling.helpers
                     return stationCanvas;
                 }
 
-                if (vehicle is CollectorElem collector)
+                if (vehicle.Type.Equals("Collector"))
                 {
+                    var collector = vehicle as CollectorElem;
                     var cashCounter = collectorView.CashBox.Tag as CashBoxView;
                     modellingSteps.CollectCash(ref collector, ref cashCounter);
                     return stationCanvas;
@@ -106,11 +107,14 @@ namespace GasStationModeling.modelling.helpers
                     }
                 }
 
-                if (vehicle is CollectorElem collector)
+                if (vehicle.Type.Equals("Collector"))
                 {
                     if (destPoint.Equals(DpHelper.CashBoxPoint))
                     {
-                        var cashBoxView = collectorView.CashBox.Tag as CashBoxView;
+                        var collector = vehicle as CollectorElem;
+                        collector.IsFilling = true;
+                        var cashBoxView = canvasElems.CashBox.Tag as CashBoxView;
+                        collectorView.IsMovingToCashBox = true;
                         modellingSteps.CollectCash(ref collector,ref cashBoxView);
                         return stationCanvas;
                     }

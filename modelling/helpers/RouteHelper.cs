@@ -37,7 +37,7 @@ namespace GasStationModeling.modelling.helpers
                 carView = vehicle.Tag as CarView;
             }
 
-            if (vehicle is CollectorElem)
+            if (vehicle.Type.Equals("Collector"))
             {
                 collectorView = vehicle.Tag as CollectorView;
             }
@@ -60,8 +60,9 @@ namespace GasStationModeling.modelling.helpers
                 }
             }
 
-            if (vehicle is CollectorElem collector)
+            if (vehicle.Type.Equals("Collector"))
             {
+                var collector = vehicle as CollectorElem;
                 if (isOnStation && !collectorView.IsMovingToCashBox)
                 {
                    MoveCollectorToCashCounter(collector);
@@ -163,7 +164,7 @@ namespace GasStationModeling.modelling.helpers
         private void LeaveServiceArea(ref RefuellerElem refueller)
         {
             refueller.AddDestinationPoint(DpHelper.LeavePointNoFilling);
-            refueller.AddDestinationPoint(DpHelper.ServiceAreaEntrancePoint);
+            //refueller.AddDestinationPoint(DpHelper.ServiceAreaEntrancePoint);
         }
     }
 }

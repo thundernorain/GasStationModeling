@@ -77,7 +77,6 @@ namespace GasStationModeling.ViewModel
                 var db = DbInitializer.getInstance();
 
                 Cars = getCarsFromDB(db);
-                CarTableItems = ModellingScreenMapper.CreateCarTableItems(Cars, Settings.Fuels);
                 Fuels = ModellingScreenMapper.CreateFuelTableitems(Settings.Fuels);
             }
             catch(DbErrorException e)
