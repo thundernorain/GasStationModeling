@@ -25,6 +25,7 @@
 
             </TextBlock>
             <TextBox x:Name="DispenserNameTB" 
+                     FontSize="{StaticResource Medium}"
                 Width="200"
                 Height="30"
                 Margin="150,10,0,0">
@@ -41,6 +42,7 @@
 
             </TextBlock>
             <TextBox x:Name="DispenserSpeedTB" 
+                     FontSize="{StaticResource Medium}"
                 Width="200"
                 Height="30"
                 Margin="50,10,0,0"
