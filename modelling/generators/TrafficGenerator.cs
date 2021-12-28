@@ -43,7 +43,8 @@ namespace GasStationModeling.modelling
             stCanvas.Children.Add(carElem);
 
             Canvas.SetLeft(carElem, destPointHelper.SpawnPoint.X);
-            Canvas.SetLeft(carElem, destPointHelper.SpawnPoint.Y);
+            Canvas.SetTop(carElem, destPointHelper.SpawnPoint.Y);
+
             return carElem;
         }
 

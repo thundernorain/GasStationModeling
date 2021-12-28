@@ -38,7 +38,7 @@ namespace GasStationModeling.modelling.view
 
             timer = new DispatcherTimer();
             timeHelper = new ModellingTimeHelper(timer);
-           
+
 
             engine = new ModellingEngine(
                 timeHelper,              
@@ -52,7 +52,7 @@ namespace GasStationModeling.modelling.view
 
         public void setUpTimer()
         {
-            timer.Interval = TimeSpan.FromMilliseconds(ModellingTimeHelper.TIMER_TICK_MILLISECONDS * 100);
+            timer.Interval = TimeSpan.FromMilliseconds(ModellingTimeHelper.TIMER_TICK_MILLISECONDS);
             timer.Tick += ModellingProcess;
         }
 

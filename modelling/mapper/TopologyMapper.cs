@@ -69,6 +69,9 @@ namespace GasStationModeling.modelling.mapper
                     ImageBrush brush = new ImageBrush();
                     var elemImage = Topology.GetCellImageModelling(i, j);
                     brush.ImageSource = elemImage;
+                    brush.TileMode = TileMode.Tile;
+                    // set the bg view port unit
+                    brush.ViewportUnits = BrushMappingMode.RelativeToBoundingBox;
                     Rectangle topologyElem = createTopologyElem(Topology.TopologyElements[i, j], brush,ref parsedCanvas);
                     Canvas.SetLeft(topologyElem, ElementSizeHelper.CELL_WIDTH * j);
                     Canvas.SetTop(topologyElem, ElementSizeHelper.CELL_HEIGHT * i);
@@ -83,6 +86,9 @@ namespace GasStationModeling.modelling.mapper
                     ImageBrush brush = new ImageBrush();
                     var roadImage = Application.Current.TryFindResource("Road") as BitmapImage;
                     brush.ImageSource = roadImage;
+                    brush.TileMode = TileMode.Tile;
+                    // set the bg view port unit
+                    brush.ViewportUnits = BrushMappingMode.RelativeToBoundingBox;
                     Rectangle topologyElem = createTopologyElem(TopologyElement.Road, brush);
                     Canvas.SetLeft(topologyElem, ElementSizeHelper.CELL_WIDTH * j);
                     Canvas.SetTop(topologyElem, ElementSizeHelper.CELL_HEIGHT * i);
