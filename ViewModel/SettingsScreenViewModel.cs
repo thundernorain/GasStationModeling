@@ -7,6 +7,7 @@ using GasStationModeling.exceptions;
 using GasStationModeling.settings_screen.mapper;
 using GasStationModeling.settings_screen.model;
 using MongoDB.Driver;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -23,6 +24,10 @@ namespace GasStationModeling.ViewModel
 
         private string _selectedFuelDispenser;
         private List<FuelDispenserComboBoxItem> _fuelDispensers = new List<FuelDispenserComboBoxItem>();
+
+        private double carInterval = 5;
+        private double carProbability = 0;
+        private double cashBoxCapacity = 10_000;
         #endregion
 
         #region DbData
@@ -92,6 +97,57 @@ namespace GasStationModeling.ViewModel
                 _fuelDispensers = value;
                 RaisePropertyChanged(() => FuelDispensers);
             }
+        }
+
+        public double CarInterval
+        {
+            get => carInterval;
+            set
+            {
+                carInterval = value;
+
+                RaisePropertyChanged(() => CarInterval);
+                RaisePropertyChanged(() => CarIntervalFormated);
+            }
+        }
+
+        public string CarIntervalFormated
+        {
+            get => ((int)carInterval).ToString();
+        }
+
+        public double CarProbability
+        {
+            get => carProbability;
+            set
+            {
+                carProbability = value;
+
+                RaisePropertyChanged(() => CarProbability);
+                RaisePropertyChanged(() => CarProbabilityFormated);
+            }
+        }
+
+        public string CarProbabilityFormated
+        {
+            get => String.Format("{0:0.##}", carProbability);
+        }
+
+        public double CashBoxCapacity
+        {
+            get => cashBoxCapacity;
+            set
+            {
+                cashBoxCapacity = value;
+
+                RaisePropertyChanged(() => CashBoxCapacity);
+                RaisePropertyChanged(() => CashBoxCapacityFormated);
+            }
+        }
+
+        public string CashBoxCapacityFormated
+        {
+            get => ((int)cashBoxCapacity).ToString();
         }
         #endregion
 

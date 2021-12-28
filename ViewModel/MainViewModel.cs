@@ -29,11 +29,11 @@ namespace GasStationModeling.ViewModel
         public const string TOPOLOGY_SCREEN_URI = "/../topology/view/TopologyScreen.xaml";
         public const string MODELLING_SCREEN_URI = "/../modelling/view/ModellingPage.xaml";
 
-        public ModellingSettings ModellingSettings { get; set; }
         public int FuelTanksCount { get; set; }
         private Uri currentPageUri;
         private Brush[] pageIndicatorBrushes;
         private Topology topology;
+        private ModellingSettings modellingSettings;
        
         public Uri CurrentPageUri
         {
@@ -52,6 +52,15 @@ namespace GasStationModeling.ViewModel
                 SetIndicatorBrushesActive(value);
 
                 RaisePropertyChanged(() => CurrentPageUri);
+            }
+        }
+
+        public ModellingSettings ModellingSettings {
+            get => modellingSettings;
+            set
+            {
+                modellingSettings = value;
+                RaisePropertyChanged(() => ModellingSettings);
             }
         }
 
