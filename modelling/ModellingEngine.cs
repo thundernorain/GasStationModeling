@@ -10,6 +10,7 @@ using GasStationModeling.settings_screen.model;
 using GasStationModeling.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -169,29 +170,26 @@ namespace GasStationModeling.modelling
             var viewModel = ServiceLocator.Current.GetInstance<ModellingScreenViewModel>();
             if (viewModel == null) return;
 
-            var carsInTable = viewModel.CarTableItems;
+            var carsInTable = new LinkedList<CarTableItem>();
 
             foreach (var elem in stationCanvas.Children.OfType<MoveableElem>())
             {
                 if (elem.Tag is CarView car) {
-                    foreach (var carInTable in carsInTable)
+                    if (car.FuelDispenserChosen)
                     {
-                        if (carInTable.Id == car.Id)
-                        {
-                            if (car.FuelDispenserChosen)
-                            {
-                                carInTable.ChosenTRK = (car.ChosenDispenser.Tag as DispenserView).Name;
-                            }
-                            else
-                            {
-                                carInTable.ChosenTRK = "-";
-                            }
-                        }
+                        var carToAdd = new CarTableItem();
+                        carToAdd.TRK = (car.ChosenDispenser.Tag as DispenserView).Id.ToString();
+                        carToAdd.Id = car.Id;
+                        carToAdd.Name = car.Model;
+                        carToAdd.Volume = (int)car.CurrentFuelSupply;
+                        carToAdd.Price = (int)car.SpendForFuel;
+
+                        carsInTable.AddFirst(carToAdd);
                     }
                 }
             }
 
-            viewModel.CarTableItems = carsInTable;
+            viewModel.CarTableItems = new ObservableCollection<CarTableItem>(carsInTable);
         }
 
         private void UpdateFuelTankInfo()

@@ -47,12 +47,12 @@
                    TextAlignment="Center" 
                    Margin="21,0,298,496"
                    Text="Транспорт:" Width="96" Height="24" VerticalAlignment="Bottom"/>
-            <Border BorderBrush="Black" BorderThickness="10" HorizontalAlignment="Left" Height="179" Margin="21,285,0,0" VerticalAlignment="Top" Width="310">
+            <Border BorderBrush="Black" BorderThickness="10" HorizontalAlignment="Left" Height="179" Margin="21,285,0,0" VerticalAlignment="Top" Width="367">
                 <DataGrid x:Name="TransportGrid" 
                           HorizontalAlignment="Left" 
-                          Height="172" Margin="-8,-5,-120,-8" 
+                          Height="172" Margin="-7.6,-4.6,-66,-8.2" 
                           VerticalAlignment="Top"
-                          Width="304" 
+                          Width="364" 
                           IsReadOnly="true"
                           FontSize="{StaticResource Medium}"       
                           ItemsSource="{Binding CarTableItems}">
@@ -63,20 +63,20 @@
             </Border>
 
             <TextBlock x:Name="CashCountInfo" Style="{StaticResource BaseText}" 
-                   FontSize="{StaticResource Medium}" 
+                   FontSize="{StaticResource Small}" 
                    HorizontalAlignment="Center" 
                    TextAlignment="Left" 
-                   Margin="24,0,6,269"
+                   Margin="2,0,0,269"
                    Text="{Binding CurrentCashView}"
-                   Width="380" Height="24" VerticalAlignment="Bottom"/>
+                   Width="395" Height="24" VerticalAlignment="Bottom"/>
 
             <TextBlock x:Name="FuelCountInfo" Style="{StaticResource BaseText}" 
                    FontSize="{StaticResource Small}" 
                    HorizontalAlignment="Center" 
                    TextAlignment="Left" 
-                   Margin="24,0,4,110"
+                   Margin="2,0,0,110"
                    Text="{Binding CurrentFuelVolumeView}"
-                   Width="380" Height="140" VerticalAlignment="Bottom"/>
+                   Width="395" Height="140" VerticalAlignment="Bottom"/>
 
             <Button x:Name="GoBackButton" Style="{StaticResource AquaButton}" Content="Назад" Margin="26,675,213,45" Click="Button_Click"/>
 

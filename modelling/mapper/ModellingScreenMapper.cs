@@ -24,7 +24,7 @@ namespace GasStationModeling.modelling.mapper
                         Name = car.Model,
                         Volume = car.CurrentFuelSupply,
                         Price = price,
-                        ChosenTRK = "-"
+                        TRK = "-"
                     });
                 }         
             });
