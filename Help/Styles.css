@@ -1,0 +1,62 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html{
+    font-size: 18px;
+}
+
+.container {
+    margin: 30px 200px;
+}
+
+.title{
+    font-size: 2rem;
+    text-align: center;
+}
+
+.subtitle{
+    color:blue;
+    font-size: 1.5rem;
+    margin: 10px 0;
+}
+
+.link{
+    display: inline-block;
+    color: rgb(44, 102, 211);
+    font-size: 1rem;
+    margin: 10px 0px;
+}
+
+.link:hover{
+    color:blue;
+}
+
+.subUl{
+    margin-left: 50px;
+}
+
+#scroll-top{
+    background-image: url(./premium-icon-up-arrrows-5245623.png);
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    cursor: pointer;
+}
+
+.h3{
+    color:blue;
+    margin: 10px 0;
+}
+
+#AZS{
+    color:blue;
+}
+
+img{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
