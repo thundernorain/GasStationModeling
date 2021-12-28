@@ -15,14 +15,14 @@
                    FontSize="{StaticResource H1}" 
                    HorizontalAlignment="Center" 
                    TextAlignment="Center"              
-                   Text="Информационное табло" Width="322" Margin="48,0,47,740"/>
+                   Text="Информационное табло" Width="326" Margin="48,0,45,740"/>
 
             <TextBlock Style="{StaticResource BaseText}" 
                    FontSize="{StaticResource Medium}" 
                    HorizontalAlignment="Center" 
                    TextAlignment="Center" 
   
-                   Text="Бензин:" Width="64" Height="25" VerticalAlignment="Bottom" Margin="24,0,327,705"/>
+                   Text="Бензин:" Width="64" Height="25" VerticalAlignment="Bottom" Margin="24,0,320,705"/>
             <Border BorderBrush="Black" BorderThickness="10" HorizontalAlignment="Left" Height="157" Margin="19,73,0,0" VerticalAlignment="Top" Width="192"/>
             <DataGrid 
                 x:Name="FuelGrid" 
@@ -45,7 +45,7 @@
                    FontSize="{StaticResource Medium}" 
                    HorizontalAlignment="Center" 
                    TextAlignment="Center" 
-                   Margin="21,0,302,496"
+                   Margin="21,0,298,496"
                    Text="Транспорт:" Width="96" Height="24" VerticalAlignment="Bottom"/>
             <Border BorderBrush="Black" BorderThickness="10" HorizontalAlignment="Left" Height="179" Margin="21,285,0,0" VerticalAlignment="Top" Width="310">
                 <DataGrid x:Name="TransportGrid" 
@@ -66,17 +66,17 @@
                    FontSize="{StaticResource Medium}" 
                    HorizontalAlignment="Center" 
                    TextAlignment="Left" 
-                   Margin="24,0,17,269"
+                   Margin="24,0,6,269"
                    Text="{Binding CurrentCashView}"
-                   Width="378" Height="24" VerticalAlignment="Bottom"/>
+                   Width="380" Height="24" VerticalAlignment="Bottom"/>
 
             <TextBlock x:Name="FuelCountInfo" Style="{StaticResource BaseText}" 
                    FontSize="{StaticResource Small}" 
                    HorizontalAlignment="Center" 
                    TextAlignment="Left" 
-                   Margin="24,0,17,110"
+                   Margin="24,0,4,110"
                    Text="{Binding CurrentFuelVolumeView}"
-                   Width="378" Height="140" VerticalAlignment="Bottom"/>
+                   Width="380" Height="140" VerticalAlignment="Bottom"/>
 
             <Button x:Name="GoBackButton" Style="{StaticResource AquaButton}" Content="Назад" Margin="26,675,213,45" Click="Button_Click"/>
 
