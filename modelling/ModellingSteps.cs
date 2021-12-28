@@ -50,8 +50,11 @@ namespace GasStationModeling.modelling
             var cashBoxView = CashBox.Tag as CashBoxView;
 
             carView.PayForFuel(ref cashBoxView, tankView.TypeFuel.Price);
-
-            dispenserView.refuelCar(ref tankView, ref carView);
+            if(tankView.CurrentFuelVolume > 0)
+            {
+                dispenserView.refuelCar(ref tankView, ref carView);
+            }
+            
             if (tankView.IsRunOut && !_isRefilling)
             {
                 CallRefueller(tankWithFuelType, ref toAdd);
@@ -87,9 +90,8 @@ namespace GasStationModeling.modelling
 
         public void CallCollector(ref List<MoveableElem> toAdd)
         {
-            var collector = trafficGenerator.SpawnCollector(ref stationCanvas);
+            var collector = trafficGenerator.SpawnCollector();
             toAdd.Add(collector);
-
         }
 
         public void CollectCash(ref CollectorElem collector, ref CashBoxView cashBox)
@@ -118,16 +120,16 @@ namespace GasStationModeling.modelling
 
         public void CallRefueller(Rectangle fuelTank,ref List<MoveableElem> toAdd)
         {
-            var refueller = trafficGenerator.SpawnRefueller(fuelTank, ref stationCanvas);
+            var refueller = trafficGenerator.SpawnRefueller(fuelTank);
             toAdd.Add(refueller);
         }
 
-        public void StartRefilling(ref RefuellerElem refueller)
+        public void StartRefilling(RefuellerElem refueller)
         {
             refueller.IsFilling = true;
         }
 
-        public void RefillFuelTank(ref RefuellerElem refueller)
+        public void RefillFuelTank( RefuellerElem refueller)
         {
             var refuellerView = refueller.Tag as RefuellerView;
 
@@ -137,11 +139,11 @@ namespace GasStationModeling.modelling
 
             if (fillingFuelTank.CurrentFuelVolume >= fillingFuelTank.MaxVolume)
             {
-                StopRefilling(ref refueller);
+                StopRefilling( refueller);
             }
         }
 
-        private static void StopRefilling(ref RefuellerElem refueller)
+        private static void StopRefilling(RefuellerElem refueller)
         {
             var refuellerView = refueller.Tag as RefuellerView;
             refueller.IsFilling = false;

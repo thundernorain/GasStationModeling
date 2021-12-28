@@ -10,6 +10,8 @@ namespace GasStationModeling.modelling.model
 
         public Rectangle ChosenTank { get; set; }
 
+        public double FuelAmount { get; set; }
+
         public TankView TankData
         {
             get
@@ -26,6 +28,11 @@ namespace GasStationModeling.modelling.model
         public void refillFuelTank()
         {
             TankData.CurrentFuelVolume += SpeedRefueling;
+            FuelAmount -= SpeedRefueling;
+            if (TankData.CurrentFuelVolume > TankData.MaxVolume && FuelAmount > 0)
+            {
+                TankData.CurrentFuelVolume = TankData.MaxVolume;
+            }
         }
     }
 }

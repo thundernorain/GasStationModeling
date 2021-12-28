@@ -37,7 +37,7 @@ namespace GasStationModeling.modelling.helpers
                 carView = vehicle.Tag as CarView;
             }
 
-            if (vehicle is CollectorElem)
+            if (vehicle.Type.Equals("Collector"))
             {
                 collectorView = vehicle.Tag as CollectorView;
             }
@@ -60,11 +60,12 @@ namespace GasStationModeling.modelling.helpers
                 }
             }
 
-            if (vehicle is CollectorElem collector)
+            if (vehicle.Type.Equals("Collector"))
             {
+                var collector = vehicle as CollectorElem;
                 if (isOnStation && !collectorView.IsMovingToCashBox)
                 {
-                   MoveCollectorToCashCounter(ref collector);
+                   MoveCollectorToCashCounter(collector);
                 }
             }
 
@@ -106,34 +107,12 @@ namespace GasStationModeling.modelling.helpers
             return car;
         }
 
-        public int getBottom(UIElement element)
-        {
-            return (int)Canvas.GetTop(element) + ElementSizeHelper.CELL_HEIGHT;
-        }
-
-        public int getRight(UIElement element)
-        {
-            return (int)Canvas.GetLeft(element) + ElementSizeHelper.CELL_WIDTH;
-        }
-
-        private CollectorElem MoveCollectorToCashCounter(ref CollectorElem collector)
+        private CollectorElem MoveCollectorToCashCounter(CollectorElem collector)
         {
             var collectorView = collector.Tag as CollectorView;
             var cashCounter = canvasElems.CashBox;
 
             collectorView.IsMovingToCashBox = true;
-
-            var destPointX = (int)Canvas.GetLeft(cashCounter) - ElementSizeHelper.CELL_WIDTH + 5;
-            var destPointY = (int)Canvas.GetBottom(cashCounter) + ElementSizeHelper.CELL_WIDTH - 10;
-            collector.AddDestinationPoint(new Point(destPointX, destPointY));
-
-            destPointX = (int)Canvas.GetLeft(cashCounter) + DpHelper.FuelingPointDeltaX;
-            destPointY = (int)Canvas.GetBottom(cashCounter) + DpHelper.FuelingPointDeltaY;
-            collector.AddDestinationPoint(new Point(destPointX, destPointY));
-
-            destPointX = (int)Canvas.GetRight(cashCounter) - ElementSizeHelper.CELL_WIDTH/2;
-            destPointY += ElementSizeHelper.CELL_HEIGHT + 5;
-            collector.AddDestinationPoint(new Point(destPointX, destPointY));
 
             collector.AddDestinationPoint(DpHelper.CashBoxPoint);
 
@@ -150,10 +129,9 @@ namespace GasStationModeling.modelling.helpers
             var fillingFinishedPoint = vehicle.GetDestinationPoint();
             vehicle.removeDestinationPoints();
 
-            vehicle.AddDestinationPoint(DpHelper.ExitPoint);
             vehicle.AddDestinationPoint(DpHelper.LeavePointFilled);
-  
-            vehicle.AddDestinationPoint(fillingFinishedPoint);
+            vehicle.AddDestinationPoint(DpHelper.ExitPoint);
+
         }
 
         public void RouteRefueller(ref RefuellerElem refueller)
@@ -186,7 +164,7 @@ namespace GasStationModeling.modelling.helpers
         private void LeaveServiceArea(ref RefuellerElem refueller)
         {
             refueller.AddDestinationPoint(DpHelper.LeavePointNoFilling);
-            refueller.AddDestinationPoint(DpHelper.ServiceAreaEntrancePoint);
+            //refueller.AddDestinationPoint(DpHelper.ServiceAreaEntrancePoint);
         }
     }
 }

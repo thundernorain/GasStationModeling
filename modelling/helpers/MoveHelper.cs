@@ -57,8 +57,9 @@ namespace GasStationModeling.modelling.helpers
                     return stationCanvas;
                 }
 
-                if (vehicle is CollectorElem collector)
+                if (vehicle.Type.Equals("Collector"))
                 {
+                    var collector = vehicle as CollectorElem;
                     var cashCounter = collectorView.CashBox.Tag as CashBoxView;
                     modellingSteps.CollectCash(ref collector, ref cashCounter);
                     return stationCanvas;
@@ -73,8 +74,8 @@ namespace GasStationModeling.modelling.helpers
             destPoint = MoveCar(vehicle, destPoint, carSpeed);
 
   
-                destSpot = DpHelper.createDestinationSpot(destPoint);
-                vehicle.DestinationSpot = destSpot;
+            destSpot = DpHelper.createDestinationSpot(destPoint);
+           vehicle.DestinationSpot = destSpot;
             
            
             var vehicleRect = vehicle.createIntersectRect();
@@ -106,11 +107,14 @@ namespace GasStationModeling.modelling.helpers
                     }
                 }
 
-                if (vehicle is CollectorElem collector)
+                if (vehicle.Type.Equals("Collector"))
                 {
                     if (destPoint.Equals(DpHelper.CashBoxPoint))
                     {
-                        var cashBoxView = collectorView.CashBox.Tag as CashBoxView;
+                        var collector = vehicle as CollectorElem;
+                        collector.IsFilling = true;
+                        var cashBoxView = canvasElems.CashBox.Tag as CashBoxView;
+                        collectorView.IsMovingToCashBox = true;
                         modellingSteps.CollectCash(ref collector,ref cashBoxView);
                         return stationCanvas;
                     }
@@ -151,7 +155,7 @@ namespace GasStationModeling.modelling.helpers
                     }
 
                     // Go Down
-                    if (Canvas.GetBottom(car) <= destPoint.Y && !isHorizontalMoving)
+                    if (bottom(car) <= destPoint.Y && !isHorizontalMoving)
                     {
                         carTop = top(car);
                         Canvas.SetTop(car, carTop + carSpeed);
@@ -168,7 +172,7 @@ namespace GasStationModeling.modelling.helpers
                     }
 
                     // Go Right
-                    if (Canvas.GetRight(car) <= destPoint.X && !isVerticalMoving)
+                    if (right(car) <= destPoint.X && !isVerticalMoving)
                     {
                         carLeft = left(car);
                         Canvas.SetLeft(car, carLeft + carSpeed);
@@ -186,7 +190,7 @@ namespace GasStationModeling.modelling.helpers
                     }
 
                     // Go Right
-                    if (Canvas.GetRight(car) <= destPoint.X)
+                    if (right(car) <= destPoint.X)
                     {
                         carLeft = left(car);
                         Canvas.SetLeft(car, carLeft + carSpeed);
@@ -202,7 +206,7 @@ namespace GasStationModeling.modelling.helpers
                     }
 
                     // Go Down
-                    if (Canvas.GetBottom(car) <= destPoint.Y && !isHorizontalMoving)
+                    if (bottom(car) <= destPoint.Y && !isHorizontalMoving)
                     {
                         carTop = top(car);
                         Canvas.SetTop(car, carTop + carSpeed);
@@ -221,7 +225,7 @@ namespace GasStationModeling.modelling.helpers
                 }
 
                 // Go Right
-                if (Canvas.GetRight(car) <= destPoint.X)
+                if (right(car)<= destPoint.X)
                 {
                     carLeft = left(car);
                     Canvas.SetLeft(car, carLeft + carSpeed);
@@ -236,7 +240,7 @@ namespace GasStationModeling.modelling.helpers
                 }
 
                 // Go Down
-                if (Canvas.GetBottom(car) <= destPoint.Y)
+                if (bottom(car) <= destPoint.Y)
                 {
                     carTop = top(car);
                     Canvas.SetTop(car, carTop + carSpeed);
@@ -252,7 +256,7 @@ namespace GasStationModeling.modelling.helpers
             
             if (refueller.IsFilling)
             {
-                modellingSteps.RefillFuelTank(ref refueller);
+                modellingSteps.RefillFuelTank(refueller);
                 return;
             }
 
@@ -263,10 +267,9 @@ namespace GasStationModeling.modelling.helpers
 
             destPoint = MoveRefueller(refueller, destPoint, RefuellerSpeed);
 
-            if(refueller.SpotIsNull)
-            {
-                destSpot = DpHelper.createDestinationSpot(destPoint);
-            }
+      
+            destSpot = DpHelper.createDestinationSpot(destPoint);
+       
             
             var refuellerRect = refueller.createIntersectRect();
 
@@ -280,7 +283,7 @@ namespace GasStationModeling.modelling.helpers
 
                 if (destPoint.Equals(pointOfFilling))
                 {
-                    modellingSteps.StartRefilling(ref refueller);
+                    modellingSteps.StartRefilling(refueller);
                 }
 
                 if (destPoint.Equals(DpHelper.LeavePointNoFilling))
@@ -330,6 +333,17 @@ namespace GasStationModeling.modelling.helpers
         private double top(UIElement element)
         {
             return Canvas.GetTop(element);
+        }
+
+
+        private double right(UIElement element)
+        {
+            return Canvas.GetLeft(element) + ElementSizeHelper.CELL_WIDTH;
+        }
+
+        private double bottom(UIElement element)
+        {
+            return Canvas.GetTop(element) + ElementSizeHelper.CELL_HEIGHT;
         }
     }
 }

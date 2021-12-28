@@ -1,10 +1,14 @@
 ﻿using CommonServiceLocator;
+using GasStationModeling.add_forms;
+using GasStationModeling.core.models;
 using GasStationModeling.modelling.helpers;
 using GasStationModeling.modelling.managers;
 using GasStationModeling.modelling.mapper;
 using GasStationModeling.settings_screen.model;
 using GasStationModeling.ViewModel;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -30,24 +34,36 @@ namespace GasStationModeling.modelling.view
         {
             InitializeComponent();
 
+            try
+            {
+                mscViewModel = ServiceLocator.Current.GetInstance<ModellingScreenViewModel>();
+                TopologyMapper mapper = new TopologyMapper(mscViewModel.Settings, mscViewModel.CurrentTopology);
+                parsedCanvas = mapper.mapTopology(StationCanvas);
+                StationCanvas = parsedCanvas.StationCanvas;
 
-            mscViewModel = ServiceLocator.Current.GetInstance<ModellingScreenViewModel>();
-            TopologyMapper mapper = new TopologyMapper(mscViewModel.Settings, mscViewModel.CurrentTopology);
-            parsedCanvas = mapper.mapTopology(StationCanvas);
-            StationCanvas = parsedCanvas.StationCanvas;
+                timer = new DispatcherTimer();
+                timeHelper = new ModellingTimeHelper(timer);
 
-            timer = new DispatcherTimer();
-            timeHelper = new ModellingTimeHelper(timer);
+                var cars = filterCarList(mscViewModel.Cars,mscViewModel.Settings);
+                engine = new ModellingEngine(
+                    timeHelper,
+                    mscViewModel.Settings,
+                    parsedCanvas,
+                    cars);
 
+                setUpTimer();
+            }
+            catch(Exception ex)
+            {
+                ErrorMessageBoxShower.show(ex.Message);
+            }       
+        }
 
-            engine = new ModellingEngine(
-                timeHelper,              
-                mscViewModel.Settings,
-                parsedCanvas,
-                mscViewModel.Cars);
-
-            setUpTimer();
-            
+        public List<Car> filterCarList(List<Car> cars,ModellingSettings settings)
+        {
+            var carsFiltered = cars.Where(car => settings.Fuels.Exists(fuel => fuel.Name == car.TypeFuel)).ToList();
+            if (carsFiltered == null || carsFiltered.Count == 0) throw new Exception("Обновите БД, моделей машин с таким топливом нет");
+            return carsFiltered;
         }
 
         public void setUpTimer()

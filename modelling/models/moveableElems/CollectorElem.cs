@@ -8,6 +8,7 @@ namespace GasStationModeling.modelling.pictureView
 {
     public class CollectorElem : MoveableElem
     {
+        public bool Start { get; set; }
         public CollectorElem(
             ImageBrush brush,
             Point location, 
@@ -18,6 +19,8 @@ namespace GasStationModeling.modelling.pictureView
             Width = ElementSizeHelper.CELL_HEIGHT;
             Fill = brush;
             IsGoingToFill = false;
+            Type = "Collector";
+            Start = false;
         }
     }
 }

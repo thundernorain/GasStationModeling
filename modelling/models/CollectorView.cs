@@ -17,7 +17,6 @@ namespace GasStationModeling.modelling.model
         public CollectorView(double tick, double cashCollectingSpeedSecond)
         {
             TakenCashCount = 0;
-            IsMovingToCashBox = true;
             CollectingCashSpeed = cashCollectingSpeedSecond * tick / 1000;
         }
 

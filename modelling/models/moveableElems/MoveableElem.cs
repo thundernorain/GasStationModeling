@@ -29,12 +29,12 @@ namespace GasStationModeling.modelling.pictureView
 
         public Rect EmptyRect {get;} = new Rect();
 
+        public string Type { get; set; } = "";
 
         public MoveableElem()
         {
             destinationPoints = new List<System.Windows.Point>();
             DestinationSpot = EmptyRect;
-            Canvas.SetZIndex(this, 1);
         }
 
         public void AddDestinationPoint(System.Windows.Point destPoint)

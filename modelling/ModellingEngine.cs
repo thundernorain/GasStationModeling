@@ -53,16 +53,9 @@ namespace GasStationModeling.modelling
             trafficGenerator = new TrafficGenerator(settings,dpHelper);
             mover = new MoveHelper(parsedCanvas, settings, dpHelper);
             this.canvasParser = parsedCanvas;
-            this.cars = filterCarList(cars);
+            this.cars = cars;
         }
-
-
-        public List<Car> filterCarList(List<Car> cars)
-        {
-
-            return cars.Where(car => settings.Fuels.Exists(fuel => fuel.Name == car.TypeFuel)).ToList();
-           
-        }
+  
 
         public Canvas Tick(bool IsPaused)
         {
@@ -110,7 +103,7 @@ namespace GasStationModeling.modelling
                 {
                     moveableElem =  router.RouteVehicle(moveableElem);
 
-                    stationCanvas = mover.MoveCarToDestination(moveableElem,ref toDelete, ref toAdd);
+                    stationCanvas = mover.MoveCarToDestination( moveableElem,ref toDelete, ref toAdd);
 
                     continue;
                 }
