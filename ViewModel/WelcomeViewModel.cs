@@ -1,9 +1,11 @@
 ﻿using CommonServiceLocator;
 using GalaSoft.MvvmLight;
+using GasStationModeling.add_forms;
 using GasStationModeling.core.DB;
 using GasStationModeling.core.DB.dto;
 using GasStationModeling.core.models;
 using GasStationModeling.DB;
+using GasStationModeling.exceptions;
 using GasStationModeling.main_window.view;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
@@ -47,8 +49,15 @@ namespace GasStationModeling.ViewModel
 
         public WelcomeViewModel()
         {
-            var db = DbInitializer.getInstance();
-            Topologies = getTopologiesFromDB(db);
+            try
+            {
+                var db = DbInitializer.getInstance();
+                Topologies = getTopologiesFromDB(db);
+            }
+            catch (DbErrorException e)
+            {
+                ErrorMessageBoxShower.ShowError(DbErrorMessage.CONNECTION_ERROR);
+            }
         }
 
         public TopologyDTO getChosenTopology(string value)

@@ -1,9 +1,11 @@
 ﻿using CommonServiceLocator;
 using GalaSoft.MvvmLight;
+using GasStationModeling.add_forms;
 using GasStationModeling.core.DB;
 using GasStationModeling.core.models;
 using GasStationModeling.core.topology;
 using GasStationModeling.DB;
+using GasStationModeling.exceptions;
 using GasStationModeling.modelling.mapper;
 using GasStationModeling.modelling.model;
 using GasStationModeling.settings_screen.model;
@@ -67,14 +69,21 @@ namespace GasStationModeling.ViewModel
 
         public ModellingScreenViewModel()
         {
-            var mainViewModel = ServiceLocator.Current.GetInstance<MainViewModel>();
-            Settings = mainViewModel.ModellingSettings;
-            CurrentTopology = mainViewModel.GetTopology;
-            var db = DbInitializer.getInstance();
+            try
+            {
+                var mainViewModel = ServiceLocator.Current.GetInstance<MainViewModel>();
+                Settings = mainViewModel.ModellingSettings;
+                CurrentTopology = mainViewModel.GetTopology;
+                var db = DbInitializer.getInstance();
 
-            Cars = getCarsFromDB(db);
-            CarTableItems = ModellingScreenMapper.CreateCarTableItems(Cars,Settings.Fuels);
-            Fuels = ModellingScreenMapper.CreateFuelTableitems(Settings.Fuels);
+                Cars = getCarsFromDB(db);
+                CarTableItems = ModellingScreenMapper.CreateCarTableItems(Cars, Settings.Fuels);
+                Fuels = ModellingScreenMapper.CreateFuelTableitems(Settings.Fuels);
+            }
+            catch(DbErrorException e)
+            {
+                ErrorMessageBoxShower.ShowError(DbErrorMessage.CONNECTION_ERROR);
+            }
         }
 
         public List<Car> getCarsFromDB(IMongoDatabase db)

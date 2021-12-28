@@ -1,5 +1,6 @@
 ﻿using CommonServiceLocator;
 using GalaSoft.MvvmLight;
+using GasStationModeling.add_forms;
 using GasStationModeling.core.DB;
 using GasStationModeling.core.models;
 using GasStationModeling.DB;
@@ -153,11 +154,18 @@ namespace GasStationModeling.ViewModel
 
         public SettingsScreenViewModel()
         {
-            var db = DbInitializer.getInstance();
+            try
+            {
+                var db = DbInitializer.getInstance();
 
-            getFuelsFromDB(db);
-            getFuelTanksFromDB(db);
-            getFuelDispensersFromDB(db);
+                getFuelsFromDB(db);
+                getFuelTanksFromDB(db);
+                getFuelDispensersFromDB(db);
+            }
+            catch (DbErrorException e)
+            {
+                ErrorMessageBoxShower.ShowError(DbErrorMessage.CONNECTION_ERROR);
+            }
         }
 
         public List<Fuel> getChosenFuels()

@@ -23,5 +23,15 @@ namespace GasStationModeling.add_forms
                 MessageBoxImage.Error
             );
         }
+
+        public static void ShowError(string errorMessage)
+        {
+            MessageBox.Show(
+                errorMessage,
+                "Ошибка",
+                MessageBoxButton.OK,
+                MessageBoxImage.Error
+            );
+        }
     }
 }

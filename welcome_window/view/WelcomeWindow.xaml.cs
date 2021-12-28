@@ -1,6 +1,7 @@
 ﻿using GasStationModeling.add_forms;
 using GasStationModeling.core.DB;
 using GasStationModeling.developers_info_window.view;
+using GasStationModeling.exceptions;
 using GasStationModeling.main_window.view;
 using System;
 using System.Configuration;
@@ -21,7 +22,7 @@ namespace GasStationModeling.welcome_window.view
             }
             catch (Exception ex)
             {
-                ErrorMessageBoxShower.show(ex.Message);
+                ErrorMessageBoxShower.ShowError(DbErrorMessage.CONNECTION_ERROR);
             }
         }
 
