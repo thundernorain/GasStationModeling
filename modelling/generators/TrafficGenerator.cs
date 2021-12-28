@@ -54,10 +54,6 @@ namespace GasStationModeling.modelling
                 ModellingTimeHelper.TIMER_TICK_MILLISECONDS,
                 settings.CashLimit / settings.CollectingTimeSec,
                 destPointHelper.SpawnPoint);
-            stCanvas.Children.Add(elem);
-
-            Canvas.SetLeft(elem, destPointHelper.SpawnPoint.X);
-            Canvas.SetLeft(elem, destPointHelper.SpawnPoint.Y);
             return elem;
         }
 
@@ -68,9 +64,6 @@ namespace GasStationModeling.modelling
                 ModellingTimeHelper.TIMER_TICK_MILLISECONDS,
                 settings.FuelTank.LimitVolume / settings.RefuellingTimeSec,
                 destPointHelper.SpawnPoint);
-            stCanvas.Children.Add(elem);
-            Canvas.SetLeft(elem, destPointHelper.SpawnPoint.X);
-            Canvas.SetLeft(elem, destPointHelper.SpawnPoint.Y);
             return elem;
         }
     }

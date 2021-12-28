@@ -51,9 +51,16 @@ namespace GasStationModeling.modelling
             router = new RouteHelper(parsedCanvas,settings,dpHelper);
             trafficGenerator = new TrafficGenerator(settings,dpHelper);
             mover = new MoveHelper(parsedCanvas, settings, dpHelper);
-
-            this.cars = cars;
             this.canvasParser = parsedCanvas;
+            this.cars = filterCarList(cars);
+        }
+
+
+        public List<Car> filterCarList(List<Car> cars)
+        {
+
+            return cars.Where(car => settings.Fuels.Exists(fuel => fuel.Name == car.TypeFuel)).ToList();
+           
         }
 
         public Canvas Tick(bool IsPaused)
@@ -73,11 +80,15 @@ namespace GasStationModeling.modelling
                 var car = cars[randomCarId];
 
                 var carElem = trafficGenerator.SpawnCar(car,stationCanvas);
-                modellingTimeHelper.TimeBetweenCars = settings.Interval;
+                modellingTimeHelper.TimeBetweenCars = settings.Interval/5;
                 modellingTimeHelper.TicksAfterLastCarSpawning = 0;
             }
 
             #region LoopingControls
+
+            List<MoveableElem> toDelete = new List<MoveableElem>();
+
+            List<MoveableElem> toAdd = new List<MoveableElem>();
 
             foreach (var elem in stationCanvas.Children.OfType<MoveableElem>())
             {
@@ -86,9 +97,9 @@ namespace GasStationModeling.modelling
                 // Car
                 if (moveableElem is CarElem car)
                 {
-                    router.RouteVehicle(ref moveableElem);
+                    moveableElem = router.RouteVehicle(moveableElem);
 
-                    stationCanvas = mover.MoveCarToDestination(ref moveableElem);
+                    stationCanvas = mover.MoveCarToDestination(moveableElem,ref toDelete,ref toAdd);
 
                     continue;
                 }
@@ -96,9 +107,9 @@ namespace GasStationModeling.modelling
                 // Collector
                 if (moveableElem is CollectorElem collector)
                 {
-                    router.RouteVehicle(ref moveableElem);
+                    moveableElem =  router.RouteVehicle(moveableElem);
 
-                    stationCanvas = mover.MoveCarToDestination(ref moveableElem);
+                    stationCanvas = mover.MoveCarToDestination(moveableElem,ref toDelete, ref toAdd);
 
                     continue;
                 }
@@ -108,9 +119,22 @@ namespace GasStationModeling.modelling
                 {
                     router.RouteRefueller(ref refueller);
 
-                    mover.MoveRefuellerToDestination(refueller);
+                    mover.MoveRefuellerToDestination(refueller, ref toDelete);
                 }
             }
+
+            foreach (var elem in toAdd)
+            {
+                stationCanvas.Children.Add(elem);
+                Canvas.SetLeft(elem, dpHelper.SpawnPoint.X);
+                Canvas.SetTop(elem,dpHelper.SpawnPoint.Y);            
+            }
+
+            foreach (var elem in toDelete)
+            {
+                stationCanvas.Children.Remove(elem);
+            }
+            GC.Collect();
 
             #endregion /LoopingControls
 

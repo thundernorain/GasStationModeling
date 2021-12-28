@@ -17,8 +17,9 @@ namespace GasStationModeling.modelling.model
 
         public int CarsInQueue { get; set; }
 
-        public DispenserView(FuelDispenser dispenser, double tick)
+        public DispenserView(int id,FuelDispenser dispenser, double tick)
         {
+            Id = id;
             Name = dispenser.Name;
 
             //Скорость в литрах в минуту
@@ -26,7 +27,7 @@ namespace GasStationModeling.modelling.model
             //умножаем скорость на размер тика
             // делим на 60 (кол-во секунд в минуте)
             // и 100 (кол-во миллисекнуд в секунде)
-            SpeedRefuelingPerTick = dispenser.SpeedRefueling * tick / (60 * 1000);
+            SpeedRefuelingPerTick = dispenser.SpeedRefueling * tick / 1000;
 
             IsBusy = false;
             CarsInQueue = 0;
@@ -34,8 +35,8 @@ namespace GasStationModeling.modelling.model
 
         public void refuelCar(ref TankView tankView,ref CarView car)
         {
-            tankView.CurrentFuelVolume -= SpeedRefuelingPerTick;
-            car.CurrentFuelVolume += SpeedRefuelingPerTick;
+            tankView.CurrentFuelVolume -= car.CurrentFuelSupply / 2;
+            car.CurrentFuelVolume += car.CurrentFuelSupply/2;
         }
     }
 }

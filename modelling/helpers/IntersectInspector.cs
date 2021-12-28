@@ -45,7 +45,7 @@ namespace GasStationModeling.modelling.helpers
                     continue;
                 }
 
-                var anotherVehicle = moveableElem;
+                /*var anotherVehicle = moveableElem;
 
                 switch (direction)
                 {
@@ -198,30 +198,30 @@ namespace GasStationModeling.modelling.helpers
                                 break;
                             }
                     }
-                }
+                }*/
             }
 
             return activeVehicle.GetDestinationPoint();
         }
 
-        public static double left(UIElement element)
+        public double left(UIElement element)
         {
             return Canvas.GetLeft(element);
         }
 
-        public static double right(UIElement element)
+        public double right(UIElement element)
         {
-            return Canvas.GetRight(element);
+            return stationCanvas.Width - (Canvas.GetLeft(element) + ElementSizeHelper.CELL_WIDTH);
         }
 
-        public static double top(UIElement element)
+        public double top(UIElement element)
         {
             return Canvas.GetTop(element);
         }
 
-        public static double bottom(UIElement element)
+        public double bottom(UIElement element)
         {
-            return Canvas.GetBottom(element);
+            return stationCanvas.Height - (Canvas.GetTop(element) + ElementSizeHelper.CELL_WIDTH);
         }
     }
 

@@ -3,6 +3,7 @@ using GasStationModeling.modelling.moveableElems;
 using GasStationModeling.modelling.pictureView;
 using GasStationModeling.settings_screen.model;
 using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -32,7 +33,7 @@ namespace GasStationModeling.modelling.helpers
             inspector = new IntersectInspector(stationCanvas);
         }
 
-        public Canvas MoveCarToDestination(ref MoveableElem vehicle)
+        public Canvas MoveCarToDestination(MoveableElem vehicle, ref List<MoveableElem> toDelete, ref List<MoveableElem> toAdd)
         {
             CarView carView = null;
             CollectorView collectorView = null;
@@ -52,7 +53,7 @@ namespace GasStationModeling.modelling.helpers
                 if (vehicle is CarElem carElem)
                 {
                    
-                    modellingSteps.StartFilling(ref carElem);
+                    modellingSteps.StartFilling(ref carElem,ref toAdd);
                     return stationCanvas;
                 }
 
@@ -69,13 +70,12 @@ namespace GasStationModeling.modelling.helpers
 
             var destSpot = vehicle.DestinationSpot;
 
-            destPoint = MoveCar(ref vehicle, destPoint, carSpeed);
+            destPoint = MoveCar(vehicle, destPoint, carSpeed);
 
-            if(vehicle.SpotIsNull)
-            {
+  
                 destSpot = DpHelper.createDestinationSpot(destPoint);
                 vehicle.DestinationSpot = destSpot;
-            }
+            
            
             var vehicleRect = vehicle.createIntersectRect();
 
@@ -101,7 +101,7 @@ namespace GasStationModeling.modelling.helpers
                     {
                         if (destPoint.Equals(fuelDispensersDestPoint))
                         { 
-                            modellingSteps.StartFilling(ref carElem);      
+                            modellingSteps.StartFilling(ref carElem,ref toAdd);      
                         }
                     }
                 }
@@ -123,14 +123,13 @@ namespace GasStationModeling.modelling.helpers
 
                 if (destPoint.Equals(DpHelper.LeavePointNoFilling) || destPoint.Equals(DpHelper.LeavePointFilled))
                 {
-                    stationCanvas.Children.Remove(vehicle);
-                    GC.Collect();
+                    toDelete.Add(vehicle);
                 }
             }
             return stationCanvas;
         }
 
-       public Point MoveCar(ref MoveableElem car, Point destPoint, int carSpeed)
+       public Point MoveCar(MoveableElem car, Point destPoint, int carSpeed)
         {
             var isHorizontalMoving = false;
             var isVerticalMoving = false;
@@ -248,7 +247,7 @@ namespace GasStationModeling.modelling.helpers
             return destPoint;
         }
 
-        public void MoveRefuellerToDestination(RefuellerElem refueller)
+        public void MoveRefuellerToDestination(RefuellerElem refueller,ref List<MoveableElem>toDelete)
         {
             
             if (refueller.IsFilling)
@@ -276,7 +275,8 @@ namespace GasStationModeling.modelling.helpers
                 refueller.removeDestinationPoint();
 
                 var fuelTank = ((RefuellerView)refueller.Tag).ChosenTank;
-                var pointOfFilling = DpHelper.FuelDispensersDestPoints[fuelTank];
+                var tankId = (fuelTank.Tag as TankView).Id;
+                var pointOfFilling = DpHelper.RefuellerDestPoints[tankId];
 
                 if (destPoint.Equals(pointOfFilling))
                 {
@@ -285,7 +285,7 @@ namespace GasStationModeling.modelling.helpers
 
                 if (destPoint.Equals(DpHelper.LeavePointNoFilling))
                 {
-                    stationCanvas.Children.Remove(refueller);
+                    toDelete.Add(refueller);
                 }
             }
         }

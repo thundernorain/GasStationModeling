@@ -22,11 +22,11 @@ namespace GasStationModeling.modelling.helpers
             canvasElems = parsedCanvas;
         }
 
-        public void RouteVehicle(ref MoveableElem vehicle)
+        public MoveableElem RouteVehicle(MoveableElem vehicle)
         {
             if (!vehicle.IsGoingToFill)
             {
-                return;
+                return vehicle;
             }
 
             CarView carView = null;
@@ -48,15 +48,15 @@ namespace GasStationModeling.modelling.helpers
             // New car
             if (!isOnStation && !isFilled && !vehicle.HasDestPoints())
             {
-                MoveVehicleToEnter(ref vehicle);
+                MoveVehicleToEnter(vehicle);
             }
 
             // Just entered the station
-            if (vehicle is CarElem carElem)
+            if (vehicle is CarElem)
             {
                 if (isOnStation && !carView.FuelDispenserChosen)
                 {
-                    ChooseFuelDispenser(ref carElem);
+                    vehicle = ChooseFuelDispenser((CarElem)vehicle);
                 }
             }
 
@@ -71,12 +71,13 @@ namespace GasStationModeling.modelling.helpers
             // After filling 
             if (isOnStation && isFilled)
             {
-                MoveVehicleToExit(ref vehicle);
+                MoveVehicleToExit(vehicle);
                 vehicle.IsOnStation = false;
             }
+            return vehicle;
         }
 
-        public void ChooseFuelDispenser(ref CarElem car)
+        public CarElem ChooseFuelDispenser(CarElem car)
         {
             var carView = car.Tag as CarView;
 
@@ -99,17 +100,10 @@ namespace GasStationModeling.modelling.helpers
             fuelDispenserView.CarsInQueue++;
             carView.FuelDispenserChosen = true;
 
-            var destPointX = (int)Canvas.GetLeft(optimalFuelDispenser) - DpHelper.FuelingPointDeltaX;
-            var destPointY = (int)Canvas.GetBottom(optimalFuelDispenser) + ElementSizeHelper.CELL_WIDTH - 10;
-            car.AddDestinationPoint(new Point(destPointX, destPointY));
-
-            destPointX = (int)Canvas.GetLeft(optimalFuelDispenser) + DpHelper.FuelingPointDeltaX;
-            destPointY = (int)Canvas.GetBottom(optimalFuelDispenser) + DpHelper.FuelingPointDeltaY;
-            car.AddDestinationPoint(new Point(destPointX, destPointY));
-
-            destPointX = (int)Canvas.GetRight(optimalFuelDispenser);
-            destPointY += ElementSizeHelper.CELL_HEIGHT + 5;
-            car.AddDestinationPoint(new Point(destPointX, destPointY));
+            //var destPointX = Canvas.GetLeft(optimalFuelDispenser) - DpHelper.FuelingPointDeltaX;
+            //var destPointY = Canvas.GetTop(optimalFuelDispenser) + ElementSizeHelper.CELL_WIDTH;
+            car.AddDestinationPoint(DpHelper.FuelDispensersDestPoints[fuelDispenserView.Id]);
+            return car;
         }
 
         public int getBottom(UIElement element)
@@ -146,12 +140,12 @@ namespace GasStationModeling.modelling.helpers
             return collector;
         }
 
-        private void MoveVehicleToEnter(ref MoveableElem vehicle)
+        private void MoveVehicleToEnter(MoveableElem vehicle)
         {
             vehicle.AddDestinationPoint(DpHelper.EntrancePoint);
         }
 
-        private void MoveVehicleToExit(ref MoveableElem vehicle)
+        private void MoveVehicleToExit(MoveableElem vehicle)
         {
             var fillingFinishedPoint = vehicle.GetDestinationPoint();
             vehicle.removeDestinationPoints();
@@ -183,6 +177,9 @@ namespace GasStationModeling.modelling.helpers
 
         private void GoToFuelTank(ref RefuellerElem refueller)
         {
+            var chosenTank = (refueller.Tag as RefuellerView).ChosenTank;
+            var tankId = (chosenTank.Tag as TankView).Id;
+            refueller.AddDestinationPoint(DpHelper.RefuellerDestPoints[tankId]);
             refueller.AddDestinationPoint(DpHelper.ServiceAreaEntrancePoint);
         }
 

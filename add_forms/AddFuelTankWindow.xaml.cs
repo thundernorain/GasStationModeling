@@ -49,6 +49,7 @@ namespace GasStationModeling.add_forms
 
             var newCollection = dbWorker.insertEntry(tank);
             var viewModel = ServiceLocator.Current.GetInstance<SettingsScreenViewModel>();
+            viewModel.TanksDB = dbWorker.getCollection();
             viewModel.FuelTanks = new TankToFuelTankComboBoxItemMapper().MapList(newCollection);
 
             Close();
