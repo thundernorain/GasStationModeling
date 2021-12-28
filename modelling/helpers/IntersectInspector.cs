@@ -85,6 +85,11 @@ namespace GasStationModeling.modelling.helpers
                     double newDestX;
                     double newDestY;
 
+                    bool bypassFromLeft = false;
+                    bool bypassFromRight = false;
+                    bool bypassFromBottom = false;
+                    bool bypassFromTop = false;
+
                     Point newDestinationPoint1;
                     Point newDestinationPoint2;
                     Point newDestinationPoint3;
@@ -102,10 +107,12 @@ namespace GasStationModeling.modelling.helpers
                                     if (destPoint.X < left(activeVehicle))
                                     {
                                         newDestX = left(fuelDispenser) - (activeVehicle.Width + 5);
+                                        bypassFromLeft = true;
                                     }
                                     else
                                     {
                                         newDestX = right(fuelDispenser) + (activeVehicle.Width + 5);
+                                        bypassFromRight = true;
                                     }
 
                                     newDestY = bottom(fuelDispenser) + 10;
@@ -118,7 +125,7 @@ namespace GasStationModeling.modelling.helpers
                                     newDestinationPoint2 = new Point(newDestX,
                                         newDestY);
 
-                                    activeVehicle.removeDestinationPoints();
+                                    activeVehicle.removeDestinationPoint();
                                     activeVehicle.AddDestinationPoint(newDestinationPoint2);
                                     activeVehicle.AddDestinationPoint(newDestinationPoint1);
                                 }
@@ -145,7 +152,7 @@ namespace GasStationModeling.modelling.helpers
                                     newDestinationPoint1 = new Point(newDestX,
                                         newDestY);
 
-                                    activeVehicle.removeDestinationPoints();
+                                    activeVehicle.removeDestinationPoint();
                                     activeVehicle.AddDestinationPoint(newDestinationPoint1);
                                 }
 
@@ -183,7 +190,7 @@ namespace GasStationModeling.modelling.helpers
                                     newDestinationPoint3 = new Point(left(fuelDispenser) - 20,
                                         destPoint.Y - 20);
 
-                                    activeVehicle.removeDestinationPoints();
+                                    activeVehicle.removeDestinationPoint();
                                     activeVehicle.AddDestinationPoint(newDestinationPoint2);
                                     activeVehicle.AddDestinationPoint(newDestinationPoint1);
                                 }

@@ -10,15 +10,7 @@ namespace GasStationModeling.modelling.pictureView
 {
     public class MoveableElem : Shape
     {
-        protected override Geometry DefiningGeometry {
-            get
-            {
-                Rect rect = new Rect();
-                rect.Width = ElementSizeHelper.CELL_WIDTH;
-                rect.Height = ElementSizeHelper.CELL_HEIGHT;
-                return new RectangleGeometry(rect);
-            }
-        }
+       
 
         public bool IsGoingToFill { get; set; }
         public bool IsOnStation { get; set; }
@@ -42,6 +34,7 @@ namespace GasStationModeling.modelling.pictureView
         {
             destinationPoints = new List<System.Windows.Point>();
             DestinationSpot = EmptyRect;
+            Canvas.SetZIndex(this, 1);
         }
 
         public void AddDestinationPoint(System.Windows.Point destPoint)
@@ -62,6 +55,29 @@ namespace GasStationModeling.modelling.pictureView
             }
         }
 
+        protected override Geometry DefiningGeometry
+        {
+            get
+            {
+                Rect rect = new Rect();
+                rect.Width = ElementSizeHelper.CELL_WIDTH;
+                rect.Height = ElementSizeHelper.CELL_HEIGHT;
+                return new RectangleGeometry(rect);
+            }
+        }
+
+        public override Geometry RenderedGeometry
+        {
+            get
+            {
+                Rect rect = new Rect();
+                rect.Width = ElementSizeHelper.CELL_WIDTH;
+                rect.Height = ElementSizeHelper.CELL_HEIGHT;
+                rect.X = Canvas.GetLeft(this);
+                rect.Y = Canvas.GetTop(this);
+                return new RectangleGeometry(rect);
+            }
+        }
         public bool HasDestPoints()
         {
             return destinationPoints.Count > 0;

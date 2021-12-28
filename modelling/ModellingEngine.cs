@@ -52,11 +52,11 @@ namespace GasStationModeling.modelling
             this.cars = cars;
         }
 
-        public void Tick(bool IsPaused)
+        public Canvas Tick(bool IsPaused)
         {
             if (IsPaused)
             {
-                return;
+                return stationCanvas;
             }
 
             modellingTimeHelper.TimerTicksCount++;
@@ -69,7 +69,7 @@ namespace GasStationModeling.modelling
                 var car = cars[randomCarId];
 
                 var carElem = trafficGenerator.SpawnCar(car,stationCanvas);
-                modellingTimeHelper.TimeBetweenCars = settings.ArrivalProbability;
+                modellingTimeHelper.TimeBetweenCars = settings.Interval;
                 modellingTimeHelper.TicksAfterLastCarSpawning = 0;
             }
 
@@ -82,9 +82,9 @@ namespace GasStationModeling.modelling
                 // Car
                 if (moveableElem is CarElem car)
                 {
-                    router.RouteVehicle(moveableElem);
+                    router.RouteVehicle(ref moveableElem);
 
-                    mover.MoveCarToDestination(moveableElem);
+                    stationCanvas = mover.MoveCarToDestination(ref moveableElem);
 
                     continue;
                 }
@@ -92,9 +92,9 @@ namespace GasStationModeling.modelling
                 // Collector
                 if (moveableElem is CollectorElem collector)
                 {
-                    router.RouteVehicle(moveableElem);
+                    router.RouteVehicle(ref moveableElem);
 
-                    mover.MoveCarToDestination(moveableElem);
+                    stationCanvas = mover.MoveCarToDestination(ref moveableElem);
 
                     continue;
                 }
@@ -113,6 +113,8 @@ namespace GasStationModeling.modelling
             #region UI
 
             UpdateTables(stationCanvas);
+
+            return stationCanvas;
 
             #endregion UI
         }

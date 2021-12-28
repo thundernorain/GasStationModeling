@@ -4,6 +4,7 @@ using GasStationModeling.modelling.model;
 using GasStationModeling.modelling.moveableElems;
 using GasStationModeling.modelling.pictureView;
 using System.Windows;
+using System.Windows.Media;
 using System.Windows.Shapes;
 
 namespace GasStationModeling.modelling.generators
@@ -18,6 +19,10 @@ namespace GasStationModeling.modelling.generators
             carId++;
 
             var brush = BrushHelper.getBrushFor("Car");
+
+            brush.TileMode = TileMode.Tile;
+            // set the bg view port unit
+            brush.ViewportUnits = BrushMappingMode.RelativeToBoundingBox;
 
             return new CarElem(brush,location,carView);
         }

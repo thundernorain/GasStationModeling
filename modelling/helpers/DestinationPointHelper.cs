@@ -14,7 +14,7 @@ namespace GasStationModeling.modelling
         public int FuelingPointDeltaX { get; } = 5;
         public int FuelingPointDeltaY { get; } = 5;
         public int CarRoadPositionY { get; private set; }
-        public int ReSpawnPointX { get; } = -50;
+        public int ReSpawnPointX { get; } = -40;
         #endregion
 
         #region CommonPoints
@@ -46,7 +46,7 @@ namespace GasStationModeling.modelling
         public void defineCommonPoints(CanvasParser parsedCanvas)
         {
             CarRoadPositionY = (int)parsedCanvas.StationCanvas.Height - 2 * ElementSizeHelper.CELL_HEIGHT; 
-            SpawnPoint = new Point((int)parsedCanvas.StationCanvas.Width - 50, CarRoadPositionY);
+            SpawnPoint = new Point((int)parsedCanvas.StationCanvas.Width, CarRoadPositionY);
             LeavePointNoFilling = new Point(ReSpawnPointX, CarRoadPositionY);
             LeavePointFilled = new Point(ReSpawnPointX, CarRoadPositionY - (ElementSizeHelper.CELL_HEIGHT + 1));
         }

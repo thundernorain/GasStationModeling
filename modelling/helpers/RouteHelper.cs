@@ -22,7 +22,7 @@ namespace GasStationModeling.modelling.helpers
             canvasElems = parsedCanvas;
         }
 
-        public void RouteVehicle(MoveableElem vehicle)
+        public void RouteVehicle(ref MoveableElem vehicle)
         {
             if (!vehicle.IsGoingToFill)
             {
@@ -48,7 +48,7 @@ namespace GasStationModeling.modelling.helpers
             // New car
             if (!isOnStation && !isFilled && !vehicle.HasDestPoints())
             {
-                MoveVehicleToEnter(vehicle);
+                MoveVehicleToEnter(ref vehicle);
             }
 
             // Just entered the station
@@ -56,7 +56,7 @@ namespace GasStationModeling.modelling.helpers
             {
                 if (isOnStation && !carView.FuelDispenserChosen)
                 {
-                    ChooseFuelDispenser(carElem);
+                    ChooseFuelDispenser(ref carElem);
                 }
             }
 
@@ -71,12 +71,12 @@ namespace GasStationModeling.modelling.helpers
             // After filling 
             if (isOnStation && isFilled)
             {
-                MoveVehicleToExit(vehicle);
+                MoveVehicleToExit(ref vehicle);
                 vehicle.IsOnStation = false;
             }
         }
 
-        public void ChooseFuelDispenser(CarElem car)
+        public void ChooseFuelDispenser(ref CarElem car)
         {
             var carView = car.Tag as CarView;
 
@@ -146,12 +146,12 @@ namespace GasStationModeling.modelling.helpers
             return collector;
         }
 
-        private void MoveVehicleToEnter(MoveableElem vehicle)
+        private void MoveVehicleToEnter(ref MoveableElem vehicle)
         {
             vehicle.AddDestinationPoint(DpHelper.EntrancePoint);
         }
 
-        private void MoveVehicleToExit(MoveableElem vehicle)
+        private void MoveVehicleToExit(ref MoveableElem vehicle)
         {
             var fillingFinishedPoint = vehicle.GetDestinationPoint();
             vehicle.removeDestinationPoints();
