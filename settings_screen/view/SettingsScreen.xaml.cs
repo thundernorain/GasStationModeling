@@ -28,18 +28,6 @@ namespace GasStationModeling.settings_screen.view
             var mainViewModel = ServiceLocator.Current.GetInstance<MainViewModel>();
             try
             {
-<<<<<<< HEAD
-                ModellingSettings settings = new ModellingSettings()
-                {
-                    Interval = IntervalSlider.Value,
-                    ArrivalProbability = ProbabilitySlider.Value,
-                    Fuels = settingsViewModel.getChosenFuels() ?? throw new NullReferenceException("Не выбраны виды топлива"),
-                    CashLimit = CashLimitSlider.Value,
-                    Dispenser = settingsViewModel.getChosenFuelDispenser() ?? throw new NullReferenceException("Не выбрана ТРК"),
-                    FuelTank = settingsViewModel.getChosenTank() ?? throw new NullReferenceException("Не выбран ТБ")
-                };
-                var mainViewModel = ServiceLocator.Current.GetInstance<MainViewModel>();
-=======
                 ModellingSettings settings = new ModellingSettings();
 
                 settings.Interval = IntervalSlider.Value;
@@ -51,7 +39,6 @@ namespace GasStationModeling.settings_screen.view
                 
                
                 mainViewModel.CurrentPageUri = new Uri(MainViewModel.MODELLING_SCREEN_URI, UriKind.Relative);
->>>>>>>  Середина моделирования
                 mainViewModel.ModellingSettings = settings;
 
                 SimpleIoc.Default.Unregister<ModellingScreenViewModel>();
