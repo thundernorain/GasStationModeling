@@ -23,6 +23,7 @@ namespace GasStationModeling.modelling
         private ModellingTimeHelper modellingTimeHelper;
         private ModellingSettings settings;
         private Canvas stationCanvas;
+        private DestinationPointHelper dpHelper;
 
         private List<Car> cars;
 
@@ -42,7 +43,7 @@ namespace GasStationModeling.modelling
             settings = _settings;
             mscvModel = ServiceLocator.Current.GetInstance<ModellingScreenViewModel>();
             this.stationCanvas = parsedCanvas.StationCanvas;
-            DestinationPointHelper dpHelper = new DestinationPointHelper(parsedCanvas);
+            dpHelper = new DestinationPointHelper(parsedCanvas);
 
             router = new RouteHelper(parsedCanvas,settings,dpHelper);
             trafficGenerator = new TrafficGenerator(settings,dpHelper);
@@ -67,8 +68,7 @@ namespace GasStationModeling.modelling
                 var randomCarId = r.Next(0, cars.Count - 1);
                 var car = cars[randomCarId];
 
-                var carElem = trafficGenerator.SpawnCar(car);
-                stationCanvas.Children.Add(carElem);
+                var carElem = trafficGenerator.SpawnCar(car,stationCanvas);
                 modellingTimeHelper.TimeBetweenCars = settings.ArrivalProbability;
                 modellingTimeHelper.TicksAfterLastCarSpawning = 0;
             }
@@ -82,9 +82,9 @@ namespace GasStationModeling.modelling
                 // Car
                 if (moveableElem is CarElem car)
                 {
-                    router.RouteVehicle(ref moveableElem);
+                    router.RouteVehicle(moveableElem);
 
-                    mover.MoveCarToDestination(ref moveableElem);
+                    mover.MoveCarToDestination(moveableElem);
 
                     continue;
                 }
@@ -92,9 +92,9 @@ namespace GasStationModeling.modelling
                 // Collector
                 if (moveableElem is CollectorElem collector)
                 {
-                    router.RouteVehicle(ref moveableElem);
+                    router.RouteVehicle(moveableElem);
 
-                    mover.MoveCarToDestination(ref moveableElem);
+                    mover.MoveCarToDestination(moveableElem);
 
                     continue;
                 }
@@ -117,7 +117,7 @@ namespace GasStationModeling.modelling
             #endregion UI
         }
 
-        private void UpdateTables(Canvas stationCanvas)
+        private void UpdateTables( Canvas stationCanvas)
         {
             UpdateCashCounterInfo(stationCanvas);
             UpdateFuelDispenserInfo(stationCanvas);

@@ -32,7 +32,7 @@ namespace GasStationModeling.modelling.helpers
             inspector = new IntersectInspector(stationCanvas);
         }
 
-        public void MoveCarToDestination(ref MoveableElem vehicle)
+        public void MoveCarToDestination(MoveableElem vehicle)
         {
             CarView carView = null;
             CollectorView collectorView = null;
@@ -65,18 +65,23 @@ namespace GasStationModeling.modelling.helpers
             }
 
             var destPoint = vehicle.GetDestinationPoint();
-
             var carSpeed = vehicle.IsGoingToFill ? CarSpeedFilling : CarSpeedNoFilling;
 
-            destPoint = MoveCar(ref vehicle, destPoint, carSpeed);
+            var destSpot = vehicle.DestinationSpot;
 
-            var destSpot = DpHelper.createDestinationSpot(destPoint);
+            destPoint = MoveCar(vehicle, destPoint, carSpeed);
 
+            if(vehicle.SpotIsNull)
+            {
+                destSpot = DpHelper.createDestinationSpot(destPoint);
+                vehicle.DestinationSpot = destSpot;
+            }
+           
             var vehicleRect = vehicle.createIntersectRect();
 
-            if (vehicleRect.IntersectsWith(destSpot))
+            /*if (vehicleRect.IntersectsWith(destSpot))
             {
-                vehicle.removeDestinationPoint(destPoint);
+                vehicle.removeDestinationPoint();
 
                 vehicle.IsBypassingObject = false;
 
@@ -119,11 +124,12 @@ namespace GasStationModeling.modelling.helpers
                 if (destPoint.Equals(DpHelper.LeavePointNoFilling) || destPoint.Equals(DpHelper.LeavePointFilled))
                 {
                     stationCanvas.Children.Remove(vehicle);
+                    GC.Collect();
                 }
-            }
+            }*/
         }
 
-       public Point MoveCar(ref MoveableElem car, Point destPoint, int carSpeed)
+       public Point MoveCar( MoveableElem car, Point destPoint, int carSpeed)
         {
             var isHorizontalMoving = false;
             var isVerticalMoving = false;
@@ -150,7 +156,7 @@ namespace GasStationModeling.modelling.helpers
                         carTop = top(car);
                         Canvas.SetTop(car, carTop + carSpeed);
                         isVerticalMoving = true;
-                        destPoint =inspector.PreventIntersection(ref car, Directions.Down);
+                        destPoint = inspector.PreventIntersection(ref car, Directions.Down);
                     }
 
                     // Go left
@@ -243,25 +249,30 @@ namespace GasStationModeling.modelling.helpers
 
         public void MoveRefuellerToDestination(RefuellerElem refueller)
         {
-            var refuellerView = refueller.Tag as RefuellerView;
-
+            
             if (refueller.IsFilling)
             {
                 modellingSteps.RefillFuelTank(ref refueller);
-
                 return;
             }
 
-            var destPoint = refueller.GetDestinationPoint();
-           
-            destPoint = MoveRefueller(refueller, destPoint, RefuellerSpeed);
-            var destSpot = DpHelper.createDestinationSpot(destPoint);
+            var refuellerView = refueller.Tag as RefuellerView;
 
+            var destPoint = refueller.GetDestinationPoint();
+            var destSpot = refueller.DestinationSpot;
+
+            destPoint = MoveRefueller(refueller, destPoint, RefuellerSpeed);
+
+            if(refueller.SpotIsNull)
+            {
+                destSpot = DpHelper.createDestinationSpot(destPoint);
+            }
+            
             var refuellerRect = refueller.createIntersectRect();
 
             if (refuellerRect.IntersectsWith(destSpot))
             {
-                refueller.removeDestinationPoint(destPoint);
+                refueller.removeDestinationPoint();
 
                 var fuelTank = ((RefuellerView)refueller.Tag).ChosenTank;
                 var pointOfFilling = DpHelper.FuelDispensersDestPoints[fuelTank];
@@ -271,7 +282,7 @@ namespace GasStationModeling.modelling.helpers
                     modellingSteps.StartRefilling(ref refueller);
                 }
 
-                if (destPoint.Equals(DpHelper.LeavePointFilled))
+                if (destPoint.Equals(DpHelper.LeavePointNoFilling))
                 {
                     stationCanvas.Children.Remove(refueller);
                 }

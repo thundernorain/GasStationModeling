@@ -45,8 +45,8 @@ namespace GasStationModeling.modelling
 
         public void defineCommonPoints(CanvasParser parsedCanvas)
         {
-            CarRoadPositionY = (int)parsedCanvas.StationCanvas.Height - ElementSizeHelper.CELL_HEIGHT; 
-            SpawnPoint = new Point((int)parsedCanvas.StationCanvas.Width + 50, CarRoadPositionY);
+            CarRoadPositionY = (int)parsedCanvas.StationCanvas.Height - 2 * ElementSizeHelper.CELL_HEIGHT; 
+            SpawnPoint = new Point((int)parsedCanvas.StationCanvas.Width - 50, CarRoadPositionY);
             LeavePointNoFilling = new Point(ReSpawnPointX, CarRoadPositionY);
             LeavePointFilled = new Point(ReSpawnPointX, CarRoadPositionY - (ElementSizeHelper.CELL_HEIGHT + 1));
         }
@@ -110,8 +110,8 @@ namespace GasStationModeling.modelling
             return new Rect(
                 destpoint.X,
                 destpoint.Y,
-                ElementSizeHelper.CELL_WIDTH / 2,
-                ElementSizeHelper.CELL_HEIGHT / 2);
+                5,
+                5);
         }
     }
 }

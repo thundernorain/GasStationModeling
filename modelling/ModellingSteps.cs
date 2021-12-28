@@ -83,8 +83,7 @@ namespace GasStationModeling.modelling
 
         public void CallCollector()
         {
-            var collector = trafficGenerator.SpawnCollector();
-            stationCanvas.Children.Add(collector);
+            var collector = trafficGenerator.SpawnCollector(ref stationCanvas);
         }
 
         public void CollectCash(ref CollectorElem collector, ref CashBoxView cashBox)
@@ -113,7 +112,7 @@ namespace GasStationModeling.modelling
 
         public void CallRefueller(Rectangle fuelTank)
         {
-            var refueller = trafficGenerator.SpawnRefueller(fuelTank);
+            var refueller = trafficGenerator.SpawnRefueller(fuelTank, ref stationCanvas);
             stationCanvas.Children.Add(refueller);
         }
 

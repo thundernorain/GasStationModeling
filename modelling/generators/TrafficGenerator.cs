@@ -6,6 +6,7 @@ using GasStationModeling.modelling.moveableElems;
 using GasStationModeling.modelling.pictureView;
 using GasStationModeling.settings_screen.model;
 using System;
+using System.Windows.Controls;
 using System.Windows.Shapes;
 
 namespace GasStationModeling.modelling
@@ -24,7 +25,7 @@ namespace GasStationModeling.modelling
             this.destPointHelper = destPointHelper;
         }
 
-        public CarElem SpawnCar(Car car)
+        public CarElem SpawnCar(Car car,  Canvas stCanvas)
         {
             Random r = new Random();
 
@@ -39,32 +40,36 @@ namespace GasStationModeling.modelling
             {
                 carElem.AddDestinationPoint(destPointHelper.LeavePointNoFilling);
             }
+            stCanvas.Children.Add(carElem);
+
+            Canvas.SetLeft(carElem, destPointHelper.SpawnPoint.X);
+            Canvas.SetLeft(carElem, destPointHelper.SpawnPoint.Y);
             return carElem;
         }
 
-        public CollectorElem SpawnCollector()
+        public CollectorElem SpawnCollector(ref Canvas stCanvas)
         {
             var elem =  MoveableElemGenerator.createCollectorElem(
                 ModellingTimeHelper.TIMER_TICK_MILLISECONDS,
                 settings.CashLimit / settings.CollectingTimeSec,
                 destPointHelper.SpawnPoint);
-            var cashBoxPoint = destPointHelper.CashBoxPoint;
-            elem.AddDestinationPoint(cashBoxPoint);
+            stCanvas.Children.Add(elem);
+
+            Canvas.SetLeft(elem, destPointHelper.SpawnPoint.X);
+            Canvas.SetLeft(elem, destPointHelper.SpawnPoint.Y);
             return elem;
         }
 
-        public RefuellerElem SpawnRefueller(Rectangle fuelTank)
+        public RefuellerElem SpawnRefueller(Rectangle fuelTank, ref Canvas stCanvas)
         {
             var elem = MoveableElemGenerator.createRefuellerElem(
                 fuelTank,
                 ModellingTimeHelper.TIMER_TICK_MILLISECONDS,
                 settings.FuelTank.LimitVolume / settings.RefuellingTimeSec,
                 destPointHelper.SpawnPoint);
-
-            var tankPoint = destPointHelper.RefuellerDestPoints[fuelTank];
-
-            elem.AddDestinationPoint(tankPoint);
-
+            stCanvas.Children.Add(elem);
+            Canvas.SetLeft(elem, destPointHelper.SpawnPoint.X);
+            Canvas.SetLeft(elem, destPointHelper.SpawnPoint.Y);
             return elem;
         }
     }

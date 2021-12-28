@@ -7,6 +7,7 @@ using GasStationModeling.ViewModel;
 using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Threading;
 
 namespace GasStationModeling.modelling.view
@@ -28,6 +29,8 @@ namespace GasStationModeling.modelling.view
         public ModellingPage()
         {
             InitializeComponent();
+
+
             mscViewModel = ServiceLocator.Current.GetInstance<ModellingScreenViewModel>();
             TopologyMapper mapper = new TopologyMapper(mscViewModel.Settings, mscViewModel.CurrentTopology);
             parsedCanvas = mapper.mapTopology(StationCanvas);
@@ -35,22 +38,29 @@ namespace GasStationModeling.modelling.view
 
             timer = new DispatcherTimer();
             timeHelper = new ModellingTimeHelper(timer);
-            IsPaused = true;
+           
 
             engine = new ModellingEngine(
                 timeHelper,              
                 mscViewModel.Settings,
                 parsedCanvas,
                 mscViewModel.Cars);
+
+            setUpTimer();
             
         }
 
-        public void ModellingProcess()
+        public void setUpTimer()
         {
-            while (true) { 
-                engine.Tick(IsPaused);
-            }
-            
+            timer.Interval = TimeSpan.FromMilliseconds(ModellingTimeHelper.TIMER_TICK_MILLISECONDS * 100);
+            timer.Tick += ModellingProcess;
+        }
+
+
+        void ModellingProcess(object sender, EventArgs e)
+        {
+            CashCountInfo.Text = DateTime.Now.ToLongTimeString();
+            engine.Tick(IsPaused);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -61,9 +71,9 @@ namespace GasStationModeling.modelling.view
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
-            timer.Start();
+
             IsPaused = false;
-            ModellingProcess();
+            timer.Start();
         }
 
         private void StopButton_Click(object sender, RoutedEventArgs e)
