@@ -10,5 +10,7 @@ namespace GasStationModeling.modelling.model
         public double Volume { get; set; }
 
         public double Price { get; set; }
+
+        public string ChosenTRK { get; set; }
     }
 }

@@ -71,12 +71,12 @@
                    Width="378" Height="24" VerticalAlignment="Bottom"/>
 
             <TextBlock x:Name="FuelCountInfo" Style="{StaticResource BaseText}" 
-                   FontSize="{StaticResource Medium}" 
+                   FontSize="{StaticResource Small}" 
                    HorizontalAlignment="Center" 
                    TextAlignment="Left" 
-                   Margin="24,0,17,238"
+                   Margin="24,0,17,110"
                    Text="{Binding CurrentFuelVolumeView}"
-                   Width="378" Height="26" VerticalAlignment="Bottom"/>
+                   Width="378" Height="140" VerticalAlignment="Bottom"/>
 
             <Button x:Name="GoBackButton" Style="{StaticResource AquaButton}" Content="Назад" Margin="26,675,213,45" Click="Button_Click"/>
 

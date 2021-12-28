@@ -59,7 +59,6 @@ namespace GasStationModeling.modelling.view
 
         void ModellingProcess(object sender, EventArgs e)
         {
-            CashCountInfo.Text = DateTime.Now.ToLongTimeString();
             engine.Tick(IsPaused);
         }
 

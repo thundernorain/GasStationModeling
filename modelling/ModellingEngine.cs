@@ -142,26 +142,49 @@ namespace GasStationModeling.modelling
 
         private void UpdateFuelDispenserInfo()
         {
-           //TODO
+            var viewModel = ServiceLocator.Current.GetInstance<ModellingScreenViewModel>();
+            if (viewModel == null) return;
+
+            var carsInTable = viewModel.CarTableItems;
+
+            foreach (var elem in stationCanvas.Children.OfType<MoveableElem>())
+            {
+                if (elem.Tag is CarView car) {
+                    foreach (var carInTable in carsInTable)
+                    {
+                        if (carInTable.Id == car.Id)
+                        {
+                            if (car.FuelDispenserChosen)
+                            {
+                                carInTable.ChosenTRK = (car.ChosenDispenser.Tag as DispenserView).Name;
+                            }
+                            else
+                            {
+                                carInTable.ChosenTRK = "-";
+                            }
+                        }
+                    }
+                }
+            }
+
+            viewModel.CarTableItems = carsInTable;
         }
 
         private void UpdateFuelTankInfo()
         {
             var tanks = canvasParser.Tanks;
             var viewModel = ServiceLocator.Current.GetInstance<ModellingScreenViewModel>();
+            if (viewModel == null) return;
 
-            if (viewModel != null)
+            StringBuilder fuelCount = new StringBuilder("");
+
+            foreach (var tank in tanks)
             {
-                StringBuilder fuelCount = new StringBuilder("");
-
-                foreach (var tank in tanks)
-                {
                     var tankView = tank.Tag as TankView;
                     fuelCount.Append(tankView.CurrentFuelVolumeView + "\n");
-                }
-
-                viewModel.CurrentFuelVolumeView = fuelCount.ToString();
             }
+
+            viewModel.CurrentFuelVolumeView = fuelCount.ToString();
         }
     }
 }

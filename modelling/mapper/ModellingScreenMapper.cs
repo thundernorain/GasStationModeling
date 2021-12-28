@@ -23,7 +23,8 @@ namespace GasStationModeling.modelling.mapper
                         Id = cars.IndexOf(car),
                         Name = car.Model,
                         Volume = car.CurrentFuelSupply,
-                        Price = price
+                        Price = price,
+                        ChosenTRK = "-"
                     });
                 }         
             });

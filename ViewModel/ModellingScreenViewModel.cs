@@ -17,13 +17,22 @@ namespace GasStationModeling.ViewModel
     {
         private string currentCashView;
         private string currentFuelVolumeView;
+        private ObservableCollection<CarTableItem> carTableItems;
 
-         #region Fields
+        #region Fields
         public ModellingSettings Settings { get; set; }
 
         public Topology CurrentTopology { get; set; }
 
-        public ObservableCollection<CarTableItem> CarTableItems { get; set; }
+        public ObservableCollection<CarTableItem> CarTableItems
+        {
+            get => carTableItems;
+            set
+            {
+                carTableItems = value;
+                RaisePropertyChanged(() => CarTableItems);
+            }
+        }
 
         public List<FuelTableItem> Fuels { get; set; }
 
