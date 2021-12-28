@@ -76,6 +76,10 @@ namespace GasStationModeling.modelling
             car.IsFilled = true;
             fuelDispenser.CarsInQueue--;
             fuelDispenser.IsBusy = false;
+
+            var carView = car.Tag as CarView;
+            carView.ChosenDispenser = null;
+            carView.FuelDispenserChosen = false;
         }
         #endregion Car
 
