@@ -25,8 +25,10 @@ namespace GasStationModeling.settings_screen.view
         private void NextButton_Click(object sender, RoutedEventArgs e)
         {
             var settingsViewModel = ServiceLocator.Current.GetInstance<SettingsScreenViewModel>();
+            var mainViewModel = ServiceLocator.Current.GetInstance<MainViewModel>();
             try
             {
+<<<<<<< HEAD
                 ModellingSettings settings = new ModellingSettings()
                 {
                     Interval = IntervalSlider.Value,
@@ -37,6 +39,19 @@ namespace GasStationModeling.settings_screen.view
                     FuelTank = settingsViewModel.getChosenTank() ?? throw new NullReferenceException("Не выбран ТБ")
                 };
                 var mainViewModel = ServiceLocator.Current.GetInstance<MainViewModel>();
+=======
+                ModellingSettings settings = new ModellingSettings();
+
+                settings.Interval = IntervalSlider.Value;
+                settings.ArrivalProbability = ProbabilitySlider.Value;
+                settings.Fuels = settingsViewModel.getChosenFuels() ?? throw new NullReferenceException("Не выбраны виды топлива");
+                settings.CashLimit = CashLimitSlider.Value;
+                settings.Dispenser = settingsViewModel.getChosenFuelDispenser() ?? throw new NullReferenceException("Не выбрана ТРК");
+                settings.FuelTank = settingsViewModel.getChosenTank() ?? throw new NullReferenceException("Не выбран ТБ");
+                
+               
+                mainViewModel.CurrentPageUri = new Uri(MainViewModel.MODELLING_SCREEN_URI, UriKind.Relative);
+>>>>>>>  Середина моделирования
                 mainViewModel.ModellingSettings = settings;
 
                 SimpleIoc.Default.Unregister<ModellingScreenViewModel>();

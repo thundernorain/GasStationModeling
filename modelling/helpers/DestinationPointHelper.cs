@@ -1,6 +1,7 @@
 ﻿using GasStationModeling.core.topology;
 using GasStationModeling.modelling.helpers;
 using GasStationModeling.modelling.mapper;
+using GasStationModeling.modelling.model;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
@@ -30,8 +31,8 @@ namespace GasStationModeling.modelling
         public Point ServiceEntrancePoint { get; set; }
 
         public Point CashBoxPoint { get; private set; }
-        public Dictionary<Rectangle, Point> FuelDispensersDestPoints { get; private set; }
-        public Dictionary<Rectangle, Point> RefuellerDestPoints { get; private set; }
+        public Dictionary<int, Point> FuelDispensersDestPoints { get; private set; }
+        public Dictionary<int, Point> RefuellerDestPoints { get; private set; }
 
         public Point ServiceAreaEntrancePoint { get; private set; }
         public Point ServiceAreaExitPoint { get; private set; }
@@ -80,27 +81,29 @@ namespace GasStationModeling.modelling
             ServiceAreaEntrancePoint = new Point((int)Canvas.GetLeft(elem) + ElementSizeHelper.CELL_WIDTH, SpawnPoint.Y);
         }
 
-        public Dictionary<Rectangle, Point> defineDestPointsToDispensers(CanvasParser parsedCanvas)
+        public Dictionary<int, Point> defineDestPointsToDispensers(CanvasParser parsedCanvas)
         {
-            Dictionary<Rectangle, Point> destPointsDict = new Dictionary<Rectangle, Point>();
+            Dictionary<int, Point> destPointsDict = new Dictionary<int, Point>();
             var elems = parsedCanvas.Dispensers;
             foreach (var rect in elems)
             {
+                var tag = rect.Tag as DispenserView;
                 Point destPoint = new Point((int)Canvas.GetLeft(rect), (int)Canvas.GetTop(rect) + ElementSizeHelper.CELL_HEIGHT);
-                destPointsDict.Add(rect, destPoint);
+                destPointsDict.Add(tag.Id, destPoint);
             }       
             return destPointsDict;
         }
 
-        public Dictionary<Rectangle, Point> defineDestPointsToFuelTanks(CanvasParser parsedCanvas)
+        public Dictionary<int, Point> defineDestPointsToFuelTanks(CanvasParser parsedCanvas)
         {
-            Dictionary<Rectangle, Point> destPointsDict = new Dictionary<Rectangle, Point>();
+            Dictionary<int, Point> destPointsDict = new Dictionary<int, Point>();
             var elems = parsedCanvas.Tanks;
             defineServiceAreaEntrancePoint(elems[0]);
             foreach (var rect in elems)
             {
+                var tag = rect.Tag as TankView;
                 Point destPoint = new Point((int)Canvas.GetLeft(rect) + ElementSizeHelper.CELL_WIDTH, (int)Canvas.GetTop(rect));
-                destPointsDict.Add(rect, destPoint);
+                destPointsDict.Add(tag.Id, destPoint);
             }
             return destPointsDict;
         }

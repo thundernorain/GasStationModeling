@@ -36,7 +36,7 @@ namespace GasStationModeling.modelling
         
         #region Car
 
-       public void StartFilling(ref CarElem car)
+       public void StartFilling(ref CarElem car, ref List<MoveableElem> toAdd)
        {
             var carView = car.Tag as CarView;
             var dispenserView = carView.ChosenDispenser.Tag as DispenserView;
@@ -54,13 +54,13 @@ namespace GasStationModeling.modelling
             dispenserView.refuelCar(ref tankView, ref carView);
             if (tankView.IsRunOut && !_isRefilling)
             {
-                CallRefueller(tankWithFuelType);
+                CallRefueller(tankWithFuelType, ref toAdd);
                 _isRefilling = true;
             }
 
             if (cashBoxView.IsFull && !_isCollectingMoney)
             {
-                CallCollector();
+                CallCollector(ref toAdd);
                 _isCollectingMoney = true;
             }
 
@@ -81,9 +81,11 @@ namespace GasStationModeling.modelling
 
         #region CashCollector
 
-        public void CallCollector()
+        public void CallCollector(ref List<MoveableElem> toAdd)
         {
             var collector = trafficGenerator.SpawnCollector(ref stationCanvas);
+            toAdd.Add(collector);
+
         }
 
         public void CollectCash(ref CollectorElem collector, ref CashBoxView cashBox)
@@ -110,10 +112,10 @@ namespace GasStationModeling.modelling
 
         #region Refueller
 
-        public void CallRefueller(Rectangle fuelTank)
+        public void CallRefueller(Rectangle fuelTank,ref List<MoveableElem> toAdd)
         {
             var refueller = trafficGenerator.SpawnRefueller(fuelTank, ref stationCanvas);
-            stationCanvas.Children.Add(refueller);
+            toAdd.Add(refueller);
         }
 
         public void StartRefilling(ref RefuellerElem refueller)

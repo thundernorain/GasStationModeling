@@ -5,6 +5,8 @@ namespace GasStationModeling.modelling.model
 {
     public class TankView : TopologyView
     {
+        public int Id { get; set; }
+
         private double _currentFuelVolume;
 
         public string CurrentFuelVolumeView { get; set; }
@@ -27,8 +29,9 @@ namespace GasStationModeling.modelling.model
             }
         }
 
-        public TankView(Tank tank)
+        public TankView(int id,Tank tank)
         {
+            Id = id;
             MaxVolume = tank.MaxVolume;
             LimitVolume = tank.LimitVolume;
             TypeFuel = tank.TypeFuel;

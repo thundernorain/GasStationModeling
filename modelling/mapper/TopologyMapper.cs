@@ -26,6 +26,8 @@ namespace GasStationModeling.modelling.mapper
 
         private int chosenFuelId;
 
+        private int objectId;
+
         public int ChosenFuelId
         {
             get
@@ -48,6 +50,7 @@ namespace GasStationModeling.modelling.mapper
             tick = ModellingTimeHelper.TIMER_TICK_MILLISECONDS;
             Fuels = new List<Fuel>(Settings.Fuels);
             ChosenFuelId = 0;
+            objectId = 0;
         }
 
         public CanvasParser mapTopology(Canvas stationCanvas)
@@ -130,14 +133,14 @@ namespace GasStationModeling.modelling.mapper
             }
             else if (elemType == TopologyElement.FuelDispenser)
             {
-                tag = new DispenserView(Settings.Dispenser,tick);
+                tag = new DispenserView(objectId++,Settings.Dispenser,tick);
             }
             else if (elemType == TopologyElement.Tank)
             {
                 Tank tank = Settings.FuelTank;
                 tank.TypeFuel = Fuels[ChosenFuelId];
                 ChosenFuelId++;
-                tag = new TankView(Settings.FuelTank);
+                tag = new TankView(objectId++,Settings.FuelTank);
             }
 
             Rectangle topologyElem = new Rectangle()
