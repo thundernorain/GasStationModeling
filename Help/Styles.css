@@ -60,3 +60,28 @@ img{
     justify-content: center;
     align-items: center;
 }
+
+.container-img-big {
+    text-align:center;
+    margin:20px auto 10px;
+    width: 500px;
+    border: 2px solid #000;
+}
+
+.container-img-small {
+    text-align: center;
+    margin: 20px auto 0px;
+    width: 250px;
+    border: 2px solid #000;
+}
+
+.image {
+    display: inline-block;
+    width: 100%;
+}
+
+.text-img{
+    margin:10px 0;
+    text-align:center;
+    font-size:1.2rem;
+}

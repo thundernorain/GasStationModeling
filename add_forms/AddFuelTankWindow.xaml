@@ -25,6 +25,7 @@
 
             </TextBlock>
             <TextBox x:Name="FuelTankNameTB" 
+                     FontSize="{StaticResource Medium}"
                 Width="200"
                 Height="30"
                 Margin="55,10,0,0">
@@ -41,6 +42,7 @@
 
             </TextBlock>
             <TextBox x:Name="FuelSizeTB" 
+                     FontSize="{StaticResource Medium}"
                 Width="200"
                 Height="30"
                 Margin="50,10,0,0"
