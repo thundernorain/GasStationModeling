@@ -344,6 +344,7 @@
                       Text="Загрузить"  
                       Foreground="White"
                       MaxWidth="200"
+                      MinWidth="180"
                       Background="{StaticResource ComboBox.Static.Background}" >
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
@@ -362,7 +363,9 @@
                 <Rectangle 
                     Fill="{StaticResource AquaBrush}"
                     Height="50"
-                    Width="120" Canvas.Left="36"
+                    Width="120" 
+                    Canvas.Left="36"
+                    Canvas.Top="4"
                     />
 
                 <TextBlock 

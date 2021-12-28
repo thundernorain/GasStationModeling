@@ -65,6 +65,13 @@ namespace GasStationModeling.DB
             var result = collection.UpdateOne(filter, definition);
             return getCollection();
         }
+
+        public List<T> updateEntryByName(String name, UpdateDefinition<T> definition)
+        {
+            var filter = Builders<T>.Filter.Eq("Name", name);
+            var result = collection.UpdateOne(filter, definition);
+            return getCollection();
+        }
     }
 
     class DBWorkerKeys

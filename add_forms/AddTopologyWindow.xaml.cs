@@ -55,11 +55,31 @@ namespace GasStationModeling.add_forms
                 ServiceAreaWidth = topology.TopologyColumnCountWorker
             };
 
-            var newCollection = dbWorker.insertEntry(topologyDTO);
+            List<TopologyDTO> newCollection;
+
+            if(dbWorker.getCollection().Exists(topology => topology.Name.Equals(name)))
+            {
+                newCollection = updateTopology(topologyDTO);
+            }
+            else
+            {
+                newCollection = dbWorker.insertEntry(topologyDTO);
+            }
+           
             var welcomeViewModel = ServiceLocator.Current.GetInstance<WelcomeViewModel>();
             welcomeViewModel.Topologies = newCollection;
 
             Close();
+        }
+
+        public List<TopologyDTO> updateTopology(TopologyDTO topology)
+        {
+            var update = Builders<TopologyDTO>
+                .Update
+                .Set(x => x.Topology, topology.Topology)
+                .Set(x => x.ServiceAreaWidth, topology.ServiceAreaWidth);
+
+            return dbWorker.updateEntryByName(topology.Name, update);
         }
     }
 }

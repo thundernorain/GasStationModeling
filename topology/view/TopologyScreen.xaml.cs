@@ -147,16 +147,6 @@ namespace GasStationModeling.topology.view
             }
         }
 
-        public List<TopologyDTO> updateTopology(TopologyDTO topology)
-        {
-            var update = Builders<TopologyDTO>
-                .Update
-                .Set(x => x.Topology, topology.Topology)
-                .Set(x => x.ServiceAreaWidth, topology.ServiceAreaWidth);
-
-            return dbWorker.updateEntry(topology.Id, update);
-        }
-
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             SimpleIoc.Default.Unregister<MainViewModel>();

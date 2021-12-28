@@ -25,9 +25,12 @@ namespace GasStationModeling.ViewModel
             get => _selectedTopology;
             set
             {
-                LoadTopology(value);
-                _selectedTopology = "Загрузить";
-                RaisePropertyChanged(() => SelectedTopology);
+                if(value != null)
+                {
+                    LoadTopology(value);
+                    _selectedTopology = "Загрузить";
+                    RaisePropertyChanged(() => SelectedTopology);
+                }
             }
         }
 
