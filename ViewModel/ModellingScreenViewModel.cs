@@ -15,6 +15,9 @@ namespace GasStationModeling.ViewModel
 {
     public class ModellingScreenViewModel : ViewModelBase
     {
+        private string currentCashView;
+        private string currentFuelVolumeView;
+
          #region Fields
         public ModellingSettings Settings { get; set; }
 
@@ -30,9 +33,25 @@ namespace GasStationModeling.ViewModel
 
         public List<Car> Cars { get; set; }
 
-        public string CurrentFuelVolumeView = "22";
+        public string CurrentCashView
+        {
+            get => currentCashView;
+            set
+            {
+                currentCashView = value;
+                RaisePropertyChanged(() => CurrentCashView);
+            }
+        }
 
-        public string CurrentCashView = "11";
+        public string CurrentFuelVolumeView
+        {
+            get => currentFuelVolumeView;
+            set
+            {
+                currentFuelVolumeView = value;
+                RaisePropertyChanged(() => CurrentFuelVolumeView);
+            }
+        }
 
             
         #endregion 

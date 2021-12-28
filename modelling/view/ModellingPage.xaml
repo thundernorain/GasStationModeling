@@ -67,14 +67,16 @@
                    HorizontalAlignment="Center" 
                    TextAlignment="Left" 
                    Margin="24,0,17,269"
-                   Text="22" Width="378" Height="24" VerticalAlignment="Bottom"/>
+                   Text="{Binding CurrentCashView}"
+                   Width="378" Height="24" VerticalAlignment="Bottom"/>
 
             <TextBlock x:Name="FuelCountInfo" Style="{StaticResource BaseText}" 
                    FontSize="{StaticResource Medium}" 
                    HorizontalAlignment="Center" 
                    TextAlignment="Left" 
                    Margin="24,0,17,238"
-                   Text="11" Width="378" Height="26" VerticalAlignment="Bottom"/>
+                   Text="{Binding CurrentFuelVolumeView}"
+                   Width="378" Height="26" VerticalAlignment="Bottom"/>
 
             <Button x:Name="GoBackButton" Style="{StaticResource AquaButton}" Content="Назад" Margin="26,675,213,45" Click="Button_Click"/>
 

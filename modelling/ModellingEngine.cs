@@ -3,6 +3,7 @@ using GasStationModeling.core.models;
 using GasStationModeling.core.topology;
 using GasStationModeling.modelling.helpers;
 using GasStationModeling.modelling.managers;
+using GasStationModeling.modelling.model;
 using GasStationModeling.modelling.moveableElems;
 using GasStationModeling.modelling.pictureView;
 using GasStationModeling.settings_screen.model;
@@ -33,6 +34,8 @@ namespace GasStationModeling.modelling
 
         private ModellingScreenViewModel mscvModel;
 
+        private CanvasParser canvasParser;
+
         public ModellingEngine(
             ModellingTimeHelper timeHelper,
             ModellingSettings _settings,
@@ -50,6 +53,7 @@ namespace GasStationModeling.modelling
             mover = new MoveHelper(parsedCanvas, settings, dpHelper);
 
             this.cars = cars;
+            this.canvasParser = parsedCanvas;
         }
 
         public void Tick(bool IsPaused)
@@ -112,33 +116,50 @@ namespace GasStationModeling.modelling
 
             #region UI
 
-            UpdateTables(stationCanvas);
+            UpdateTables();
 
             #endregion UI
         }
 
-        private void UpdateTables( Canvas stationCanvas)
+        private void UpdateTables()
         {
-            UpdateCashCounterInfo(stationCanvas);
-            UpdateFuelDispenserInfo(stationCanvas);
-            UpdateFuelTankInfo(stationCanvas);
+            UpdateCashCounterInfo();
+            UpdateFuelDispenserInfo();
+            UpdateFuelTankInfo();
 
             //TODO: Label для заправки и кассы
         }
 
-        private static void UpdateCashCounterInfo(Canvas stationCanvasy)
+        private void UpdateCashCounterInfo()
         {
-            //TODO
+            var cashBox = canvasParser.CashBox.Tag as CashBoxView;
+            var viewModel = ServiceLocator.Current.GetInstance<ModellingScreenViewModel>();
+
+            if (viewModel != null) viewModel.CurrentCashView = cashBox.CurrentCashView;
         }
 
-        private static void UpdateFuelDispenserInfo(Canvas stationCanvas)
+        private void UpdateFuelDispenserInfo()
         {
            //TODO
         }
 
-        private static void UpdateFuelTankInfo(Canvas stationCanvas)
+        private void UpdateFuelTankInfo()
         {
-            //TODO
+            var tanks = canvasParser.Tanks;
+            var viewModel = ServiceLocator.Current.GetInstance<ModellingScreenViewModel>();
+
+            if (viewModel != null)
+            {
+                StringBuilder fuelCount = new StringBuilder("");
+
+                foreach (var tank in tanks)
+                {
+                    var tankView = tank.Tag as TankView;
+                    fuelCount.Append(tankView.CurrentFuelVolumeView + "\n");
+                }
+
+                viewModel.CurrentFuelVolumeView = fuelCount.ToString();
+            }
         }
     }
 }
