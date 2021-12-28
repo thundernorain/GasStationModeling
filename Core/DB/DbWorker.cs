@@ -1,4 +1,5 @@
-﻿using GasStationModeling.core.DB.Interfaces;
+﻿using GasStationModeling.core.DB.dto;
+using GasStationModeling.core.DB.Interfaces;
 using GasStationModeling.exceptions;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
@@ -55,6 +56,13 @@ namespace GasStationModeling.DB
         public List<T> insertEntry(T entry)
         {
             collection.InsertOne(entry);
+            return getCollection();
+        }
+
+        public List<T> updateEntry(ObjectId id,UpdateDefinition<T> definition)
+        {
+            var filter = Builders<T>.Filter.Eq("_id", id);
+            var result = collection.UpdateOne(filter, definition);
             return getCollection();
         }
     }

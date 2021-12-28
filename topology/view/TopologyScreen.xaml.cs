@@ -7,6 +7,11 @@ using System.Windows;
 using System.Windows.Controls;
 using GasStationModeling.main_window.view;
 using GalaSoft.MvvmLight.Ioc;
+using MongoDB.Driver;
+using GasStationModeling.core.DB;
+using GasStationModeling.DB;
+using GasStationModeling.core.DB.dto;
+using System.Collections.Generic;
 
 namespace GasStationModeling.topology.view
 {
@@ -15,6 +20,9 @@ namespace GasStationModeling.topology.view
     /// </summary>
     public partial class TopologyScreen : Page
     {
+        private static IMongoDatabase DB = DbInitializer.getInstance();
+        private static DbWorker<TopologyDTO> dbWorker = new DbWorker<TopologyDTO>(DB, DBWorkerKeys.TOPOLOGIES_KEY);
+
         public TopologyScreen()
         {
             InitializeComponent();
@@ -137,6 +145,16 @@ namespace GasStationModeling.topology.view
                 AddTopologyWindow addTopologyWindow = new AddTopologyWindow(mainViewModel.GetTopology);
                 addTopologyWindow.Show();
             }
+        }
+
+        public List<TopologyDTO> updateTopology(TopologyDTO topology)
+        {
+            var update = Builders<TopologyDTO>
+                .Update
+                .Set(x => x.Topology, topology.Topology)
+                .Set(x => x.ServiceAreaWidth, topology.ServiceAreaWidth);
+
+            return dbWorker.updateEntry(topology.Id, update);
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
