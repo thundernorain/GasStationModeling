@@ -10,9 +10,6 @@ namespace GasStationModeling.modelling.pictureView
 {
     public class MoveableElem : Shape
     {
-
-
-
         protected override Geometry DefiningGeometry {
             get
             {
@@ -22,7 +19,6 @@ namespace GasStationModeling.modelling.pictureView
                 return new RectangleGeometry(rect);
             }
         }
-
 
         public bool IsGoingToFill { get; set; }
         public bool IsOnStation { get; set; }

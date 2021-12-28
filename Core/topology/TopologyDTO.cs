@@ -13,6 +13,7 @@ namespace GasStationModeling.core.DB.dto
     {
         [BsonId]
         public ObjectId Id { get; set; }
+
         public String Name { get; set; }
         public IGasStationElement[,] Topology { get; set; }
         public int ServiceAreaWidth { get; set; }
