@@ -62,12 +62,35 @@ namespace GasStationModeling.modelling.helpers
                     var collector = vehicle as CollectorElem;
                     var cashCounter = canvasElems.CashBox.Tag as CashBoxView;
                     modellingSteps.CollectCash(ref collector, ref cashCounter);
+
+                    collector.removeDestinationPoints();
+                    collector.AddDestinationPoint(DpHelper.ExitPoint);
+                    collector.AddDestinationPoint(DpHelper.LeavePointNoFilling);
                     return stationCanvas;
                 }
             }
 
-           
-            var destPoint = vehicle.GetDestinationPoint();
+            if(Canvas.GetLeft(vehicle) <= 5 &&
+                    Canvas.GetTop(vehicle) <= 5)
+            {
+                {
+                    toDelete.Add(vehicle);
+                }
+            }
+
+            if (vehicle.Type.Equals("Collector"))
+            {
+                if (Canvas.GetLeft(vehicle)  - DpHelper.LeavePointFilled.X <= 5 &&
+                   Canvas.GetTop(vehicle) - DpHelper.LeavePointFilled.Y <= 5)
+                {
+                    {
+                        toDelete.Add(vehicle);
+                    }
+                }
+            }
+
+
+                var destPoint = vehicle.GetDestinationPoint();
             var carSpeed = vehicle.IsGoingToFill ? CarSpeedFilling : CarSpeedNoFilling;
 
             var destSpot = vehicle.DestinationSpot;
@@ -120,11 +143,12 @@ namespace GasStationModeling.modelling.helpers
                         collectorView.CashBox = cashBoxView;
 
                         collector.removeDestinationPoints();
-                        collector.AddDestinationPoint(DpHelper.LeavePointNoFilling);
                         collector.AddDestinationPoint(DpHelper.ExitPoint);
-
+                        collector.AddDestinationPoint(DpHelper.LeavePointNoFilling);
+                        
                         return stationCanvas;
                     }
+
                 }
 
                 if (destPoint.Equals(DpHelper.ExitPoint))
