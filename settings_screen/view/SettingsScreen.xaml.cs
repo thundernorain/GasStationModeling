@@ -36,14 +36,11 @@ namespace GasStationModeling.settings_screen.view
                 settings.CashLimit = CashLimitSlider.Value;
                 settings.Dispenser = settingsViewModel.getChosenFuelDispenser() ?? throw new NullReferenceException("Не выбрана ТРК");
                 settings.FuelTank = settingsViewModel.getChosenTank() ?? throw new NullReferenceException("Не выбран ТБ");
-                
-               
-                mainViewModel.CurrentPageUri = new Uri(MainViewModel.MODELLING_SCREEN_URI, UriKind.Relative);
-                mainViewModel.ModellingSettings = settings;
 
                 SimpleIoc.Default.Unregister<ModellingScreenViewModel>();
                 SimpleIoc.Default.Register<ModellingScreenViewModel>();
 
+                mainViewModel.ModellingSettings = settings;
                 mainViewModel.CurrentPageUri = new Uri(MainViewModel.MODELLING_SCREEN_URI, UriKind.Relative);
             }
             catch(Exception ex)
