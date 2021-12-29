@@ -419,6 +419,7 @@
     <Resource Include="Help\images\toolbox.PNG" />
     <Resource Include="Help\images\topology.PNG" />
     <Resource Include="Help\images\welcome.PNG" />
+    <Resource Include="Help\images\modelling.png" />
     <Content Include="Help\Index.html" />
     <Content Include="Help\index.js" />
     <Resource Include="Help\premium-icon-up-arrrows-5245623.png" />
