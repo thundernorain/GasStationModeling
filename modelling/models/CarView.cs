@@ -44,7 +44,7 @@ namespace GasStationModeling.modelling.model
 
         public void PayForFuel(ref CashBoxView cashBoxView, double price)
         {
-            SpendForFuel = CurrentFuelSupply * price;
+            SpendForFuel = CurrentFuelSupply * price;/// 50;
             cashBoxView.CurrentCashCount += SpendForFuel;
         }
     }

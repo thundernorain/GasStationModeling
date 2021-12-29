@@ -103,6 +103,7 @@ namespace GasStationModeling.modelling
 
             if (cashBox.CurrentCashCount <= 0)
             {
+                cashBox.CurrentCashCount = 0;
                 StopCollecting(ref collector);
             }
         }

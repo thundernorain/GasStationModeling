@@ -164,7 +164,7 @@ namespace GasStationModeling.modelling.helpers
         private void LeaveServiceArea(ref RefuellerElem refueller)
         {
             refueller.AddDestinationPoint(DpHelper.LeavePointNoFilling);
-            //refueller.AddDestinationPoint(DpHelper.ServiceAreaEntrancePoint);
+            refueller.AddDestinationPoint(DpHelper.ServiceAreaEntrancePoint);
         }
     }
 }

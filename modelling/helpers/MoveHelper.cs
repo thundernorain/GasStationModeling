@@ -12,9 +12,9 @@ namespace GasStationModeling.modelling.helpers
     class MoveHelper
     {
 
-        private static int CarSpeedFilling = 3;
-        private static int CarSpeedNoFilling = 4;
-        private static int RefuellerSpeed = 2;
+        private static int CarSpeedFilling = 5;
+        private static int CarSpeedNoFilling = 6;
+        private static int RefuellerSpeed = 4;
 
         private Canvas stationCanvas;
         public DestinationPointHelper DpHelper { get; set; }
@@ -60,12 +60,13 @@ namespace GasStationModeling.modelling.helpers
                 if (vehicle.Type.Equals("Collector"))
                 {
                     var collector = vehicle as CollectorElem;
-                    var cashCounter = collectorView.CashBox.Tag as CashBoxView;
+                    var cashCounter = canvasElems.CashBox.Tag as CashBoxView;
                     modellingSteps.CollectCash(ref collector, ref cashCounter);
                     return stationCanvas;
                 }
             }
 
+           
             var destPoint = vehicle.GetDestinationPoint();
             var carSpeed = vehicle.IsGoingToFill ? CarSpeedFilling : CarSpeedNoFilling;
 
@@ -109,13 +110,19 @@ namespace GasStationModeling.modelling.helpers
 
                 if (vehicle.Type.Equals("Collector"))
                 {
-                    if (destPoint.Equals(DpHelper.CashBoxPoint))
-                    {
+
+                    if(Canvas.GetLeft(vehicle) - DpHelper.CashBoxPoint.X <= 20) {
                         var collector = vehicle as CollectorElem;
                         collector.IsFilling = true;
-                        var cashBoxView = canvasElems.CashBox.Tag as CashBoxView;
                         collectorView.IsMovingToCashBox = true;
-                        modellingSteps.CollectCash(ref collector,ref cashBoxView);
+
+                        var cashBoxView = canvasElems.CashBox;
+                        collectorView.CashBox = cashBoxView;
+
+                        collector.removeDestinationPoints();
+                        collector.AddDestinationPoint(DpHelper.LeavePointNoFilling);
+                        collector.AddDestinationPoint(DpHelper.ExitPoint);
+
                         return stationCanvas;
                     }
                 }
@@ -304,7 +311,7 @@ namespace GasStationModeling.modelling.helpers
                 Canvas.SetLeft(refueller, refuellerLeft - refuellerSpeed);
             }
 
-            if (Canvas.GetRight(refueller) <= destPoint.X)
+            if (right(refueller) <= destPoint.X)
             {
                 refuellerLeft = left(refueller);
                 Canvas.SetLeft(refueller, refuellerLeft + refuellerSpeed);
@@ -316,7 +323,7 @@ namespace GasStationModeling.modelling.helpers
                 Canvas.SetTop(refueller, refuellerTop - refuellerSpeed);
             }
 
-            if (Canvas.GetBottom(refueller) <= destPoint.Y)
+            if (bottom(refueller) <= destPoint.Y)
             {
                 refuellerTop = top(refueller);
                 Canvas.SetTop(refueller, refuellerTop + refuellerSpeed);
