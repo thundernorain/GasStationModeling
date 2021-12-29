@@ -25,7 +25,7 @@ namespace GasStationModeling.modelling.model
             set
             {
                 _currentFuelVolume = value;
-                CurrentFuelVolumeView = "Объём топлива в ТБ " + TypeFuel.Name + " (м3) : " + (int)_currentFuelVolume + " \\ " + MaxVolume + " м3";
+                CurrentFuelVolumeView = "Объём топлива в ТБ " + TypeFuel.Name + " (м3) : " + (int)_currentFuelVolume + " \\ " + (int)MaxVolume + " м3";
             }
         }
 

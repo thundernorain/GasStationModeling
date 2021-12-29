@@ -19,7 +19,7 @@ namespace GasStationModeling.modelling.model
             set
             {
                 _currentCash = value;
-                CurrentCashView = "Объём денег в кассе (руб) : " + (int)_currentCash + " \\ " + CashLimit + " руб";
+                CurrentCashView = "Объём денег в кассе (руб) : " + (int)_currentCash + " \\ " + (int)CashLimit + " руб";
             }
         }
 
