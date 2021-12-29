@@ -54,7 +54,8 @@ namespace GasStationModeling.modelling
                 ModellingTimeHelper.TIMER_TICK_MILLISECONDS,
                 settings.CashLimit / settings.CollectingTimeSec,
                 destPointHelper.SpawnPoint);
-            elem.AddDestinationPoint(destPointHelper.LeavePointFilled);
+            elem.removeDestinationPoints();
+            elem.AddDestinationPoint(destPointHelper.LeavePointNoFilling);
             elem.AddDestinationPoint(destPointHelper.ExitPoint);
             elem.AddDestinationPoint(destPointHelper.CashBoxPoint);
             elem.AddDestinationPoint(destPointHelper.EntrancePoint);

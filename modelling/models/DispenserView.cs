@@ -37,8 +37,8 @@ namespace GasStationModeling.modelling.model
         {
             if(tankView.CurrentFuelVolume > SpeedRefuelingPerTick)
             {
-                tankView.CurrentFuelVolume -= car.CurrentFuelSupply / 2;
-                car.CurrentFuelVolume += car.CurrentFuelSupply / 2;
+                tankView.CurrentFuelVolume -= SpeedRefuelingPerTick;
+                car.CurrentFuelVolume += SpeedRefuelingPerTick;
             }         
         }
     }

@@ -3,6 +3,7 @@ using GasStationModeling.modelling.pictureView;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Shapes;
 
 namespace GasStationModeling.modelling.helpers
 {
@@ -20,185 +21,190 @@ namespace GasStationModeling.modelling.helpers
             var destPoint = activeVehicle.GetDestinationPoint();
 
             Rect activeVehicleRect = new Rect(
-                Canvas.GetLeft(activeVehicle),
-                Canvas.GetTop(activeVehicle),
-                activeVehicle.Width,
-                activeVehicle.Height);
+                Canvas.GetLeft(activeVehicle) + 5,
+                Canvas.GetTop(activeVehicle) + 5,
+                activeVehicle.Width - 10,
+                activeVehicle.Height - 10);
 
-            foreach (var elem in stationCanvas.Children.OfType<MoveableElem>())
+            foreach (var elem in stationCanvas.Children)
             {
                 if (elem == activeVehicle)
                 {
                     continue;
                 }
 
-                var moveableElem = elem;
+             
+                    var moveableElem = elem as UIElement;
 
-                Rect moveableElemRect = new Rect(
-                    Canvas.GetLeft(moveableElem),
-                    Canvas.GetTop(moveableElem),
-                    moveableElem.Width,
-                    moveableElem.Height);
+                    Rect moveableElemRect = new Rect(
+                        Canvas.GetLeft(moveableElem),
+                        Canvas.GetTop(moveableElem),
+                        48,
+                        48);
 
-                if (!activeVehicleRect.IntersectsWith(moveableElemRect))
+                    if (!activeVehicleRect.IntersectsWith(moveableElemRect))
+                    {
+                        continue;
+                    }
+                if (elem is MoveableElem)
                 {
-                    continue;
-                }
-
-                var anotherVehicle = moveableElem;
-
-                switch (direction)
-                {
-                    case Directions.Up:
-                        {
-                            Canvas.SetTop(activeVehicle, bottom(anotherVehicle));
-
-                            break;
-                        }
-
-                    case Directions.Right:
-                        {
-                            Canvas.SetLeft(activeVehicle, left(anotherVehicle) - activeVehicle.Width);
-                            break;
-                        }
-
-                    case Directions.Down:
-                        {
-                            Canvas.SetTop(activeVehicle, top(anotherVehicle) - activeVehicle.Height);
-                            break;
-                        }
-
-                    case Directions.Left:
-                        {
-                            Canvas.SetLeft(activeVehicle, right(anotherVehicle));
-                            break;
-                        }
-                }
-
-                // Fuel Dispenser
-                if (moveableElem.Tag is DispenserView || moveableElem.Tag is CashBoxView)
-                {
-                    var fuelDispenser = moveableElem;
-
-                    var initialDestinationPoint = activeVehicle.GetDestinationPoint();
-
-                    double newDestX;
-                    double newDestY;
-
-                    bool bypassFromLeft = false;
-                    bool bypassFromRight = false;
-                    bool bypassFromBottom = false;
-                    bool bypassFromTop = false;
-
-                    Point newDestinationPoint1;
-                    Point newDestinationPoint2;
-                    Point newDestinationPoint3;
+                    var anotherVehicle = moveableElem;
 
                     switch (direction)
                     {
                         case Directions.Up:
                             {
-                                Canvas.SetTop(activeVehicle, bottom(fuelDispenser));
+                                Canvas.SetTop(activeVehicle, bottom(anotherVehicle));
 
-                                if (!activeVehicle.IsBypassingObject)
-                                {
-                                    activeVehicle.IsBypassingObject = true;
-
-                                    if (destPoint.X < left(activeVehicle))
-                                    {
-                                        newDestX = left(fuelDispenser) - (activeVehicle.Width + 5);
-                                        bypassFromLeft = true;
-                                    }
-                                    else
-                                    {
-                                        newDestX = right(fuelDispenser) + (activeVehicle.Width + 5);
-                                        bypassFromRight = true;
-                                    }
-
-                                    newDestY = bottom(fuelDispenser) + 10;
-
-
-                                    newDestinationPoint1 = new Point(newDestX,
-                                        newDestY);
-
-                                    newDestY = top(fuelDispenser) + activeVehicle.Height + 10;
-                                    newDestinationPoint2 = new Point(newDestX,
-                                        newDestY);
-
-                                    activeVehicle.removeDestinationPoint();
-                                    activeVehicle.AddDestinationPoint(newDestinationPoint2);
-                                    activeVehicle.AddDestinationPoint(newDestinationPoint1);
-                                }
                                 break;
                             }
 
                         case Directions.Right:
                             {
+                                Canvas.SetRight(activeVehicle, left(anotherVehicle) - activeVehicle.Width);
                                 break;
                             }
 
                         case Directions.Down:
                             {
-                                Canvas.SetTop(activeVehicle, top(fuelDispenser) - activeVehicle.Height);   
-                                if (!activeVehicle.IsBypassingObject)
-                                {
-                                    activeVehicle.IsBypassingObject = true;
-
-
-                                    newDestX = left(fuelDispenser) - (activeVehicle.Width + 5);
-
-                                    newDestY = top(fuelDispenser) - 10;
-
-                                    newDestinationPoint1 = new Point(newDestX,
-                                        newDestY);
-
-                                    activeVehicle.removeDestinationPoint();
-                                    activeVehicle.AddDestinationPoint(newDestinationPoint1);
-                                }
-
+                                Canvas.SetBottom(activeVehicle, top(anotherVehicle) - activeVehicle.Height);
                                 break;
                             }
 
                         case Directions.Left:
                             {
-                                Canvas.SetLeft(activeVehicle, right(fuelDispenser));
-                                if (!activeVehicle.IsBypassingObject)
-                                {
-                                    activeVehicle.IsBypassingObject = true;
-
-
-                                    newDestX = right(fuelDispenser) + 10;
-                                    newDestY = top(fuelDispenser) - (ElementSizeHelper.CELL_HEIGHT + 5);
-
-                                    newDestinationPoint1 = new Point(newDestX,
-                                        newDestY);
-
-                                    if (activeVehicle.IsFilled)
-                                    {
-                                        newDestX = left(fuelDispenser) - ElementSizeHelper.CELL_WIDTH - 5;
-                                    }
-                                    else
-                                    {
-                                        activeVehicle.IsGoesHorizontal = true;
-                                        newDestX = (int)initialDestinationPoint.X + ElementSizeHelper.CELL_WIDTH / 2;
-                                    }
-
-                                    newDestinationPoint2 = new Point(newDestX, newDestY);
-
-                                    activeVehicle.FromLeftBypassingPoint = newDestinationPoint2;
-
-                                    newDestinationPoint3 = new Point(left(fuelDispenser) - 20,
-                                        destPoint.Y - 20);
-
-                                    activeVehicle.removeDestinationPoint();
-                                    activeVehicle.AddDestinationPoint(newDestinationPoint2);
-                                    activeVehicle.AddDestinationPoint(newDestinationPoint1);
-                                }
-
+                                Canvas.SetLeft(activeVehicle, right(anotherVehicle));
                                 break;
                             }
                     }
                 }
+                if(elem is Rectangle)
+                {
+                    // Fuel Dispenser
+                    if ((elem as Rectangle).Tag is DispenserView || (elem as Rectangle).Tag is CashBoxView)
+                    {
+                        var fuelDispenser = elem as Rectangle;
+
+                        var initialDestinationPoint = activeVehicle.GetDestinationPoint();
+
+                        double newDestX;
+                        double newDestY;
+
+                        bool bypassFromLeft = false;
+                        bool bypassFromRight = false;
+                        bool bypassFromBottom = false;
+                        bool bypassFromTop = false;
+
+                        Point newDestinationPoint1;
+                        Point newDestinationPoint2;
+                        Point newDestinationPoint3;
+
+                        switch (direction)
+                        {
+                            case Directions.Up:
+                                {
+                                    Canvas.SetTop(activeVehicle, bottom(fuelDispenser));
+
+                                    if (!activeVehicle.IsBypassingObject)
+                                    {
+                                        activeVehicle.IsBypassingObject = true;
+
+                                        if (destPoint.X < left(activeVehicle))
+                                        {
+                                            newDestX = left(fuelDispenser) - (activeVehicle.Width + 5);
+                                            bypassFromLeft = true;
+                                        }
+                                        else
+                                        {
+                                            newDestX = right(fuelDispenser) + (activeVehicle.Width + 5);
+                                            bypassFromRight = true;
+                                        }
+
+                                        newDestY = bottom(fuelDispenser) + 10;
+
+
+                                        newDestinationPoint1 = new Point(newDestX,
+                                            newDestY);
+
+                                        newDestY = top(fuelDispenser) + activeVehicle.Height + 10;
+                                        newDestinationPoint2 = new Point(newDestX,
+                                            newDestY);
+
+                                        activeVehicle.removeDestinationPoint();
+                                        activeVehicle.AddDestinationPoint(newDestinationPoint2);
+                                        activeVehicle.AddDestinationPoint(newDestinationPoint1);
+                                    }
+                                    break;
+                                }
+
+                            case Directions.Right:
+                                {
+                                    break;
+                                }
+
+                            case Directions.Down:
+                                {
+                                    Canvas.SetTop(activeVehicle, top(fuelDispenser) - activeVehicle.Height);
+                                    if (!activeVehicle.IsBypassingObject)
+                                    {
+                                        activeVehicle.IsBypassingObject = true;
+
+
+                                        newDestX = left(fuelDispenser) - (activeVehicle.Width + 5);
+
+                                        newDestY = top(fuelDispenser) - 10;
+
+                                        newDestinationPoint1 = new Point(newDestX,
+                                            newDestY);
+
+                                        activeVehicle.removeDestinationPoint();
+                                        activeVehicle.AddDestinationPoint(newDestinationPoint1);
+                                    }
+
+                                    break;
+                                }
+
+                            case Directions.Left:
+                                {
+                                    Canvas.SetLeft(activeVehicle, right(fuelDispenser));
+                                    if (!activeVehicle.IsBypassingObject)
+                                    {
+                                        activeVehicle.IsBypassingObject = true;
+
+
+                                        newDestX = right(fuelDispenser) + 10;
+                                        newDestY = top(fuelDispenser) - (ElementSizeHelper.CELL_HEIGHT + 5);
+
+                                        newDestinationPoint1 = new Point(newDestX,
+                                            newDestY);
+
+                                        if (activeVehicle.IsFilled)
+                                        {
+                                            newDestX = left(fuelDispenser) - ElementSizeHelper.CELL_WIDTH - 5;
+                                        }
+                                        else
+                                        {
+                                            activeVehicle.IsGoesHorizontal = true;
+                                            newDestX = (int)initialDestinationPoint.X + ElementSizeHelper.CELL_WIDTH / 2;
+                                        }
+
+                                        newDestinationPoint2 = new Point(newDestX, newDestY);
+
+                                        activeVehicle.FromLeftBypassingPoint = newDestinationPoint2;
+
+                                        newDestinationPoint3 = new Point(left(fuelDispenser) - 20,
+                                            destPoint.Y - 20);
+
+                                        activeVehicle.removeDestinationPoint();
+                                        activeVehicle.AddDestinationPoint(newDestinationPoint2);
+                                        activeVehicle.AddDestinationPoint(newDestinationPoint1);
+                                    }
+
+                                    break;
+                                }
+                        }
+                    }
+                }          
             }
 
             return activeVehicle.GetDestinationPoint();

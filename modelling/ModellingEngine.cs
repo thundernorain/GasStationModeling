@@ -74,7 +74,7 @@ namespace GasStationModeling.modelling
                 var car = cars[randomCarId];
 
                 var carElem = trafficGenerator.SpawnCar(car,stationCanvas);
-                modellingTimeHelper.TimeBetweenCars = settings.Interval/5;
+                modellingTimeHelper.TimeBetweenCars = settings.Interval/20;
                 modellingTimeHelper.TicksAfterLastCarSpawning = 0;
             }
 
@@ -168,11 +168,12 @@ namespace GasStationModeling.modelling
             foreach (var elem in stationCanvas.Children.OfType<MoveableElem>())
             {
                 if (elem.Tag is CarView car) {
-                    if (car.FuelDispenserChosen)
+                    if (elem.IsFilling)
                     {
                         var carToAdd = new CarTableItem();
                         carToAdd.TRK = (car.ChosenDispenser.Tag as DispenserView).Id.ToString();
                         carToAdd.Id = car.Id;
+                        carToAdd.FuelType = car.TypeFuel;
                         carToAdd.Name = car.Model;
                         carToAdd.Volume = (int)car.CurrentFuelSupply;
                         carToAdd.Price = (int)car.SpendForFuel;
