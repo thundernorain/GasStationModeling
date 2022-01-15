@@ -2,6 +2,7 @@
 using GasStationModeling.modelling.models;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Shapes;
 
 namespace GasStationModeling.modelling.model
 {
@@ -17,16 +18,17 @@ namespace GasStationModeling.modelling.model
 
         public int CarsInQueue { get; set; }
 
+        public Rectangle CurrentTank { get; set; }
+
         public DispenserView(int id,FuelDispenser dispenser, double tick)
         {
             Id = id;
             Name = dispenser.Name;
 
             //Скорость в литрах в минуту
-            //Моделрование работает на миллисекундах
+            //Моделирование работает на миллисекундах
             //умножаем скорость на размер тика
-            // делим на 60 (кол-во секунд в минуте)
-            // и 100 (кол-во миллисекнуд в секунде)
+            // и делим на 1000 (кол-во миллисекнуд в секунде)
             SpeedRefuelingPerTick = dispenser.SpeedRefueling * tick / 1000;
 
             IsBusy = false;
@@ -39,7 +41,12 @@ namespace GasStationModeling.modelling.model
             {
                 tankView.CurrentFuelVolume -= SpeedRefuelingPerTick;
                 car.CurrentFuelVolume += SpeedRefuelingPerTick;
-            }         
+            }  
+            else
+            {
+                car.CurrentFuelVolume += tankView.CurrentFuelVolume;
+                tankView.CurrentFuelVolume = 0;
+            }
         }
     }
 }

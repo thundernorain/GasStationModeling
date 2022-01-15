@@ -8,7 +8,6 @@ namespace GasStationModeling.modelling.pictureView
 {
     public class CarElem : MoveableElem
     {
-        
         public CarElem(ImageBrush brush, Point location, CarView carView)
         {
             Tag = carView;
@@ -17,5 +16,7 @@ namespace GasStationModeling.modelling.pictureView
             Fill = brush;
             IsGoingToFill = false;
         }
+
+        public CarView View => Tag as CarView;
     }
 }

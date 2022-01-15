@@ -55,8 +55,7 @@ namespace GasStationModeling.modelling
             this.canvasParser = parsedCanvas;
             this.cars = cars;
         }
-  
-
+ 
         public Canvas Tick(bool IsPaused)
         {
             if (IsPaused)
@@ -74,7 +73,7 @@ namespace GasStationModeling.modelling
                 var car = cars[randomCarId];
 
                 var carElem = trafficGenerator.SpawnCar(car,stationCanvas);
-                modellingTimeHelper.TimeBetweenCars = settings.Interval/20;
+                modellingTimeHelper.TimeBetweenCars = settings.Interval;
                 modellingTimeHelper.TicksAfterLastCarSpawning = 0;
             }
 
@@ -101,7 +100,7 @@ namespace GasStationModeling.modelling
                 // Collector
                 if (moveableElem is CollectorElem collector)
                 {
-                    moveableElem =  router.RouteVehicle(moveableElem);
+                    moveableElem =  router.RouteVehicle  (moveableElem);
 
                     stationCanvas = mover.MoveCarToDestination( moveableElem,ref toDelete, ref toAdd);
 
@@ -146,7 +145,7 @@ namespace GasStationModeling.modelling
             UpdateCashCounterInfo();
             UpdateFuelDispenserInfo();
             UpdateFuelTankInfo();
-
+            updateTimeUI();
             //TODO: Label для заправки и кассы
         }
 
@@ -201,6 +200,11 @@ namespace GasStationModeling.modelling
             }
 
             viewModel.CurrentFuelVolumeView = fuelCount.ToString();
+        }
+
+        public void updateTimeUI()
+        {
+            mscvModel.CurrentModelTime = "Время: " + modellingTimeHelper.TimerInSecondsTotal.ToString();
         }
     }
 }

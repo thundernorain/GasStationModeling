@@ -19,5 +19,7 @@ namespace GasStationModeling.modelling.moveableElems
             Width = ElementSizeHelper.CELL_HEIGHT;
             Fill = brush;
         }
+
+        public RefuellerView View => Tag as RefuellerView;
     }
 }

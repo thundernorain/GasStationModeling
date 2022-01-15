@@ -1,6 +1,5 @@
 ﻿using GasStationModeling.core.topology;
 using GasStationModeling.modelling.helpers;
-using GasStationModeling.modelling.mapper;
 using GasStationModeling.modelling.model;
 using System.Collections.Generic;
 using System.Windows;
@@ -15,11 +14,13 @@ namespace GasStationModeling.modelling
         public int FuelingPointDeltaX { get; } = 5;
         public int FuelingPointDeltaY { get; } = 5;
         public int CarRoadPositionY { get; private set; }
+        public int ServiceRoadPositionY { get; private set; }
         public int ReSpawnPointX { get; } = -40;
         #endregion
 
         #region CommonPoints
-        public Point SpawnPoint { get; private set; }      
+        public Point SpawnPoint { get; private set; }
+        public Point ServiceSpawnPoint { get; private set; }
         public Point LeavePointNoFilling { get; private set; }
         public Point LeavePointFilled { get; private set; }
         #endregion
@@ -44,10 +45,13 @@ namespace GasStationModeling.modelling
             defineElementsPoints(parsedCanvas);
         }
 
+        #region PointsDefiner
         public void defineCommonPoints(CanvasParser parsedCanvas)
         {
-            CarRoadPositionY = (int)parsedCanvas.StationCanvas.Height - 2 * ElementSizeHelper.CELL_HEIGHT; 
+            CarRoadPositionY = (int)parsedCanvas.StationCanvas.Height - 2 * ElementSizeHelper.CELL_HEIGHT;
+            ServiceRoadPositionY = CarRoadPositionY - ElementSizeHelper.CELL_HEIGHT;
             SpawnPoint = new Point((int)parsedCanvas.StationCanvas.Width, CarRoadPositionY);
+            ServiceSpawnPoint = new Point((int)parsedCanvas.StationCanvas.Width, ServiceRoadPositionY);
             LeavePointNoFilling = new Point(ReSpawnPointX, CarRoadPositionY);
             LeavePointFilled = new Point(ReSpawnPointX, CarRoadPositionY - (ElementSizeHelper.CELL_HEIGHT + 1));
         }
@@ -109,6 +113,7 @@ namespace GasStationModeling.modelling
             }
             return destPointsDict;
         }
+        #endregion
 
         public Rect createDestinationSpot(Point destpoint)
         {

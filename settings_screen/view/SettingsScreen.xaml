@@ -14,8 +14,8 @@
         </Grid.RowDefinitions>
         <TextBlock x:Name="IntervalValue" HorizontalAlignment="Left" Margin="937,32,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Style="{StaticResource BaseText}" FontSize="{StaticResource Medium}" Text="{Binding CarIntervalFormated}"/>
         <TextBlock HorizontalAlignment="Left" Margin="148,32,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Время появления автомобиля (с)" VerticalAlignment="Top" Style="{StaticResource BaseText}" FontSize="{StaticResource Medium}"/>
-        <Slider x:Name="IntervalSlider" HorizontalAlignment="Left" Margin="680,32,0,0" Grid.Row="1" VerticalAlignment="Top" Width="234" Height="22" Value="{Binding CarInterval, Mode=TwoWay}" Minimum="5" Maximum="60" SelectionStart="5" />
-        <TextBlock HorizontalAlignment="Left" Margin="680,59,0,0" Grid.Row="1" TextWrapping="Wrap" Text="5" VerticalAlignment="Top" Style="{StaticResource BaseText}" FontSize="{StaticResource Medium}"/>
+        <Slider x:Name="IntervalSlider" HorizontalAlignment="Left" Margin="680,32,0,0" VerticalAlignment="Top" Width="234" Height="22" Value="{Binding CarInterval, Mode=TwoWay}" Minimum="1" Maximum="60" SelectionStart="1" />
+        <TextBlock HorizontalAlignment="Left" Margin="680,59,0,0" Grid.Row="1" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Style="{StaticResource BaseText}" FontSize="{StaticResource Medium}"/>
         <TextBlock HorizontalAlignment="Left" Margin="889,59,0,0" Grid.Row="1" TextWrapping="Wrap" Text="60" VerticalAlignment="Top" Style="{StaticResource BaseText}" FontSize="{StaticResource Medium}"/>
 
 

@@ -10,6 +10,7 @@ namespace GasStationModeling.modelling.managers
         public bool IsPaused { get; set; }
         public int TicksAfterLastCarSpawning { get; set; }
         public double TimeAfterLastCarSpawningInSeconds => TicksAfterLastCarSpawning * (double)TIMER_TICK_MILLISECONDS / 1000;
+        public double TimerInSecondsTotal => TimerTicksCount * (double)TIMER_TICK_MILLISECONDS / 1000.0;
         public double TimeBetweenCars { get; set; }
 
         public ModellingTimeHelper(DispatcherTimer timer) {

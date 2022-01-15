@@ -11,7 +11,8 @@ namespace GasStationModeling.modelling
 {
     class ModellingSteps
     {
-        public Rectangle CashBox { get; private set; }
+
+        public CashBoxView cashBoxView { get; private set; }
         public List<Rectangle> Dispensers { get; private set; }
         public List<Rectangle> Tanks { get; private set; }
 
@@ -25,7 +26,7 @@ namespace GasStationModeling.modelling
             CanvasParser canvasParsed,
             TrafficGenerator trafficGenerator)
         {
-            CashBox = canvasParsed.CashBox;
+            cashBoxView = canvasParsed.CashBox.Tag as CashBoxView;
             Dispensers = canvasParsed.Dispensers;
             Tanks = canvasParsed.Tanks;
             _isCollectingMoney = false;
@@ -36,8 +37,8 @@ namespace GasStationModeling.modelling
         
         #region Car
 
-       public void StartFilling(ref CarElem car, ref List<MoveableElem> toAdd)
-       {
+        public void StartFill(ref CarElem car)
+        {
             var carView = car.Tag as CarView;
             var dispenserView = carView.ChosenDispenser.Tag as DispenserView;
 
@@ -46,10 +47,18 @@ namespace GasStationModeling.modelling
 
             var tankWithFuelType = Tanks.First(tank => (tank.Tag as TankView).TypeFuel.Name.Equals(carView.TypeFuel));
 
-            var tankView = tankWithFuelType.Tag as TankView;
-            var cashBoxView = CashBox.Tag as CashBoxView;
+            dispenserView.CurrentTank = tankWithFuelType;
 
-            carView.PayForFuel(ref cashBoxView, tankView.TypeFuel.Price);
+            carView.PayForFuel(cashBoxView, (tankWithFuelType.Tag as TankView).TypeFuel.Price);
+        }
+
+       public void RefillCar(ref CarElem car, ref List<MoveableElem> toAdd)
+       {
+            var carView = car.View;
+            var dispenserView = carView.ChosenDispenser.Tag as DispenserView;
+
+            var tankView = dispenserView.CurrentTank.Tag as TankView;
+
             if(tankView.CurrentFuelVolume > 0)
             {
                 dispenserView.refuelCar(ref tankView, ref carView);
@@ -57,7 +66,7 @@ namespace GasStationModeling.modelling
             
             if (tankView.IsRunOut && !_isRefilling)
             {
-                CallRefueller(tankWithFuelType, ref toAdd);
+                CallRefueller(dispenserView.CurrentTank, ref toAdd);
                 _isRefilling = true;
             }
 
@@ -80,7 +89,7 @@ namespace GasStationModeling.modelling
             fuelDispenser.CarsInQueue--;
             fuelDispenser.IsBusy = false;
 
-            var carView = car.Tag as CarView;
+            var carView = car.View;
             carView.ChosenDispenser = null;
             carView.FuelDispenserChosen = false;
         }
@@ -121,14 +130,15 @@ namespace GasStationModeling.modelling
 
         public void CallRefueller(Rectangle fuelTank,ref List<MoveableElem> toAdd)
         {
-            var refueller = trafficGenerator.SpawnRefueller(fuelTank);
+            double fuelAmount = (fuelTank.Tag as TankView).MaxVolume;
+            var refueller = trafficGenerator.SpawnRefueller(fuelTank,fuelAmount);
             toAdd.Add(refueller);
         }
 
         public void StartRefilling(RefuellerElem refueller)
         {
             refueller.IsFilling = true;
-        }
+        }    
 
         public void RefillFuelTank( RefuellerElem refueller)
         {
@@ -138,7 +148,7 @@ namespace GasStationModeling.modelling
 
             refuellerView.refillFuelTank();
 
-            if (fillingFuelTank.CurrentFuelVolume >= fillingFuelTank.MaxVolume)
+            if (fillingFuelTank.CurrentFuelVolume >= fillingFuelTank.MaxVolume || refuellerView.FuelAmount == 0)
             {
                 StopRefilling( refueller);
             }

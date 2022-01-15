@@ -8,6 +8,7 @@ namespace GasStationModeling.modelling.model
     public class CarView : TopologyView
     {
         const int MIN_FUEL_SUPPLY = 6;
+
         public int Id { get; set; }
 
         public string Model { get; set; }
@@ -37,15 +38,19 @@ namespace GasStationModeling.modelling.model
             FuelDispenserChosen = false;
             IsGoingToFill = false;
             SpendForFuel = 0;
-
-            Random random = new Random();
-            CurrentFuelSupply = MIN_FUEL_SUPPLY + random.NextDouble() * (MaxVolumeTank - MIN_FUEL_SUPPLY);
+            CurrentFuelSupply = GenerateFuelSupply();
         }
 
-        public void PayForFuel(ref CashBoxView cashBoxView, double price)
+        public void PayForFuel(CashBoxView cashBoxView, double price)
         {
-            SpendForFuel = CurrentFuelSupply * price;/// 50;
-            cashBoxView.CurrentCashCount += SpendForFuel;
+            SpendForFuel = CurrentFuelSupply * price;
+            cashBoxView.CurrentCashCount += SpendForFuel/50;
+        }
+
+        public double GenerateFuelSupply()
+        {
+            Random r = new Random();
+            return MIN_FUEL_SUPPLY + r.NextDouble() * (MaxVolumeTank - MIN_FUEL_SUPPLY);
         }
     }
 }

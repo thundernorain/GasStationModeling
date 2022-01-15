@@ -53,7 +53,7 @@ namespace GasStationModeling.modelling
             var elem =  MoveableElemGenerator.createCollectorElem(
                 ModellingTimeHelper.TIMER_TICK_MILLISECONDS,
                 settings.CashLimit / settings.CollectingTimeSec,
-                destPointHelper.SpawnPoint);
+                destPointHelper.ServiceSpawnPoint);
             elem.removeDestinationPoints();
             elem.AddDestinationPoint(destPointHelper.LeavePointNoFilling);
             elem.AddDestinationPoint(destPointHelper.ExitPoint);
@@ -62,13 +62,14 @@ namespace GasStationModeling.modelling
             return elem;
         }
 
-        public RefuellerElem SpawnRefueller(Rectangle fuelTank)
+        public RefuellerElem SpawnRefueller(Rectangle fuelTank, double fuelAmount)
         {
             var elem = MoveableElemGenerator.createRefuellerElem(
                 fuelTank,
                 ModellingTimeHelper.TIMER_TICK_MILLISECONDS,
                 settings.FuelTank.LimitVolume / settings.RefuellingTimeSec,
-                destPointHelper.SpawnPoint);
+                fuelAmount,
+                destPointHelper.ServiceSpawnPoint);
             return elem;
         }
     }

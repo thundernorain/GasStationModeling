@@ -68,7 +68,6 @@ namespace GasStationModeling.modelling.helpers
                    MoveCollectorToCashCounter(collector);
                 }
             }
-
             // After filling 
             if (isOnStation && isFilled)
             {
@@ -95,7 +94,6 @@ namespace GasStationModeling.modelling.helpers
                     optimalFuelDispenser = fuelDispenser;
                 }
             }
-
             carView.ChosenDispenser = optimalFuelDispenser;
             fuelDispenserView = optimalFuelDispenser.Tag as DispenserView;
             fuelDispenserView.CarsInQueue++;
@@ -111,11 +109,8 @@ namespace GasStationModeling.modelling.helpers
         {
             var collectorView = collector.Tag as CollectorView;
             var cashCounter = canvasElems.CashBox;
-
             collectorView.IsMovingToCashBox = true;
-
             collector.AddDestinationPoint(DpHelper.CashBoxPoint);
-
             return collector;
         }
 
@@ -128,10 +123,8 @@ namespace GasStationModeling.modelling.helpers
         {
             var fillingFinishedPoint = vehicle.GetDestinationPoint();
             vehicle.removeDestinationPoints();
-
             vehicle.AddDestinationPoint(DpHelper.LeavePointFilled);
             vehicle.AddDestinationPoint(DpHelper.ExitPoint);
-
         }
 
         public void RouteRefueller(ref RefuellerElem refueller)

@@ -16,13 +16,11 @@
                    HorizontalAlignment="Center" 
                    TextAlignment="Center"              
                    Text="Информационное табло" Width="326" Margin="48,0,45,740"/>
-
             <TextBlock Style="{StaticResource BaseText}" 
                    FontSize="{StaticResource Medium}" 
                    HorizontalAlignment="Center" 
                    TextAlignment="Center" 
-  
-                   Text="Бензин:" Width="64" Height="25" VerticalAlignment="Bottom" Margin="24,0,320,705"/>
+                   Text="Доступное топливо:" Width="171" Height="25" VerticalAlignment="Bottom" Margin="20,0,217,705"/>
             <Border BorderBrush="Black" BorderThickness="10" HorizontalAlignment="Left" Height="157" Margin="19,73,0,0" VerticalAlignment="Top" Width="192"/>
             <DataGrid 
                 x:Name="FuelGrid" 
@@ -31,14 +29,14 @@
                 Margin="23,76,0,0" 
                 VerticalAlignment="Top"
                 IsReadOnly="true"               
-                FontSize="{StaticResource Medium}"                  
+                FontSize="{StaticResource Medium}"  
+                AutoGenerateColumns="False"
                 ItemsSource="{Binding Fuels}"
                 Width="183">
-
                 <DataGrid.Columns>
-
+                    <DataGridTextColumn Header="Название" Binding="{Binding Path=Name}" Width="90" />
+                    <DataGridTextColumn Header="Цена" Binding="{Binding Path=Price}" Width="90" />
                 </DataGrid.Columns>
-
             </DataGrid>
 
             <TextBlock Style="{StaticResource BaseText}" 
@@ -54,10 +52,15 @@
                           VerticalAlignment="Top"
                           Width="366" 
                           IsReadOnly="true"
+                          AutoGenerateColumns="False"
                           FontSize="{StaticResource Medium}"       
                           ItemsSource="{Binding CarTableItems}">
                     <DataGrid.Columns>
-
+                        <DataGridTextColumn Header="ТРК" Binding="{Binding Path=TRK}" Width="40" />
+                        <DataGridTextColumn Header="Авто" Binding="{Binding Path=Name}" Width="90" />
+                        <DataGridTextColumn Header="Объём" Binding="{Binding Path=Volume}" Width="70" />
+                        <DataGridTextColumn Header="Тип" Binding="{Binding Path=FuelType}" Width="70" />
+                        <DataGridTextColumn Header="Стоимость" Binding="{Binding Path=Price}" Width="100" />
                     </DataGrid.Columns>
                 </DataGrid>
             </Border>
@@ -86,16 +89,24 @@
         <Grid Width="729" Background="#F5F5F5" >
             <Canvas Name="StationCanvas" Background="LightGray" Margin="0,0,-17,108" />
 
-            <Grid Height="72" Margin="105,673,42,31">
+            <Grid Height="72" Margin="9,673,45,31">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="65*"/>
                     <RowDefinition Height="7*"/>
                 </Grid.RowDefinitions>
-                <Button x:Name="StartButton" Style="{StaticResource AquaButton}" Content="Старт" Margin="301,6,101,6" Click="StartButton_Click" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2">
+                <Button x:Name="StartButton" Style="{StaticResource AquaButton}" Content="Старт" Margin="218,6,284,6" Click="StartButton_Click" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2">
 
                 </Button>
-                <Button x:Name="StopButton" Style="{StaticResource AquaButton}"  Content="Стоп" Margin="94,6,309,6" Click="StopButton_Click" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2">
+                <Button x:Name="StopButton" Style="{StaticResource AquaButton}"  Content="Стоп" Margin="12,6,493,6" Click="StopButton_Click" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2">
                 </Button>
+                <TextBlock x:Name="TotalTimeInfo" Style="{StaticResource BaseText}" 
+                   FontSize="{StaticResource Small}" 
+                   HorizontalAlignment="Center" 
+                   TextAlignment="Left" 
+                   Margin="416,0,10,10"
+                   Text="{Binding CurrentModelTime}"
+                   Width="249" Height="45" VerticalAlignment="Bottom"/>
+
             </Grid>
 
         </Grid>
