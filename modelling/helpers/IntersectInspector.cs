@@ -1,6 +1,5 @@
 ﻿using GasStationModeling.modelling.model;
 using GasStationModeling.modelling.pictureView;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Shapes;
@@ -21,8 +20,8 @@ namespace GasStationModeling.modelling.helpers
             var destPoint = activeVehicle.GetDestinationPoint();
 
             Rect activeVehicleRect = new Rect(
-                Canvas.GetLeft(activeVehicle) + 5,
-                Canvas.GetTop(activeVehicle) + 5,
+                left(activeVehicle) + 5,
+                top(activeVehicle) + 5,
                 activeVehicle.Width - 10,
                 activeVehicle.Height - 10);
 
@@ -33,19 +32,19 @@ namespace GasStationModeling.modelling.helpers
                     continue;
                 }
 
-             
-                    var moveableElem = elem as UIElement;
+                var moveableElem = elem as UIElement;
 
-                    Rect moveableElemRect = new Rect(
-                        Canvas.GetLeft(moveableElem),
-                        Canvas.GetTop(moveableElem),
-                        48,
-                        48);
+                Rect moveableElemRect = new Rect(
+                    Canvas.GetLeft(moveableElem),
+                    Canvas.GetTop(moveableElem),
+                    ElementSizeHelper.CELL_WIDTH,
+                    ElementSizeHelper.CELL_HEIGHT);
 
-                    if (!activeVehicleRect.IntersectsWith(moveableElemRect))
-                    {
-                        continue;
-                    }
+                if (!activeVehicleRect.IntersectsWith(moveableElemRect))
+                {
+                    continue;
+                }
+
                 if (elem is MoveableElem)
                 {
                     var anotherVehicle = moveableElem;
@@ -61,13 +60,13 @@ namespace GasStationModeling.modelling.helpers
 
                         case Directions.Right:
                             {
-                                Canvas.SetRight(activeVehicle, left(anotherVehicle) - activeVehicle.Width);
+                                Canvas.SetLeft(activeVehicle, left(anotherVehicle) - activeVehicle.Width);
                                 break;
                             }
 
                         case Directions.Down:
                             {
-                                Canvas.SetBottom(activeVehicle, top(anotherVehicle) - activeVehicle.Height);
+                                Canvas.SetTop(activeVehicle, top(anotherVehicle) - activeVehicle.Height);
                                 break;
                             }
 
@@ -193,7 +192,7 @@ namespace GasStationModeling.modelling.helpers
                                         activeVehicle.FromLeftBypassingPoint = newDestinationPoint2;
 
                                         newDestinationPoint3 = new Point(left(fuelDispenser) - 20,
-                                            destPoint.Y - 20);
+                                               destPoint.Y - 20);
 
                                         activeVehicle.removeDestinationPoint();
                                         activeVehicle.AddDestinationPoint(newDestinationPoint2);
@@ -206,7 +205,6 @@ namespace GasStationModeling.modelling.helpers
                     }
                 }          
             }
-
             return activeVehicle.GetDestinationPoint();
         }
 
@@ -227,9 +225,7 @@ namespace GasStationModeling.modelling.helpers
 
         public double bottom(UIElement element)
         {
-            return Canvas.GetTop(element) + ElementSizeHelper.CELL_WIDTH;
+            return Canvas.GetTop(element) + ElementSizeHelper.CELL_HEIGHT;
         }
-    }
-
-    
+    }   
 }

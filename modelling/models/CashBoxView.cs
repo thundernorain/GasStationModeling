@@ -1,4 +1,4 @@
-﻿
+﻿ 
 using GasStationModeling.modelling.models;
 
 namespace GasStationModeling.modelling.model
@@ -26,7 +26,6 @@ namespace GasStationModeling.modelling.model
         public CashBoxView(double cashLimit)
         {
             CashLimit = cashLimit;
-            //CurrentCashCount = CashLimit;
             CurrentCashCount = 0;
         }
     }

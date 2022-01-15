@@ -22,5 +22,7 @@ namespace GasStationModeling.modelling.pictureView
             Type = "Collector";
             Start = false;
         }
+
+        public CollectorView View => Tag as CollectorView;
     }
 }

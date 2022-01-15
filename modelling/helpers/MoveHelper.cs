@@ -53,7 +53,7 @@ namespace GasStationModeling.modelling.helpers
                 if (vehicle is CarElem carElem)
                 {
                    
-                    modellingSteps.StartFilling(ref carElem,ref toAdd);
+                    modellingSteps.RefillCar(ref carElem,ref toAdd);
                     return stationCanvas;
                 }
 
@@ -70,27 +70,7 @@ namespace GasStationModeling.modelling.helpers
                 }
             }
 
-            if(Canvas.GetLeft(vehicle) <= 5 &&
-                    Canvas.GetTop(vehicle) <= 5)
-            {
-                {
-                    toDelete.Add(vehicle);
-                }
-            }
-
-            if (vehicle.Type.Equals("Collector"))
-            {
-                if (Canvas.GetLeft(vehicle)  - DpHelper.LeavePointFilled.X <= 5 &&
-                   Canvas.GetTop(vehicle) - DpHelper.LeavePointFilled.Y <= 5)
-                {
-                    {
-                        toDelete.Add(vehicle);
-                    }
-                }
-            }
-
-
-                var destPoint = vehicle.GetDestinationPoint();
+            var destPoint = vehicle.GetDestinationPoint();
             var carSpeed = vehicle.IsGoingToFill ? CarSpeedFilling : CarSpeedNoFilling;
 
             var destSpot = vehicle.DestinationSpot;
@@ -126,7 +106,7 @@ namespace GasStationModeling.modelling.helpers
                     {
                         if (destPoint.Equals(fuelDispensersDestPoint))
                         { 
-                            modellingSteps.StartFilling(ref carElem,ref toAdd);      
+                            modellingSteps.StartFill(ref carElem  );      
                         }
                     }
                 }
@@ -144,8 +124,12 @@ namespace GasStationModeling.modelling.helpers
 
                         collector.removeDestinationPoints();
                         collector.AddDestinationPoint(DpHelper.ExitPoint);
-                        collector.AddDestinationPoint(DpHelper.LeavePointNoFilling);
-                        
+
+                        if (destPoint.Equals(DpHelper.ExitPoint))
+                        {
+                            toDelete.Add(vehicle);
+                        }
+
                         return stationCanvas;
                     }
 
@@ -177,7 +161,7 @@ namespace GasStationModeling.modelling.helpers
                 if (!car.IsFilled && !car.IsGoesHorizontal)
                 {
                     // Go Up
-                    if (Canvas.GetTop(car) >= destPoint.Y && !isHorizontalMoving)
+                    if (top(car) >= destPoint.Y && !isHorizontalMoving)
                     {
                         carTop = top(car);
                         Canvas.SetTop(car, carTop - carSpeed);
@@ -195,7 +179,7 @@ namespace GasStationModeling.modelling.helpers
                     }
 
                     // Go left
-                    if (Canvas.GetLeft(car) >= destPoint.X && !isVerticalMoving)
+                    if (left(car) >= destPoint.X && !isVerticalMoving)
                     {
                         carLeft = left(car);
                         Canvas.SetLeft(car, carLeft - carSpeed);
@@ -203,7 +187,7 @@ namespace GasStationModeling.modelling.helpers
                     }
 
                     // Go Right
-                    if (right(car) <= destPoint.X && !isVerticalMoving)
+                    if (right(car) < destPoint.X + ElementSizeHelper.CELL_WIDTH && !isVerticalMoving)
                     {
                         carLeft = left(car);
                         Canvas.SetLeft(car, carLeft + carSpeed);
@@ -212,7 +196,7 @@ namespace GasStationModeling.modelling.helpers
                 else
                 {
                     // Go left
-                    if (Canvas.GetLeft(car) >= destPoint.X)
+                    if (left(car) > destPoint.X)
                     {
                         carLeft = left(car);
                         Canvas.SetLeft(car, carLeft - carSpeed);
@@ -221,7 +205,7 @@ namespace GasStationModeling.modelling.helpers
                     }
 
                     // Go Right
-                    if (right(car) <= destPoint.X)
+                    if (left(car) < destPoint.X)
                     {
                         carLeft = left(car);
                         Canvas.SetLeft(car, carLeft + carSpeed);
@@ -229,7 +213,7 @@ namespace GasStationModeling.modelling.helpers
                     }
 
                     // Go Up
-                    if (Canvas.GetTop(car) >= destPoint.Y && !isHorizontalMoving)
+                    if (top(car) >= destPoint.Y && !isHorizontalMoving)
                     {
                         carTop = top(car);
                         Canvas.SetTop(car, carTop - carSpeed);
@@ -248,7 +232,7 @@ namespace GasStationModeling.modelling.helpers
             else
             {
                 // Go left
-                if (Canvas.GetLeft(car) >= destPoint.X)
+                if (left(car) >= destPoint.X)
                 {
                     carLeft = left(car);
                     Canvas.SetLeft(car, carLeft - carSpeed);
@@ -256,14 +240,14 @@ namespace GasStationModeling.modelling.helpers
                 }
 
                 // Go Right
-                if (right(car)<= destPoint.X)
+                if (right(car) < destPoint.X + ElementSizeHelper.CELL_WIDTH)
                 {
                     carLeft = left(car);
                     Canvas.SetLeft(car, carLeft + carSpeed);
                 }
 
                 // Go Up
-                if (Canvas.GetTop(car) >= destPoint.Y)
+                if (top(car) >= destPoint.Y)
                 {
                     carTop = top(car);
                     Canvas.SetTop(car, carTop - carSpeed);
@@ -329,25 +313,25 @@ namespace GasStationModeling.modelling.helpers
             double refuellerTop;
             double refuellerLeft;
 
-            if (Canvas.GetLeft(refueller) >= destPoint.X)
+            if (left(refueller) >= destPoint.X)
             {
                 refuellerLeft = left(refueller);
                 Canvas.SetLeft(refueller, refuellerLeft - refuellerSpeed);
             }
 
-            if (right(refueller) <= destPoint.X)
+            if (right(refueller) <= destPoint.X + ElementSizeHelper.CELL_WIDTH)
             {
                 refuellerLeft = left(refueller);
                 Canvas.SetLeft(refueller, refuellerLeft + refuellerSpeed);
             }
 
-            if (Canvas.GetTop(refueller) >= destPoint.Y)
+            if (top(refueller) >= destPoint.Y)
             {
                 refuellerTop = top(refueller);
                 Canvas.SetTop(refueller, refuellerTop - refuellerSpeed);
             }
 
-            if (bottom(refueller) <= destPoint.Y)
+            if (bottom(refueller) <= destPoint.Y + ElementSizeHelper.CELL_HEIGHT)
             {
                 refuellerTop = top(refueller);
                 Canvas.SetTop(refueller, refuellerTop + refuellerSpeed);
@@ -355,7 +339,8 @@ namespace GasStationModeling.modelling.helpers
 
             return destPoint;
         }
-
+  
+        #region CoordinateGetters
         private double left(UIElement element)
         {
             return Canvas.GetLeft(element);
@@ -376,5 +361,6 @@ namespace GasStationModeling.modelling.helpers
         {
             return Canvas.GetTop(element) + ElementSizeHelper.CELL_HEIGHT;
         }
+        #endregion
     }
 }

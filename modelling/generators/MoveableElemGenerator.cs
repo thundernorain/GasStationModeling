@@ -43,9 +43,10 @@ namespace GasStationModeling.modelling.generators
             Rectangle tank,
             double tick,
             double refuellingSpeed,
+            double fuelAmount,
             Point location)
         {
-            var refuellerView = new RefuellerView(tick, refuellingSpeed);
+            var refuellerView = new RefuellerView(tick, refuellingSpeed, fuelAmount);
 
             refuellerView.ChosenTank = tank;
 

@@ -11,23 +11,18 @@ namespace GasStationModeling.modelling.pictureView
     public class MoveableElem : Shape
     {
        
-
         public bool IsGoingToFill { get; set; }
         public bool IsOnStation { get; set; }
         public bool IsFilled { get; set; }
         public bool IsFilling { get; set; }
         public bool IsBypassingObject { get; set; }
         public bool IsGoesHorizontal { get; set; }
+
         public System.Windows.Point FromLeftBypassingPoint { get; set; }
-
         private readonly List<System.Windows.Point> destinationPoints;
-
         public Rect intersectRect { get; set; }
-
         public Rect DestinationSpot { get; set; }
-
-
-        public Rect EmptyRect {get;} = new Rect();
+        private Rect EmptyRect {get;} = new Rect();
 
         public string Type { get; set; } = "";
 

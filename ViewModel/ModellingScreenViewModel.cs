@@ -19,6 +19,7 @@ namespace GasStationModeling.ViewModel
     {
         private string currentCashView;
         private string currentFuelVolumeView;
+        private string currentModelTime;
         private ObservableCollection<CarTableItem> carTableItems;
 
         #region Fields
@@ -43,6 +44,16 @@ namespace GasStationModeling.ViewModel
         public List<TankView> TankViews { get; set; }
 
         public List<Car> Cars { get; set; }
+
+        public string CurrentModelTime
+        {
+            get => currentModelTime;
+            set
+            {
+                currentModelTime = value;
+                RaisePropertyChanged(() => CurrentModelTime);
+            }
+        }
 
         public string CurrentCashView
         {

@@ -22,7 +22,7 @@ namespace GasStationModeling.welcome_window.view
             }
             catch (Exception ex)
             {
-                ErrorMessageBoxShower.ShowError(DbErrorMessage.CONNECTION_ERROR);
+                ErrorMessageBoxShower.ShowError(DbErrorMessage.CONNECTION_ERROR + " " + ex.Message);
             }
         }
 

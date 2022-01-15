@@ -34,10 +34,8 @@ namespace GasStationModeling.modelling.model
             Id = id;
             MaxVolume = tank.LimitVolume;
             LimitVolume = tank.CriticalVolume;
-            //LimitVolume = tank.LimitVolume;
             TypeFuel = tank.TypeFuel;
             CurrentFuelVolume = MaxVolume;
-            //CurrentFuelVolume = 0;
         }
     }
 }

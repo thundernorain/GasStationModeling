@@ -23,9 +23,9 @@ namespace GasStationModeling.core.DB
                 DB = client.GetDatabase(dbName);
                 return DB;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new DbErrorException(DbErrorMessage.CONNECTION_ERROR);
+                throw new DbErrorException(DbErrorMessage.CONNECTION_ERROR + " " + ex.Message);
             }
         }
 
@@ -38,10 +38,9 @@ namespace GasStationModeling.core.DB
                 BsonClassMap.RegisterClassMap<Tank>();
                 BsonClassMap.RegisterClassMap<Entrance>();
                 BsonClassMap.RegisterClassMap<Exit>();
-
+                 
                 DB = InitializeClient();
-            }
-            
+            }         
             return DB;
         }
     }
