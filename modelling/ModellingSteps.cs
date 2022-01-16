@@ -148,7 +148,7 @@ namespace GasStationModeling.modelling
 
             refuellerView.refillFuelTank();
 
-            if (fillingFuelTank.CurrentFuelVolume >= fillingFuelTank.MaxVolume || refuellerView.FuelAmount == 0)
+            if (refuellerView.FuelAmount == 0)
             {
                 StopRefilling( refueller);
             }
