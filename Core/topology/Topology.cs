@@ -411,6 +411,11 @@ namespace GasStationModeling.core.topology
                         ErrorMessageBoxShower.ShowTopology("Выбранный шаблон может распологаться только в нижней части сетки");
                         return false;
                     }
+                    if (!CanAddExitOrEntrance(column, true))
+                    {
+                        ErrorMessageBoxShower.ShowTopology("Въезд должен находится справа от выезда");
+                        return false;
+                    }
                     break;
 
                 case TopologyElement.Exit:
@@ -429,10 +434,29 @@ namespace GasStationModeling.core.topology
                         ErrorMessageBoxShower.ShowTopology("Выбранный шаблон может распологаться только в нижней части сетки");
                         return false;
                     }
+                    if (!CanAddExitOrEntrance(column, false))
+                    {
+                        ErrorMessageBoxShower.ShowTopology("Выезд должен находится слева от въезда");
+                        return false;
+                    }
                     break;
             }
 
             return CheckTopologyCellRangeIsFree(row, column);
+        }
+
+        private bool CanAddExitOrEntrance(int column, bool checkForEntrance)
+        {
+            int columnValue = checkForEntrance ? -1 : int.MaxValue;
+            var topologyElementMatching = checkForEntrance ? TopologyElement.Exit : TopologyElement.Entrance;
+
+            for (int i = 0; i < TopologyColumnCountMain; i++)
+            {
+                if (TopologyElements[TopologyRowCount - 1, i] == topologyElementMatching)
+                    columnValue = i;
+            }
+
+            return checkForEntrance ? columnValue < column : columnValue > column;
         }
 
         private bool CheckTopologyCellRangeIsFree(int row, int column)
