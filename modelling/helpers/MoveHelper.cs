@@ -65,7 +65,7 @@ namespace GasStationModeling.modelling.helpers
 
                     collector.removeDestinationPoints();
                     collector.AddDestinationPoint(DpHelper.ExitPoint);
-                    collector.AddDestinationPoint(DpHelper.LeavePointNoFilling);
+
                     return stationCanvas;
                 }
             }
@@ -113,8 +113,7 @@ namespace GasStationModeling.modelling.helpers
 
                 if (vehicle.Type.Equals("Collector"))
                 {
-
-                    if(Canvas.GetLeft(vehicle) - DpHelper.CashBoxPoint.X <= 20) {
+                    if(Math.Abs(Canvas.GetLeft(vehicle) - DpHelper.CashBoxPoint.X) <= 20) {
                         var collector = vehicle as CollectorElem;
                         collector.IsFilling = true;
                         collectorView.IsMovingToCashBox = true;
@@ -122,11 +121,9 @@ namespace GasStationModeling.modelling.helpers
                         var cashBoxView = canvasElems.CashBox;
                         collectorView.CashBox = cashBoxView;
 
-                        collector.removeDestinationPoints();
-                        collector.AddDestinationPoint(DpHelper.ExitPoint);
-
                         if (destPoint.Equals(DpHelper.ExitPoint))
                         {
+                            collector.AddDestinationPoint(DpHelper.LeavePointNoFilling);
                             toDelete.Add(vehicle);
                         }
 
@@ -138,6 +135,12 @@ namespace GasStationModeling.modelling.helpers
                 if (destPoint.Equals(DpHelper.ExitPoint))
                 {
                     vehicle.IsOnStation = false;
+
+                    if (vehicle.Type.Equals("Collector"))
+                    {
+                        vehicle.removeDestinationPoints();
+                        vehicle.AddDestinationPoint(DpHelper.LeavePointNoFilling);
+                    }
                 }
 
                 if (destPoint.Equals(DpHelper.LeavePointNoFilling) || destPoint.Equals(DpHelper.LeavePointFilled))

@@ -55,7 +55,6 @@ namespace GasStationModeling.modelling
                 settings.CashLimit / settings.CollectingTimeSec,
                 destPointHelper.ServiceSpawnPoint);
             elem.removeDestinationPoints();
-            elem.AddDestinationPoint(destPointHelper.LeavePointNoFilling);
             elem.AddDestinationPoint(destPointHelper.ExitPoint);
             elem.AddDestinationPoint(destPointHelper.CashBoxPoint);
             elem.AddDestinationPoint(destPointHelper.EntrancePoint);
