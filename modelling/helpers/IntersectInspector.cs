@@ -22,10 +22,10 @@ namespace GasStationModeling.modelling.helpers
             var destPoint = activeVehicle.GetDestinationPoint();
 
             Rect activeVehicleRect = new Rect(
-                left(activeVehicle) + 4,
-                top(activeVehicle) + 4,
-                activeVehicle.Width - 8,
-                activeVehicle.Height - 8);
+                left(activeVehicle) + 6,
+                top(activeVehicle) + 6,
+                activeVehicle.Width - 12,
+                activeVehicle.Height - 12);
 
             foreach (var elem in stationCanvas.Children)
             {
@@ -205,16 +205,15 @@ namespace GasStationModeling.modelling.helpers
                                         //right
                                         else if (destPoint.X >= left(activeVehicle))
                                         {
-                                            newDestX = right(fuelDispenser);
+                                            newDestX = right(fuelDispenser) + (activeVehicle.Width + 1);
                                             bypassFromRight = true;
                                         }
 
-                                        newDestY = bottom(fuelDispenser);
+                                        newDestY = top(fuelDispenser) - 1;
 
                                         newDestinationPoint1 = new Point(newDestX,
                                             newDestY);
 
-                                        //activeVehicle.removeDestinationPoint();
                                         activeVehicle.AddDestinationPoint(newDestinationPoint1);
                                     }
 
