@@ -11,6 +11,8 @@ namespace GasStationModeling.modelling.helpers
         private Canvas stationCanvas;
         private DestinationPointHelper dpHelper;
 
+        private const int collisionMaskCorrector = 6;
+
         public IntersectInspector(Canvas stationCanvas,DestinationPointHelper dpHelper)
         {
             this.stationCanvas = stationCanvas;
@@ -22,10 +24,10 @@ namespace GasStationModeling.modelling.helpers
             var destPoint = activeVehicle.GetDestinationPoint();
 
             Rect activeVehicleRect = new Rect(
-                left(activeVehicle) + 6,
-                top(activeVehicle) + 6,
-                activeVehicle.Width - 12,
-                activeVehicle.Height - 12);
+                left(activeVehicle) + collisionMaskCorrector,
+                top(activeVehicle) + collisionMaskCorrector,
+                activeVehicle.Width - 2 * collisionMaskCorrector,
+                activeVehicle.Height - 2 * collisionMaskCorrector);
 
             foreach (var elem in stationCanvas.Children)
             {
@@ -37,10 +39,10 @@ namespace GasStationModeling.modelling.helpers
                 var moveableElem = elem as UIElement;
 
                 Rect moveableElemRect = new Rect(
-                    Canvas.GetLeft(moveableElem) + 1,
-                    Canvas.GetTop(moveableElem) + 1,
-                    ElementSizeHelper.CELL_WIDTH - 2,
-                    ElementSizeHelper.CELL_HEIGHT - 2);
+                    Canvas.GetLeft(moveableElem),
+                    Canvas.GetTop(moveableElem),
+                    ElementSizeHelper.CELL_WIDTH,
+                    ElementSizeHelper.CELL_HEIGHT);
 
                 if (!activeVehicleRect.IntersectsWith(moveableElemRect))
                 {
@@ -63,29 +65,30 @@ namespace GasStationModeling.modelling.helpers
                                     var destSpot = new Rect(
                                                             destPoint.X,
                                                             destPoint.Y,
-                                                                     7,
-                                                                     7);
+                                                                     10,
+                                                                     10);
 
                                     if (anotherVehicleRect.IntersectsWith(destSpot))
                                     {
                                         activeVehicle.removeDestinationPoints();
                                         activeVehicle.AddDestinationPoint(dpHelper.LeavePointFilled);
+                                        break;
                                     }
                                 }
-                                Canvas.SetTop(activeVehicle, bottom(anotherVehicle));
+                                Canvas.SetTop(activeVehicle, bottom(anotherVehicle) - collisionMaskCorrector / 2);
 
                                 break;
                             }
 
                         case Directions.Right:
                             {
-                                Canvas.SetLeft(activeVehicle, left(anotherVehicle) - activeVehicle.Width);
+                                Canvas.SetLeft(activeVehicle, left(anotherVehicle) - (activeVehicle.Width - collisionMaskCorrector / 2));
                                 break;
                             }
 
                         case Directions.Down:
                             {
-                                Canvas.SetTop(activeVehicle, top(anotherVehicle) - activeVehicle.Height);
+                                Canvas.SetTop(activeVehicle, top(anotherVehicle) - (activeVehicle.Height - collisionMaskCorrector / 2));
                                 break;
                             }
 
@@ -100,8 +103,8 @@ namespace GasStationModeling.modelling.helpers
                                     var destSpot = new Rect(
                                                             destPoint.X,
                                                             destPoint.Y,
-                                                                     7,
-                                                                     7);
+                                                                     10,
+                                                                     10);
 
                                     if (anotherVehicleRect.IntersectsWith(destSpot))
                                     {
@@ -110,7 +113,7 @@ namespace GasStationModeling.modelling.helpers
                                     }
                                 }
 
-                                Canvas.SetLeft(activeVehicle, right(anotherVehicle));
+                                Canvas.SetLeft(activeVehicle, right(anotherVehicle) - collisionMaskCorrector / 2);
                                 break;
                             }
                     }
@@ -144,7 +147,7 @@ namespace GasStationModeling.modelling.helpers
                                         right(activeVehicle) <= left(stationItem) &&
                                         top(activeVehicle) < bottom(stationItem)) break;
 
-                                    Canvas.SetTop(activeVehicle, bottom(stationItem));
+                                    Canvas.SetTop(activeVehicle, bottom(stationItem) - collisionMaskCorrector / 2);
 
                                     if (!activeVehicle.IsBypassingObject)
                                     {
@@ -191,7 +194,7 @@ namespace GasStationModeling.modelling.helpers
                                        right(activeVehicle) <= left(stationItem) &&
                                        bottom(activeVehicle) > top(stationItem)) break;
 
-                                    Canvas.SetTop(activeVehicle, top(stationItem) - activeVehicle.Height);
+                                    Canvas.SetTop(activeVehicle, top(stationItem) - activeVehicle.Height + collisionMaskCorrector / 2);
                                     if (!activeVehicle.IsBypassingObject)
                                     {
                                         activeVehicle.IsBypassingObject = true;
@@ -205,14 +208,14 @@ namespace GasStationModeling.modelling.helpers
                                         //right
                                         else if (destPoint.X > left(activeVehicle))
                                         {
-                                            newDestX = right(stationItem) + 1;
+                                            newDestX = right(stationItem) + ElementSizeHelper.CELL_WIDTH + 1;
                                             bypassFromRight = true;
                                         }
                                         else
                                         {
                                             newDestinationPoint2 = new Point();
                                         }
-                                        newDestY = bottom(stationItem) + 1;
+                                        newDestY = bottom(stationItem) + ElementSizeHelper.CELL_WIDTH + 1;
 
                                         newDestinationPoint1 = new Point(newDestX,
                                             newDestY);
@@ -230,7 +233,7 @@ namespace GasStationModeling.modelling.helpers
                                        left(activeVehicle) < right(stationItem)) break;
                                     else
                                     {
-                                        Canvas.SetLeft(activeVehicle, right(stationItem));
+                                        Canvas.SetLeft(activeVehicle, right(stationItem) - collisionMaskCorrector / 2);
                                         if (!activeVehicle.IsBypassingObject)
                                         {
                                             activeVehicle.IsBypassingObject = true;
@@ -251,7 +254,7 @@ namespace GasStationModeling.modelling.helpers
                                             else
                                             {
                                                 activeVehicle.IsGoesHorizontal = true;
-                                                newDestX = (int)initialDestinationPoint.X + ElementSizeHelper.CELL_WIDTH / 2;
+                                                newDestX = (int)initialDestinationPoint.X + ElementSizeHelper.CELL_WIDTH;
                                             }
 
                                             newDestinationPoint2 = new Point(newDestX, newDestY);
