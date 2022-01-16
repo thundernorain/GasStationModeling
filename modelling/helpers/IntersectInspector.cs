@@ -120,7 +120,7 @@ namespace GasStationModeling.modelling.helpers
                     // Fuel Dispenser
                     if ((elem as Rectangle).Tag is DispenserView || (elem as Rectangle).Tag is CashBoxView)
                     {
-                        var fuelDispenser = elem as Rectangle;
+                        var stationItem = elem as Rectangle;
 
                         var initialDestinationPoint = activeVehicle.GetDestinationPoint();
 
@@ -140,11 +140,11 @@ namespace GasStationModeling.modelling.helpers
                         {
                             case Directions.Up:
                                 {
-                                    if (left(activeVehicle) >= right(fuelDispenser) ||
-                                        right(activeVehicle) <= left(fuelDispenser) &&
-                                        top(activeVehicle) < bottom(fuelDispenser)) break;
+                                    if (left(activeVehicle) >= right(stationItem) ||
+                                        right(activeVehicle) <= left(stationItem) &&
+                                        top(activeVehicle) < bottom(stationItem)) break;
 
-                                    Canvas.SetTop(activeVehicle, bottom(fuelDispenser));
+                                    Canvas.SetTop(activeVehicle, bottom(stationItem));
 
                                     if (!activeVehicle.IsBypassingObject)
                                     {
@@ -154,23 +154,23 @@ namespace GasStationModeling.modelling.helpers
                                         //left
                                         if (destPoint.X < left(activeVehicle))
                                         {
-                                            newDestX = left(fuelDispenser) - (activeVehicle.Width + 1);
+                                            newDestX = left(stationItem) - (activeVehicle.Width + 1);
                                             bypassFromLeft = true;
                                         }
                                         //right
-                                        else if (destPoint.X >= left(activeVehicle))
+                                        else if (destPoint.X > left(activeVehicle))
                                         {
-                                            newDestX = right(fuelDispenser);
+                                            newDestX = right(stationItem) + 1;
                                             bypassFromRight = true;
-                                        }
+                                        }                    
 
-                                        newDestY = bottom(fuelDispenser) + 1;
+                                        newDestY = bottom(stationItem) + 1;
 
 
                                         newDestinationPoint1 = new Point(newDestX,
                                             newDestY);
 
-                                        newDestY = top(fuelDispenser) - activeVehicle.Height;
+                                        newDestY = top(stationItem) - activeVehicle.Height;
                                         newDestinationPoint2 = new Point(newDestX,
                                             newDestY);
                                            
@@ -187,11 +187,11 @@ namespace GasStationModeling.modelling.helpers
 
                             case Directions.Down:
                                 {
-                                    if (left(activeVehicle) >= right(fuelDispenser) ||
-                                       right(activeVehicle) <= left(fuelDispenser) &&
-                                       bottom(activeVehicle) > top(fuelDispenser)) break;
+                                    if (left(activeVehicle) >= right(stationItem) ||
+                                       right(activeVehicle) <= left(stationItem) &&
+                                       bottom(activeVehicle) > top(stationItem)) break;
 
-                                    Canvas.SetTop(activeVehicle, top(fuelDispenser) - activeVehicle.Height);
+                                    Canvas.SetTop(activeVehicle, top(stationItem) - activeVehicle.Height);
                                     if (!activeVehicle.IsBypassingObject)
                                     {
                                         activeVehicle.IsBypassingObject = true;
@@ -199,17 +199,20 @@ namespace GasStationModeling.modelling.helpers
                                         //left
                                         if (destPoint.X < left(activeVehicle))
                                         {
-                                            newDestX = left(fuelDispenser) - (activeVehicle.Width + 1);
+                                            newDestX = left(stationItem) - (activeVehicle.Width + 1);
                                             bypassFromLeft = true;
                                         }
                                         //right
-                                        else if (destPoint.X >= left(activeVehicle))
+                                        else if (destPoint.X > left(activeVehicle))
                                         {
-                                            newDestX = right(fuelDispenser) + (activeVehicle.Width + 1);
+                                            newDestX = right(stationItem) + 1;
                                             bypassFromRight = true;
                                         }
-
-                                        newDestY = top(fuelDispenser) - 1;
+                                        else
+                                        {
+                                            newDestinationPoint2 = new Point();
+                                        }
+                                        newDestY = bottom(stationItem) + 1;
 
                                         newDestinationPoint1 = new Point(newDestX,
                                             newDestY);
@@ -222,19 +225,19 @@ namespace GasStationModeling.modelling.helpers
 
                             case Directions.Left:
                                 {
-                                    if (top(activeVehicle) >= bottom(fuelDispenser) ||
-                                       bottom(activeVehicle) <= top(fuelDispenser) &&
-                                       left(activeVehicle) < right(fuelDispenser)) break;
+                                    if (top(activeVehicle) >= bottom(stationItem) ||
+                                       bottom(activeVehicle) <= top(stationItem) &&
+                                       left(activeVehicle) < right(stationItem)) break;
                                     else
                                     {
-                                        Canvas.SetLeft(activeVehicle, right(fuelDispenser));
+                                        Canvas.SetLeft(activeVehicle, right(stationItem));
                                         if (!activeVehicle.IsBypassingObject)
                                         {
                                             activeVehicle.IsBypassingObject = true;
 
 
-                                            newDestX = right(fuelDispenser);
-                                            newDestY = bottom(fuelDispenser) - 5;
+                                            newDestX = right(stationItem);
+                                            newDestY = bottom(stationItem) - 5;
 
                                             newDestinationPoint1 = new Point(newDestX,
                                                 newDestY);
@@ -242,8 +245,8 @@ namespace GasStationModeling.modelling.helpers
                                             //upper
                                             if (destPoint.Y < top(activeVehicle))
                                             {
-                                                newDestX = left(fuelDispenser) - ElementSizeHelper.CELL_WIDTH - 5;
-                                                newDestY = top(fuelDispenser) - ElementSizeHelper.CELL_HEIGHT;
+                                                newDestX = left(stationItem) - ElementSizeHelper.CELL_WIDTH - 5;
+                                                newDestY = top(stationItem) - ElementSizeHelper.CELL_HEIGHT;
                                             }
                                             else
                                             {
@@ -252,7 +255,7 @@ namespace GasStationModeling.modelling.helpers
                                             }
 
                                             newDestinationPoint2 = new Point(newDestX, newDestY);
-
+                                             
                                             activeVehicle.FromLeftBypassingPoint = newDestinationPoint2;
 
                                             //activeVehicle.removeDestinationPoint();
