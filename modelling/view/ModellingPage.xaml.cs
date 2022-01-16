@@ -81,6 +81,8 @@ namespace GasStationModeling.modelling.view
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             var mainViewModel = ServiceLocator.Current.GetInstance<MainViewModel>();
+            timer.Stop();
+            IsPaused = true;
             mainViewModel.ModellingSettings = null;
             mainViewModel.CurrentPageUri = new Uri(MainViewModel.SETTINGS_SCREEN_URI, UriKind.Relative);
         }
