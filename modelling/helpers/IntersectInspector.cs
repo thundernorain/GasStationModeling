@@ -234,15 +234,17 @@ namespace GasStationModeling.modelling.helpers
                                             activeVehicle.IsBypassingObject = true;
 
 
-                                            newDestX = right(fuelDispenser) + 10;
-                                            newDestY = top(fuelDispenser) - (ElementSizeHelper.CELL_HEIGHT + 5);
+                                            newDestX = right(fuelDispenser);
+                                            newDestY = bottom(fuelDispenser) - 5;
 
                                             newDestinationPoint1 = new Point(newDestX,
                                                 newDestY);
 
-                                            if (activeVehicle.IsFilled)
+                                            //upper
+                                            if (destPoint.Y < top(activeVehicle))
                                             {
                                                 newDestX = left(fuelDispenser) - ElementSizeHelper.CELL_WIDTH - 5;
+                                                newDestY = top(fuelDispenser) - ElementSizeHelper.CELL_HEIGHT;
                                             }
                                             else
                                             {
@@ -253,9 +255,6 @@ namespace GasStationModeling.modelling.helpers
                                             newDestinationPoint2 = new Point(newDestX, newDestY);
 
                                             activeVehicle.FromLeftBypassingPoint = newDestinationPoint2;
-
-                                            newDestinationPoint3 = new Point(left(fuelDispenser) - 20,
-                                                   destPoint.Y - 20);
 
                                             //activeVehicle.removeDestinationPoint();
                                             activeVehicle.AddDestinationPoint(newDestinationPoint2);
