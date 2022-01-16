@@ -205,14 +205,14 @@ namespace GasStationModeling.modelling.helpers
                                         //right
                                         else if (destPoint.X > left(activeVehicle))
                                         {
-                                            newDestX = 2 * right(stationItem) + 1;
+                                            newDestX = right(stationItem) + 1;
                                             bypassFromRight = true;
                                         }
                                         else
                                         {
                                             newDestinationPoint2 = new Point();
                                         }
-                                        newDestY = 2 * bottom(stationItem) + 1;
+                                        newDestY = bottom(stationItem) + 1;
 
                                         newDestinationPoint1 = new Point(newDestX,
                                             newDestY);
