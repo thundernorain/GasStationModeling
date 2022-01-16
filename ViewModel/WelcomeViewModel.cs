@@ -77,8 +77,9 @@ namespace GasStationModeling.ViewModel
 
         public void LoadTopology(string value)
         {
-            var mainWindow = new MainWindow();
+            ViewModelUtils.ReloadMainViewModels();
 
+            var mainWindow = new MainWindow();
             var viewModel = ServiceLocator.Current.GetInstance<MainViewModel>();
             var topology = getChosenTopology(value);
             viewModel.GetTopology.LoadTopology(topology.Topology, topology.ServiceAreaWidth);

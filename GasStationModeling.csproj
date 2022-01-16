@@ -249,6 +249,7 @@
     <Compile Include="core\DB\DbWorker.cs" />
     <Compile Include="core\DB\Interfaces\IDbWorker.cs" />
     <Compile Include="ViewModel\SettingsScreenViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelUtils.cs" />
     <Compile Include="ViewModel\WelcomeViewModel.cs" />
     <Page Include="add_forms\AddTopologyWindow.xaml">
       <SubType>Designer</SubType>

@@ -3,6 +3,7 @@ using GasStationModeling.core.DB;
 using GasStationModeling.developers_info_window.view;
 using GasStationModeling.exceptions;
 using GasStationModeling.main_window.view;
+using GasStationModeling.ViewModel;
 using System;
 using System.Configuration;
 using System.Globalization;
@@ -28,6 +29,7 @@ namespace GasStationModeling.welcome_window.view
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            ViewModelUtils.ReloadMainViewModels();
             var mainWindow = new MainWindow();
             mainWindow.Show();
         }

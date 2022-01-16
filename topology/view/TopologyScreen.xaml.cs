@@ -149,8 +149,8 @@ namespace GasStationModeling.topology.view
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            SimpleIoc.Default.Unregister<MainViewModel>();
-            SimpleIoc.Default.Register<MainViewModel>();
+            /*SimpleIoc.Default.Unregister<MainViewModel>();
+            SimpleIoc.Default.Register<MainViewModel>();*/
             MainWindow.GetWindow(this).Close();
         }
     }
