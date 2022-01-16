@@ -151,6 +151,9 @@ namespace GasStationModeling.modelling.helpers
 
        public Point MoveCar(MoveableElem car, Point destPoint, int carSpeed)
         {
+            car.oldX = left(car);
+            car.oldY = top(car);
+
             var isHorizontalMoving = false;
             var isVerticalMoving = false;
 

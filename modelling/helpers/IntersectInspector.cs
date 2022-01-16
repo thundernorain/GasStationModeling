@@ -58,7 +58,7 @@ namespace GasStationModeling.modelling.helpers
                             {                     
                                 if (activeVehicle.Tag is CarView
                                     && (destPoint.Equals(dpHelper.EntrancePoint) 
-                                        || dpHelper.FuelDispensersDestPoints.ContainsValue(destPoint)))
+                                        /*|| dpHelper.FuelDispensersDestPoints.ContainsValue(destPoint)*/))
                                 {
                                     Rect anotherVehicleRect = anotherVehicle.createIntersectRect();
 
@@ -68,10 +68,24 @@ namespace GasStationModeling.modelling.helpers
                                                                      10,
                                                                      10);
 
-                                    if (anotherVehicleRect.IntersectsWith(destSpot))
+                                    /*if (anotherVehicleRect.IntersectsWith(destSpot))
                                     {
                                         activeVehicle.removeDestinationPoints();
                                         activeVehicle.AddDestinationPoint(dpHelper.LeavePointFilled);
+                                        break;
+                                    }*/
+                                    if (anotherVehicleRect.IntersectsWith(destSpot)
+                                        && anotherVehicle.oldX == Canvas.GetLeft(anotherVehicle)
+                                        && anotherVehicle.oldY == Canvas.GetTop(anotherVehicle))
+                                    {
+                                        var newDestX = left(activeVehicle) + activeVehicle.Width / 2;
+                                        var newDestY = bottom(activeVehicle) + 48;
+                                        var newDestPoint = new Point(newDestX, newDestY);
+
+                                        activeVehicle.removeDestinationPoints();
+                                        activeVehicle.AddDestinationPoint(dpHelper.LeavePointNoFilling);
+                                        activeVehicle.AddDestinationPoint(newDestPoint);
+
                                         break;
                                     }
                                 }
@@ -95,8 +109,7 @@ namespace GasStationModeling.modelling.helpers
                         case Directions.Left:
                             {
                                 if (activeVehicle.Tag is CarView
-                                    && (destPoint.Equals(dpHelper.EntrancePoint) 
-                                        || dpHelper.FuelDispensersDestPoints.ContainsValue(destPoint)))
+                                    && (destPoint.Equals(dpHelper.EntrancePoint)))
                                 {
                                     Rect anotherVehicleRect = anotherVehicle.createIntersectRect();
 
@@ -106,10 +119,17 @@ namespace GasStationModeling.modelling.helpers
                                                                      10,
                                                                      10);
 
-                                    if (anotherVehicleRect.IntersectsWith(destSpot))
+                                    if (anotherVehicleRect.IntersectsWith(destSpot)
+                                        && anotherVehicle.oldX == Canvas.GetLeft(anotherVehicle)
+                                        && anotherVehicle.oldY == Canvas.GetTop(anotherVehicle))
                                     {
+                                        var newDestX = left(activeVehicle) + activeVehicle.Width/2;
+                                        var newDestY = bottom(activeVehicle) + 48;
+                                        var newDestPoint = new Point(newDestX, newDestY);
+
                                         activeVehicle.removeDestinationPoints();
-                                        activeVehicle.AddDestinationPoint(dpHelper.LeavePointFilled);
+                                        activeVehicle.AddDestinationPoint(dpHelper.LeavePointNoFilling);
+                                        activeVehicle.AddDestinationPoint(newDestPoint);
                                     }
                                 }
 
@@ -240,7 +260,7 @@ namespace GasStationModeling.modelling.helpers
 
 
                                             newDestX = right(stationItem);
-                                            newDestY = bottom(stationItem) - 5;
+                                            newDestY = bottom(stationItem) + ElementSizeHelper.CELL_WIDTH + 1;
 
                                             newDestinationPoint1 = new Point(newDestX,
                                                 newDestY);
@@ -248,13 +268,13 @@ namespace GasStationModeling.modelling.helpers
                                             //upper
                                             if (destPoint.Y < top(activeVehicle))
                                             {
-                                                newDestX = left(stationItem) - ElementSizeHelper.CELL_WIDTH - 5;
+                                                newDestX = left(stationItem) - ElementSizeHelper.CELL_WIDTH + 1;
                                                 newDestY = top(stationItem) - ElementSizeHelper.CELL_HEIGHT;
                                             }
                                             else
                                             {
                                                 activeVehicle.IsGoesHorizontal = true;
-                                                newDestX = (int)initialDestinationPoint.X + ElementSizeHelper.CELL_WIDTH;
+                                                newDestX = (int)initialDestinationPoint.X + ElementSizeHelper.CELL_WIDTH + 1;
                                             }
 
                                             newDestinationPoint2 = new Point(newDestX, newDestY);

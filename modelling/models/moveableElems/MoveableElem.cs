@@ -10,6 +10,8 @@ namespace GasStationModeling.modelling.pictureView
 {
     public class MoveableElem : Shape
     {
+        public double oldX = -1;
+        public double oldY = -1;
        
         public bool IsGoingToFill { get; set; }
         public bool IsOnStation { get; set; }

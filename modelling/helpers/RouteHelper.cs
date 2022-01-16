@@ -116,7 +116,12 @@ namespace GasStationModeling.modelling.helpers
 
         private void MoveVehicleToEnter(MoveableElem vehicle)
         {
+            var newPoint = new Point(
+                DpHelper.EntrancePoint.X,
+                DpHelper.EntrancePoint.Y + ElementSizeHelper.CELL_HEIGHT
+                );
             vehicle.AddDestinationPoint(DpHelper.EntrancePoint);
+            vehicle.AddDestinationPoint(newPoint);
         }
 
         private void MoveVehicleToExit(MoveableElem vehicle)

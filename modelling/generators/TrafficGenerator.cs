@@ -1,11 +1,13 @@
 ﻿using GasStationModeling.core.models;
 using GasStationModeling.modelling.generators;
+using GasStationModeling.modelling.helpers;
 using GasStationModeling.modelling.managers;
 using GasStationModeling.modelling.model;
 using GasStationModeling.modelling.moveableElems;
 using GasStationModeling.modelling.pictureView;
 using GasStationModeling.settings_screen.model;
 using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Shapes;
 
@@ -58,6 +60,12 @@ namespace GasStationModeling.modelling
             elem.AddDestinationPoint(destPointHelper.ExitPoint);
             elem.AddDestinationPoint(destPointHelper.CashBoxPoint);
             elem.AddDestinationPoint(destPointHelper.EntrancePoint);
+
+            var newPoint = new Point(
+                                destPointHelper.EntrancePoint.X,
+                                destPointHelper.EntrancePoint.Y + ElementSizeHelper.CELL_HEIGHT
+                                );
+            elem.AddDestinationPoint(newPoint);
             return elem;
         }
 
