@@ -22,7 +22,7 @@ namespace GasStationModeling.modelling.model
 
         public RefuellerView(double tick, double speedOfRefuellingPerSecond, double fuelAmount)
         {
-            SpeedRefueling = speedOfRefuellingPerSecond * tick / 1000;
+            SpeedRefueling = speedOfRefuellingPerSecond * tick / 100;
             FuelAmount = fuelAmount;
         }
 
@@ -35,6 +35,7 @@ namespace GasStationModeling.modelling.model
                 if (TankData.CurrentFuelVolume > TankData.MaxVolume && FuelAmount > 0)
                 {
                     TankData.CurrentFuelVolume = TankData.MaxVolume;
+                    FuelAmount = 0;
                 }
             }
         }

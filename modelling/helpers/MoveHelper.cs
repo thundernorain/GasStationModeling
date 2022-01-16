@@ -30,7 +30,7 @@ namespace GasStationModeling.modelling.helpers
             canvasElems = parsedCanvas;
             trafficGenerator = new TrafficGenerator(settings, destPointHelper);
             modellingSteps = new ModellingSteps(canvasElems,trafficGenerator);
-            inspector = new IntersectInspector(stationCanvas);
+            inspector = new IntersectInspector(stationCanvas,DpHelper);
         }
 
         public Canvas MoveCarToDestination(MoveableElem vehicle, ref List<MoveableElem> toDelete, ref List<MoveableElem> toAdd)
@@ -73,12 +73,10 @@ namespace GasStationModeling.modelling.helpers
             var destPoint = vehicle.GetDestinationPoint();
             var carSpeed = vehicle.IsGoingToFill ? CarSpeedFilling : CarSpeedNoFilling;
 
-            var destSpot = vehicle.DestinationSpot;
-
             destPoint = MoveCar(vehicle, destPoint, carSpeed);
 
   
-            destSpot = DpHelper.createDestinationSpot(destPoint);
+           var  destSpot = DpHelper.createDestinationSpot(destPoint);
            vehicle.DestinationSpot = destSpot;
             
            
@@ -106,7 +104,7 @@ namespace GasStationModeling.modelling.helpers
                     {
                         if (destPoint.Equals(fuelDispensersDestPoint))
                         { 
-                            modellingSteps.StartFill(ref carElem  );      
+                            modellingSteps.StartFill(ref carElem);      
                         }
                     }
                 }
@@ -173,7 +171,7 @@ namespace GasStationModeling.modelling.helpers
                     }
 
                     // Go Down
-                    if (bottom(car) <= destPoint.Y && !isHorizontalMoving)
+                    else if (bottom(car) <= destPoint.Y && !isHorizontalMoving)
                     {
                         carTop = top(car);
                         Canvas.SetTop(car, carTop + carSpeed);
@@ -182,7 +180,7 @@ namespace GasStationModeling.modelling.helpers
                     }
 
                     // Go left
-                    if (left(car) >= destPoint.X && !isVerticalMoving)
+                    else if (left(car) >= destPoint.X && !isVerticalMoving)
                     {
                         carLeft = left(car);
                         Canvas.SetLeft(car, carLeft - carSpeed);
@@ -190,7 +188,7 @@ namespace GasStationModeling.modelling.helpers
                     }
 
                     // Go Right
-                    if (right(car) < destPoint.X + ElementSizeHelper.CELL_WIDTH && !isVerticalMoving)
+                    else if (right(car) <= destPoint.X && !isVerticalMoving)
                     {
                         carLeft = left(car);
                         Canvas.SetLeft(car, carLeft + carSpeed);
@@ -199,16 +197,15 @@ namespace GasStationModeling.modelling.helpers
                 else
                 {
                     // Go left
-                    if (left(car) > destPoint.X)
+                    if (left(car) >= destPoint.X)
                     {
                         carLeft = left(car);
                         Canvas.SetLeft(car, carLeft - carSpeed);
                         isHorizontalMoving = true;
                         destPoint = inspector.PreventIntersection(ref car, Directions.Left);
                     }
-
                     // Go Right
-                    if (left(car) < destPoint.X)
+                    else if (right(car) <= destPoint.X)
                     {
                         carLeft = left(car);
                         Canvas.SetLeft(car, carLeft + carSpeed);
@@ -216,7 +213,7 @@ namespace GasStationModeling.modelling.helpers
                     }
 
                     // Go Up
-                    if (top(car) >= destPoint.Y && !isHorizontalMoving)
+                    else if (top(car) >= destPoint.Y && !isHorizontalMoving)
                     {
                         carTop = top(car);
                         Canvas.SetTop(car, carTop - carSpeed);
@@ -224,7 +221,7 @@ namespace GasStationModeling.modelling.helpers
                     }
 
                     // Go Down
-                    if (bottom(car) <= destPoint.Y && !isHorizontalMoving)
+                    else if (bottom(car) <= destPoint.Y && !isHorizontalMoving)
                     {
                         carTop = top(car);
                         Canvas.SetTop(car, carTop + carSpeed);
@@ -243,7 +240,7 @@ namespace GasStationModeling.modelling.helpers
                 }
 
                 // Go Right
-                if (right(car) < destPoint.X + ElementSizeHelper.CELL_WIDTH)
+                if (right(car) <= destPoint.X)
                 {
                     carLeft = left(car);
                     Canvas.SetLeft(car, carLeft + carSpeed);
@@ -322,19 +319,19 @@ namespace GasStationModeling.modelling.helpers
                 Canvas.SetLeft(refueller, refuellerLeft - refuellerSpeed);
             }
 
-            if (right(refueller) <= destPoint.X + ElementSizeHelper.CELL_WIDTH)
+            else if (right(refueller) <= destPoint.X)
             {
                 refuellerLeft = left(refueller);
                 Canvas.SetLeft(refueller, refuellerLeft + refuellerSpeed);
             }
 
-            if (top(refueller) >= destPoint.Y)
+            else if (top(refueller) >= destPoint.Y)
             {
                 refuellerTop = top(refueller);
                 Canvas.SetTop(refueller, refuellerTop - refuellerSpeed);
             }
 
-            if (bottom(refueller) <= destPoint.Y + ElementSizeHelper.CELL_HEIGHT)
+            else if (bottom(refueller) <= destPoint.Y)
             {
                 refuellerTop = top(refueller);
                 Canvas.SetTop(refueller, refuellerTop + refuellerSpeed);
