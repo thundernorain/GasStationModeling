@@ -29,7 +29,7 @@ namespace GasStationModeling.modelling.model
             //Моделирование работает на миллисекундах
             //умножаем скорость на размер тика
             // и делим на 1000 (кол-во миллисекнуд в секунде)
-            SpeedRefuelingPerTick = dispenser.SpeedRefueling * tick / 10;
+            SpeedRefuelingPerTick = dispenser.SpeedRefueling * tick / 1000;
 
             IsBusy = false;
             CarsInQueue = 0;
