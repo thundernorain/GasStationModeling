@@ -96,13 +96,13 @@ namespace GasStationModeling.modelling.helpers
 
                         case Directions.Right:
                             {
-                                Canvas.SetLeft(activeVehicle, left(anotherVehicle) - (activeVehicle.Width - collisionMaskCorrector / 2));
+                                Canvas.SetLeft(activeVehicle, left(anotherVehicle) - (activeVehicle.Width + collisionMaskCorrector / 2));
                                 break;
                             }
 
                         case Directions.Down:
                             {
-                                Canvas.SetTop(activeVehicle, top(anotherVehicle) - (activeVehicle.Height - collisionMaskCorrector / 2));
+                                Canvas.SetTop(activeVehicle, top(anotherVehicle) - (activeVehicle.Height + collisionMaskCorrector / 2));
                                 break;
                             }
 
@@ -214,13 +214,13 @@ namespace GasStationModeling.modelling.helpers
                                        right(activeVehicle) <= left(stationItem) &&
                                        bottom(activeVehicle) > top(stationItem)) break;
 
-                                    Canvas.SetTop(activeVehicle, top(stationItem) - activeVehicle.Height + collisionMaskCorrector / 2);
+                                       Canvas.SetTop(activeVehicle, top(stationItem) - activeVehicle.Height + collisionMaskCorrector/2);
                                     if (!activeVehicle.IsBypassingObject)
                                     {
                                         activeVehicle.IsBypassingObject = true;
 
                                         //left
-                                        if (destPoint.X < left(activeVehicle))
+                                        if (destPoint.X - left(activeVehicle) <= 15)
                                         {
                                             newDestX = left(stationItem) - (activeVehicle.Width + 1);
                                             bypassFromLeft = true;
@@ -231,10 +231,7 @@ namespace GasStationModeling.modelling.helpers
                                             newDestX = right(stationItem) + ElementSizeHelper.CELL_WIDTH + 1;
                                             bypassFromRight = true;
                                         }
-                                        else
-                                        {
-                                            newDestinationPoint2 = new Point();
-                                        }
+                                   
                                         newDestY = bottom(stationItem) + ElementSizeHelper.CELL_WIDTH + 1;
 
                                         newDestinationPoint1 = new Point(newDestX,
