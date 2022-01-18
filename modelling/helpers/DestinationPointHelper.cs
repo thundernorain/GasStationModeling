@@ -36,7 +36,9 @@ namespace GasStationModeling.modelling
         public Dictionary<int, Point> RefuellerDestPoints { get; private set; }
 
         public Point ServiceAreaEntrancePoint { get; private set; }
+        public Point ServiceMiddlePoint { get; private set; }
         public Point ServiceAreaExitPoint { get; private set; }
+        public Point ServiceMiddleExitPoint { get; private set; }
         #endregion
 
         public DestinationPointHelper(CanvasParser parsedCanvas)
@@ -85,7 +87,9 @@ namespace GasStationModeling.modelling
 
         public void defineServiceAreaEntrancePoint(Rectangle elem)
         {
-            ServiceAreaEntrancePoint = new Point((int)Canvas.GetLeft(elem) + ElementSizeHelper.CELL_WIDTH, SpawnPoint.Y);
+            ServiceAreaEntrancePoint = new Point((int)Canvas.GetLeft(elem) + 2 * ElementSizeHelper.CELL_WIDTH, SpawnPoint.Y);
+            ServiceMiddlePoint = new Point(ServiceAreaEntrancePoint.X, Canvas.GetTop(elem) + 2 * ElementSizeHelper.CELL_HEIGHT);
+            ServiceMiddleExitPoint = new Point(ServiceAreaEntrancePoint.X,ServiceAreaEntrancePoint.Y + ElementSizeHelper.CELL_HEIGHT);
         }
 
         public Dictionary<int, Point> defineDestPointsToDispensers(CanvasParser parsedCanvas)

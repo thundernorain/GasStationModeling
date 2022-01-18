@@ -98,9 +98,6 @@ namespace GasStationModeling.modelling.helpers
             fuelDispenserView = optimalFuelDispenser.Tag as DispenserView;
             fuelDispenserView.CarsInQueue++;
             carView.FuelDispenserChosen = true;
-
-            //var destPointX = Canvas.GetLeft(optimalFuelDispenser) - DpHelper.FuelingPointDeltaX;
-            //var destPointY = Canvas.GetTop(optimalFuelDispenser) + ElementSizeHelper.CELL_WIDTH;
             car.AddDestinationPoint(DpHelper.FuelDispensersDestPoints[fuelDispenserView.Id]);
             return car;
         }
@@ -144,6 +141,7 @@ namespace GasStationModeling.modelling.helpers
             if (!isFilled)
             {
                 GoToFuelTank(ref refueller);
+                GoToServiceEntrancePoint(ref refueller);
             }
             else
             {
@@ -151,17 +149,23 @@ namespace GasStationModeling.modelling.helpers
             }
         }
 
+        private void GoToServiceEntrancePoint(ref RefuellerElem refueller)
+        {
+            refueller.AddDestinationPoint(DpHelper.ServiceMiddlePoint);
+            refueller.AddDestinationPoint(DpHelper.ServiceAreaEntrancePoint);
+        }
+
         private void GoToFuelTank(ref RefuellerElem refueller)
         {
             var chosenTank = (refueller.Tag as RefuellerView).ChosenTank;
             var tankId = (chosenTank.Tag as TankView).Id;
             refueller.AddDestinationPoint(DpHelper.RefuellerDestPoints[tankId]);
-            refueller.AddDestinationPoint(DpHelper.ServiceAreaEntrancePoint);
         }
 
         private void LeaveServiceArea(ref RefuellerElem refueller)
         {
             refueller.AddDestinationPoint(DpHelper.LeavePointNoFilling);
+            refueller.AddDestinationPoint(DpHelper.ServiceMiddleExitPoint);
             refueller.AddDestinationPoint(DpHelper.ServiceAreaEntrancePoint);
         }
     }
