@@ -1,5 +1,6 @@
 ﻿using GasStationModeling.modelling.model;
 using GasStationModeling.modelling.pictureView;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Shapes;
@@ -55,10 +56,46 @@ namespace GasStationModeling.modelling.helpers
                     switch (direction)
                     {
                         case Directions.Up:
-                            {                     
+                            {
+
+                                /*if (anotherVehicle.IsFilling)                               
+                                {
+
+                                    var disp = (anotherVehicle.Tag as CarView).ChosenDispenser.Tag as DispenserView;
+                                    var id = disp.Id;
+                                    var chosenDispenserPoint = dpHelper.FuelDispensersDestPoints[id];
+
+                                    if (activeVehicle.Type.Equals("Collector") || !activeVehicle.GetDestinationPoint().Equals(chosenDispenserPoint))
+                                    {
+                                        //left
+                                        if (destPoint.X < left(activeVehicle))
+                                        {
+                                            newDestX = left(anotherVehicle) - (activeVehicle.Width + 1);
+                                        }
+                                        //right
+                                        else if (destPoint.X >= right(activeVehicle))
+                                        {
+                                            newDestX = right(anotherVehicle) + ElementSizeHelper.CELL_WIDTH + 1;
+                                        }
+
+                                        newDestY = bottom(anotherVehicle) + 1;
+
+
+                                        var ndp = new Point(newDestX,
+                                            newDestY);
+
+
+                                        newDestY = top(anotherVehicle) - ElementSizeHelper.CELL_HEIGHT;
+                                        var newNdp = new Point(newDestX,
+                                            newDestY);
+                                        activeVehicle.AddDestinationPoint(newNdp);
+                                        activeVehicle.AddDestinationPoint(ndp);
+                                        break;
+                                    }
+                                }*/
+
                                 if (activeVehicle.Tag is CarView
-                                    && (destPoint.Equals(dpHelper.EntrancePoint) 
-                                        /*|| dpHelper.FuelDispensersDestPoints.ContainsValue(destPoint)*/))
+                                    && destPoint.Equals(dpHelper.EntrancePoint))
                                 {
                                     Rect anotherVehicleRect = anotherVehicle.createIntersectRect();
 
@@ -68,12 +105,6 @@ namespace GasStationModeling.modelling.helpers
                                                                      10,
                                                                      10);
 
-                                    /*if (anotherVehicleRect.IntersectsWith(destSpot))
-                                    {
-                                        activeVehicle.removeDestinationPoints();
-                                        activeVehicle.AddDestinationPoint(dpHelper.LeavePointFilled);
-                                        break;
-                                    }*/
                                     if (anotherVehicleRect.IntersectsWith(destSpot)
                                         && anotherVehicle.oldX == Canvas.GetLeft(anotherVehicle)
                                         && anotherVehicle.oldY == Canvas.GetTop(anotherVehicle))
@@ -96,18 +127,46 @@ namespace GasStationModeling.modelling.helpers
 
                         case Directions.Right:
                             {
-                                Canvas.SetLeft(activeVehicle, left(anotherVehicle) - (activeVehicle.Width + collisionMaskCorrector / 2));
+                                Canvas.SetLeft(activeVehicle, left(anotherVehicle) - (activeVehicle.Width - collisionMaskCorrector / 2));
                                 break;
                             }
 
                         case Directions.Down:
                             {
-                                Canvas.SetTop(activeVehicle, top(anotherVehicle) - (activeVehicle.Height + collisionMaskCorrector / 2));
+                                Canvas.SetTop(activeVehicle, top(anotherVehicle) - (activeVehicle.Height - collisionMaskCorrector / 2));
                                 break;
                             }
 
                         case Directions.Left:
                             {
+                                /*if (anotherVehicle.IsFilling && (activeVehicle.Type.Equals("Collector") ||
+                                    !(activeVehicle.Tag as CarView).ChosenDispenser.Equals((anotherVehicle.Tag as CarView).ChosenDispenser)))
+                                {
+                                    double newDestY = bottom(anotherVehicle) + ElementSizeHelper.CELL_WIDTH + 1;
+                                    //up
+                                    /*if (destPoint.Y <= top(activeVehicle))
+                                    {
+                                        newDestY = top(anotherVehicle) - (activeVehicle.Width + 1);
+                                    }
+                                    //down
+                                    else if (destPoint.Y >= bottom(activeVehicle))
+                                    {
+                                        newDestY = bottom(anotherVehicle) + ElementSizeHelper.CELL_WIDTH + 1;
+                                    }//
+
+                                    var newDestX = right(anotherVehicle) - (ElementSizeHelper.CELL_WIDTH + 1);
+                                    var ndp = new Point(newDestX,
+                                       newDestY);
+
+                                    newDestX = right(anotherVehicle) - (ElementSizeHelper.CELL_WIDTH + 1);
+
+                                    var ndp1 = new Point(newDestX,
+                                        newDestY);
+                                    activeVehicle.AddDestinationPoint(ndp1);
+                                    activeVehicle.AddDestinationPoint(ndp);
+                                    break;
+                                }*/
+
                                 if (activeVehicle.Tag is CarView
                                     && (destPoint.Equals(dpHelper.EntrancePoint)))
                                 {
@@ -147,9 +206,6 @@ namespace GasStationModeling.modelling.helpers
 
                         var initialDestinationPoint = activeVehicle.GetDestinationPoint();
 
-                        double newDestX = -1;
-                        double newDestY = -1;
-
                         bool bypassFromLeft = false;
                         bool bypassFromRight = false;
                         bool bypassFromBottom = false;
@@ -171,29 +227,28 @@ namespace GasStationModeling.modelling.helpers
 
                                     if (!activeVehicle.IsBypassingObject)
                                     {
+                                        double newDestX = right(stationItem) + ElementSizeHelper.CELL_WIDTH + 1;
                                         activeVehicle.IsBypassingObject = true;
 
-
+                                        //right
+                                        if (Math.Abs(destPoint.X - left(activeVehicle)) <= 10)
+                                        {
+                                            newDestX = right(stationItem) + ElementSizeHelper.CELL_WIDTH + 1;
+                                            bypassFromRight = true;
+                                        }                         
                                         //left
-                                        if (destPoint.X < left(activeVehicle))
+                                        else if (destPoint.X < left(activeVehicle))
                                         {
                                             newDestX = left(stationItem) - (activeVehicle.Width + 1);
                                             bypassFromLeft = true;
                                         }
-                                        //right
-                                        else if (destPoint.X > left(activeVehicle))
-                                        {
-                                            newDestX = right(stationItem) + 1;
-                                            bypassFromRight = true;
-                                        }                    
 
-                                        newDestY = bottom(stationItem) + 1;
-
+                                        var newDestY = bottom(stationItem) + 1;
 
                                         newDestinationPoint1 = new Point(newDestX,
                                             newDestY);
 
-                                        newDestY = top(stationItem) - activeVehicle.Height;
+                                        newDestY = top(stationItem) - (activeVehicle.Height + 1);
                                         newDestinationPoint2 = new Point(newDestX,
                                             newDestY);
                                            
@@ -217,10 +272,11 @@ namespace GasStationModeling.modelling.helpers
                                        Canvas.SetTop(activeVehicle, top(stationItem) - activeVehicle.Height + collisionMaskCorrector/2);
                                     if (!activeVehicle.IsBypassingObject)
                                     {
+                                        double newDestX = left(stationItem) - (activeVehicle.Width + 1);
                                         activeVehicle.IsBypassingObject = true;
 
                                         //left
-                                        if (destPoint.X - left(activeVehicle) <= 15)
+                                        if (Math.Abs(destPoint.X - left(activeVehicle)) <= 15)
                                         {
                                             newDestX = left(stationItem) - (activeVehicle.Width + 1);
                                             bypassFromLeft = true;
@@ -231,15 +287,15 @@ namespace GasStationModeling.modelling.helpers
                                             newDestX = right(stationItem) + ElementSizeHelper.CELL_WIDTH + 1;
                                             bypassFromRight = true;
                                         }
-                                   
-                                        newDestY = bottom(stationItem) + ElementSizeHelper.CELL_WIDTH + 1;
+                                        //else newDestX = left(stationItem) - (activeVehicle.Width + 1);
+
+                                        var newDestY = bottom(stationItem) + ElementSizeHelper.CELL_WIDTH + 1;
 
                                         newDestinationPoint1 = new Point(newDestX,
                                             newDestY);
 
                                         activeVehicle.AddDestinationPoint(newDestinationPoint1);
                                     }
-
                                     break;
                                 }
 
@@ -256,12 +312,11 @@ namespace GasStationModeling.modelling.helpers
                                             activeVehicle.IsBypassingObject = true;
 
 
-                                            newDestX = right(stationItem);
-                                            newDestY = bottom(stationItem) + ElementSizeHelper.CELL_WIDTH + 1;
+                                            var newDestX = right(stationItem) + 1;
+                                            var newDestY = bottom(stationItem) + ElementSizeHelper.CELL_WIDTH + 1;
 
                                             newDestinationPoint1 = new Point(newDestX,
                                                 newDestY);
-
                                             //upper
                                             if (destPoint.Y < top(activeVehicle))
                                             {

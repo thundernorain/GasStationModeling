@@ -15,6 +15,7 @@ namespace GasStationModeling.modelling.pictureView
             Width = ElementSizeHelper.CELL_HEIGHT;
             Fill = brush;
             IsGoingToFill = false;
+            Type = "Car";
         }
 
         public CarView View => Tag as CarView;

@@ -123,7 +123,6 @@ namespace GasStationModeling.modelling.helpers
 
         private void MoveVehicleToExit(MoveableElem vehicle)
         {
-            var fillingFinishedPoint = vehicle.GetDestinationPoint();
             vehicle.removeDestinationPoints();
             vehicle.AddDestinationPoint(DpHelper.LeavePointFilled);
             vehicle.AddDestinationPoint(DpHelper.ExitPoint);
@@ -165,8 +164,14 @@ namespace GasStationModeling.modelling.helpers
         private void LeaveServiceArea(ref RefuellerElem refueller)
         {
             refueller.AddDestinationPoint(DpHelper.LeavePointNoFilling);
+<<<<<<< HEAD
             refueller.AddDestinationPoint(DpHelper.ServiceMiddleExitPoint);
             refueller.AddDestinationPoint(DpHelper.ServiceAreaEntrancePoint);
+=======
+            var exitPoint = new Point(DpHelper.ServiceAreaEntrancePoint.X,
+                DpHelper.ServiceAreaEntrancePoint.Y + ElementSizeHelper.CELL_HEIGHT + 1);
+            refueller.AddDestinationPoint(exitPoint);
+>>>>>>> положение авто в соответствии с направлением движения
         }
     }
 }

@@ -160,6 +160,8 @@ namespace GasStationModeling.modelling.helpers
             double carTop;
             double carLeft;
 
+            Directions currentDirection = Directions.Left;
+
             if (!car.IsBypassingObject)
             {
                 if (!car.IsFilled && !car.IsGoesHorizontal)
@@ -170,7 +172,8 @@ namespace GasStationModeling.modelling.helpers
                         carTop = top(car);
                         Canvas.SetTop(car, carTop - carSpeed);
                         isVerticalMoving = true;
-                        destPoint = inspector.PreventIntersection(ref car, Directions.Up);
+                        currentDirection = Directions.Up;
+                        destPoint = inspector.PreventIntersection(ref car, currentDirection);
                     }
 
                     // Go Down
@@ -179,7 +182,8 @@ namespace GasStationModeling.modelling.helpers
                         carTop = top(car);
                         Canvas.SetTop(car, carTop + carSpeed);
                         isVerticalMoving = true;
-                        destPoint = inspector.PreventIntersection(ref car, Directions.Down);
+                        currentDirection = Directions.Down;
+                        destPoint = inspector.PreventIntersection(ref car, currentDirection);
                     }
 
                     // Go left
@@ -187,7 +191,8 @@ namespace GasStationModeling.modelling.helpers
                     {
                         carLeft = left(car);
                         Canvas.SetLeft(car, carLeft - carSpeed);
-                        destPoint = inspector.PreventIntersection(ref car, Directions.Left);
+                        currentDirection = Directions.Left;
+                        destPoint = inspector.PreventIntersection(ref car, currentDirection);
                     }
 
                     // Go Right
@@ -195,6 +200,7 @@ namespace GasStationModeling.modelling.helpers
                     {
                         carLeft = left(car);
                         Canvas.SetLeft(car, carLeft + carSpeed);
+                        currentDirection = Directions.Right;
                     }
                 }
                 else
@@ -205,7 +211,8 @@ namespace GasStationModeling.modelling.helpers
                         carLeft = left(car);
                         Canvas.SetLeft(car, carLeft - carSpeed);
                         isHorizontalMoving = true;
-                        destPoint = inspector.PreventIntersection(ref car, Directions.Left);
+                        currentDirection = Directions.Left;
+                        destPoint = inspector.PreventIntersection(ref car, currentDirection);
                     }
                     // Go Right
                     else if (right(car) <= destPoint.X)
@@ -213,6 +220,7 @@ namespace GasStationModeling.modelling.helpers
                         carLeft = left(car);
                         Canvas.SetLeft(car, carLeft + carSpeed);
                         isHorizontalMoving = true;
+                        currentDirection = Directions.Right;
                     }
 
                     // Go Up
@@ -220,7 +228,8 @@ namespace GasStationModeling.modelling.helpers
                     {
                         carTop = top(car);
                         Canvas.SetTop(car, carTop - carSpeed);
-                        destPoint = inspector.PreventIntersection(ref car, Directions.Up);
+                        currentDirection = Directions.Up;
+                        destPoint = inspector.PreventIntersection(ref car, currentDirection);
                     }
 
                     // Go Down
@@ -228,7 +237,8 @@ namespace GasStationModeling.modelling.helpers
                     {
                         carTop = top(car);
                         Canvas.SetTop(car, carTop + carSpeed);
-                        destPoint = inspector.PreventIntersection(ref car, Directions.Down);
+                        currentDirection = Directions.Down;
+                        destPoint = inspector.PreventIntersection(ref car, currentDirection);
                     }
                 }
             }
@@ -239,32 +249,38 @@ namespace GasStationModeling.modelling.helpers
                 {
                     carLeft = left(car);
                     Canvas.SetLeft(car, carLeft - carSpeed);
-                    destPoint = inspector.PreventIntersection(ref car, Directions.Left);
+                    currentDirection = Directions.Left;
+                    destPoint = inspector.PreventIntersection(ref car, currentDirection);
                 }
 
                 // Go Right
-                if (right(car) <= destPoint.X)
+                else if (right(car) <= destPoint.X)
                 {
                     carLeft = left(car);
                     Canvas.SetLeft(car, carLeft + carSpeed);
+                    currentDirection = Directions.Right;
                 }
 
                 // Go Up
-                if (top(car) >= destPoint.Y)
+                else if (top(car) >= destPoint.Y)
                 {
                     carTop = top(car);
                     Canvas.SetTop(car, carTop - carSpeed);
-                    destPoint = inspector.PreventIntersection(ref car, Directions.Up);
+                    currentDirection = Directions.Up;
+                    destPoint = inspector.PreventIntersection(ref car, currentDirection);
                 }
 
                 // Go Down
-                if (bottom(car) <= destPoint.Y)
+                else if (bottom(car) <= destPoint.Y)
                 {
                     carTop = top(car);
                     Canvas.SetTop(car, carTop + carSpeed);
-                    destPoint = inspector.PreventIntersection(ref car, Directions.Down);
+                    currentDirection = Directions.Down;
+                    destPoint = inspector.PreventIntersection(ref car, currentDirection);
                 }
             }
+
+            car.Fill = BrushHelper.getBrushFor(car.Type + "_" + currentDirection.ToString());
 
             return destPoint;
         }
@@ -316,29 +332,34 @@ namespace GasStationModeling.modelling.helpers
             double refuellerTop;
             double refuellerLeft;
 
+            Directions currentDirection = Directions.Up;
+
             if (left(refueller) >= destPoint.X)
             {
                 refuellerLeft = left(refueller);
                 Canvas.SetLeft(refueller, refuellerLeft - refuellerSpeed);
+                currentDirection = Directions.Left;
             }
-
             else if (right(refueller) <= destPoint.X)
             {
                 refuellerLeft = left(refueller);
                 Canvas.SetLeft(refueller, refuellerLeft + refuellerSpeed);
+                currentDirection = Directions.Right;
             }
-
             else if (top(refueller) >= destPoint.Y)
             {
                 refuellerTop = top(refueller);
                 Canvas.SetTop(refueller, refuellerTop - refuellerSpeed);
+                currentDirection = Directions.Up;
             }
-
             else if (bottom(refueller) <= destPoint.Y)
             {
                 refuellerTop = top(refueller);
                 Canvas.SetTop(refueller, refuellerTop + refuellerSpeed);
+                currentDirection = Directions.Down;
             }
+
+            refueller.Fill = BrushHelper.getBrushFor("Refueller_" + currentDirection.ToString());
 
             return destPoint;
         }

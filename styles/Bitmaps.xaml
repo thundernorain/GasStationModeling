@@ -12,14 +12,31 @@
     <BitmapImage x:Key="CellIncorrect" UriSource="./assets/imgElementStation/Incorrect.png" />
     <BitmapImage x:Key="Tank" UriSource="./assets/imgElementStation/tank.png"/>
     <BitmapImage x:Key="Tank_Critical" UriSource="./assets/imgElementStation/tank_critical.png"/>
-    <BitmapImage x:Key="Car" UriSource="./assets/imgElementStation/car.png"/>
     <BitmapImage x:Key="Cashbox" UriSource="./assets/imgElementStation/cashbox.png"/>
     <BitmapImage x:Key="Cashbox_Critical" UriSource="./assets/imgElementStation/cashbox_сritical.png"/>
+    <BitmapImage x:Key="Car" UriSource="./assets/imgElementStation/car_left.png"/>
+    <BitmapImage x:Key="Car_Left" UriSource="./assets/imgElementStation/car_left.png"/>
+    <BitmapImage x:Key="Car_Right" UriSource="./assets/imgElementStation/car_right.png"/>
+    <BitmapImage x:Key="Car_Up" UriSource="./assets/imgElementStation/car_up.png"/>
+    <BitmapImage x:Key="Car_Down" UriSource="./assets/imgElementStation/car_down.png"/>
+    
     <BitmapImage x:Key="Collector" UriSource="./assets/imgElementStation/collector.png"/>
+    <BitmapImage x:Key="Collector_Left" UriSource="./assets/imgElementStation/Collector_Left.png"/>
+    <BitmapImage x:Key="Collector_Right" UriSource="./assets/imgElementStation/Collector_Right.png"/>
+    <BitmapImage x:Key="Collector_Up" UriSource="./assets/imgElementStation/Collector_Up.png"/>
+    <BitmapImage x:Key="Collector_Down" UriSource="./assets/imgElementStation/Collector_Down.png"/>
+    
     <BitmapImage x:Key="Entrance" UriSource="./assets/imgElementStation/entrance.png"/>
     <BitmapImage x:Key="Exit" UriSource="./assets/imgElementStation/exit.png"/>
+
     <BitmapImage x:Key="FuelDispenser" UriSource="./assets/imgElementStation/fuelDispenser.png"/>
+    
     <BitmapImage x:Key="Refueller" UriSource="./assets/imgElementStation/refueller.png"/>
+    <BitmapImage x:Key="Refueller_Left" UriSource="./assets/imgElementStation/Refueller_Left.png"/>
+    <BitmapImage x:Key="Refueller_Right" UriSource="./assets/imgElementStation/Refueller_Right.png"/>
+    <BitmapImage x:Key="Refueller_Up" UriSource="./assets/imgElementStation/Refueller_Up.png"/>
+    <BitmapImage x:Key="Refueller_Down" UriSource="./assets/imgElementStation/Refueller_Down.png"/>
+    
     <BitmapImage x:Key="TankWhite" UriSource="./assets/imgElementStation/tankWhite.png"/>
     
 </ResourceDictionary>
