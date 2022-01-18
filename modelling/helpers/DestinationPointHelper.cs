@@ -29,8 +29,6 @@ namespace GasStationModeling.modelling
         public Point EntrancePoint { get; private set; }
         public Point ExitPoint { get; private set; }
 
-        public Point ServiceEntrancePoint { get; set; }
-
         public Point CashBoxPoint { get; private set; }
         public Dictionary<int, Point> FuelDispensersDestPoints { get; private set; }
         public Dictionary<int, Point> RefuellerDestPoints { get; private set; }
@@ -39,6 +37,7 @@ namespace GasStationModeling.modelling
         public Point ServiceMiddlePoint { get; private set; }
         public Point ServiceAreaExitPoint { get; private set; }
         public Point ServiceMiddleExitPoint { get; private set; }
+        public Point ServiceAreaWaitingPoint { get; private set; }
         #endregion
 
         public DestinationPointHelper(CanvasParser parsedCanvas)
@@ -51,7 +50,7 @@ namespace GasStationModeling.modelling
         public void defineCommonPoints(CanvasParser parsedCanvas)
         {
             CarRoadPositionY = (int)parsedCanvas.StationCanvas.Height - 2 * ElementSizeHelper.CELL_HEIGHT;
-            ServiceRoadPositionY = CarRoadPositionY - ElementSizeHelper.CELL_HEIGHT;
+            ServiceRoadPositionY = CarRoadPositionY -  ElementSizeHelper.CELL_HEIGHT;
             SpawnPoint = new Point((int)parsedCanvas.StationCanvas.Width, CarRoadPositionY);
             ServiceSpawnPoint = new Point((int)parsedCanvas.StationCanvas.Width, ServiceRoadPositionY);
             LeavePointNoFilling = new Point(ReSpawnPointX, CarRoadPositionY);
@@ -90,6 +89,7 @@ namespace GasStationModeling.modelling
             ServiceAreaEntrancePoint = new Point((int)Canvas.GetLeft(elem) + 2 * ElementSizeHelper.CELL_WIDTH, SpawnPoint.Y);
             ServiceMiddlePoint = new Point(ServiceAreaEntrancePoint.X, Canvas.GetTop(elem) + 2 * ElementSizeHelper.CELL_HEIGHT);
             ServiceMiddleExitPoint = new Point(ServiceAreaEntrancePoint.X,ServiceAreaEntrancePoint.Y + ElementSizeHelper.CELL_HEIGHT);
+            ServiceAreaWaitingPoint = new Point(ServiceSpawnPoint.X, ServiceRoadPositionY);
         }
 
         public Dictionary<int, Point> defineDestPointsToDispensers(CanvasParser parsedCanvas)

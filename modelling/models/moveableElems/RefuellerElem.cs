@@ -9,6 +9,9 @@ namespace GasStationModeling.modelling.moveableElems
 {
     public class RefuellerElem : MoveableElem
     {
+        public bool IsWaiting { get; set; }
+        public bool IsGoingToWait { get; set; }
+
         public RefuellerElem(
             ImageBrush brush,
             Point location,
@@ -18,6 +21,11 @@ namespace GasStationModeling.modelling.moveableElems
             Height = ElementSizeHelper.CELL_WIDTH;
             Width = ElementSizeHelper.CELL_HEIGHT;
             Fill = brush;
+            Type = "Collector";
+            IsFilled= false;
+            IsOnStation = false;
+            IsWaiting = false;
+            IsGoingToWait = false;
         }
 
         public RefuellerView View => Tag as RefuellerView;

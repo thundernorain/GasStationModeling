@@ -20,7 +20,7 @@ namespace GasStationModeling.modelling
         private static bool _isRefilling;
 
         private TrafficGenerator trafficGenerator;
-        private Canvas stationCanvas;
+        private CanvasParser canvasParsed;
 
         public ModellingSteps(
             CanvasParser canvasParsed,
@@ -31,7 +31,7 @@ namespace GasStationModeling.modelling
             Tanks = canvasParsed.Tanks;
             _isCollectingMoney = false;
             _isRefilling = false;
-            stationCanvas = canvasParsed.StationCanvas;
+            this.canvasParsed = canvasParsed;
             this.trafficGenerator = trafficGenerator;
         }
         
@@ -99,7 +99,7 @@ namespace GasStationModeling.modelling
 
         public void CallCollector(ref List<MoveableElem> toAdd)
         {
-            var collector = trafficGenerator.SpawnCollector();
+            var collector = trafficGenerator.SpawnCollector();         
             toAdd.Add(collector);
         }
 
@@ -132,6 +132,7 @@ namespace GasStationModeling.modelling
         {
             double fuelAmount = (fuelTank.Tag as TankView).MaxVolume;
             var refueller = trafficGenerator.SpawnRefueller(fuelTank,fuelAmount);
+            canvasParsed.RefuellersOnServiceArea.Add(refueller);
             toAdd.Add(refueller);
         }
 
@@ -159,6 +160,7 @@ namespace GasStationModeling.modelling
             var refuellerView = refueller.Tag as RefuellerView;
             refueller.IsFilling = false;
             refueller.IsFilled = true;
+            refueller.IsGoingToFill = false;
 
             _isRefilling = false;
         }

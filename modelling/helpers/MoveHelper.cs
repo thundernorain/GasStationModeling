@@ -300,10 +300,8 @@ namespace GasStationModeling.modelling.helpers
             var destSpot = refueller.DestinationSpot;
 
             destPoint = MoveRefueller(refueller, destPoint, RefuellerSpeed);
-
-      
-            destSpot = DpHelper.createDestinationSpot(destPoint);
-       
+ 
+            destSpot = DpHelper.createDestinationSpot(destPoint);     
             
             var refuellerRect = refueller.createIntersectRect();
 
@@ -320,9 +318,23 @@ namespace GasStationModeling.modelling.helpers
                     modellingSteps.StartRefilling(refueller);
                 }
 
-                if (destPoint.Equals(DpHelper.LeavePointNoFilling))
+                else if (destPoint.Equals(DpHelper.LeavePointNoFilling))
                 {
                     toDelete.Add(refueller);
+                }
+
+                else if (destPoint.Equals(DpHelper.ServiceAreaWaitingPoint))
+                {
+                    refueller.IsWaiting = true;
+                }
+
+                else if (destPoint.Equals(DpHelper.ServiceAreaEntrancePoint)){
+                    if (refueller.IsFilled)
+                    {
+                        canvasElems.RefuellersOnServiceArea.Remove(refueller);
+                        refueller.IsOnStation = false;
+                    }
+                    else refueller.IsOnStation = true;
                 }
             }
         }
@@ -331,6 +343,7 @@ namespace GasStationModeling.modelling.helpers
         {
             double refuellerTop;
             double refuellerLeft;
+            if (refueller.IsWaiting) { return destPoint; }
 
             Directions currentDirection = Directions.Up;
 

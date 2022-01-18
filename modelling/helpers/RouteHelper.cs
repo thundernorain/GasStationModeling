@@ -148,10 +148,28 @@ namespace GasStationModeling.modelling.helpers
             }
         }
 
+        private void SetAnotherRefuellersWaitingCondition(ref RefuellerElem refueller,Boolean condition)
+        {
+            foreach (var refElem in canvasElems.RefuellersOnServiceArea)
+            {
+                if (refElem.Equals(refueller)) continue;
+
+                else if (refueller.IsFilled)
+                {
+                    refElem.IsGoingToWait = condition;
+                }
+            }
+        }
+
         private void GoToServiceEntrancePoint(ref RefuellerElem refueller)
         {
             refueller.AddDestinationPoint(DpHelper.ServiceMiddlePoint);
             refueller.AddDestinationPoint(DpHelper.ServiceAreaEntrancePoint);
+        }
+
+        private void GoToWaitingPoint(ref RefuellerElem refueller)
+        {
+            refueller.AddDestinationPoint(DpHelper.ServiceAreaWaitingPoint);
         }
 
         private void GoToFuelTank(ref RefuellerElem refueller)
@@ -164,14 +182,8 @@ namespace GasStationModeling.modelling.helpers
         private void LeaveServiceArea(ref RefuellerElem refueller)
         {
             refueller.AddDestinationPoint(DpHelper.LeavePointNoFilling);
-<<<<<<< HEAD
             refueller.AddDestinationPoint(DpHelper.ServiceMiddleExitPoint);
             refueller.AddDestinationPoint(DpHelper.ServiceAreaEntrancePoint);
-=======
-            var exitPoint = new Point(DpHelper.ServiceAreaEntrancePoint.X,
-                DpHelper.ServiceAreaEntrancePoint.Y + ElementSizeHelper.CELL_HEIGHT + 1);
-            refueller.AddDestinationPoint(exitPoint);
->>>>>>> положение авто в соответствии с направлением движения
         }
     }
 }
