@@ -116,6 +116,32 @@ namespace GasStationModeling.modelling
                 }
             }
 
+            foreach(var stationElem in stationCanvas.Children.OfType<Rectangle>())
+            {
+                if(stationElem.Tag is TankView tankView)
+                {
+                    if (tankView.IsRunOut)
+                    {
+                        stationElem.Fill = BrushHelper.getBrushFor("Tank_Critical");
+                    }
+                    else
+                    {
+                        stationElem.Fill = BrushHelper.getBrushFor("Tank");
+                    }
+                }
+                else if(stationElem.Tag is CashBoxView cashView)
+                {
+                    if (cashView.IsFull)
+                    {
+                        stationElem.Fill = BrushHelper.getBrushFor("Cashbox_Critical");
+                    }
+                    else
+                    {
+                        stationElem.Fill = BrushHelper.getBrushFor("Cashbox");
+                    }
+                }
+            }
+
             foreach (var elem in toAdd)
             {
                 stationCanvas.Children.Add(elem);

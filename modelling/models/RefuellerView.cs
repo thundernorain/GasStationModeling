@@ -22,7 +22,7 @@ namespace GasStationModeling.modelling.model
 
         public RefuellerView(double tick, double speedOfRefuellingPerSecond, double fuelAmount)
         {
-            SpeedRefueling = speedOfRefuellingPerSecond * tick / 1000;
+            SpeedRefueling = speedOfRefuellingPerSecond * tick / 50;
             FuelAmount = fuelAmount;
         }
 

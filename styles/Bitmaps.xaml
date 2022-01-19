@@ -11,8 +11,10 @@
     <BitmapImage x:Key="Road" UriSource="./assets/imgElementStation/road.png" />
     <BitmapImage x:Key="CellIncorrect" UriSource="./assets/imgElementStation/Incorrect.png" />
     <BitmapImage x:Key="Tank" UriSource="./assets/imgElementStation/tank.png"/>
+    <BitmapImage x:Key="Tank_Critical" UriSource="./assets/imgElementStation/tank_critical.png"/>
     <BitmapImage x:Key="Car" UriSource="./assets/imgElementStation/car.png"/>
     <BitmapImage x:Key="Cashbox" UriSource="./assets/imgElementStation/cashbox.png"/>
+    <BitmapImage x:Key="Cashbox_Critical" UriSource="./assets/imgElementStation/cashbox_сritical.png"/>
     <BitmapImage x:Key="Collector" UriSource="./assets/imgElementStation/collector.png"/>
     <BitmapImage x:Key="Entrance" UriSource="./assets/imgElementStation/entrance.png"/>
     <BitmapImage x:Key="Exit" UriSource="./assets/imgElementStation/exit.png"/>
