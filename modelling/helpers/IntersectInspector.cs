@@ -162,10 +162,10 @@ namespace GasStationModeling.modelling.helpers
                             {
                                 Canvas.SetTop(activeVehicle, top(anotherVehicle) - (activeVehicle.Height - collisionMaskCorrector / 2));
 
-                                if(anotherVehicle.oldY <= top(anotherVehicle) && !activeVehicle.IsFilled)
+                                if(anotherVehicle.oldY <= top(anotherVehicle) && (!activeVehicle.IsFilled || !anotherVehicle.IsFilled))
                                 {
-                                    var newDestX = right(anotherVehicle) + ElementSizeHelper.CELL_WIDTH + 1;
-                                    var newDestY = bottom(anotherVehicle) + ElementSizeHelper.CELL_WIDTH + 1;
+                                    var newDestX = right(anotherVehicle) +  ElementSizeHelper.CELL_WIDTH + 1;
+                                    var newDestY = bottom(anotherVehicle) - 10;
                                     var destinationPoint = new Point(newDestX, newDestY);
                                     var destinationPoint2 = new Point(newDestX, top(activeVehicle));
 
