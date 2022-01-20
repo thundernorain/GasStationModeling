@@ -79,7 +79,7 @@ namespace GasStationModeling.modelling.helpers
                                         && anotherVehicle.oldY == Canvas.GetTop(anotherVehicle))
                                     {
                                         var newDestX = left(activeVehicle) + activeVehicle.Width / 2;
-                                        var newDestY = bottom(activeVehicle) + 48;
+                                        var newDestY = bottom(activeVehicle) + ElementSizeHelper.CELL_HEIGHT/2;
                                         var newDestPoint = new Point(newDestX, newDestY);
 
                                         activeVehicle.removeDestinationPoints();
@@ -96,13 +96,13 @@ namespace GasStationModeling.modelling.helpers
 
                         case Directions.Right:
                             {
-                                Canvas.SetLeft(activeVehicle, left(anotherVehicle) - (activeVehicle.Width + collisionMaskCorrector / 2));
+                                Canvas.SetLeft(activeVehicle, left(anotherVehicle) - (activeVehicle.Width - collisionMaskCorrector / 2));
                                 break;
                             }
 
                         case Directions.Down:
                             {
-                                Canvas.SetTop(activeVehicle, top(anotherVehicle) - (activeVehicle.Height + collisionMaskCorrector / 2));
+                                Canvas.SetTop(activeVehicle, top(anotherVehicle) - (activeVehicle.Height - collisionMaskCorrector / 2));
                                 break;
                             }
 
