@@ -53,7 +53,7 @@ namespace GasStationModeling.modelling
             ServiceRoadPositionY = CarRoadPositionY -  ElementSizeHelper.CELL_HEIGHT;
             SpawnPoint = new Point((int)parsedCanvas.StationCanvas.Width, CarRoadPositionY);
             ServiceSpawnPoint = new Point((int)parsedCanvas.StationCanvas.Width, ServiceRoadPositionY);
-            LeavePointNoFilling = new Point(ReSpawnPointX, CarRoadPositionY);
+            LeavePointNoFilling = new Point(ReSpawnPointX, CarRoadPositionY + ElementSizeHelper.CELL_HEIGHT);
             LeavePointFilled = new Point(ReSpawnPointX, CarRoadPositionY - (ElementSizeHelper.CELL_HEIGHT + 1));
         }
 
@@ -88,7 +88,7 @@ namespace GasStationModeling.modelling
         {
             ServiceAreaEntrancePoint = new Point((int)Canvas.GetLeft(elem) + 2 * ElementSizeHelper.CELL_WIDTH, SpawnPoint.Y);
             ServiceMiddlePoint = new Point(ServiceAreaEntrancePoint.X, Canvas.GetTop(elem) + 2 * ElementSizeHelper.CELL_HEIGHT);
-            ServiceMiddleExitPoint = new Point(ServiceAreaEntrancePoint.X,ServiceAreaEntrancePoint.Y + ElementSizeHelper.CELL_HEIGHT);
+            ServiceMiddleExitPoint = new Point(ServiceAreaEntrancePoint.X,ServiceAreaEntrancePoint.Y + ElementSizeHelper.CELL_HEIGHT + 15);
             ServiceAreaWaitingPoint = new Point(ServiceSpawnPoint.X, ServiceRoadPositionY);
         }
 

@@ -135,12 +135,12 @@ namespace GasStationModeling.modelling.helpers
                                         && anotherVehicle.oldX == Canvas.GetLeft(anotherVehicle)
                                         && anotherVehicle.oldY == Canvas.GetTop(anotherVehicle))
                                     {
-                                        var newDestX = left(activeVehicle) + activeVehicle.Width / 2;
-                                        var newDestY = bottom(activeVehicle) + 48;
+                                        var newDestX = left(activeVehicle);
+                                        var newDestY = bottom(activeVehicle) + 15;
                                         var newDestPoint = new Point(newDestX, newDestY);
 
                                         activeVehicle.removeDestinationPoints();
-                                        activeVehicle.AddDestinationPoint(dpHelper.LeavePointNoFilling);
+                                        activeVehicle.AddDestinationPoint(dpHelper.LeavePointFilled);
                                         activeVehicle.AddDestinationPoint(newDestPoint);
 
                                         break;
@@ -162,7 +162,7 @@ namespace GasStationModeling.modelling.helpers
                             {
                                 Canvas.SetTop(activeVehicle, top(anotherVehicle) - (activeVehicle.Height - collisionMaskCorrector / 2));
 
-                                if(anotherVehicle.oldY <= top(anotherVehicle))
+                                if(anotherVehicle.oldY <= top(anotherVehicle) && !activeVehicle.IsFilled)
                                 {
                                     var newDestX = right(anotherVehicle) + ElementSizeHelper.CELL_WIDTH + 1;
                                     var newDestY = bottom(anotherVehicle) + ElementSizeHelper.CELL_WIDTH + 1;
@@ -248,11 +248,11 @@ namespace GasStationModeling.modelling.helpers
                                         && anotherVehicle.oldY == Canvas.GetTop(anotherVehicle))
                                     {
                                         var newDestX = left(activeVehicle) + activeVehicle.Width/2;
-                                        var newDestY = bottom(activeVehicle) + 48;
+                                        var newDestY = bottom(activeVehicle) + ElementSizeHelper.CELL_HEIGHT;
                                         var newDestPoint = new Point(newDestX, newDestY);
 
                                         activeVehicle.removeDestinationPoints();
-                                        activeVehicle.AddDestinationPoint(dpHelper.LeavePointNoFilling);
+                                        activeVehicle.AddDestinationPoint(dpHelper.LeavePointFilled);
                                         activeVehicle.AddDestinationPoint(newDestPoint);
                                     }
                                 }

@@ -13,7 +13,7 @@ namespace GasStationModeling.modelling.helpers
     {
 
         private static int CarSpeedFilling = 5;
-        private static int CarSpeedNoFilling = 6;
+        private static int CarSpeedNoFilling = 5;
         private static int RefuellerSpeed = 4;
 
         private Canvas stationCanvas;
